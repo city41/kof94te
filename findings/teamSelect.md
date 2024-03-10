@@ -13,7 +13,7 @@ Here are the bytes that get moved depending on team chosen
 | Itl  | 0     | 0f    |
 | Chn  | 1     | 03    |
 | Jpn  | 2     | 06    |
-| USA  | 3     | 06    |
+| USA  | 3     | 09    |
 | Kor  | 4     | 0c    |
 | Brz  | 5     | 00    |
 | Eng  | 6     | 15    |
@@ -67,3 +67,35 @@ So far, `src/lua/forceTeamItalyOrder.lua` creates a team of two Heiderns and a J
 When first coming into character order select, it writes from 1081c0 to 108232.
 
 I think 1081c0 through 1081c2 is the currently selected team. For Italy it is `0f1011`, which should be Terry(0f)|Andy(10)|Joe(11)
+
+### Character IDs
+
+| value | character           |
+| ----- | ------------------- |
+| 00    | Heidern             |
+| 01    | Ralf                |
+| 02    | Clark               |
+| 03    | Athena              |
+| 04    | Kensou              |
+| 05    | Chin                |
+| 06    | Kyo                 |
+| 07    | Benimaru            |
+| 08    | Goro                |
+| 09    | Heavy D             |
+| 0a    | Lucky               |
+| 0b    | Brian               |
+| 0c    | Kim                 |
+| 0d    | Chang               |
+| 0e    | Choi                |
+| 0f    | Terry               |
+| 10    | Andy                |
+| 11    | Joe                 |
+| 12    | Ryo                 |
+| 13    | Robert              |
+| 14    | Takuma              |
+| 15    | Yuri                |
+| 16    | Mai                 |
+| 17    | King                |
+| 18    | Rugal               |
+| 19    | O.Rugal             |
+| 1a    | Invisible Rugal (?) |
