@@ -63,3 +63,7 @@ It seems to be
 | 11    | Joe       |
 
 So far, `src/lua/forceTeamItalyOrder.lua` creates a team of two Heiderns and a Joe :O
+
+When first coming into character order select, it writes from 1081c0 to 108232.
+
+I think 1081c0 through 1081c2 is the currently selected team. For Italy it is `0f1011`, which should be Terry(0f)|Andy(10)|Joe(11)

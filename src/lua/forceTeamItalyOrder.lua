@@ -9,20 +9,20 @@ function on_memory_write(offset, data)
 	if offset == 0x108232 then
 		-- first character choice is being written
 		-- force Joe
-		return 0x11
+		-- return 0x11
 	end
 
 	if offset == 0x108233 then
 		-- second character choice is being written
 		-- force Terry
-		return 0xf
+		-- return 0xf
 	end
 
 	if offset == 0x108234 then
 		-- third character choice is being written
 		-- force Andy
-		return 0x10
+		-- return 0x10
 	end
 end
 
-mem_handler = mem:install_write_tap(address, address + 5, "writes", on_memory_write)
+mem_handler = mem:install_write_tap(address, address + 3, "writes", on_memory_write)
