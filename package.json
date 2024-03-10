@@ -1,0 +1,20 @@
+{
+  "name": "kof94te",
+  "version": "0.0.0",
+  "repository": "git@github.com:city41/kof94te.git",
+  "author": "Matt Greer <matt.e.greer@gmail.com>",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "restore": "cp kof94.zip $MAME_ROM_DIR",
+    "type-check": "yarn tsc --noemit",
+    "to-neosd": "bash scripts/toneosd.sh",
+    "mame": "mame -w -nofilter -nomouse -sound none kof94"
+  },
+  "dependencies": {
+    "@types/mkdirp": "^2.0.0",
+    "@types/node": "^20.11.25",
+    "mkdirp": "^3.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}

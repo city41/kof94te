@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"baseUrl": ".",
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"sourceMap": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"jsx": "react",
+		"target": "ES2020",
+		"outDir": "dist",
+		"skipLibCheck": true,
+		"noUnusedLocals": true
+	},
+	"include": ["src/**/*"]
+}

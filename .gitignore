@@ -32,6 +32,7 @@ Thumbs.db
 ._*
 
 # Neo Geo rom files
+rom/
 *.p1
 *.ep1
 *.c1
