@@ -1,0 +1,47 @@
+.vscode/
+coverage/
+dist/
+node_modules/
+out/
+history/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# OS X files
+.DS_Store
+._*
+
+# Neo Geo rom files
+*.p1
+*.ep1
+*.c1
+*.c2
+*.c3
+*.c4
+*.flipped
+*.zip
+*.neo
+*.bin
+proms/
+toneosd/
+ipsBinaries/
