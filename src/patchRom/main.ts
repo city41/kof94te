@@ -282,6 +282,11 @@ async function main(patchJsonPaths: string[]) {
 
         console.log("\n\n");
       }
+      console.log(
+        `after patching, ${
+          subroutineInsertEnd - subroutineInsertStart
+        } bytes left for subroutines`
+      );
     }
   }
 
