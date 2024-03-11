@@ -10,7 +10,7 @@
       "description": "the new routine",
       "subroutine": true,
       "symbol": "NEW_ROUTINE",
-      "patchAsm": ["loop:", "nop", "bra loop"]
+      "patchAsm": ["move.l #$2bffe4, $108584", "rts"]
     },
     {
       "type": "prom",
