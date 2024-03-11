@@ -1,0 +1,13 @@
+{
+  "description": "Have it write a different function pointer upon pressing A in HTP",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "write different fp",
+      "address": "13b9dc",
+      "patchAsm": [
+        "move.l #$3b06e, $584(A5) ; 3b06e is the first fp set when entering HTP"
+      ]
+    }
+  ]
+}

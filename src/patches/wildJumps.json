@@ -1,0 +1,11 @@
+{
+  "description": "Have team select go back to HTP",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "go back to HTP",
+      "address": "1370b4",
+      "patchAsm": ["move.l #$3b72c, $584(A5)"]
+    }
+  ]
+}

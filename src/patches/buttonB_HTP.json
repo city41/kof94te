@@ -1,0 +1,11 @@
+{
+  "description": "Press B on How To Play to proceed instead of A",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "btst B instead of A",
+      "address": "13b9d2",
+      "patchAsm": ["btst #$5, $3a02(a5)"]
+    }
+  ]
+}
