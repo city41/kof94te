@@ -7,16 +7,31 @@
   "patches": [
     {
       "type": "prom",
-      "description": "the new routine",
+      "description": "main routine",
       "subroutine": true,
-      "symbol": "NEW_ROUTINE",
+      "symbol": "MAIN_ROUTINE",
       "patchAsm": ["move.l #$2bffe4, $108584", "rts"]
+    },
+    {
+      "type": "prom",
+      "description": "clean up routine",
+      "subroutine": true,
+      "symbol": "CLEAN_UP_ROUTINE",
+      "patchAsm": [
+        "jsr $3604",
+        "jsr $15a0",
+        "jsr $25aa",
+        "jsr $5e72",
+        "jsr $c004c8",
+        "move.l #$2MAIN_ROUTINE, $108584",
+        "rts"
+      ]
     },
     {
       "type": "prom",
       "description": "jump to new address when press A in HTP",
       "address": "13b9dc",
-      "patchAsm": ["move.l #$2NEW_ROUTINE, $584(A5)"]
+      "patchAsm": ["move.l #$2CLEAN_UP_ROUTINE, $584(A5)"]
     }
   ]
 }

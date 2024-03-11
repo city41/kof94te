@@ -49,8 +49,6 @@ That address is 108584
 036E6C: 41FA 0036 lea ($36,PC) ; ($36ea4), A0
 036E70: 4E71 nop
 
-first thing it does is "null out the function pointer"
-
 ### other addresses the game writes there
 
 pressing coin to go to title screen
