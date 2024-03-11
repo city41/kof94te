@@ -2,7 +2,7 @@ import path from "node:path";
 import fsp from "node:fs/promises";
 import * as mkdirp from "mkdirp";
 import { execSync } from "node:child_process";
-import { AddressPromPatch, Patch } from "./types";
+import { AddressPromPatch, InlinePatch } from "./types";
 import { asmTmpDir } from "./dirs";
 import { isCromPatch, isStringPatch } from "./main";
 
@@ -208,7 +208,7 @@ async function doPromPatch(
   symbolTable: Record<string, number>,
   promData: number[],
   subroutineInsertEnd: number,
-  patch: Patch
+  patch: InlinePatch
 ): Promise<{
   patchedPromData: number[];
   subroutineInsertEnd: number;

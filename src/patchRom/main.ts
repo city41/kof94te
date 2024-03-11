@@ -4,9 +4,11 @@ import * as mkdirp from "mkdirp";
 import { execSync } from "node:child_process";
 import { PROM_FILE_NAME, asmTmpDir, romTmpDir, tmpDir } from "./dirs";
 import {
+  AddressPromFilePathPatch,
   AddressPromPatch,
   CromBuffer,
   CromPatch,
+  InlinePatch,
   Patch,
   PatchJSON,
   StringPromPatch,
@@ -77,6 +79,20 @@ function isAddressPatch(obj: unknown): obj is AddressPromPatch {
   return p.type === "prom" && Array.isArray(p.patchAsm);
 }
 
+function isAddressFilePathPatch(obj: unknown): obj is AddressPromFilePathPatch {
+  if (!obj) {
+    return false;
+  }
+
+  if (typeof obj !== "object") {
+    return false;
+  }
+
+  const p = obj as AddressPromPatch;
+
+  return p.type === "prom" && typeof p.patchAsm === "string";
+}
+
 function isCromPatch(obj: unknown): obj is CromPatch {
   if (!obj) {
     return false;
@@ -107,7 +123,12 @@ function isPatch(obj: unknown): obj is Patch {
 
   const p = obj as Patch;
 
-  return isStringPatch(p) || isAddressPatch(p) || isCromPatch(p);
+  return (
+    isStringPatch(p) ||
+    isAddressPatch(p) ||
+    isAddressFilePathPatch(p) ||
+    isCromPatch(p)
+  );
 }
 
 function isPatchJSON(obj: unknown): obj is PatchJSON {
@@ -158,6 +179,25 @@ async function writePatchedZip(
   console.log("about to execute", cpCmd, "in", romTmpDir);
   const output2 = execSync(cpCmd, { cwd: romTmpDir });
   console.log(output2.toString());
+}
+
+async function hydratePatch(
+  patch: Patch,
+  jsonDir: string
+): Promise<InlinePatch> {
+  if (isStringPatch(patch) || isCromPatch(patch) || isAddressPatch(patch)) {
+    return patch;
+  } else if (isAddressFilePathPatch(patch)) {
+    const asmPath = path.resolve(jsonDir, patch.patchAsm);
+    const asmString = (await fsp.readFile(asmPath)).toString();
+
+    return {
+      ...patch,
+      patchAsm: asmString.split("\n"),
+    };
+  } else {
+    throw new Error(`unexpected patch: ${JSON.stringify(patch)}`);
+  }
 }
 
 async function main(patchJsonPaths: string[]) {
@@ -234,11 +274,12 @@ async function main(patchJsonPaths: string[]) {
 
         try {
           if (patch.type === "prom") {
+            const hydratedPatch = await hydratePatch(patch, jsonDir);
             const result = await doPromPatch(
               symbolTable,
               patchedPromData,
               subroutineInsertEnd,
-              patch
+              hydratedPatch
             );
             patchedPromData = result.patchedPromData;
             subroutineInsertEnd = result.subroutineInsertEnd;

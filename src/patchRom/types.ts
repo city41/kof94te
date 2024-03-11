@@ -27,12 +27,24 @@ export type AddressPromPatch = BasePromPatch & {
   patchAsm: string[];
 };
 
+export type AddressPromFilePathPatch = BasePromPatch & {
+  address?: string;
+  subroutine?: boolean;
+  patchAsm: string;
+};
+
 export type StringPromPatch = BasePromPatch & {
   string: true;
   value: string;
 };
 
-export type Patch = AddressPromPatch | StringPromPatch | CromPatch;
+export type Patch =
+  | AddressPromPatch
+  | AddressPromFileAsmPatch
+  | StringPromPatch
+  | CromPatch;
+
+export type InlinePatch = AddressPromPatch | StringPromPatch | CromPatch;
 
 export type SubroutineSpace = {
   start: string;
