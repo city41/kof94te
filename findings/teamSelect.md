@@ -21,7 +21,7 @@ Here are the bytes that get moved depending on team chosen
 
 These values don't change depending on what team the CPU picks.
 
-The lua script, `forceTeamItalToBeUSA.lua` successfully forces a selection of Team Italy to be USA once the game starts. The order select screen still shows Italy, but I am guessing they just reused the sprites and don't bother to update them as normally they would not change.
+The lua script, `forceTeamItalyToBeUSA.lua` successfully forces a selection of Team Italy to be USA once the game starts. The order select screen still shows Italy, but I am guessing they just reused the sprites and don't bother to update them as normally they would not change.
 
 ## Player Memory Blocks
 
@@ -68,34 +68,29 @@ When first coming into character order select, it writes from 1081c0 to 108232.
 
 I think 1081c0 through 1081c2 is the currently selected team. For Italy it is `0f1011`, which should be Terry(0f)|Andy(10)|Joe(11)
 
-### Character IDs
+## Sprites
 
-| value | character           |
-| ----- | ------------------- |
-| 00    | Heidern             |
-| 01    | Ralf                |
-| 02    | Clark               |
-| 03    | Athena              |
-| 04    | Kensou              |
-| 05    | Chin                |
-| 06    | Kyo                 |
-| 07    | Benimaru            |
-| 08    | Goro                |
-| 09    | Heavy D             |
-| 0a    | Lucky               |
-| 0b    | Brian               |
-| 0c    | Kim                 |
-| 0d    | Chang               |
-| 0e    | Choi                |
-| 0f    | Terry               |
-| 10    | Andy                |
-| 11    | Joe                 |
-| 12    | Ryo                 |
-| 13    | Robert              |
-| 14    | Takuma              |
-| 15    | Yuri                |
-| 16    | Mai                 |
-| 17    | King                |
-| 18    | Rugal               |
-| 19    | O.Rugal             |
-| 1a    | Invisible Rugal (?) |
+The background sprites are
+97, 98, 129-144
+115-116
+
+sprite 97
+
+| tile | palette |
+| ---- | ------- |
+| 0    | 0       |
+| 4293 | b0      |
+| 4100 | b0      |
+| 4108 | b0      |
+| 4110 | b0      |
+| 4118 | b0      |
+| 4120 | b0      |
+| 4128 | b0      |
+| 4130 | b0      |
+| 4138 | b0      |
+| 4180 | b0      |
+| 4188 | b0      |
+| 4190 | b2      |
+| 4198 | b2      |
+| 41a0 | b2      |
+| 41a8 | b2      |

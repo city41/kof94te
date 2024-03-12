@@ -202,3 +202,12 @@ PLAYER 1 79
 1081e8
 10817e
 1082a2
+
+# PX TEAM Memory Decoded
+
+| start  | end (inclusive) | description                     |
+| ------ | --------------- | ------------------------------- |
+| 108110 | 108117          | 'P1 TEAM' is ascii              |
+| 108235 | 108237          | Character IDs of p1 chosen team |
+| 108310 | 108317          | 'P2 TEAM' is ascii              |
+| 108435 | 108437          | Character IDs of p2 chosen team |
