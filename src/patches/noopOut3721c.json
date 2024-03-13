@@ -1,0 +1,11 @@
+{
+  "description": "Forces 3721c (a team select init routine) to return immediately",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "rts",
+      "address": "13721c",
+      "patchAsm": ["rts"]
+    }
+  ]
+}

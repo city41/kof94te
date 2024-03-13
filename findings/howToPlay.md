@@ -69,8 +69,8 @@ press start to enter how to play
 press A to enter team select
 3b72c
 1558
-36e66 (this is what it first writes upon A pressed) -- loads background sprites
-36fea -- loads character sprites
+36e66 (this is what it first writes upon A pressed)
+36fea
 37046 -- runs team select
 
 press A to enter member select

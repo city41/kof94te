@@ -1,0 +1,11 @@
+{
+  "description": "Forces 37046 (a team select init routine) to set 37086, which skips player team select and simulates the timer running out",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "nops",
+      "address": "137046",
+      "patchAsm": ["move.l #$37086, $584(a5)", "rts"]
+    }
+  ]
+}
