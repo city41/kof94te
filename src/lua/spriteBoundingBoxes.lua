@@ -125,14 +125,10 @@ function getSpriteTileIndexes(si, vr, h)
 	local tileIndexes = {}
 
 	local base = SCB1 + si * 64
-	print(string.format("base: %x", base))
 
 	for i = 0, h - 1 do
 		local evenWord = vr[base + i * 2] or 0
 		local oddWord = vr[base + i * 2 + 1] or 0
-		print(string.format("evenWord at %x = %x", (base + i * 2), evenWord))
-		print(string.format("oddWord at %x = %x", (base + i * 2 + 1), oddWord))
-
 		local lsb = evenWord
 		local msb = (oddWord >> 4) & 0xf
 
@@ -235,7 +231,9 @@ function dump_sprite(si)
 end
 
 function on_pause()
-	dump_sprite(97)
+	for i = 150, 250 do
+		dump_sprite(i)
+	end
 end
 
 emu.register_frame_done(on_frame, "frame")

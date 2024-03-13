@@ -1,0 +1,12 @@
+{
+  "description": "Have the Italian Flag entity use Terry's portrait tiles",
+
+  "patches": [
+    {
+      "type": "prom",
+      "description": "Change starting tile index/palette",
+      "address": "1f6d24",
+      "patchAsm": ["dc.w $0202", "dc.w $c701", "dc.w $f718"]
+    }
+  ]
+}

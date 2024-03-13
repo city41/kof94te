@@ -249,12 +249,15 @@ async function main(patchJsonPaths: string[]) {
       usage();
     } else {
       if (
-        patchJson.patches.some(isAddressPatch) &&
+        patchJson.patches.some(
+          (p) => isAddressPatch(p) && p.subroutine == true
+        ) &&
         !patchJson.subroutineSpace
       ) {
-        throw new Error(
+        console.error(
           "This patch contains subroutine patches, but did not specify subroutineSpace"
         );
+        process.exit(1);
       }
       let symbolTable: Record<string, number> = {};
       const subroutineInsertStart = patchJson.subroutineSpace?.start
@@ -328,6 +331,11 @@ async function main(patchJsonPaths: string[]) {
           subroutineInsertEnd - subroutineInsertStart
         } bytes left for subroutines`
       );
+
+      console.log("final symbols");
+      for (const entry of Object.entries(symbolTable)) {
+        console.log(entry[0], entry[1].toString(16));
+      }
     }
   }
 

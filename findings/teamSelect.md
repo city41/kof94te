@@ -70,6 +70,8 @@ I think 1081c0 through 1081c2 is the currently selected team. For Italy it is `0
 
 ## Sprites
 
+### Background
+
 The background sprites are
 97, 98, 129-144
 115-116
@@ -94,3 +96,22 @@ sprite 97
 | 4198 | b2      |
 | 41a0 | b2      |
 | 41a8 | b2      |
+
+### Flag interface
+
+TODO: these sprite indexes change, so they are probably
+written to/pulled from memory somewhere
+
+first set is 194->209
+second set is 303->318
+
+| team    | sprite set 1 | sprite set 2 |
+| ------- | ------------ | ------------ |
+| Italy   | 208, 209     | 317,318      |
+| China   | 206, 207     | 315,316      |
+| Japan   | 204, 205     | 313,314      |
+| USA     | 202, 203     | 311,312      |
+| Korea   | 200, 201     | 309,310      |
+| Brazil  | 198, 199     | 307,308      |
+| England | 196, 197     | 305,306      |
+| Mexico  | 194, 195     | 303,304      |

@@ -7,6 +7,13 @@
   "patches": [
     {
       "type": "prom",
+      "description": "truncate sprites routine",
+      "subroutine": true,
+      "symbol": "TRUNCATE_SPRITES_ROUTINE",
+      "patchAsm": "truncateSprites.asm"
+    },
+    {
+      "type": "prom",
       "description": "main routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",
@@ -14,7 +21,7 @@
     },
     {
       "type": "prom",
-      "description": "clean up routine",
+      "description": "init routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_INIT_ROUTINE",
       "patchAsm": "charSelectInitRoutine.asm"
@@ -23,7 +30,7 @@
       "type": "prom",
       "description": "jump to new char select after bg and char sprites have been initted",
       "address": "13703c",
-      "patchAsm": ["move.l #$2CHAR_SELECT_MAIN_ROUTINE, $584(A5)"]
+      "patchAsm": ["move.l #$2CHAR_SELECT_INIT_ROUTINE, $584(A5)"]
     }
   ]
 }
