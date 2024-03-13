@@ -9,6 +9,14 @@ Keeping track of how I'm progressing and how I made kof94te. I will make a blog 
 - Running the game and looking at user ram, does it look like there are pockets that can be used?
 - What I failed to do and should have: how many palettes does the game generally use? Enough left over?
 
+## look for previous work
+
+Didn't find much at all. But did find this
+
+https://www.youtube.com/watch?v=Se4UGd3RdsY
+
+It showed the game's engine is flexible enough to (easily) support editted teams.
+
 ## Finding the memory tags
 
 Finding the tags was a massive breakthrough. Thank you SNK devs. I literally found them by just scrolling through RAM while the game was running and seeing if anything jumped out. And boy did it ever. You just never know.
