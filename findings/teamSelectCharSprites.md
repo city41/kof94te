@@ -14,7 +14,7 @@ Team USA
 
 # Terry
 
-Terry's first sprite is either 190 or 299
+Terry's first sprite
 
 | tile | palette |
 | ---- | ------- |
@@ -25,3 +25,17 @@ Terry's first sprite is either 190 or 299
 | 4a14 | 10      |
 | 4a15 | 10      |
 | 4a16 | 10      |
+
+# Andy
+
+Andy's first sprite
+
+| tile | palette |
+| ---- | ------- |
+| 0    | 0       |
+| 5859 | 1e      |
+| 0    | 0       |
+| 0    | 0       |
+| 0    | 0       |
+| 0    | 0       |
+| 0    | 0       |

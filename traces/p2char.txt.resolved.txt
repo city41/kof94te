@@ -1,0 +1,1417 @@
+03721C:  movea.l $1087ee, A6                       | 03721C: movea.l ($7ee,A5), A6
+037220:  btst #$5, $100000                         | 037220: btst #$5, (-$8000,A5)
+037226:  beq $3722c                                | 037226: beq $3722c
+03722C:  lea $108300, A4                           | 03722C: lea ($300,A5), A4
+037230:  movea.l ($108300), A0                     | 037230: movea.l (A4), A0
+037232:  jsr ($3723a)                              | 037232: jsr (A0)
+03723A:    clr.b $1083cf                           | 03723A: clr.b ($cf,A4)
+03723E:    bsr $37870                              | 03723E: bsr $37870
+037870:      cmpa.l #$108100, A4                   | 037870: cmpa.l #$108100, A4
+037876:      bne $378c4                            | 037876: bne $378c4
+0378C4:      moveq #$0, D0                         | 0378C4: moveq #$0, D0
+0378C6:      move.b $108431, D0                    | 0378C6: move.b ($431,A5), D0
+0378CA:      bsr $3790e                            | 0378CA: bsr $3790e
+03790E:        add.w D0, D0                        | 03790E: add.w D0, D0
+037910:        add.w D0, D0                        | 037910: add.w D0, D0
+037912:        lea $534dc.l, A2                    | 037912: lea $534dc.l, A2
+037918:        adda.w D0, A2                       | 037918: adda.w D0, A2
+03791A:        rts                                 | 03791A: rts
+0378CE:      lea $1087fe, A3                       | 0378CE: lea ($7fe,A5), A3
+0378D2:      move.w #$d8, D5                       | 0378D2: move.w #$d8, D5
+0378D6:      moveq #$2, D6                         | 0378D6: moveq #$2, D6
+0378D8:      lea $37962                            | 0378D8: lea ($88,PC) ; ($37962), A0
+0378DC:      nop                                   | 0378DC: nop
+0378DE:      move.w #$3500, D0                     | 0378DE: move.w #$3500, D0
+0378E2:      jsr $260e.w                           | 0378E2: jsr $260e.w
+00260E:        move.w $108580, D7                  | 00260E: move.w ($580,A5), D7
+002612:        bmi $2670                           | 002612: bmi $2670
+002616:        subq.w #2, $108580                  | 002616: subq.w #2, ($580,A5)
+00261A:        lea $108500, A1                     | 00261A: lea ($500,A5), A1
+00261E:        movea.w $NaN, A1                    | 00261E: movea.w (A1,D7.w), A1
+002622:        adda.l #$100000, A1                 | 002622: adda.l #$100000, A1
+002628:        move.l A0, ($102f00)                | 002628: move.l A0, (A1)
+00262A:        move.w D0, $102f08                  | 00262A: move.w D0, ($8,A1)
+00262E:        lea $100100, A0                     | 00262E: lea (-$7f00,A5), A0
+002632:        move.l A0, D7                       | 002632: move.l A0, D7
+002634:        move.w $100104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002640:        move.w A0, $102f04                  | 002640: move.w A0, ($4,A1)
+002644:        move.w $100306, $102f06             | 002644: move.w ($6,A0), ($6,A1)
+00264A:        move.w $100306, D7                  | 00264A: move.w ($6,A0), D7
+00264E:        move.w A1, $100306                  | 00264E: move.w A1, ($6,A0)
+002652:        movea.l D7, A0                      | 002652: movea.l D7, A0
+002654:        move.w A1, $102d04                  | 002654: move.w A1, ($4,A0)
+002658:        lea $102f10, A0                     | 002658: lea ($10,A1), A0
+00265C:        move.w #$1e, D0                     | 00265C: move.w #$1e, D0
+002660:        moveq #$0, D7                       | 002660: moveq #$0, D7
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+00266E:        rts                                 | 00266E: rts
+0378E6:      bsr $3791c                            | 0378E6: bsr $3791c
+03791C:        clr.b $102fcf                       | 03791C: clr.b ($cf,A1)
+037920:        move.l #$4d454d42, $102f10          | 037920: move.l #$4d454d42, ($10,A1)
+037928:        move.l #$44495350, $102f14          | 037928: move.l #$44495350, ($14,A1)
+037930:        move.b #$ff, $102f68                | 037930: move.b #$ff, ($68,A1)
+037936:        move.b #$ff, $102f69                | 037936: move.b #$ff, ($69,A1)
+03793C:        clr.l $102f18                       | 03793C: clr.l ($18,A1)
+037940:        clr.l $102f1c                       | 037940: clr.l ($1c,A1)
+037944:        clr.l $102f20                       | 037944: clr.l ($20,A1)
+037948:        move.w D5, $102f24                  | 037948: move.w D5, ($24,A1)
+03794C:        move.w #$b8, $102f26                | 03794C: move.w #$b8, ($26,A1)
+037952:        move.l A4, $102f84                  | 037952: move.l A4, ($84,A1)
+037956:        move.l A1, (A3)+                    | 037956: move.l A1, (A3)+
+037958:        rts                                 | 037958: rts
+0378EA:      move.w #$6e, $102f2c                  | 0378EA: move.w #$6e, ($2c,A1)
+0378F0:      sub.w D6, $102f2c                     | 0378F0: sub.w D6, ($2c,A1)
+0378F4:      move.w D6, $102fd0                    | 0378F4: move.w D6, ($d0,A1)
+0378F8:      lea $3795e                            | 0378F8: lea ($64,PC) ; ($3795e), A0
+0378FC:      nop                                   | 0378FC: nop
+0378FE:      move.b $NaN, $102f30                  | 0378FE: move.b (A0,D6.w), ($30,A1)
+037904:      addi.w #$20, D5                       | 037904: addi.w #$20, D5
+037908:      dbra D6, $378d8                       | 037908: dbra D6, $378d8
+0378D8:      lea $37962                            | 0378D8: lea ($88,PC) ; ($37962), A0
+0378DC:      nop                                   | 0378DC: nop
+0378DE:      move.w #$3500, D0                     | 0378DE: move.w #$3500, D0
+0378E2:      jsr $260e.w                           | 0378E2: jsr $260e.w
+00260E:        move.w $108580, D7                  | 00260E: move.w ($580,A5), D7
+002612:        bmi $2670                           | 002612: bmi $2670
+002616:        subq.w #2, $108580                  | 002616: subq.w #2, ($580,A5)
+00261A:        lea $108500, A1                     | 00261A: lea ($500,A5), A1
+00261E:        movea.w $NaN, A1                    | 00261E: movea.w (A1,D7.w), A1
+002622:        adda.l #$100000, A1                 | 002622: adda.l #$100000, A1
+002628:        move.l A0, ($103100)                | 002628: move.l A0, (A1)
+00262A:        move.w D0, $103108                  | 00262A: move.w D0, ($8,A1)
+00262E:        lea $100100, A0                     | 00262E: lea (-$7f00,A5), A0
+002632:        move.l A0, D7                       | 002632: move.l A0, D7
+002634:        move.w $100104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002640:        move.w A0, $103104                  | 002640: move.w A0, ($4,A1)
+002644:        move.w $100306, $103106             | 002644: move.w ($6,A0), ($6,A1)
+00264A:        move.w $100306, D7                  | 00264A: move.w ($6,A0), D7
+00264E:        move.w A1, $100306                  | 00264E: move.w A1, ($6,A0)
+002652:        movea.l D7, A0                      | 002652: movea.l D7, A0
+002654:        move.w A1, $102f04                  | 002654: move.w A1, ($4,A0)
+002658:        lea $103110, A0                     | 002658: lea ($10,A1), A0
+00265C:        move.w #$1e, D0                     | 00265C: move.w #$1e, D0
+002660:        moveq #$0, D7                       | 002660: moveq #$0, D7
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+00266E:        rts                                 | 00266E: rts
+0378E6:      bsr $3791c                            | 0378E6: bsr $3791c
+03791C:        clr.b $1031cf                       | 03791C: clr.b ($cf,A1)
+037920:        move.l #$4d454d42, $103110          | 037920: move.l #$4d454d42, ($10,A1)
+037928:        move.l #$44495350, $103114          | 037928: move.l #$44495350, ($14,A1)
+037930:        move.b #$ff, $103168                | 037930: move.b #$ff, ($68,A1)
+037936:        move.b #$ff, $103169                | 037936: move.b #$ff, ($69,A1)
+03793C:        clr.l $103118                       | 03793C: clr.l ($18,A1)
+037940:        clr.l $10311c                       | 037940: clr.l ($1c,A1)
+037944:        clr.l $103120                       | 037944: clr.l ($20,A1)
+037948:        move.w D5, $103124                  | 037948: move.w D5, ($24,A1)
+03794C:        move.w #$b8, $103126                | 03794C: move.w #$b8, ($26,A1)
+037952:        move.l A4, $103184                  | 037952: move.l A4, ($84,A1)
+037956:        move.l A1, (A3)+                    | 037956: move.l A1, (A3)+
+037958:        rts                                 | 037958: rts
+0378EA:      move.w #$6e, $10312c                  | 0378EA: move.w #$6e, ($2c,A1)
+0378F0:      sub.w D6, $10312c                     | 0378F0: sub.w D6, ($2c,A1)
+0378F4:      move.w D6, $1031d0                    | 0378F4: move.w D6, ($d0,A1)
+0378F8:      lea $3795e                            | 0378F8: lea ($64,PC) ; ($3795e), A0
+0378FC:      nop                                   | 0378FC: nop
+0378FE:      move.b $NaN, $103130                  | 0378FE: move.b (A0,D6.w), ($30,A1)
+037904:      addi.w #$20, D5                       | 037904: addi.w #$20, D5
+037908:      dbra D6, $378d8                       | 037908: dbra D6, $378d8
+0378D8:      lea $37962                            | 0378D8: lea ($88,PC) ; ($37962), A0
+0378DC:      nop                                   | 0378DC: nop
+0378DE:      move.w #$3500, D0                     | 0378DE: move.w #$3500, D0
+0378E2:      jsr $260e.w                           | 0378E2: jsr $260e.w
+00260E:        move.w $108580, D7                  | 00260E: move.w ($580,A5), D7
+002612:        bmi $2670                           | 002612: bmi $2670
+002616:        subq.w #2, $108580                  | 002616: subq.w #2, ($580,A5)
+00261A:        lea $108500, A1                     | 00261A: lea ($500,A5), A1
+00261E:        movea.w $NaN, A1                    | 00261E: movea.w (A1,D7.w), A1
+002622:        adda.l #$100000, A1                 | 002622: adda.l #$100000, A1
+002628:        move.l A0, ($103300)                | 002628: move.l A0, (A1)
+00262A:        move.w D0, $103308                  | 00262A: move.w D0, ($8,A1)
+00262E:        lea $100100, A0                     | 00262E: lea (-$7f00,A5), A0
+002632:        move.l A0, D7                       | 002632: move.l A0, D7
+002634:        move.w $100104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $100f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $101f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $101f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102304, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102508, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102504, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102708, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102704, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102908, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102904, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102b08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102b04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102d08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102d04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $102f08, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $102f04, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $103108, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002634:        move.w $103104, D7                  | 002634: move.w ($4,A0), D7
+002638:        movea.l D7, A0                      | 002638: movea.l D7, A0
+00263A:        cmp.w $100308, D0                   | 00263A: cmp.w ($8,A0), D0
+00263E:        bcc $2634                           | 00263E: bcc $2634
+002640:        move.w A0, $103304                  | 002640: move.w A0, ($4,A1)
+002644:        move.w $100306, $103306             | 002644: move.w ($6,A0), ($6,A1)
+00264A:        move.w $100306, D7                  | 00264A: move.w ($6,A0), D7
+00264E:        move.w A1, $100306                  | 00264E: move.w A1, ($6,A0)
+002652:        movea.l D7, A0                      | 002652: movea.l D7, A0
+002654:        move.w A1, $103104                  | 002654: move.w A1, ($4,A0)
+002658:        lea $103310, A0                     | 002658: lea ($10,A1), A0
+00265C:        move.w #$1e, D0                     | 00265C: move.w #$1e, D0
+002660:        moveq #$0, D7                       | 002660: moveq #$0, D7
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+002662:        move.l D7, (A0)+                    | 002662: move.l D7, (A0)+
+002664:        move.l D7, (A0)+                    | 002664: move.l D7, (A0)+
+002666:        move.l D7, (A0)+                    | 002666: move.l D7, (A0)+
+002668:        move.l D7, (A0)+                    | 002668: move.l D7, (A0)+
+00266A:        dbra D0, $2662                      | 00266A: dbra D0, $2662
+00266E:        rts                                 | 00266E: rts
+0378E6:      bsr $3791c                            | 0378E6: bsr $3791c
+03791C:        clr.b $1033cf                       | 03791C: clr.b ($cf,A1)
+037920:        move.l #$4d454d42, $103310          | 037920: move.l #$4d454d42, ($10,A1)
+037928:        move.l #$44495350, $103314          | 037928: move.l #$44495350, ($14,A1)
+037930:        move.b #$ff, $103368                | 037930: move.b #$ff, ($68,A1)
+037936:        move.b #$ff, $103369                | 037936: move.b #$ff, ($69,A1)
+03793C:        clr.l $103318                       | 03793C: clr.l ($18,A1)
+037940:        clr.l $10331c                       | 037940: clr.l ($1c,A1)
+037944:        clr.l $103320                       | 037944: clr.l ($20,A1)
+037948:        move.w D5, $103324                  | 037948: move.w D5, ($24,A1)
+03794C:        move.w #$b8, $103326                | 03794C: move.w #$b8, ($26,A1)
+037952:        move.l A4, $103384                  | 037952: move.l A4, ($84,A1)
+037956:        move.l A1, (A3)+                    | 037956: move.l A1, (A3)+
+037958:        rts                                 | 037958: rts
+0378EA:      move.w #$6e, $10332c                  | 0378EA: move.w #$6e, ($2c,A1)
+0378F0:      sub.w D6, $10332c                     | 0378F0: sub.w D6, ($2c,A1)
+0378F4:      move.w D6, $1033d0                    | 0378F4: move.w D6, ($d0,A1)
+0378F8:      lea $3795e                            | 0378F8: lea ($64,PC) ; ($3795e), A0
+0378FC:      nop                                   | 0378FC: nop
+0378FE:      move.b $NaN, $103330                  | 0378FE: move.b (A0,D6.w), ($30,A1)
+037904:      addi.w #$20, D5                       | 037904: addi.w #$20, D5
+037908:      dbra D6, $378d8                       | 037908: dbra D6, $378d8
+03790C:      rts                                   | 03790C: rts
+037242:    move.b #$ff, $108368                    | 037242: move.b #$ff, ($68,A4)
+037248:    move.b #$ff, $108369                    | 037248: move.b #$ff, ($69,A4)
+03724E:    clr.l $108318                           | 03724E: clr.l ($18,A4)
+037252:    clr.l $10831c                           | 037252: clr.l ($1c,A4)
+037256:    clr.l $108320                           | 037256: clr.l ($20,A4)
+03725A:    bsr $373d8                              | 03725A: bsr $373d8
+0373D8:      moveq #$0, D0                         | 0373D8: moveq #$0, D0
+0373DA:      move.b $108431, D0                    | 0373DA: move.b ($131,A4), D0
+0373DE:      add.w D0, D0                          | 0373DE: add.w D0, D0
+0373E0:      add.w D0, D0                          | 0373E0: add.w D0, D0
+0373E2:      lea $534b8.l, A0                      | 0373E2: lea $534b8.l, A0
+0373E8:      move.w $NaN, $108318                  | 0373E8: move.w (A0,D0.w), ($18,A4)
+0373EE:      move.w $534ba, $10831c                | 0373EE: move.w ($2,A0,D0.w), ($1c,A4)
+0373F4:      rts                                   | 0373F4: rts
+03725E:    move.w #$78, $10832c                    | 03725E: move.w #$78, ($2c,A4)
+037264:    move.w #$1b, $108370                    | 037264: move.w #$1b, ($70,A4)
+03726A:    clr.w $1083d0                           | 03726A: clr.w ($d0,A4)
+03726E:    move.l #$37274, ($108300)               | 03726E: move.l #$37274, (A4)
+037274:    btst #$0, $1083cf                       | 037274: btst #$0, ($cf,A4)
+03727A:    bne $372c6                              | 03727A: bne $372c6
+03727C:    tst.b $108430                           | 03727C: tst.b ($130,A4)
+037280:    bpl $37298                              | 037280: bpl $37298
+037298:    bsr $37574                              | 037298: bsr $37574
+037574:      btst #$2, $108785                     | 037574: btst #$2, ($785,A5)
+03757A:      bne $37598                            | 03757A: bne $37598
+03757C:      movea.l $1083b6, A0                   | 03757C: movea.l ($b6,A4), A0
+037580:      move.b $108230, D0                    | 037580: move.b ($130,A0), D0
+037584:      andi.b #$7f, D0                       | 037584: andi.b #$7f, D0
+037588:      subq.b #1, D0                         | 037588: subq.b #1, D0
+03758A:      btst D0, $1087e6                      | 03758A: btst D0, ($7e6,A5)
+03758E:      bne $375c0                            | 03758E: bne $375c0
+0375C0:      rts                                   | 0375C0: rts
+03729C:    move.w #$47, $108372                    | 03729C: move.w #$47, ($72,A4)
+0372A2:    btst #$0, $108430                       | 0372A2: btst #$0, ($130,A4)
+0372A8:    bne $372b0                              | 0372A8: bne $372b0
+0372AA:    move.w #$49, $108372                    | 0372AA: move.w #$49, ($72,A4)
+0372B0:    bsr $372da                              | 0372B0: bsr $372da
+0372DA:      move.b $108430, D0                    | 0372DA: move.b ($130,A4), D0
+0372DE:      andi.b #$7f, D0                       | 0372DE: andi.b #$7f, D0
+0372E2:      addq.b #1, D0                         | 0372E2: addq.b #1, D0
+0372E4:      btst D0, $1087e6                      | 0372E4: btst D0, ($7e6,A5)
+0372E8:      bne $37310                            | 0372E8: bne $37310
+0372EA:      move.b $10ba1f, D0                    | 0372EA: move.b ($1,A6), D0
+0372EE:      andi.w #$f, D0                        | 0372EE: andi.w #$f, D0
+0372F2:      lea $37316                            | 0372F2: lea ($22,PC) ; ($37316), A0
+0372F6:      nop                                   | 0372F6: nop
+0372F8:      moveq #$0, D1                         | 0372F8: moveq #$0, D1
+0372FA:      move.b $NaN, D1                       | 0372FA: move.b (A0,D0.w), D1
+0372FE:      bmi $37310                            | 0372FE: bmi $37310
+037310:      bsr $373f6                            | 037310: bsr $373f6
+0373F6:        lea $53538.l, A0                    | 0373F6: lea $53538.l, A0
+0373FC:        btst #$0, $108430                   | 0373FC: btst #$0, ($130,A4)
+037402:        bne $3740a                          | 037402: bne $3740a
+037404:        lea $5355c.l, A0                    | 037404: lea $5355c.l, A0
+03740A:        moveq #$0, D0                       | 03740A: moveq #$0, D0
+03740C:        move.b $108431, D0                  | 03740C: move.b ($131,A4), D0
+037410:        add.w D0, D0                        | 037410: add.w D0, D0
+037412:        add.w D0, D0                        | 037412: add.w D0, D0
+037414:        movea.l $NaN, A0                    | 037414: movea.l (A0,D0.w), A0
+037418:        move.b #$ff, $10c6fe                | 037418: move.b #$ff, ($46fe,A5)
+03741E:        jsr $6086.w                         | 03741E: jsr $6086.w
+006086:          move.b ($53700), D0               | 006086: move.b (A0), D0
+006088:          move.b D0, -(A7)                  | 006088: move.b D0, -(A7)
+00608A:          move.w (A7)+, D0                  | 00608A: move.w (A7)+, D0
+00608C:          move.b $53701, D0                 | 00608C: move.b ($1,A0), D0
+006090:          move.w D0, D2                     | 006090: move.w D0, D2
+006092:          addq.l #2, A0                     | 006092: addq.l #2, A0
+006094:          tst.b $10c6fe                     | 006094: tst.b ($46fe,A5)
+006098:          bmi $60b4                         | 006098: bmi $60b4
+0060B4:          move.b (A0)+, D0                  | 0060B4: move.b (A0)+, D0
+0060B6:          move.b D0, -(A7)                  | 0060B6: move.b D0, -(A7)
+0060B8:          move.w (A7)+, D0                  | 0060B8: move.w (A7)+, D0
+0060BA:          clr.b D0                          | 0060BA: clr.b D0
+0060BC:          move.w D2, $10c6fa                | 0060BC: move.w D2, ($46fa,A5)
+0060C0:          move.w D0, $10c6fc                | 0060C0: move.w D0, ($46fc,A5)
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+006086:          move.b ($5370c), D0               | 006086: move.b (A0), D0
+006088:          move.b D0, -(A7)                  | 006088: move.b D0, -(A7)
+00608A:          move.w (A7)+, D0                  | 00608A: move.w (A7)+, D0
+00608C:          move.b $5370d, D0                 | 00608C: move.b ($1,A0), D0
+006090:          move.w D0, D2                     | 006090: move.w D0, D2
+006092:          addq.l #2, A0                     | 006092: addq.l #2, A0
+006094:          tst.b $10c6fe                     | 006094: tst.b ($46fe,A5)
+006098:          bmi $60b4                         | 006098: bmi $60b4
+0060B4:          move.b (A0)+, D0                  | 0060B4: move.b (A0)+, D0
+0060B6:          move.b D0, -(A7)                  | 0060B6: move.b D0, -(A7)
+0060B8:          move.w (A7)+, D0                  | 0060B8: move.w (A7)+, D0
+0060BA:          clr.b D0                          | 0060BA: clr.b D0
+0060BC:          move.w D2, $10c6fa                | 0060BC: move.w D2, ($46fa,A5)
+0060C0:          move.w D0, $10c6fc                | 0060C0: move.w D0, ($46fc,A5)
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+0060EE:          or.w D0, D1                       | 0060EE: or.w D0, D1
+0060F0:          swap D2                           | 0060F0: swap D2
+0060F2:          move.w D1, D2                     | 0060F2: move.w D1, D2
+0060F4:          move.l D2, $3c0000.l              | 0060F4: move.l D2, $3c0000.l
+0060FA:          swap D2                           | 0060FA: swap D2
+0060FC:          addi.w #$20, D2                   | 0060FC: addi.w #$20, D2
+006100:          bra $60c4                         | 006100: bra $60c4
+0060C4:          moveq #$0, D1                     | 0060C4: moveq #$0, D1
+0060C6:          move.b (A0)+, D1                  | 0060C6: move.b (A0)+, D1
+0060C8:          cmpi.b #$d, D1                    | 0060C8: cmpi.b #$d, D1
+0060CC:          bne $60e2                         | 0060CC: bne $60e2
+0060E2:          cmpi.b #-$2, D1                   | 0060E2: cmpi.b #-$2, D1
+0060E6:          beq $6086                         | 0060E6: beq $6086
+0060E8:          cmpi.b #-$1, D1                   | 0060E8: cmpi.b #-$1, D1
+0060EC:          beq $6102                         | 0060EC: beq $6102
+006102:          addq.w #1, $10c6fa                | 006102: addq.w #1, ($46fa,A5)
+006106:          rts                               | 006106: rts
+037422:        rts                                 | 037422: rts
+037314:      rts                                   | 037314: rts
+0372B4:    bsr $37424                              | 0372B4: bsr $37424
+037424:      move.b $108430, D0                    | 037424: move.b ($130,A4), D0
+037428:      andi.b #$7f, D0                       | 037428: andi.b #$7f, D0
+03742C:      addq.b #1, D0                         | 03742C: addq.b #1, D0
+03742E:      btst D0, $1087e6                      | 03742E: btst D0, ($7e6,A5)
+037432:      bne $3745a                            | 037432: bne $3745a
+037434:      tst.b $108430                         | 037434: tst.b ($130,A4)
+037438:      bpl $3744a                            | 037438: bpl $3744a
+03744A:      bsr $37464                            | 03744A: bsr $37464
+037464:        moveq #$0, D1                       | 037464: moveq #$0, D1
+037466:        move.b $10ba1f, D0                  | 037466: move.b ($1,A6), D0
+03746A:        btst #$4, D0                        | 03746A: btst #$4, D0
+03746E:        beq $37476                          | 03746E: beq $37476
+037476:        addq.w #1, D1                       | 037476: addq.w #1, D1
+037478:        btst #$5, D0                        | 037478: btst #$5, D0
+03747C:        beq $37484                          | 03747C: beq $37484
+037484:        addq.w #1, D1                       | 037484: addq.w #1, D1
+037486:        btst #$6, D0                        | 037486: btst #$6, D0
+03748A:        beq $37492                          | 03748A: beq $37492
+037492:        addq.w #1, D1                       | 037492: addq.w #1, D1
+037494:        btst #$7, D0                        | 037494: btst #$7, D0
+037498:        beq $374a0                          | 037498: beq $374a0
+0374A0:        moveq #$0, D0                       | 0374A0: moveq #$0, D0
+0374A2:        rts                                 | 0374A2: rts
+03744E:      beq $37462                            | 03744E: beq $37462
+037462:      rts                                   | 037462: rts
+0372B8:    bra $36eac                              | 0372B8: bra $36eac
+036EAC:    jsr $48e6.w                             | 036EAC: jsr $48e6.w
+0048E6:      move.w $108370, D0                    | 0048E6: move.w ($70,A4), D0
+0048EA:      cmp.b $108378, D0                     | 0048EA: cmp.b ($78,A4), D0
+0048EE:      bne $491c                             | 0048EE: bne $491c
+00491C:      move.b D0, $108378                    | 00491C: move.b D0, ($78,A4)
+004920:      clr.w $108374                         | 004920: clr.w ($74,A4)
+004924:      clr.w $10837e                         | 004924: clr.w ($7e,A4)
+004928:      clr.b $10837d                         | 004928: clr.b ($7d,A4)
+00492C:      andi.w #$efff, $1083e6                | 00492C: andi.w #$efff, ($e6,A4)
+004932:      bsr $49f8                             | 004932: bsr $49f8
+0049F8:        lea $108390, A0                     | 0049F8: lea ($90,A4), A0
+0049FC:        clr.b ($108390)                     | 0049FC: clr.b (A0)
+0049FE:        clr.b $108395                       | 0049FE: clr.b ($5,A0)
+004A02:        clr.b $10839a                       | 004A02: clr.b ($a,A0)
+004A06:        clr.b $10839f                       | 004A06: clr.b ($f,A0)
+004A0A:        rts                                 | 004A0A: rts
+004936:      bsr $4962                             | 004936: bsr $4962
+004962:        lea $7bf48.l, A0                    | 004962: lea $7bf48.l, A0
+004968:        move.w $108370, D0                  | 004968: move.w ($70,A4), D0
+00496C:        add.w D0, D0                        | 00496C: add.w D0, D0
+00496E:        add.w D0, D0                        | 00496E: add.w D0, D0
+004970:        movea.l $NaN, A0                    | 004970: movea.l (A0,D0.w), A0
+004974:        move.w $108372, D0                  | 004974: move.w ($72,A4), D0
+004978:        add.w D0, D0                        | 004978: add.w D0, D0
+00497A:        move.w $NaN, $10c6de                | 00497A: move.w (A0,D0.w), ($46de,A5)
+004980:        lea $80000.l, A0                    | 004980: lea $80000.l, A0
+004986:        move.w $108370, D0                  | 004986: move.w ($70,A4), D0
+00498A:        add.w D0, D0                        | 00498A: add.w D0, D0
+00498C:        add.w D0, D0                        | 00498C: add.w D0, D0
+00498E:        movea.l $NaN, A0                    | 00498E: movea.l (A0,D0.w), A0
+004992:        move.w $10c6de, D0                  | 004992: move.w ($46de,A5), D0
+004996:        tst.b $10c6e2                       | 004996: tst.b ($46e2,A5)
+00499A:        beq $49a0                           | 00499A: beq $49a0
+0049A0:        andi.w #$ff, D0                     | 0049A0: andi.w #$ff, D0
+0049A4:        add.w D0, D0                        | 0049A4: add.w D0, D0
+0049A6:        add.w D0, D0                        | 0049A6: add.w D0, D0
+0049A8:        movea.l $NaN, A0                    | 0049A8: movea.l (A0,D0.w), A0
+0049AC:        move.w $108374, D0                  | 0049AC: move.w ($74,A4), D0
+0049B0:        adda.w D0, A0                       | 0049B0: adda.w D0, A0
+0049B2:        move.b ($f31d6), $108376            | 0049B2: move.b (A0), ($76,A4)
+0049B6:        bmi $4a22                           | 0049B6: bmi $4a22
+0049BA:        move.b $108381, D0                  | 0049BA: move.b ($81,A4), D0
+0049BE:        tst.b $10837d                       | 0049BE: tst.b ($7d,A4)
+0049C2:        beq $49c8                           | 0049C2: beq $49c8
+0049C8:        add.b $10837d, D0                   | 0049C8: add.b ($7d,A4), D0
+0049CC:        add.b D0, $108376                   | 0049CC: add.b D0, ($76,A4)
+0049D0:        bgt $49d8                           | 0049D0: bgt $49d8
+0049D8:        addq.w #1, $10837e                  | 0049D8: addq.w #1, ($7e,A4)
+0049DC:        move.b $f31da, $10837a              | 0049DC: move.b ($4,A0), ($7a,A4)
+0049E2:        move.b $f31db, $10837b              | 0049E2: move.b ($5,A0), ($7b,A4)
+0049E8:        move.l ($f31d6), D0                 | 0049E8: move.l (A0), D0
+0049EA:        movea.l D0, A0                      | 0049EA: movea.l D0, A0
+0049EC:        move.w ($30f104a), $10836a          | 0049EC: move.w (A0), ($6a,A4)
+0049F0:        move.w $30f104c, $10836c            | 0049F0: move.w ($2,A0), ($6c,A4)
+0049F6:        rts                                 | 0049F6: rts
+00493A:      bra $4906                             | 00493A: bra $4906
+004906:      subq.b #1, $108376                    | 004906: subq.b #1, ($76,A4)
+00490A:      bhi $491a                             | 00490A: bhi $491a
+00491A:      rts                                   | 00491A: rts
+036EB0:    jmp $3e2e.w                             | 036EB0: jmp $3e2e.w
+003E2E:    tst.w $108374                           | 003E2E: tst.w ($74,A4)
+003E32:    bmi $3e80                               | 003E32: bmi $3e80
+003E34:    btst #$6, $10837c                       | 003E34: btst #$6, ($7c,A4)
+003E3A:    bne $3e78                               | 003E3A: bne $3e78
+003E3E:    moveq #$0, D3                           | 003E3E: moveq #$0, D3
+003E40:    move.b $108382, D3                      | 003E40: move.b ($82,A4), D3
+003E44:    add.w D3, D3                            | 003E44: add.w D3, D3
+003E46:    add.w D3, D3                            | 003E46: add.w D3, D3
+003E48:    move.w $108318, D0                      | 003E48: move.w ($18,A4), D0
+003E4C:    lea $10904c, A0                         | 003E4C: lea ($104c,A5), A0
+003E50:    sub.w $NaN, D0                          | 003E50: sub.w (A0,D3.w), D0
+003E54:    addi.w #$30, D0                         | 003E54: addi.w #$30, D0
+003E58:    cmpi.w #$1a0, D0                        | 003E58: cmpi.w #$1a0, D0
+003E5C:    bls $3e60                               | 003E5C: bls $3e60
+003E60:    move.w $10831c, D0                      | 003E60: move.w ($1c,A4), D0
+003E64:    sub.w $108320, D0                       | 003E64: sub.w ($20,A4), D0
+003E68:    lea $109058, A0                         | 003E68: lea ($1058,A5), A0
+003E6C:    sub.w $NaN, D0                          | 003E6C: sub.w (A0,D3.w), D0
+003E70:    cmpi.w #$1c0, D0                        | 003E70: cmpi.w #$1c0, D0
+003E74:    bls $3e78                               | 003E74: bls $3e78
+003E78:    bsr $4860                               | 003E78: bsr $4860
+004860:      lea $7bf48.l, A0                      | 004860: lea $7bf48.l, A0
+004866:      move.w $108370, D0                    | 004866: move.w ($70,A4), D0
+00486A:      add.w D0, D0                          | 00486A: add.w D0, D0
+00486C:      add.w D0, D0                          | 00486C: add.w D0, D0
+00486E:      movea.l $NaN, A0                      | 00486E: movea.l (A0,D0.w), A0
+004872:      move.w $108372, D0                    | 004872: move.w ($72,A4), D0
+004876:      add.w D0, D0                          | 004876: add.w D0, D0
+004878:      move.w $NaN, D1                       | 004878: move.w (A0,D0.w), D1
+00487C:      move.w D1, $10c6de                    | 00487C: move.w D1, ($46de,A5)
+004880:      lea $80000.l, A0                      | 004880: lea $80000.l, A0
+004886:      move.w $108370, D0                    | 004886: move.w ($70,A4), D0
+00488A:      add.w D0, D0                          | 00488A: add.w D0, D0
+00488C:      add.w D0, D0                          | 00488C: add.w D0, D0
+00488E:      movea.l $NaN, A0                      | 00488E: movea.l (A0,D0.w), A0
+004892:      move.w $10c6de, D0                    | 004892: move.w ($46de,A5), D0
+004896:      tst.b $10c6e2                         | 004896: tst.b ($46e2,A5)
+00489A:      beq $48a0                             | 00489A: beq $48a0
+0048A0:      andi.w #$ff, D0                       | 0048A0: andi.w #$ff, D0
+0048A4:      add.w D0, D0                          | 0048A4: add.w D0, D0
+0048A6:      add.w D0, D0                          | 0048A6: add.w D0, D0
+0048A8:      movea.l $NaN, A0                      | 0048A8: movea.l (A0,D0.w), A0
+0048AC:      move.w $108374, D0                    | 0048AC: move.w ($74,A4), D0
+0048B0:      adda.w D0, A0                         | 0048B0: adda.w D0, A0
+0048B2:      move.l ($f31d6), D0                   | 0048B2: move.l (A0), D0
+0048B4:      andi.l #$ffffff, D0                   | 0048B4: andi.l #$ffffff, D0
+0048BA:      movea.l D0, A0                        | 0048BA: movea.l D0, A0
+0048BC:      move.w $f104e, D0                     | 0048BC: move.w ($4,A0), D0
+0048C0:      andi.w #$1fff, D0                     | 0048C0: andi.w #$1fff, D0
+0048C4:      move.w D0, $10c6e0                    | 0048C4: move.w D0, ($46e0,A5)
+0048C8:      lea $80080.l, A0                      | 0048C8: lea $80080.l, A0
+0048CE:      move.w $108370, D1                    | 0048CE: move.w ($70,A4), D1
+0048D2:      add.w D1, D1                          | 0048D2: add.w D1, D1
+0048D4:      add.w D1, D1                          | 0048D4: add.w D1, D1
+0048D6:      movea.l $NaN, A0                      | 0048D6: movea.l (A0,D1.w), A0
+0048DA:      add.w D0, D0                          | 0048DA: add.w D0, D0
+0048DC:      add.w D0, D0                          | 0048DC: add.w D0, D0
+0048DE:      move.l $NaN, $108328                  | 0048DE: move.l (A0,D0.w), ($28,A4)
+0048E4:      rts                                   | 0048E4: rts
+003E7C:    bra $481a                               | 003E7C: bra $481a
+00481A:    addq.w #1, $108e3a                      | 00481A: addq.w #1, ($e3a,A5)
+00481E:    lea $108838, A1                         | 00481E: lea ($838,A5), A1
+004822:    move.w $10832c, D0                      | 004822: move.w ($2c,A4), D0
+004826:    move.w D0, D1                           | 004826: move.w D0, D1
+004828:    add.w D1, D1                            | 004828: add.w D1, D1
+00482A:    adda.w D1, A1                           | 00482A: adda.w D1, A1
+00482C:    cmp.w $108e38, D1                       | 00482C: cmp.w ($e38,A5), D1
+004830:    bhi $4836                               | 004830: bhi $4836
+004832:    move.w D1, $108e38                      | 004832: move.w D1, ($e38,A5)
+004836:    move.w (A1)+, D1                        | 004836: move.w (A1)+, D1
+004838:    beq $485a                               | 004838: beq $485a
+00483A:    move.l #$100000, D2                     | 00483A: move.l #$100000, D2
+004840:    move.w D1, D2                           | 004840: move.w D1, D2
+004842:    movea.l D2, A0                          | 004842: movea.l D2, A0
+004844:    cmp.w $10812c, D0                       | 004844: cmp.w ($2c,A0), D0
+004848:    bcc $4836                               | 004848: bcc $4836
+004836:    move.w (A1)+, D1                        | 004836: move.w (A1)+, D1
+004838:    beq $485a                               | 004838: beq $485a
+00485A:    move.w A4, $10892a                      | 00485A: move.w A4, (-$2,A1)
+00485E:    rts                                     | 00485E: rts
+037234:  clr.b $10ba1f                             | 037234: clr.b ($1,A6)
+037238:  rts                                       | 037238: rts

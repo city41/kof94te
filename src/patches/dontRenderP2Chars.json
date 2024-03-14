@@ -1,0 +1,11 @@
+{
+  "description": "Has team select skip rendering p2's characters",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "nops",
+      "address": "13704A",
+      "patchAsm": ["nop", "nop"]
+    }
+  ]
+}

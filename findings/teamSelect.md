@@ -118,6 +118,7 @@ The flag sprite indexes vary depending on how you get to the team select screen.
     - 371fe: sets up player one's character sprites
     - 3721c: sets up player two's character sprites
     - these run every frame, so changing a team will naturally cause the new characters to appear
+    - interestingly, order select does not use these functions
   - if the timer on team select runs out, it sets 37086
     - 37086 is a nest of stuff, but ultimately it seems to be "pick whichever team is highlighted, then run cpu team select" (wherever that is...)
 
@@ -378,3 +379,31 @@ D0 = D0 << 5, D0 becomes #ca0
 002668: 20C7 move.l D7, (A0)+
 00266A: 51C8 FFF6 dbra
 00266E: 4E75 rts
+
+## 371fe: load p1 character sprites
+
+0371FE: 2C6D 07EA movea.l ($7ea,A5), A6
+037202: 082D 0005 8000 btst #$5, (-$8000,A5)
+037208: 6704 beq $3720e
+03720A: 4DED 39CA lea ($39ca,A5), A6
+03720E: 49ED 0100 lea ($100,A5), A4
+037212: 2054 movea.l (A4), A0
+037214: 4E90 jsr (A0)
+037216: 422E 0001 clr.b ($1,A6)
+03721A: 4E75 rts
+
+37214 is jumping to 3723A on the first time, and 37274 from then on. 3723A just "bleeds" into 37274 so the first time through it just does a bit more setup
+
+## 3721c: load p2 character sprites
+
+03721C: 2C6D 07EE movea.l ($7ee,A5), A6
+037220: 082D 0005 8000 btst #$5, (-$8000,A5)
+037226: 6704 beq $3722c
+037228: 4DED 39E0 lea ($39e0,A5), A6
+03722C: 49ED 0300 lea ($300,A5), A4
+037230: 2054 movea.l (A4), A0
+037232: 4E90 jsr (A0)
+037234: 422E 0001 clr.b ($1,A6)
+037238: 4E75 rts
+
+37232 does the same thing as in the p1 routine above
