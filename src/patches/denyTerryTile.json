@@ -1,0 +1,27 @@
+{
+  "description": "Don't let it set tile 4a11",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "deny tile",
+      "address": "104304",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.w #$4a11, d1",
+        "beq bogusTile ; oh it is terry's tile? set something else then",
+        "move.w d1, (a0) ; not terry's tile, set the tile as before",
+        "bra done",
+        "bogusTile:",
+        "move.w #$4a12, (a0) ; set one of terry's other tiles",
+        "done:",
+        "nop",
+        "move.w d0, (a0) ; this is the other word: palette, flip, etc",
+        "rts"
+      ]
+    }
+  ]
+}

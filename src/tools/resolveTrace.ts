@@ -129,7 +129,7 @@ function resolveLine(
   l: string,
   nextL: string,
   indentDepth: number
-): { resolvedLine: string; indentDepth: number } {
+): { resolvedLine: string; indentDepth: number } | undefined {
   l = removeDuplicateSpaces(l);
   nextL = removeDuplicateSpaces(nextL);
 
@@ -138,6 +138,11 @@ function resolveLine(
   const [registerS, asmS] = line.split(" -- ");
   const [rawAddress, opcode, ...params] = asmS.split(" ");
   const address = rawAddress.replace(":", "");
+
+  if (parseInt(address, 16) >= 0xc00000) {
+    // this is in the bios, so ignore it
+    return undefined;
+  }
 
   let nextIndentDepth = indentDepth;
   if (opcode === "jsr" || opcode === "bsr") {
@@ -216,8 +221,10 @@ async function main(tracePath: string) {
     const nextLine = lines[i + 1];
     try {
       const result = resolveLine(line, nextLine, indentDepth);
-      indentDepth = result.indentDepth;
-      resolvedLines.push(result.resolvedLine);
+      if (result) {
+        indentDepth = result.indentDepth;
+        resolvedLines.push(result.resolvedLine);
+      }
     } catch (e) {
       console.error("resolve fail at line", i, e);
       console.log("line\n", line);

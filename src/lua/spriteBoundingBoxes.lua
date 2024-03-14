@@ -214,24 +214,25 @@ function dump_sprite(si)
 	local paletteIndexes = getSpritePaletteIndexes(si, vram, h)
 	local tileIndexes = getSpriteTileIndexes(si, vram, h)
 
-	print("--------------------")
-	print(string.format("Sprite: %d at (%d,%d), %d tiles tall", si, x, y, h))
-	print("tiles")
+	if h > 0 then
+		print(string.format("Sprite: %d at (%d,%d), %d tiles tall", si, x, y, h))
 
-	for _, ti in pairs(tileIndexes) do
-		print(string.format("  %x", ti))
+		print("tiles")
+		for _, ti in pairs(tileIndexes) do
+			print(string.format("  %x", ti))
+		end
+
+		print("palettes")
+
+		for _, pi in pairs(paletteIndexes) do
+			print(string.format("  %x", pi))
+		end
+		print("--------------------")
 	end
-
-	print("palettes")
-
-	for _, pi in pairs(paletteIndexes) do
-		print(string.format("  %x", pi))
-	end
-	print("--------------------")
 end
 
 function on_pause()
-	for i = 150, 250 do
+	for i = 150, 380 do
 		dump_sprite(i)
 	end
 end

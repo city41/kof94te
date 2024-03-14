@@ -70,8 +70,11 @@ function formJsrAsm(numBytesToReplace: number, jsrAddress: number): string[] {
 
   const numNops = (numBytesToReplace - 6) / 2;
 
+  // TODO: hardcoding 2 as generally these subroutines will end up
+  // in the second bank, but really should calculate that from the address
+
   const asmNops = new Array(numNops).fill(0).map(() => "nop");
-  return asmNops.concat(`jsr $${jsrAddress.toString(16)}`);
+  return asmNops.concat(`jsr $2${jsrAddress.toString(16)}`);
 }
 
 function stringToassembly(str: string): string[] {
