@@ -7,13 +7,9 @@ jsr $5e72
 ; this is the bios routine for clearing all sprites
 jsr $c004c8
 
-; we don't want to call the below two, as loading the flags
-; is required to get the background to show up. instead we need
-; to understand these routines and recreate them as needed
-; load the background
-; jsr $371c4
-; load the flags
-; jsr $36ec0
+; load the avatars onto the screen
+; TODO: make sure this is done during vblank
+; jsr $2LOAD_AVATARS
 
 ; now init is done, go into main char select routine
 move.l #$2CHAR_SELECT_MAIN_ROUTINE, $108584

@@ -228,13 +228,13 @@ function dump_sprite(si)
 			print(string.format("  %x", pi))
 		end
 		print("--------------------")
+	else
+		print("sprite %d has zero height", si)
 	end
 end
 
 function on_pause()
-	for i = 150, 380 do
-		dump_sprite(i)
-	end
+	dump_sprite(0)
 end
 
 emu.register_frame_done(on_frame, "frame")

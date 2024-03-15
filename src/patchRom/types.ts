@@ -38,13 +38,23 @@ export type StringPromPatch = BasePromPatch & {
   value: string;
 };
 
+export type DataPromPatch = BasePromPatch & {
+  data: true;
+  value: string[];
+};
+
 export type Patch =
   | AddressPromPatch
-  | AddressPromFileAsmPatch
+  | AddressPromFilePathPatch
   | StringPromPatch
+  | DataPromPatch
   | CromPatch;
 
-export type InlinePatch = AddressPromPatch | StringPromPatch | CromPatch;
+export type InlinePatch =
+  | AddressPromPatch
+  | StringPromPatch
+  | DataPromPatch
+  | CromPatch;
 
 export type SubroutineSpace = {
   start: string;

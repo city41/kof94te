@@ -8,6 +8,7 @@ import {
   AddressPromPatch,
   CromBuffer,
   CromPatch,
+  DataPromPatch,
   InlinePatch,
   Patch,
   PatchJSON,
@@ -49,6 +50,20 @@ function flipBytes(data: number[]): number[] {
   }
 
   return data;
+}
+
+function isDataPatch(obj: unknown): obj is DataPromPatch {
+  if (!obj) {
+    return false;
+  }
+
+  if (typeof obj !== "object") {
+    return false;
+  }
+
+  const p = obj as DataPromPatch;
+
+  return p.type === "prom" && p.data === true && Array.isArray(p.value);
 }
 
 function isStringPatch(obj: unknown): obj is StringPromPatch {
@@ -125,6 +140,7 @@ function isPatch(obj: unknown): obj is Patch {
 
   return (
     isStringPatch(p) ||
+    isDataPatch(p) ||
     isAddressPatch(p) ||
     isAddressFilePathPatch(p) ||
     isCromPatch(p)
@@ -185,7 +201,12 @@ async function hydratePatch(
   patch: Patch,
   jsonDir: string
 ): Promise<InlinePatch> {
-  if (isStringPatch(patch) || isCromPatch(patch) || isAddressPatch(patch)) {
+  if (
+    isStringPatch(patch) ||
+    isCromPatch(patch) ||
+    isAddressPatch(patch) ||
+    isDataPatch(patch)
+  ) {
     return patch;
   } else if (isAddressFilePathPatch(patch)) {
     const asmPath = path.resolve(jsonDir, patch.patchAsm);
@@ -365,4 +386,4 @@ const finalPatchJsonPaths = patchJsonInputPaths.map((pjip) =>
 
 main(finalPatchJsonPaths).catch((e) => console.error);
 
-export { isStringPatch, isCromPatch };
+export { isStringPatch, isCromPatch, isDataPatch };

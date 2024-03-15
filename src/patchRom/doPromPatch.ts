@@ -4,7 +4,7 @@ import * as mkdirp from "mkdirp";
 import { execSync } from "node:child_process";
 import { AddressPromPatch, InlinePatch } from "./types";
 import { asmTmpDir } from "./dirs";
-import { isCromPatch, isStringPatch } from "./main";
+import { isCromPatch, isDataPatch, isStringPatch } from "./main";
 
 function hexDump(bytes: number[]): string {
   return bytes.map((b) => b.toString(16)).join(" ");
@@ -77,7 +77,7 @@ function formJsrAsm(numBytesToReplace: number, jsrAddress: number): string[] {
   return asmNops.concat(`jsr $2${jsrAddress.toString(16)}`);
 }
 
-function stringToassembly(str: string): string[] {
+function stringToAssembly(str: string): string[] {
   return str
     .split("")
     .map((c) => {
@@ -88,39 +88,46 @@ function stringToassembly(str: string): string[] {
     .concat("dc.b $0  ; null terminator");
 }
 
-async function addStringToProm(
-  data: number[],
-  subroutineInsertEnd: number,
-  str: string
-): Promise<{ patchedPromData: number[]; subroutineInsertEnd: number }> {
-  const subroutineBytes = await assemble(stringToassembly(str));
-  console.log(
-    "addStringToProm: subroutinebytes for",
-    str,
-    hexDump(subroutineBytes)
-  );
-
-  let subroutineStartAddress = subroutineInsertEnd - subroutineBytes.length;
-
+function addBytesToProm(
+  promData: number[],
+  bytes: number[],
+  subroutineInsertEnd: number
+) {
+  let subroutineStartAddress = subroutineInsertEnd - bytes.length;
   if (subroutineStartAddress & 1) {
     // the 68k cannot address odd bytes, need to back off one to get an even address
     subroutineStartAddress -= 1;
   }
 
   console.log(
-    `Adding str (${str}) at address $${subroutineStartAddress.toString(16)}`
+    `addBytesToProm: adding bytes at ${subroutineStartAddress.toString(16)}:`,
+    hexDump(bytes)
   );
 
-  data.splice(
-    subroutineStartAddress,
-    subroutineBytes.length,
-    ...subroutineBytes
-  );
+  promData.splice(subroutineStartAddress, bytes.length, ...bytes);
 
   return {
-    patchedPromData: data,
+    patchedPromData: promData,
     subroutineInsertEnd: subroutineStartAddress,
   };
+}
+
+async function addDataToProm(
+  promData: number[],
+  subroutineInsertEnd: number,
+  dataAsm: string[]
+): Promise<{ patchedPromData: number[]; subroutineInsertEnd: number }> {
+  const dataBytes = await assemble(dataAsm);
+  return addBytesToProm(promData, dataBytes, subroutineInsertEnd);
+}
+
+async function addStringToProm(
+  promData: number[],
+  subroutineInsertEnd: number,
+  str: string
+): Promise<{ patchedPromData: number[]; subroutineInsertEnd: number }> {
+  const stringBytes = await assemble(stringToAssembly(str));
+  return addBytesToProm(promData, stringBytes, subroutineInsertEnd);
 }
 
 async function replaceWithSubroutine(
@@ -228,6 +235,8 @@ async function doPromPatch(
 
   if (isStringPatch(patch)) {
     result = await addStringToProm(promData, subroutineInsertEnd, patch.value);
+  } else if (isDataPatch(patch)) {
+    result = await addDataToProm(promData, subroutineInsertEnd, patch.value);
   } else if (patch.subroutine) {
     patch = applySymbols(symbolTable, patch);
     result = await replaceWithSubroutine(promData, subroutineInsertEnd, patch);
