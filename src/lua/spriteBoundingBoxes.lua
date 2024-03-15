@@ -25,8 +25,8 @@ VRAM_SIZE = 0x8600
 FIX_LAYER = 0x7000
 
 -- toggle sprites/fix on/off
-SHOW_SPRITES = true
-SHOW_FIX_LAYER = true
+SHOW_SPRITES = false
+SHOW_FIX_LAYER = false
 
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)
@@ -46,10 +46,14 @@ function on_vram_write(offset, data)
 			return 0xff
 		end
 
-		if (not SHOW_SPRITES) and next_vram_index >= SCB4 and next_vram_index <= VRAM_SIZE then
-			-- this moves the sprites off the screen, 320 is to account for stickied sprites
-			-- who might be only moving their control sprite
-			return -320
+		if (not SHOW_SPRITES) and next_vram_index >= SCB3 and next_vram_index <= SCB4 then
+			if next_vram_index < SCB3 + 129 then
+				return 0
+			end
+
+			if next_vram_index > SCB3 + 144 then
+				return 0
+			end
 		end
 	end
 end
