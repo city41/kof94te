@@ -23,6 +23,18 @@ These values don't change depending on what team the CPU picks.
 
 The lua script, `forceTeamItalyToBeUSA.lua` successfully forces a selection of Team Italy to be USA once the game starts. The order select screen still shows Italy, but I am guessing they just reused the sprites and don't bother to update them as normally they would not change.
 
+## The Timer
+
+Team Select runs on a timer and once elapsed chooses the currently focused team for you.
+
+The timer looks to be a word at 108654, confirmed with `teamSelectTimerNeverElapses.lua`
+
+At 37440 it compares the timer to 141e. when it goes under that it starts running some additional stuff.
+
+It is checking for zero at 3706a
+sbcd d0, d1
+bcs 3707c
+
 ## Player Memory Blocks
 
 From 108110 to 10830f is a memory block for player 1, and 108310 to 10850f is player 2's block. They are 512 bytes each.

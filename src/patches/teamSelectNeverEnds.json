@@ -1,0 +1,11 @@
+{
+  "description": "Skip the zero branch on the team select timer. Team select never ends, but cant press A to move on either",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "skip branch",
+      "address": "13706c",
+      "patchAsm": ["nop", "nop"]
+    }
+  ]
+}
