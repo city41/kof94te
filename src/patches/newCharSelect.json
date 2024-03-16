@@ -49,6 +49,20 @@
     },
     {
       "type": "prom",
+      "description": "truncate sprites routine",
+      "subroutine": true,
+      "symbol": "TRUNCATE_SPRITES_ROUTINE",
+      "patchAsm": "truncateSpritesRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "teardown routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",
+      "patchAsm": "charSelectTeardownRoutine.asm"
+    },
+    {
+      "type": "prom",
       "description": "main routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",

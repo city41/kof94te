@@ -27,5 +27,7 @@ lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
 ; now init is done, go into main char select routine
+; if the timer has elapsed
 move.l #$2CHAR_SELECT_MAIN_ROUTINE, $108584
+
 rts
