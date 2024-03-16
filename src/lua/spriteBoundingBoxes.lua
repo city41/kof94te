@@ -25,8 +25,8 @@ VRAM_SIZE = 0x8600
 FIX_LAYER = 0x7000
 
 -- toggle sprites/fix on/off
-SHOW_SPRITES = false
-SHOW_FIX_LAYER = false
+SHOW_SPRITES = true
+SHOW_FIX_LAYER = true
 
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)
@@ -238,7 +238,9 @@ function dump_sprite(si)
 end
 
 function on_pause()
-	dump_sprite(0)
+	for i = 321, 374 do
+		dump_sprite(i)
+	end
 end
 
 emu.register_frame_done(on_frame, "frame")

@@ -1,0 +1,71 @@
+{
+  "description": "Go to new routine after HTP instead of team select",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "palettes",
+      "subroutine": true,
+      "symbol": "PALETTES",
+      "patchAsm": "palettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "bg_oceans image",
+      "subroutine": true,
+      "symbol": "BG_OCEANS_IMAGE",
+      "patchAsm": "bg_oceans.asm"
+    },
+    {
+      "type": "prom",
+      "description": "logo_countries image",
+      "subroutine": true,
+      "symbol": "LOGO_COUNTRIES_IMAGE",
+      "patchAsm": "logo_countries.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character_grid image",
+      "subroutine": true,
+      "symbol": "CHARACTER_GRID_IMAGE",
+      "patchAsm": "character_grid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "load palettes routine",
+      "subroutine": true,
+      "symbol": "LOAD_P_A_L_E_T_T_E_S",
+      "patchAsm": "loadPalettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render static image routine",
+      "subroutine": true,
+      "symbol": "RENDER_STATIC_IMAGE",
+      "patchAsm": "renderStaticImage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "main routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_MAIN_ROUTINE",
+      "patchAsm": "charSelectMainRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "init routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_INIT_ROUTINE",
+      "patchAsm": "charSelectInitRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "jump to new char select instead of 36e66",
+      "address": "13b9dc",
+      "patchAsm": ["move.l #$2CHAR_SELECT_INIT_ROUTINE, $584(A5)"]
+    }
+  ]
+}

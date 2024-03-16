@@ -1,5 +1,4 @@
 start:
-jsr $2LOAD_AVATARS
 move.b #$f, $108235 ; p1 character one is Terry
 move.b #$6, $108236 ; p1 character two is Kyo
 move.b #$12, $108237 ; p1 character three is Ryo

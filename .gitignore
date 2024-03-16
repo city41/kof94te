@@ -39,6 +39,7 @@ rom/
 *.c2
 *.c3
 *.c4
+*.s1
 *.flipped
 *.zip
 *.neo

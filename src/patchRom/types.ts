@@ -4,13 +4,6 @@ export type BasePatch = {
   skip?: boolean;
 };
 
-export type CromPatch = BasePatch & {
-  type: "crom";
-  imgFile: string;
-  paletteFile: string;
-  destStartingIndex: string;
-};
-
 export type CromBuffer = {
   fileName: string;
   data: number[];
@@ -38,23 +31,12 @@ export type StringPromPatch = BasePromPatch & {
   value: string;
 };
 
-export type DataPromPatch = BasePromPatch & {
-  data: true;
-  value: string[];
-};
-
 export type Patch =
   | AddressPromPatch
   | AddressPromFilePathPatch
-  | StringPromPatch
-  | DataPromPatch
-  | CromPatch;
+  | StringPromPatch;
 
-export type InlinePatch =
-  | AddressPromPatch
-  | StringPromPatch
-  | DataPromPatch
-  | CromPatch;
+export type InlinePatch = AddressPromPatch | StringPromPatch;
 
 export type SubroutineSpace = {
   start: string;

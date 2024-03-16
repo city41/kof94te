@@ -6,7 +6,12 @@ There is about 160kb from 969c8 to c0001. I've used clobberZeroSpan.ts and the g
 
 ## C ROM
 
-The character select screen will need about 100 tiles. 4 tiles per character portrait, and there are 26 characters (24 regular plus the 2 bosses). At the end of C7/C8 there is over 200 blank tiles. That should be plenty. If not, the beginning of C1/C2 has about 500 kanji tiles that are almost certainly not used in the game.
+bg_oceans: 20x14 = 280
+logo_countries: 15x10 = 150
+character_grid: 18x6 = 108
+total: 538
+
+Actually the total is 447 as there are a lot of duplicate tiles.
 
 ## S ROM
 
@@ -15,3 +20,9 @@ The S ROM is pretty much completely full. But I doubt we'll need anything added 
 ## V ROM
 
 I doubt we will need any additional sound effects/music. Can just use the existing ones from the existing char select screen.
+
+# Available Sprites
+
+The game has taken control of most of the sprites. If going forward with the hack method, about 57 sprites would need to be available.
+
+320 seems to be the upper sprite the game controls, leaving 321-380, 60 sprites

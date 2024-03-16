@@ -7,16 +7,13 @@ import {
   AddressPromFilePathPatch,
   AddressPromPatch,
   CromBuffer,
-  CromPatch,
-  DataPromPatch,
   InlinePatch,
   Patch,
   PatchJSON,
   StringPromPatch,
 } from "./types";
 import { doPromPatch } from "./doPromPatch";
-import { createCromBytes } from "./createCromBytes";
-import { insertIntoCrom } from "./insertIntoCrom";
+import { injectCromTiles } from "./injectCromTiles";
 
 function usage() {
   console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
@@ -33,15 +30,6 @@ async function getProm(zipPath: string): Promise<Buffer> {
   return fsp.readFile(path.resolve(romTmpDir, PROM_FILE_NAME));
 }
 
-async function getCrom(zipPath: string, cromFile: string): Promise<CromBuffer> {
-  execSync(`unzip -o ${zipPath} -d ${romTmpDir}`);
-
-  return {
-    fileName: cromFile,
-    data: Array.from(await fsp.readFile(path.resolve(romTmpDir, cromFile))),
-  };
-}
-
 function flipBytes(data: number[]): number[] {
   for (let i = 0; i < data.length; i += 2) {
     const byte = data[i];
@@ -50,20 +38,6 @@ function flipBytes(data: number[]): number[] {
   }
 
   return data;
-}
-
-function isDataPatch(obj: unknown): obj is DataPromPatch {
-  if (!obj) {
-    return false;
-  }
-
-  if (typeof obj !== "object") {
-    return false;
-  }
-
-  const p = obj as DataPromPatch;
-
-  return p.type === "prom" && p.data === true && Array.isArray(p.value);
 }
 
 function isStringPatch(obj: unknown): obj is StringPromPatch {
@@ -108,25 +82,6 @@ function isAddressFilePathPatch(obj: unknown): obj is AddressPromFilePathPatch {
   return p.type === "prom" && typeof p.patchAsm === "string";
 }
 
-function isCromPatch(obj: unknown): obj is CromPatch {
-  if (!obj) {
-    return false;
-  }
-
-  if (typeof obj !== "object") {
-    return false;
-  }
-
-  const p = obj as CromPatch;
-
-  return (
-    p.type === "crom" &&
-    typeof p.destStartingIndex === "string" &&
-    typeof p.imgFile === "string" &&
-    typeof p.paletteFile === "string"
-  );
-}
-
 function isPatch(obj: unknown): obj is Patch {
   if (!obj) {
     return false;
@@ -138,13 +93,7 @@ function isPatch(obj: unknown): obj is Patch {
 
   const p = obj as Patch;
 
-  return (
-    isStringPatch(p) ||
-    isDataPatch(p) ||
-    isAddressPatch(p) ||
-    isAddressFilePathPatch(p) ||
-    isCromPatch(p)
-  );
+  return isStringPatch(p) || isAddressPatch(p) || isAddressFilePathPatch(p);
 }
 
 function isPatchJSON(obj: unknown): obj is PatchJSON {
@@ -201,12 +150,7 @@ async function hydratePatch(
   patch: Patch,
   jsonDir: string
 ): Promise<InlinePatch> {
-  if (
-    isStringPatch(patch) ||
-    isCromPatch(patch) ||
-    isAddressPatch(patch) ||
-    isDataPatch(patch)
-  ) {
+  if (isStringPatch(patch) || isAddressPatch(patch)) {
     return patch;
   } else if (isAddressFilePathPatch(patch)) {
     const asmPath = path.resolve(jsonDir, patch.patchAsm);
@@ -236,19 +180,6 @@ async function main(patchJsonPaths: string[]) {
   const promData = flipBytes(flippedPromData);
 
   let patchedPromData = [...promData];
-
-  await fsp.writeFile("/home/matt/tmp/p1.bin", new Uint8Array(patchedPromData));
-
-  let cromBuffers = [
-    await getCrom(path.resolve("./kof94.zip"), "055-c1.c1"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c2.c2"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c3.c3"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c4.c4"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c5.c5"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c6.c6"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c7.c7"),
-    await getCrom(path.resolve("./kof94.zip"), "055-c8.c8"),
-  ];
 
   for (const patchJsonPath of patchJsonPaths) {
     const jsonDir = path.dirname(patchJsonPath);
@@ -297,48 +228,19 @@ async function main(patchJsonPaths: string[]) {
         }
 
         try {
-          if (patch.type === "prom") {
-            const hydratedPatch = await hydratePatch(patch, jsonDir);
-            const result = await doPromPatch(
-              symbolTable,
-              patchedPromData,
-              subroutineInsertEnd,
-              hydratedPatch
-            );
-            patchedPromData = result.patchedPromData;
-            subroutineInsertEnd = result.subroutineInsertEnd;
-            symbolTable = result.symbolTable;
+          const hydratedPatch = await hydratePatch(patch, jsonDir);
+          const result = await doPromPatch(
+            symbolTable,
+            patchedPromData,
+            subroutineInsertEnd,
+            hydratedPatch
+          );
+          patchedPromData = result.patchedPromData;
+          subroutineInsertEnd = result.subroutineInsertEnd;
+          symbolTable = result.symbolTable;
 
-            if (subroutineInsertEnd < subroutineInsertStart) {
-              throw new Error("patch used up all of the subroutine space");
-            }
-          } else if (patch.type === "crom") {
-            console.log(patch.description);
-            console.log("creating crom bytes for", patch.imgFile);
-            const { oddCromBytes, evenCromBytes } = createCromBytes(
-              path.resolve(jsonDir, patch.imgFile),
-              path.resolve(jsonDir, patch.paletteFile)
-            );
-
-            const startingCromTileIndex = parseInt(patch.destStartingIndex, 16);
-            const tileIndexes: number[] = [];
-            const tileCount = oddCromBytes.length / 64;
-            for (let t = 0; t < tileCount; ++t) {
-              tileIndexes.push(startingCromTileIndex + t);
-            }
-
-            console.log(
-              "inserting crom data into croms at tile indexes:",
-              tileIndexes.map((ti) => ti.toString(16)).join(",")
-            );
-            cromBuffers = await insertIntoCrom(
-              oddCromBytes,
-              evenCromBytes,
-              parseInt(patch.destStartingIndex, 16),
-              cromBuffers
-            );
-
-            console.log("\n\n");
+          if (subroutineInsertEnd < subroutineInsertStart) {
+            throw new Error("patch used up all of the subroutine space");
           }
         } catch (e) {
           console.error(e);
@@ -368,6 +270,8 @@ async function main(patchJsonPaths: string[]) {
     throw new Error("MAME_ROM_DIR env variable is not set");
   }
 
+  const cromBuffers = await injectCromTiles();
+
   const writePath = path.resolve(mameDir, "kof94.zip");
   await writePatchedZip(flippedBackPatch, cromBuffers, writePath);
 
@@ -386,4 +290,4 @@ const finalPatchJsonPaths = patchJsonInputPaths.map((pjip) =>
 
 main(finalPatchJsonPaths).catch((e) => console.error);
 
-export { isStringPatch, isCromPatch, isDataPatch };
+export { isStringPatch };

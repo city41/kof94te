@@ -84,3 +84,22 @@ learn how the list of entities makes its way into the engine
 
 - how can I have the flags NOT become live entities?
 - how can I create new avatar entities and load them onto the screen via the engine?
+
+## gave up, just hacking now
+
+- learning how the game works was working, but it was very slow going
+- doing some exploring and experimenting, realized I can work around the game
+- building out that hack
+
+## writing the hack
+
+- doing the entire char select screen in assembly
+- came up with what the screen looks like in aseprite
+- integrated the screen into the game working with what I had
+  - only some sprites at the bottom and top of range
+  - only about 500 crom tiles
+  - etc
+- thought up some tricks like using the bg sprites for current team, etc
+- using sromcrom to generate tiles
+  - wrote a scrip to inject them into available gaps
+  - assembly for the data taking those gaps into account

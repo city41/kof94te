@@ -4,7 +4,7 @@ import * as mkdirp from "mkdirp";
 import { execSync } from "node:child_process";
 import { AddressPromPatch, InlinePatch } from "./types";
 import { asmTmpDir } from "./dirs";
-import { isCromPatch, isDataPatch, isStringPatch } from "./main";
+import { isStringPatch } from "./main";
 
 function hexDump(bytes: number[]): string {
   return bytes.map((b) => b.toString(16)).join(" ");
@@ -112,15 +112,6 @@ function addBytesToProm(
   };
 }
 
-async function addDataToProm(
-  promData: number[],
-  subroutineInsertEnd: number,
-  dataAsm: string[]
-): Promise<{ patchedPromData: number[]; subroutineInsertEnd: number }> {
-  const dataBytes = await assemble(dataAsm);
-  return addBytesToProm(promData, dataBytes, subroutineInsertEnd);
-}
-
 async function addStringToProm(
   promData: number[],
   subroutineInsertEnd: number,
@@ -224,10 +215,6 @@ async function doPromPatch(
   subroutineInsertEnd: number;
   symbolTable: Record<string, number>;
 }> {
-  if (isCromPatch(patch)) {
-    throw new Error("doPromPatch: given a crom patch");
-  }
-
   console.log("applying patch");
   console.log(patch.description ?? "(patch has no description)");
 
@@ -235,8 +222,6 @@ async function doPromPatch(
 
   if (isStringPatch(patch)) {
     result = await addStringToProm(promData, subroutineInsertEnd, patch.value);
-  } else if (isDataPatch(patch)) {
-    result = await addDataToProm(promData, subroutineInsertEnd, patch.value);
   } else if (patch.subroutine) {
     patch = applySymbols(symbolTable, patch);
     result = await replaceWithSubroutine(promData, subroutineInsertEnd, patch);
