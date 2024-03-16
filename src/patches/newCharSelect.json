@@ -76,10 +76,46 @@
       "patchAsm": "charSelectInitRoutine.asm"
     },
     {
+      "skip": true,
       "type": "prom",
       "description": "jump to new char select instead of 36e66",
       "address": "13b9dc",
       "patchAsm": ["move.l #$2CHAR_SELECT_INIT_ROUTINE, $584(A5)"]
+    },
+    {
+      "type": "prom",
+      "descrition": "jump to char init",
+      "address": "13703c",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_INIT_ROUTINE",
+        "move.l #$37046, $108584",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "137042",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "1336a4",
+      "patchAsm": ["jmp $337a6"]
+    },
+    {
+      "type": "prom",
+      "description": "stop writing longs to vram...",
+      "address": "1024c4",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "stop writing longs to vram...",
+      "address": "1024cc",
+      "patchAsm": ["nop"]
     }
   ]
 }
