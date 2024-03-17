@@ -107,15 +107,15 @@
     },
     {
       "type": "prom",
-      "description": "stop writing longs to vram...",
-      "address": "1024c4",
-      "patchAsm": ["nop"]
+      "description": "skip the sprite clearing block",
+      "address": "1337d4",
+      "patchAsm": ["jmp $338d6"]
     },
     {
       "type": "prom",
-      "description": "stop writing longs to vram...",
-      "address": "1024cc",
-      "patchAsm": ["nop"]
+      "description": "skip the sprite clearing block",
+      "address": "133a30",
+      "patchAsm": ["rts"]
     }
   ]
 }
