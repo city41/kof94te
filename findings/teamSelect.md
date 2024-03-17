@@ -2,6 +2,27 @@
 
 When on the team select screen, the current cursor index is stored at 1081C0
 
+## When team changes
+
+Whenever the team index changes it
+
+- checks for cursor wrapping at sets it to zero/max if needed
+- bsr's to 373a0
+  - it writes a byte to 108231
+    - these seem to never change
+    - italy: 5
+    - china: 1
+    - jpn: 2
+    - usa: 3
+    - kor: 4
+    - brz: 0
+    - eng: 7
+    - mex: 6
+  - this byte is read at 379ac, every frame, regardless of index change
+    - in subroutine 379a2, which was a dynamic jump
+
+379a2
+
 Once the player selects a team, it overwrites the index value with a new value
 
 move.b $135(a4), $c0(a4) where $c0(a4) is 1081c0.
