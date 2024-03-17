@@ -2,9 +2,16 @@
 
 NOTE: applying `teamSelectNeverEnds.json` patch is helpful.
 
-This seems to be the memory that is used to decide which characters are rendered in team select (order select too?)
+This is the memory used to display characters during team and order select.
 
-P1's is at 102910, and P2 at 102b10. half a kb in size, just like the P1MEMBER section
+There are six of them, one for each character
+
+102910: team 1, char 1
+102B10: team 1, char 2
+102D10: team 1, char 3
+102f10: team 2, char 1
+103110: team 2, char 2
+103310: team 2, char 3
 
 ## decoding
 
@@ -16,7 +23,7 @@ Team Italy
 | 10292c  | 0070     | Same value for all teams, written once, never read |
 | 102930  | 0001     | Same value for all teams, written once, never read |
 | 10296a  | ffe0ff90 | Never changes, but was diff in dumps???            |
-| 102970  | 000f     | The first character!!!!                            |
+| 102970  | 000f     | The character, likely the only byte that matters   |
 
 [1] Forcing other teams to get 000D using `membdispExplorer.lua`
 
