@@ -2,7 +2,7 @@ cpu = manager.machine.devices[":maincpu"]
 mem = cpu.spaces["program"]
 
 address = 0x102970
-value = 0x100000
+value = 0x180000
 
 function on_p1_memory_read(offset, data, mask)
 	local tag = mem:read_range(0x102910, 0x102917, 8)

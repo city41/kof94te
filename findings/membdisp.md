@@ -56,13 +56,32 @@ Team Italy
 
 102928 looks like a double word pointer for the first character's tiles
 
-| value    | character |
-| -------- | --------- |
-| 000d19e8 | Terry     |
-| 000aab74 | Athena    |
-| 000b45be | Kyo       |
-| 000be588 | Heavy     |
-| 000c8bd0 | Kim       |
-| 0009eda0 | Heidern   |
-| 000e4f8c | Yuri      |
-| 000db244 | Ryo       |
+| value | id  | character           |
+| ----- | --- | ------------------- |
+| 9eda0 | 00  | Heidern             |
+| a080e | 01  | Ralf                |
+| a3116 | 02  | Clark               |
+| aab74 | 03  | Athena              |
+| ab9d0 | 04  | Kensou              |
+| ac6f8 | 05  | Chin                |
+| b45be | 06  | Kyo                 |
+| b52f6 | 07  | Benimaru            |
+| b5f12 | 08  | Goro                |
+| be588 | 09  | Heavy D             |
+| bf3fa | 0a  | Lucky               |
+| c01e4 | 0b  | Brian               |
+| c8bd0 | 0c  | Kim                 |
+| ca12e | 0d  | Chang               |
+| ca1fc | 0e  | Choi                |
+| d19e8 | 0f  | Terry               |
+| d2588 | 10  | Andy                |
+| d311e | 11  | Joe                 |
+| db244 | 12  | Ryo                 |
+| dbe48 | 13  | Robert              |
+| dc958 | 14  | Takuma              |
+| e4f8c | 15  | Yuri                |
+| e6610 | 16  | Mai                 |
+| e67ac | 17  | King                |
+| ecd48 | 18  | Rugal               |
+|       | 19  | O.Rugal             |
+|       | 1a  | Invisible Rugal (?) |
