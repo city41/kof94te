@@ -1,5 +1,5 @@
 {
-  "description": "Skip the zero branch on the team select timer. Team select never ends, but cant press A to move on either",
+  "description": "Skip the zero branch on the team select timer, causing team select to never end. After a certain amount of time, A no longer progresses either",
   "patches": [
     {
       "type": "prom",

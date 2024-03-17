@@ -76,15 +76,8 @@
       "patchAsm": "charSelectInitRoutine.asm"
     },
     {
-      "skip": true,
       "type": "prom",
-      "description": "jump to new char select instead of 36e66",
-      "address": "13b9dc",
-      "patchAsm": ["move.l #$2CHAR_SELECT_INIT_ROUTINE, $584(A5)"]
-    },
-    {
-      "type": "prom",
-      "descrition": "jump to char init",
+      "descrition": "jump to char init after team init is done",
       "address": "13703c",
       "subroutine": true,
       "patchAsm": [
@@ -116,6 +109,24 @@
       "description": "skip the sprite clearing block",
       "address": "133a30",
       "patchAsm": ["rts"]
+    },
+    {
+      "type": "prom",
+      "description": "team select never ends, skip the branch",
+      "address": "13706c",
+      "patchAsm": ["nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Run char select after team select",
+      "address": "137074",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
+        ";;; ;restore what got clobbered",
+        "move.b #$3c, $655(A5)",
+        "rts"
+      ]
     }
   ]
 }

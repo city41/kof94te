@@ -1,3 +1,6 @@
+;;;; NOTE: using A5 needs to be done carefully, the main game
+;;;; expects it when we rts
+
 start:
 move.b #$f, $108235 ; p1 character one is Terry
 move.b #$6, $108236 ; p1 character two is Kyo
