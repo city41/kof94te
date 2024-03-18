@@ -146,12 +146,6 @@
     {
       "type": "prom",
       "description": "skip the sprite clearing block",
-      "address": "133a30",
-      "patchAsm": ["rts"]
-    },
-    {
-      "type": "prom",
-      "description": "skip the sprite clearing block",
       "address": "133a28",
       "subroutine": true,
       "patchAsm": [
@@ -162,7 +156,7 @@
         "move.b $IN_CHAR_SELECT_FLAG, D5",
         "cmpi.b #1, D5",
         "bne done",
-        "lea $33b32, A2 ; skip all sprite clears",
+        "lea $33b32, A0 ; skip all sprite clears",
         "done:",
         "rts"
       ]
