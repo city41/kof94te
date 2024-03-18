@@ -2,9 +2,12 @@ import path from "node:path";
 import fsp from "node:fs/promises";
 import { execSync } from "node:child_process";
 import { romTmpDir } from "./dirs";
-import { CromBuffer } from "./types";
+import { RomFileBuffer } from "./types";
 
-async function getCrom(zipPath: string, cromFile: string): Promise<CromBuffer> {
+async function getRom(
+  zipPath: string,
+  cromFile: string
+): Promise<RomFileBuffer> {
   execSync(`unzip -o ${zipPath} -d ${romTmpDir}`);
 
   return {
@@ -13,4 +16,4 @@ async function getCrom(zipPath: string, cromFile: string): Promise<CromBuffer> {
   };
 }
 
-export { getCrom };
+export { getRom };

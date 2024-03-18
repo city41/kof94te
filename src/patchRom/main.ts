@@ -2,11 +2,17 @@ import path from "node:path";
 import fsp from "node:fs/promises";
 import * as mkdirp from "mkdirp";
 import { execSync } from "node:child_process";
-import { PROM_FILE_NAME, asmTmpDir, romTmpDir, tmpDir } from "./dirs";
+import {
+  PROM_FILE_NAME,
+  SROM_FILE_NAME,
+  asmTmpDir,
+  romTmpDir,
+  tmpDir,
+} from "./dirs";
 import {
   AddressPromFilePathPatch,
   AddressPromPatch,
-  CromBuffer,
+  RomFileBuffer,
   InlinePatch,
   Patch,
   PatchJSON,
@@ -14,6 +20,7 @@ import {
 } from "./types";
 import { doPromPatch } from "./doPromPatch";
 import { injectCromTiles } from "./injectCromTiles";
+import { clearFixTiles } from "./clearFixTiles";
 
 function usage() {
   console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
@@ -120,12 +127,18 @@ function isPatchJSON(obj: unknown): obj is PatchJSON {
 
 async function writePatchedZip(
   promData: number[],
-  cromBuffers: CromBuffer[],
+  cromBuffers: RomFileBuffer[],
+  fixBuffer: RomFileBuffer,
   outputPath: string
 ): Promise<void> {
   await fsp.writeFile(
     path.resolve(romTmpDir, PROM_FILE_NAME),
     new Uint8Array(promData)
+  );
+
+  await fsp.writeFile(
+    path.resolve(romTmpDir, SROM_FILE_NAME),
+    new Uint8Array(fixBuffer.data)
   );
 
   for (const cromBuffer of cromBuffers) {
@@ -291,9 +304,10 @@ async function main(patchJsonPaths: string[]) {
   }
 
   const cromBuffers = await injectCromTiles();
+  const fixBuffer = await clearFixTiles();
 
   const writePath = path.resolve(mameDir, "kof94.zip");
-  await writePatchedZip(flippedBackPatch, cromBuffers, writePath);
+  await writePatchedZip(flippedBackPatch, cromBuffers, fixBuffer, writePath);
 
   console.log("wrote patched rom to", writePath);
 }

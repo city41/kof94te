@@ -1,8 +1,8 @@
 import path from "node:path";
 import fsp from "node:fs/promises";
-import { getCrom } from "./getCrom";
+import { getRom } from "./getRom";
 import { calcDestIndex } from "../cromSpans";
-import { CromBuffer } from "./types";
+import { RomFileBuffer } from "./types";
 
 // todo: can this be calculated?
 const NEW_TILES_FIRST_INDEX = 256;
@@ -12,25 +12,25 @@ const TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
 // a crom tile is 128 bytes, but this is since it's split across two files
 const CROM_TILE_SIZE_PER_ROM = 64;
 
-async function injectCromTiles(): Promise<CromBuffer[]> {
+async function injectCromTiles(): Promise<RomFileBuffer[]> {
   console.log("injecting crom tiles...");
 
-  const cromBuffers: Record<string, CromBuffer[]> = {
+  const cromBuffers: Record<string, RomFileBuffer[]> = {
     "c1/c2": [
-      await getCrom(path.resolve("./kof94.zip"), "055-c1.c1"),
-      await getCrom(path.resolve("./kof94.zip"), "055-c2.c2"),
+      await getRom(path.resolve("./kof94.zip"), "055-c1.c1"),
+      await getRom(path.resolve("./kof94.zip"), "055-c2.c2"),
     ],
     "c3/c4": [
-      await getCrom(path.resolve("./kof94.zip"), "055-c3.c3"),
-      await getCrom(path.resolve("./kof94.zip"), "055-c4.c4"),
+      await getRom(path.resolve("./kof94.zip"), "055-c3.c3"),
+      await getRom(path.resolve("./kof94.zip"), "055-c4.c4"),
     ],
     "c5/c6": [
-      await getCrom(path.resolve("./kof94.zip"), "055-c5.c5"),
-      await getCrom(path.resolve("./kof94.zip"), "055-c6.c6"),
+      await getRom(path.resolve("./kof94.zip"), "055-c5.c5"),
+      await getRom(path.resolve("./kof94.zip"), "055-c6.c6"),
     ],
     "c7/c8": [
-      await getCrom(path.resolve("./kof94.zip"), "055-c7.c7"),
-      await getCrom(path.resolve("./kof94.zip"), "055-c8.c8"),
+      await getRom(path.resolve("./kof94.zip"), "055-c7.c7"),
+      await getRom(path.resolve("./kof94.zip"), "055-c8.c8"),
     ],
   };
 

@@ -4,7 +4,7 @@ export type BasePatch = {
   skip?: boolean;
 };
 
-export type CromBuffer = {
+export type RomFileBuffer = {
   fileName: string;
   data: number[];
 };

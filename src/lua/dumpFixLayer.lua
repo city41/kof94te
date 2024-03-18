@@ -19,7 +19,7 @@ function dump_fix()
 
 	for y = 0, ROWS - 1 do
 		for x = 0, COLS - 1 do
-			local val = fix_ram[x * ROWS + y]
+			local val = fix_ram[x * ROWS + y] & 0xfff
 			local sep = x == 0 and "" or "|"
 			local vals = val == 0xf20 and " .. " or string.format("%04x", val)
 			io.write(string.format("%s%s", sep, vals))
