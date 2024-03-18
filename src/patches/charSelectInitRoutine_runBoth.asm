@@ -12,17 +12,17 @@
 jsr $2LOAD_P_A_L_E_T_T_E_S
 ; load the background/oceans image onto the screen
 ; TODO: make sure this is done during vblank
-move.w #326, D6 ; set sprite index to 321
+move.w #$OCEANS_IMAGE_SI, D6 ; set sprite index
 lea $2BG_OCEANS_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
-; load the logo/countries image onto the screen
-move.w #346, D6 ; set sprite index to 21
+load the logo/countries image onto the screen
+move.w #$LOGO_IMAGE_SI, D6 ; set sprite index to
 lea $2LOGO_COUNTRIES_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the character grid image onto the screen
-move.w #361, D6 ; set sprite index to 21
+move.w #$GRID_IMAGE_SI, D6 ; set sprite index
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 

@@ -5,7 +5,10 @@
     "end": "bfff0"
   },
   "symbols": {
-    "IN_CHAR_SELECT_FLAG": "10f800"
+    "IN_CHAR_SELECT_FLAG": "10f800",
+    "OCEANS_IMAGE_SI": "148",
+    "LOGO_IMAGE_SI": "15c",
+    "GRID_IMAGE_SI": "16b"
   },
   "patches": [
     {
