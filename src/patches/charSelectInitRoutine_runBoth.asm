@@ -16,7 +16,7 @@ move.w #$OCEANS_IMAGE_SI, D6 ; set sprite index
 lea $2BG_OCEANS_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
-load the logo/countries image onto the screen
+; load the logo/countries image onto the screen
 move.w #$LOGO_IMAGE_SI, D6 ; set sprite index to
 lea $2LOGO_COUNTRIES_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
