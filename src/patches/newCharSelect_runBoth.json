@@ -6,7 +6,7 @@
   },
   "symbols": {
     "IN_CHAR_SELECT_FLAG": "10f800",
-    "OCEANS_IMAGE_SI": "148",
+    "OCEANS_IMAGE_SI": "14a",
     "LOGO_IMAGE_SI": "15c",
     "GRID_IMAGE_SI": "16b"
   },
@@ -45,6 +45,13 @@
       "subroutine": true,
       "symbol": "LOAD_P_A_L_E_T_T_E_S",
       "patchAsm": "loadPalettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear left overs out of fix",
+      "subroutine": true,
+      "symbol": "CLEAR_FIX",
+      "patchAsm": "clearFix.asm"
     },
     {
       "type": "prom",

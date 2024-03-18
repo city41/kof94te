@@ -6,7 +6,7 @@ There is about 160kb from 969c8 to c0001. I've used clobberZeroSpan.ts and the g
 
 ## C ROM
 
-bg_oceans: 20x14 = 280
+bg_oceans: 18x14 = 252
 logo_countries: 15x10 = 150
 character_grid: 18x6 = 108
 total: 538
