@@ -210,6 +210,17 @@
       "description": "clean up straggling word",
       "address": "13711c",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "set kyo in membdisp",
+      "address": "1379d2",
+      "subroutine": true,
+      "patchAsm": [
+        ";; a4 will point to all six characters in turn",
+        "move.b #6, $71(A4)",
+        "rts"
+      ]
     }
   ]
 }
