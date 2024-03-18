@@ -30,4 +30,6 @@ jsr $2RENDER_STATIC_IMAGE
 ; if the timer has elapsed
 ; move.l #$2CHAR_SELECT_MAIN_ROUTINE, $108584
 
+move.b #1, $IN_CHAR_SELECT_FLAG
+
 rts

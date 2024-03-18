@@ -165,6 +165,24 @@ async function hydratePatch(
   }
 }
 
+function loadInitialSymbols(
+  initialSymbols: Record<string, string> | undefined
+): Record<string, number> {
+  if (!initialSymbols) {
+    return {};
+  }
+
+  return Object.entries(initialSymbols).reduce<Record<string, number>>(
+    (accum, entry) => {
+      return {
+        ...accum,
+        [entry[0]]: parseInt(entry[1], 16),
+      };
+    },
+    {}
+  );
+}
+
 async function main(patchJsonPaths: string[]) {
   await fsp.rm(tmpDir, {
     recursive: true,
@@ -211,7 +229,9 @@ async function main(patchJsonPaths: string[]) {
         );
         process.exit(1);
       }
-      let symbolTable: Record<string, number> = {};
+      let symbolTable: Record<string, number> = loadInitialSymbols(
+        patchJson.symbols
+      );
       const subroutineInsertStart = patchJson.subroutineSpace?.start
         ? parseInt(patchJson.subroutineSpace.start, 16)
         : 0;

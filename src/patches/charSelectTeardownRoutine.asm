@@ -13,4 +13,6 @@ move.w #356, D6
 move.w #18, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
 
+move.b #0, $IN_CHAR_SELECT_FLAG
+
 rts

@@ -47,4 +47,5 @@ export type PatchJSON = {
   description: string;
   patches: Patch[];
   subroutineSpace?: SubroutineSpace;
+  symbols?: Record<string, string>;
 };

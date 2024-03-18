@@ -4,6 +4,9 @@
     "start": "97000",
     "end": "bfff0"
   },
+  "symbols": {
+    "IN_CHAR_SELECT_FLAG": "10f800"
+  },
   "patches": [
     {
       "type": "prom",
