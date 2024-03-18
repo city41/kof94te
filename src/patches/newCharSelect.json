@@ -98,20 +98,80 @@
     {
       "type": "prom",
       "description": "skip the sprite clearing block",
-      "address": "1336a4",
-      "patchAsm": ["jmp $337a6"]
+      "address": "13369c",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $336a6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $337a6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1336a2",
+      "patchAsm": ["nop"]
     },
     {
       "type": "prom",
       "description": "skip the sprite clearing block",
-      "address": "1337d4",
-      "patchAsm": ["jmp $338d6"]
+      "address": "1337cc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $337d6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $338d6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1337d2",
+      "patchAsm": ["nop"]
     },
     {
       "type": "prom",
       "description": "skip the sprite clearing block",
       "address": "133a30",
       "patchAsm": ["rts"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a28",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $33a32, A0",
+        "adda.w D2, A0",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $33b32, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "133a2e",
+      "patchAsm": ["nop"]
     },
     {
       "type": "prom",
