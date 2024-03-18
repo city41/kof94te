@@ -13,6 +13,13 @@
   "patches": [
     {
       "type": "prom",
+      "description": "avatar tile table",
+      "subroutine": true,
+      "symbol": "AVATAR_TILE_TABLE",
+      "patchAsm": "avatarTileTable.asm"
+    },
+    {
+      "type": "prom",
       "description": "palettes",
       "subroutine": true,
       "symbol": "PALETTES",
