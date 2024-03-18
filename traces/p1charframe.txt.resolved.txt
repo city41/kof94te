@@ -15520,19 +15520,42 @@ C116C4 | ............................... rts                                    
 0329D8 | ............................. tst.b $108784                                                                     | tst.b ($784,A5)
 0329DC | ............................. beq $329d2                                                                        | beq $329d2
 0329DE | ............................. bsr $32c8a                                                                        | bsr $32c8a
+
+load REG_P1CNT into D0
 032C8A | .............................. move.b $300000.l, D0              result: $2000ff                                | move.b $300000.l, D0
 032C90 | .............................. move.b $340000.l, D3              result: $ffff                                  | move.b $340000.l, D3
+
+not it as REG_P1CNT is low active
 032C96 | .............................. not.b D0                          result: $200000                                | not.b D0
+
+move previous frame's input into D1
 032C98 | .............................. move.b $10b9c4, D1                result: $dd00                                  | move.b ($39c4,A5), D1
+
+store input in $10b9c4, keep it here as "last frame's input"
 032C9C | .............................. move.b $0, $10b9c4                                                               | move.b D0, ($39c4,A5)
+
+store current input at 10b9c7
 032CA0 | .............................. move.b $0, $10b9c7                                                               | move.b D1, ($39c7,A5)
+
+copy cur input to D2
 032CA4 | .............................. move.b $0, D2                     result: $0                                     | move.b D1, D2
+
+and together previous input and current input into D1
 032CA6 | .............................. and.b $0, D1                      result: $dd00                                  | and.b D0, D1
+
+store the and result into 10b9ca
 032CA8 | .............................. move.b $0, $10b9ca                                                               | move.b D1, ($39ca,A5)
+
+restore cur input into D1 from D2 copy
 032CAC | .............................. move.b D2, D1                     result: $dd00                                  | move.b D2, D1
+
+xor prev and current input
 032CAE | .............................. eor.b $0, D1                      result: $dd00                                  | eor.b D0, D1
 032CB0 | .............................. and.b $0, D2                      result: $0                                     | and.b D1, D2
+
+i think put newly changed inputs into 10b9cc
 032CB2 | .............................. move.b D2, $10b9cc                                                               | move.b D2, ($39cc,A5)
+
 032CB6 | .............................. lea $10b9cf, A0                   result: $10b9cf                                | lea ($39cf,A5), A0
 032CBA | .............................. and.b $0, D0                      result: $200000                                | and.b D1, D0
 032CBC | .............................. move.b $10b9d0, $10b9cb                                                          | move.b ($1,A0), ($39cb,A5)

@@ -174,10 +174,11 @@
       "patchAsm": ["nop"]
     },
     {
+      "skip": true,
       "type": "prom",
-      "description": "team select never ends, skip the branch",
-      "address": "13706c",
-      "patchAsm": ["nop", "nop"]
+      "description": "skip team select counter decrement",
+      "address": "13705a",
+      "patchAsm": ["subq.b #0, $655(a5)"]
     },
     {
       "type": "prom",
@@ -190,6 +191,25 @@
         "move.b #$3c, $655(A5)",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "run teardown just before going to order select",
+      "address": "137116",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "move.l #37eb2, $584(A5)",
+        ";;; end restore",
+        "jsr $2CHAR_SELECT_TEARDOWN_ROUTINE",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13711c",
+      "patchAsm": ["nop"]
     }
   ]
 }

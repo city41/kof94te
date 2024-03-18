@@ -1,10 +1,10 @@
 {
-  "description": "Skip the zero branch on the team select timer, causing team select to never end. After a certain amount of time, A no longer progresses either",
+  "description": "Dont decrement the team select counter",
   "patches": [
     {
       "type": "prom",
-      "description": "skip branch",
-      "address": "13706c",
+      "description": "skip decrement",
+      "address": "13705a",
       "patchAsm": ["nop", "nop"]
     }
   ]
