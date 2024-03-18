@@ -1,39 +1,9 @@
 ;;;;; start logo_countries static sprite data ;;;;;
-dc.w 15 ; width in tiles
+dc.w 14 ; width in tiles
 dc.w 10 ; height in tiles
 
 ;; start sprite tiles
 ;;; column 0
-
-;; SCB1 word pairs
-dc.w $4b
-dc.w $c300
-dc.w $4b
-dc.w $c300
-dc.w $4b
-dc.w $c300
-dc.w $4b
-dc.w $c300
-dc.w $4b
-dc.w $c300
-dc.w $152
-dc.w $d700
-dc.w $15f
-dc.w $d700
-dc.w $169
-dc.w $e000
-dc.w $4b
-dc.w $c300
-dc.w $4b
-dc.w $c300
-
-;; SCB3 vertical position|sticky|size
-dc.w $f80a
-
-;; SCB4 horizontal position
-dc.w $1000
-
-;;; column 1
 
 ;; SCB1 word pairs
 dc.w $4b
@@ -46,13 +16,13 @@ dc.w $f5
 dc.w $d100
 dc.w $144
 dc.w $dd00
-dc.w $153
+dc.w $152
 dc.w $d700
-dc.w $160
+dc.w $15e
 dc.w $d700
-dc.w $16a
+dc.w $167
 dc.w $e000
-dc.w $172
+dc.w $16f
 dc.w $e000
 dc.w $4b
 dc.w $c300
@@ -63,7 +33,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $1800
 
-;;; column 2
+;;; column 1
 
 ;; SCB1 word pairs
 dc.w $4b
@@ -76,13 +46,13 @@ dc.w $f6
 dc.w $d100
 dc.w $145
 dc.w $de00
-dc.w $154
+dc.w $153
 dc.w $dd00
-dc.w $161
+dc.w $15f
 dc.w $d700
-dc.w $16b
+dc.w $168
 dc.w $e000
-dc.w $173
+dc.w $170
 dc.w $e000
 dc.w $4b
 dc.w $c300
@@ -93,7 +63,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $2000
 
-;;; column 3
+;;; column 2
 
 ;; SCB1 word pairs
 dc.w $4b
@@ -106,15 +76,15 @@ dc.w $f7
 dc.w $d700
 dc.w $146
 dc.w $d700
-dc.w $155
+dc.w $154
 dc.w $de00
-dc.w $162
+dc.w $160
 dc.w $e000
-dc.w $16c
+dc.w $169
 dc.w $e000
-dc.w $174
+dc.w $171
 dc.w $e000
-dc.w $17a
+dc.w $177
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -123,7 +93,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $2800
 
-;;; column 4
+;;; column 3
 
 ;; SCB1 word pairs
 dc.w $d1
@@ -136,11 +106,11 @@ dc.w $f8
 dc.w $d800
 dc.w $147
 dc.w $d700
-dc.w $156
+dc.w $155
 dc.w $e000
-dc.w $163
+dc.w $161
 dc.w $e000
-dc.w $16d
+dc.w $16a
 dc.w $e000
 dc.w $4b
 dc.w $c300
@@ -153,7 +123,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $3000
 
-;;; column 5
+;;; column 4
 
 ;; SCB1 word pairs
 dc.w $d2
@@ -166,13 +136,13 @@ dc.w $f9
 dc.w $d800
 dc.w $148
 dc.w $d700
-dc.w $157
+dc.w $156
 dc.w $e000
-dc.w $164
+dc.w $162
 dc.w $e000
-dc.w $16e
+dc.w $16b
 dc.w $e000
-dc.w $175
+dc.w $172
 dc.w $e000
 dc.w $4b
 dc.w $c300
@@ -183,7 +153,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $3800
 
-;;; column 6
+;;; column 5
 
 ;; SCB1 word pairs
 dc.w $d3
@@ -196,15 +166,15 @@ dc.w $fa
 dc.w $d800
 dc.w $149
 dc.w $d700
-dc.w $158
+dc.w $157
 dc.w $e000
-dc.w $165
+dc.w $163
 dc.w $e000
-dc.w $16f
+dc.w $16c
 dc.w $d700
-dc.w $176
+dc.w $173
 dc.w $e000
-dc.w $17b
+dc.w $178
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -213,7 +183,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $4000
 
-;;; column 7
+;;; column 6
 
 ;; SCB1 word pairs
 dc.w $d4
@@ -226,15 +196,15 @@ dc.w $fb
 dc.w $d900
 dc.w $14a
 dc.w $d700
-dc.w $159
+dc.w $158
 dc.w $d700
-dc.w $166
+dc.w $164
 dc.w $d700
 dc.w $4b
 dc.w $c300
-dc.w $177
+dc.w $174
 dc.w $e000
-dc.w $17c
+dc.w $179
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -243,7 +213,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $4800
 
-;;; column 8
+;;; column 7
 
 ;; SCB1 word pairs
 dc.w $d5
@@ -256,7 +226,7 @@ dc.w $fc
 dc.w $d900
 dc.w $14b
 dc.w $d700
-dc.w $15a
+dc.w $159
 dc.w $d700
 dc.w $4b
 dc.w $c300
@@ -264,7 +234,7 @@ dc.w $4b
 dc.w $c300
 dc.w $4b
 dc.w $c300
-dc.w $17d
+dc.w $17a
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -273,7 +243,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $5000
 
-;;; column 9
+;;; column 8
 
 ;; SCB1 word pairs
 dc.w $d6
@@ -286,7 +256,7 @@ dc.w $fd
 dc.w $d900
 dc.w $14c
 dc.w $d700
-dc.w $15b
+dc.w $15a
 dc.w $c900
 dc.w $4b
 dc.w $c300
@@ -303,7 +273,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $5800
 
-;;; column 10
+;;; column 9
 
 ;; SCB1 word pairs
 dc.w $d7
@@ -333,7 +303,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $6000
 
-;;; column 11
+;;; column 10
 
 ;; SCB1 word pairs
 dc.w $d8
@@ -354,7 +324,7 @@ dc.w $4b
 dc.w $c300
 dc.w $4b
 dc.w $c300
-dc.w $17e
+dc.w $17b
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -363,7 +333,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $6800
 
-;;; column 12
+;;; column 11
 
 ;; SCB1 word pairs
 dc.w $d9
@@ -376,7 +346,7 @@ dc.w $141
 dc.w $db00
 dc.w $14f
 dc.w $d700
-dc.w $15c
+dc.w $15b
 dc.w $e000
 dc.w $4b
 dc.w $c300
@@ -384,7 +354,7 @@ dc.w $4b
 dc.w $c300
 dc.w $4b
 dc.w $c300
-dc.w $17f
+dc.w $17c
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -393,7 +363,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $7000
 
-;;; column 13
+;;; column 12
 
 ;; SCB1 word pairs
 dc.w $4b
@@ -406,15 +376,15 @@ dc.w $142
 dc.w $dc00
 dc.w $150
 dc.w $d700
-dc.w $15d
+dc.w $15c
 dc.w $e000
-dc.w $167
+dc.w $165
 dc.w $e000
-dc.w $170
+dc.w $16d
 dc.w $cf00
-dc.w $178
+dc.w $175
 dc.w $d400
-dc.w $180
+dc.w $17d
 dc.w $d400
 
 ;; SCB3 vertical position|sticky|size
@@ -423,7 +393,7 @@ dc.w $f80a
 ;; SCB4 horizontal position
 dc.w $7800
 
-;;; column 14
+;;; column 13
 
 ;; SCB1 word pairs
 dc.w $4b
@@ -436,13 +406,13 @@ dc.w $143
 dc.w $d200
 dc.w $151
 dc.w $d700
-dc.w $15e
+dc.w $15d
 dc.w $e000
-dc.w $168
+dc.w $166
 dc.w $e000
-dc.w $171
+dc.w $16e
 dc.w $d400
-dc.w $179
+dc.w $176
 dc.w $d400
 dc.w $4b
 dc.w $c300
