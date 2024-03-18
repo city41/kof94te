@@ -238,7 +238,7 @@ function dump_sprite(si)
 end
 
 function on_pause()
-	for i = 321, 374 do
+	for i = 0, 380 do
 		dump_sprite(i)
 	end
 end

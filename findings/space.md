@@ -11,7 +11,7 @@ logo_countries: 15x10 = 150
 character_grid: 18x6 = 108
 total: 538
 
-Actually the total is 447 as there are a lot of duplicate tiles.
+Actually the total is 411 as there are a lot of duplicate tiles.
 
 ## S ROM
 
