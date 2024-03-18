@@ -1,0 +1,20 @@
+{
+  "description": "Force Kyo to always be written to membdisp",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "set kyo",
+      "address": "1379d2",
+      "subroutine": true,
+      "patchAsm": [
+        ";; a4 will point to all six characters in turn",
+        "move.b #6, $71(A4)",
+        "rts"
+      ]
+    }
+  ]
+}

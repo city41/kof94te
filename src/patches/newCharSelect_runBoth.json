@@ -62,7 +62,7 @@
       "description": "teardown routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",
-      "patchAsm": "charSelectTeardownRoutine.asm"
+      "patchAsm": "charSelectTeardownRoutine_runBoth.asm"
     },
     {
       "type": "prom",

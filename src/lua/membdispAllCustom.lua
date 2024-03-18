@@ -19,7 +19,7 @@ function on_memory_read(offset, data, mask)
 
 	for _, char in pairs(chars) do
 		if char.address == offset then
-			return 0x0018
+			return char.value
 		end
 	end
 end
