@@ -1,0 +1,215 @@
+{
+  "description": "Go to new routine after HTP instead of team select",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "symbols": {
+    "IN_CHAR_SELECT_FLAG": "10f800"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "palettes",
+      "subroutine": true,
+      "symbol": "PALETTES",
+      "patchAsm": "palettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "bg_oceans image",
+      "subroutine": true,
+      "symbol": "BG_OCEANS_IMAGE",
+      "patchAsm": "bg_oceans.asm"
+    },
+    {
+      "type": "prom",
+      "description": "logo_countries image",
+      "subroutine": true,
+      "symbol": "LOGO_COUNTRIES_IMAGE",
+      "patchAsm": "logo_countries.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character_grid image",
+      "subroutine": true,
+      "symbol": "CHARACTER_GRID_IMAGE",
+      "patchAsm": "character_grid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "load palettes routine",
+      "subroutine": true,
+      "symbol": "LOAD_P_A_L_E_T_T_E_S",
+      "patchAsm": "loadPalettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render static image routine",
+      "subroutine": true,
+      "symbol": "RENDER_STATIC_IMAGE",
+      "patchAsm": "renderStaticImage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "truncate sprites routine",
+      "subroutine": true,
+      "symbol": "TRUNCATE_SPRITES_ROUTINE",
+      "patchAsm": "truncateSpritesRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "teardown routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",
+      "patchAsm": "charSelectTeardownRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "main routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_MAIN_ROUTINE",
+      "patchAsm": "charSelectMainRoutine_runBoth.asm"
+    },
+    {
+      "type": "prom",
+      "description": "init routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_INIT_ROUTINE",
+      "patchAsm": "charSelectInitRoutine_runBoth.asm"
+    },
+    {
+      "type": "prom",
+      "descrition": "jump to char init after team init is done",
+      "address": "13703c",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_INIT_ROUTINE",
+        "move.l #$37046, $108584",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "137042",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "13369c",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $336a6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $337a6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1336a2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "1337cc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $337d6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $338d6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1337d2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a30",
+      "patchAsm": ["rts"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a28",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $33a32, A0",
+        "adda.w D2, A0",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $33b32, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "133a2e",
+      "patchAsm": ["nop"]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "skip team select counter decrement",
+      "address": "13705a",
+      "patchAsm": ["subq.b #0, $655(a5)"]
+    },
+    {
+      "type": "prom",
+      "description": "Run char select after team select",
+      "address": "137074",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
+        ";;; ;restore what got clobbered",
+        "move.b #$3c, $655(A5)",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "run teardown just before going to order select",
+      "address": "137116",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "move.l #$37eb2, $584(A5)",
+        ";;; end restore",
+        "jsr $2CHAR_SELECT_TEARDOWN_ROUTINE",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13711c",
+      "patchAsm": ["nop"]
+    }
+  ]
+}
