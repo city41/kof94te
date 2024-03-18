@@ -10,8 +10,8 @@ move.b #$f, $108436 ; p2 character two is Terry
 move.b #$f, $108437 ; p2 character three is Terry
 
 
-move.b $10fd97, D0 ; load BIOS_P1CHANGE
-btst #$4, D0 ; is A pressed?
+move.b $10fdac, D0 ; load BIOS_STATCURNT
+btst #$0, D0 ; is p1 start pressed?
 beq done ; it's not? let's try again next frame
 
 move.l #$37eb2, $108584 ; it is, have the engine go to order select next
