@@ -211,6 +211,8 @@ function on_frame()
 	visualize_boundingBoxes()
 end
 
+palettes = {}
+
 function dump_sprite(si)
 	local h = getSpriteHeight(si, vram)
 	local x = getSpriteX(si, vram)
@@ -229,6 +231,7 @@ function dump_sprite(si)
 		print("palettes")
 
 		for _, pi in pairs(paletteIndexes) do
+			palettes[pi] = true
 			print(string.format("  %x", pi))
 		end
 		print("--------------------")
@@ -237,8 +240,29 @@ function dump_sprite(si)
 	end
 end
 
+function get_keys(t)
+	local keyset = {}
+	local n = 0
+	for k, v in pairs(t) do
+		n = n + 1
+		keyset[n] = k
+	end
+
+	return keyset
+end
+
 function on_pause()
-	dump_sprite(99)
+	palettes = {}
+	for i = 0, 380 do
+		dump_sprite(i)
+	end
+
+	local palettes_in_use = get_keys(palettes)
+	table.sort(palettes_in_use)
+
+	for _, pi in pairs(palettes_in_use) do
+		print("palette in use", pi)
+	end
 end
 
 emu.register_frame_done(on_frame, "frame")

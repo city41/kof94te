@@ -30,14 +30,14 @@
       "description": "bg_oceans image",
       "subroutine": true,
       "symbol": "BG_OCEANS_IMAGE",
-      "patchAsm": "bg_oceans.asm"
+      "patchAsm": "bg_oceans_dumped3.asm"
     },
     {
       "type": "prom",
       "description": "logo_countries image",
       "subroutine": true,
       "symbol": "LOGO_COUNTRIES_IMAGE",
-      "patchAsm": "logo_countries.asm"
+      "patchAsm": "logo_countries_dumped.asm"
     },
     {
       "type": "prom",

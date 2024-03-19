@@ -9,32 +9,12 @@
         "dest": "../src/patches/palettes.asm"
       },
       {
-        "template": "bg_oceans.asm.hbr",
-        "dest": "../src/patches/bg_oceans.asm"
-      },
-      {
-        "template": "logo_countries.asm.hbr",
-        "dest": "../src/patches/logo_countries.asm"
-      },
-      {
         "template": "character_grid.asm.hbr",
         "dest": "../src/patches/character_grid.asm"
       }
     ]
   },
   "cromImages": [
-    {
-      "name": "bg_oceans",
-      "imageFile": "./bg_oceans.png",
-      "x": 16,
-      "y": 0
-    },
-    {
-      "name": "logo_countries",
-      "imageFile": "./logo_countries.png",
-      "x": 48,
-      "y": 0
-    },
     {
       "name": "character_grid",
       "imageFile": "./character_grid.png",

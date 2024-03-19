@@ -6,7 +6,7 @@ import { RomFileBuffer } from "./types";
 
 // todo: can this be calculated?
 const NEW_TILES_FIRST_INDEX = 256;
-const NEW_TILES_LAST_INDEX = 697;
+const NEW_TILES_LAST_INDEX = 352;
 const TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
 
 // a crom tile is 128 bytes, but this is since it's split across two files
@@ -71,7 +71,7 @@ async function injectCromTiles(): Promise<RomFileBuffer[]> {
 
   for (let i = 0; i < TOTAL_NEW_TILES; ++i) {
     const srcIndex = i + NEW_TILES_FIRST_INDEX;
-    const { destIndex, destCromPair } = calcDestIndex(i);
+    const { destIndex, destCromPair } = calcDestIndex(i, false);
 
     replaceTile(srcIndex, destIndex, destCromPair);
   }

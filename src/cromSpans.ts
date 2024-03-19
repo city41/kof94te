@@ -1,12 +1,15 @@
+// kof94's crom pairs are 4 megabytes
+const TILES_PER_PAIR = 32768;
 // tiles in the croms that are empty or unused
-// the hack needs about 550 tiles
-// this nets 666 tiles
+// the hack needs about 110 tiles
+// this nets 220 tiles
 export const cromSpans = [
-  // 255 is also blank, but it's supposed to be, can't use it
-  // 0 is too, but often zero gets used, skipping to be safe
-  { start: 1, end: 254, pair: "c1/c2" },
-  { start: 320, end: 510, pair: "c1/c2" },
-  { start: 32547, end: 32766, pair: "c7/c8" },
+  {
+    globalOffset: TILES_PER_PAIR * 3,
+    start: 32547,
+    end: 32766,
+    pair: "c7/c8",
+  },
 ];
 
 // Given a "logical index" that sromcrom will emit (it has no idea we are
@@ -15,7 +18,10 @@ export const cromSpans = [
 //
 // both injectCromTiles uses this to inject the tiles into the correct spot,
 // and sromCromPreEmit uses this so the assembly data has the matching indexes
-export function calcDestIndex(logicalIndex: number): {
+export function calcDestIndex(
+  logicalIndex: number,
+  includeGlobalOffset: boolean
+): {
   destIndex: number;
   destCromPair: string;
 } {
@@ -26,8 +32,9 @@ export function calcDestIndex(logicalIndex: number): {
     const curSpanSize = cromSpan.end - cromSpan.start + 1;
 
     if (logicalIndex < curSpanSize) {
+      const offset = includeGlobalOffset ? cromSpan.globalOffset : 0;
       return {
-        destIndex: cromSpan.start + logicalIndex,
+        destIndex: cromSpan.start + logicalIndex + offset,
         destCromPair: cromSpan.pair,
       };
     } else {

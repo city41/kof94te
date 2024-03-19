@@ -50,11 +50,7 @@ function createAssemblyTileSCB1(
   tile: SromCromTile,
   startingPaletteIndex: number
 ): AsmCromTileSCB1 {
-  // TODO: this does not take into account that indexes in croms are global
-  // when in a game. So far it doesn't matter as all the tiles are in c1/c2
-  // TODO: the minus 256 is because I know that's where the first tile is that
-  // sromcrom emitted. Todo, calculate this or add an option to sromcrom to not do this
-  const destIndex = calcDestIndex(tile.index - 256).destIndex;
+  const destIndex = calcDestIndex(tile.index - 256, true).destIndex;
 
   // lsb of tile index
   const evenWord = destIndex & 0xffff;
@@ -136,7 +132,7 @@ function prepareForAssembly(
 }
 
 export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
-  const startingPaletteIndex = 255 - codeEmitData.palettes.length;
+  const startingPaletteIndex = 140;
   console.log({ startingPaletteIndex });
   const cromImages = codeEmitData.cromImages.reduce(
     (accum: Record<string, AsmCromImage>, ci: SromCromCromImage) => {

@@ -3,7 +3,6 @@ cpu = manager.machine.devices[":maincpu"]
 mem = cpu.spaces["program"]
 screen = manager.machine.screens[":screen"]
 
--- what vram looks like this frame
 vram = {}
 -- where vram will write to next
 next_vram_index = 0
@@ -39,7 +38,6 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		vram[next_vram_index] = data
 		next_vram_index = next_vram_index + vram_index_mod
 
 		if (not SHOW_FIX_LAYER) and next_vram_index >= FIX_LAYER and next_vram_index <= SCB2 then
@@ -125,36 +123,6 @@ function isOnScreen(left, top, right, bottom)
 	return not (right < 0 or bottom < 0 or left > 320 or top > 224)
 end
 
-function getSpriteTileIndexes(si, vr, h)
-	local tileIndexes = {}
-
-	local base = SCB1 + si * 64
-
-	for i = 0, h - 1 do
-		local evenWord = vr[base + i * 2] or 0
-		local oddWord = vr[base + i * 2 + 1] or 0
-		local lsb = evenWord
-		local msb = (oddWord >> 4) & 0xf
-
-		table.insert(tileIndexes, (msb << 16) | lsb)
-	end
-
-	return tileIndexes
-end
-
-function getSpritePaletteIndexes(si, vr, h)
-	local paletteIndexes = {}
-
-	local base = SCB1 + si * 64
-
-	for i = 0, h - 1 do
-		local oddWord = vr[base + i * 2 + 1] or 0
-		table.insert(paletteIndexes, oddWord >> 8)
-	end
-
-	return paletteIndexes
-end
-
 RED = 0xffff0000
 ORANGE = 0xffffaa00
 PURPLE = 0xffaa00ff
@@ -207,38 +175,65 @@ function visualize_boundingBoxes()
 	end
 end
 
-function on_frame()
-	visualize_boundingBoxes()
-end
+vramdevice = emu.item(manager.machine.devices[":spritegen"].items["0/m_videoram"])
 
-function dump_sprite(si)
-	local h = getSpriteHeight(si, vram)
-	local x = getSpriteX(si, vram)
-	local y = getSpriteY(si, vram)
-	local paletteIndexes = getSpritePaletteIndexes(si, vram, h)
-	local tileIndexes = getSpriteTileIndexes(si, vram, h)
-
-	if h > 0 then
-		print(string.format("Sprite: %d at (%d,%d), %d tiles tall", si, x, y, h))
-
-		print("tiles")
-		for _, ti in pairs(tileIndexes) do
-			print(string.format("  %x", ti))
-		end
-
-		print("palettes")
-
-		for _, pi in pairs(paletteIndexes) do
-			print(string.format("  %x", pi))
-		end
-		print("--------------------")
-	else
-		print("sprite %d has zero height", si)
+function grab_vram()
+	for i = 0, VRAM_SIZE - 1 do
+		vram[i] = vramdevice:read(i)
 	end
 end
 
+function on_frame()
+	grab_vram()
+	visualize_boundingBoxes()
+end
+
+function getSpriteScb1(si, vr, h)
+	local words = {}
+
+	local base = SCB1 + si * 64
+
+	for i = 0, h - 1 do
+		local word = {}
+		word.evenWord = vr[base + i * 2] or 0
+		word.oddWord = vr[base + i * 2 + 1] or 0
+
+		table.insert(words, word)
+	end
+
+	return words
+end
+
+function dump_sprite_asm(si, ci)
+	local h = getSpriteHeight(si, vram)
+
+	local scb1Words = getSpriteScb1(si, vram, h)
+	local scb3 = vram[SCB3 + si]
+	local scb4 = vram[SCB4 + si]
+
+	print(string.format(";;;;;;; column %d, %d tiles high ;;;;;;;", ci, h))
+	print(";; SCB1 word pairs")
+	for _, words in pairs(scb1Words) do
+		print(string.format("dc.w $%x", words.evenWord))
+		print(string.format("dc.w $%x", words.oddWord))
+	end
+
+	print("")
+	print(";; SCB3 vertical position | sticky | size")
+	print(string.format("dc.w $%x", scb3))
+
+	print("")
+	print(";; SCB4 horizontal position")
+	print(string.format("dc.w $%x", scb4))
+	print("")
+	print("")
+end
+
 function on_pause()
-	dump_sprite(99)
+	grab_vram()
+	for i = 130, 143 do
+		dump_sprite_asm(i, i - 130)
+	end
 end
 
 emu.register_frame_done(on_frame, "frame")
