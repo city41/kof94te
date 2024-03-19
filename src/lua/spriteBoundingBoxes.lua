@@ -238,9 +238,12 @@ function dump_sprite(si)
 end
 
 function on_pause()
-	for i = 0, 380 do
-		dump_sprite(i)
-	end
+	dump_sprite(210)
+	dump_sprite(211)
+	dump_sprite(212)
+	dump_sprite(213)
+	dump_sprite(214)
+	dump_sprite(215)
 end
 
 emu.register_frame_done(on_frame, "frame")

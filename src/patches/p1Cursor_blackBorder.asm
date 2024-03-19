@@ -1,5 +1,6 @@
 ;;;;; start p1 cursor sprite data ;;;;;
 ;;;;; this for when p1 is a human, it says "P1"
+;;;;; this version has a black border
 
 dc.w 3 ; width in tiles
 dc.w 3 ; height in tiles

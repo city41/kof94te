@@ -5,13 +5,15 @@
     "end": "bfff0"
   },
   "symbols": {
+    "CHAR_SELECT_COUNTER": "10f7fe",
     "IN_CHAR_SELECT_FLAG": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
     "STORE_A0": "10f806",
     "STORE_A1": "10f816",
     "GRID_IMAGE_SI": "14a",
-    "P1_CURSOR_SI": "15e"
+    "P1_CURSOR_BLACK_BORDER_SI": "15e",
+    "P1_CURSOR_WHITE_BORDER_SI": "162"
   },
   "patches": [
     {
@@ -37,10 +39,17 @@
     },
     {
       "type": "prom",
-      "description": "p1 cursor image",
+      "description": "p1 cursor, black border, image",
       "subroutine": true,
-      "symbol": "P1_CURSOR_IMAGE",
-      "patchAsm": "p1Cursor.asm"
+      "symbol": "P1_CURSOR_BLACK_BORDER_IMAGE",
+      "patchAsm": "p1Cursor_blackBorder.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, white border, image",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_WHITE_BORDER_IMAGE",
+      "patchAsm": "p1Cursor_whiteBorder.asm"
     },
     {
       "type": "prom",

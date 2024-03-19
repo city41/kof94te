@@ -7,18 +7,48 @@ move.b #$f, $108435 ; p2 character one is Terry
 move.b #$f, $108436 ; p2 character two is Terry
 move.b #$f, $108437 ; p2 character three is Terry
 
+;;; increment the counter
+move.b $CHAR_SELECT_COUNTER, D5
+addi.b #1, D5
+move.b D5, $CHAR_SELECT_COUNTER
+
 ;;;;;;;;;;;;;;;; CURSOR ;;;;;;;;;;;;;;;;;;;;
 move.l A0, D1
 move.l D1, $STORE_A0      ; store A0 as the game needs it
 move.l A1, D1
 move.l D1, $STORE_A1      ; store A1 as the game needs it
 
+;;;; load the common values for MOVE_CURSOR that work for both
+;;;; the black and white cursor
 move.b $10fd96, D0        ; load BIOS_P1CURRENT
 move.b #$a, D0            ; simulate right and down being pressed
-move.w #$P1_CURSOR_SI, D1 ; load the cursor's sprite index
 lea $P1_CURSOR_X, A0      ; pointer to cursor X
 lea $P1_CURSOR_Y, A1      ; pointer to cursor Y
+
+;;;; now show the white or black cursor, depending on if the counter
+;;;; is odd or not
+btst #0, D5
+beq blackCursor
+move.w #$P1_CURSOR_WHITE_BORDER_SI, D1 ; load the cursor's sprite index
+bra moveCursor
+blackCursor:
+move.w #$P1_CURSOR_BLACK_BORDER_SI, D1 ; load the cursor's sprite index
+moveCursor:
 jsr $2MOVE_CURSOR
+
+;;;; now hide the one that should not be on screen
+move.w #0, D1 ; X
+move.w #272, D2 ; Y, which will be 224px, putting it off screen
+btst #0, D5
+beq hideWhiteCursor
+move.w #$P1_CURSOR_BLACK_BORDER_SI, D0 ; load the cursor's sprite index
+bra hideCursor
+hideWhiteCursor:
+move.w #$P1_CURSOR_WHITE_BORDER_SI, D0 ; load the cursor's sprite index
+hideCursor:
+jsr $2MOVE_SPRITE
+
+
 
 ;; restore the saved address registers
 move.l $STORE_A0, D1
