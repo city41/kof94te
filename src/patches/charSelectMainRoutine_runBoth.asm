@@ -7,6 +7,24 @@ move.b #$f, $108435 ; p2 character one is Terry
 move.b #$f, $108436 ; p2 character two is Terry
 move.b #$f, $108437 ; p2 character three is Terry
 
+;;;;;;;;;;;;;;;; CURSOR ;;;;;;;;;;;;;;;;;;;;
+move.l A0, D1
+move.l D1, $STORE_A0      ; store A0 as the game needs it
+move.l A1, D1
+move.l D1, $STORE_A1      ; store A1 as the game needs it
+
+move.b $10fd96, D0        ; load BIOS_P1CURRENT
+move.b #$a, D0            ; simulate right and down being pressed
+move.w #$P1_CURSOR_SI, D1 ; load the cursor's sprite index
+lea $P1_CURSOR_X, A0      ; pointer to cursor X
+lea $P1_CURSOR_Y, A1      ; pointer to cursor Y
+jsr $2MOVE_CURSOR
+
+;; restore the saved address registers
+move.l $STORE_A0, D1
+movea.l D1, A0
+move.l $STORE_A1, D1
+movea.l D1, A1
 
 move.b $10fdac, D0 ; load BIOS_STATCURNT
 btst #$0, D0 ; is p1 start pressed?
