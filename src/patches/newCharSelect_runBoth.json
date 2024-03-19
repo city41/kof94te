@@ -6,6 +6,8 @@
   },
   "symbols": {
     "IN_CHAR_SELECT_FLAG": "10f800",
+    "P1_CURSOR_X": "10f802",
+    "P1_CURSOR_Y": "10f804",
     "GRID_IMAGE_SI": "14a",
     "P1_CURSOR_SI": "15e"
   },

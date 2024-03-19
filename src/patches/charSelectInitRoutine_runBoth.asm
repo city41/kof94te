@@ -27,7 +27,12 @@ move.w #8, D1
 move.w #441, D2 ; y will be 55 when on screen
 jsr $2MOVE_SPRITE
 
+; initialize cursor's location
+move.w #0, $P1_CURSOR_X
+move.w #0, $P1_CURSOR_Y
+
 
 move.b #1, $IN_CHAR_SELECT_FLAG
+
 
 rts
