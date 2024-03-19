@@ -32,18 +32,18 @@ dc.b 59
 ;;; 6: Kyo
 dc.b 72
 dc.b 73
-dc.b 90
-dc.b 91
+dc.b 85
+dc.b 86
 ;;; 7: Benimaru
 dc.b 74
 dc.b 75
-dc.b 92
-dc.b 93
+dc.b 87
+dc.b 88
 ;;; 8: Goro
 dc.b 76
 dc.b 77
-dc.b 94
-dc.b 95
+dc.b 89
+dc.b 90
 ;;; 9: Heavy
 dc.b 6
 dc.b 7
@@ -90,20 +90,20 @@ dc.b 5
 dc.b 22
 dc.b 23
 ;;; 12: Ryo
-dc.b 78
 dc.b 79
-dc.b 96
-dc.b 97
-;;; 13: Robert
 dc.b 80
+dc.b 91
+dc.b 92
+;;; 13: Robert
 dc.b 81
-dc.b 98
-dc.b 99
-;;; 14: Takuma
 dc.b 82
+dc.b 93
+dc.b 94
+;;; 14: Takuma
 dc.b 83
-dc.b 100
-dc.b 101
+dc.b 84
+dc.b 95
+dc.b 96
 ;;; 15: Yuri
 dc.b 48
 dc.b 49
