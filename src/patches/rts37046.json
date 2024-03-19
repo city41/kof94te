@@ -1,0 +1,11 @@
+{
+  "description": "make 37046 immediately rts",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "rts",
+      "address": "137046",
+      "patchAsm": ["rts"]
+    }
+  ]
+}
