@@ -8,6 +8,8 @@
     "IN_CHAR_SELECT_FLAG": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
+    "STORE_A0": "10f806",
+    "STORE_A1": "10f816",
     "GRID_IMAGE_SI": "14a",
     "P1_CURSOR_SI": "15e"
   },
@@ -60,6 +62,13 @@
       "subroutine": true,
       "symbol": "MOVE_SPRITE",
       "patchAsm": "moveSprite.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CURSOR",
+      "patchAsm": "moveCursor.asm"
     },
     {
       "type": "prom",

@@ -7,61 +7,24 @@ move.b #$f, $108435 ; p2 character one is Terry
 move.b #$f, $108436 ; p2 character two is Terry
 move.b #$f, $108437 ; p2 character three is Terry
 
-;;;;;;;;;;;;;;;; P1 CURSOR LOGIC ;;;;;;;;;;;;;;;;;;;;
-move.w $P1_CURSOR_X, D1 ; load current cursor X
-move.w $P1_CURSOR_Y, D2 ; and Y
+;;;;;;;;;;;;;;;; CURSOR ;;;;;;;;;;;;;;;;;;;;
+move.l A0, D1
+move.l D1, $STORE_A0      ; store A0 as the game needs it
+move.l A1, D1
+move.l D1, $STORE_A1      ; store A1 as the game needs it
 
-move.b $10fd96, D0 ; load BIOS_P1CURRENT
-move.b #$8, D0     ; simulate right being pressed
+move.b $10fd96, D0        ; load BIOS_P1CURRENT
+move.b #$a, D0            ; simulate right and down being pressed
+move.w #$P1_CURSOR_SI, D1 ; load the cursor's sprite index
+lea $P1_CURSOR_X, A0      ; pointer to cursor X
+lea $P1_CURSOR_Y, A1      ; pointer to cursor Y
+jsr $2MOVE_CURSOR
 
-btst #$3, D0 ; is Right pressed?
-bne incCursorX ; it is? move cursor right one
-
-btst #$2, D0 ; is Left pressed?
-bne decCursorX ; it is? move cursor left one
-
-btst #$1, D0 ; is Down pressed?
-bne incCursorY ; it is? move cursor down one
-
-btst #$0, D0 ; is Up pressed?
-bne decCursorY ; it is? move cursor up one
-
-bra doneWithCursor ; no direction is pushed
-
-incCursorX:
-addi.w #1, D1
-cmpi.w #8, D1
-ble.s skipUpperWrap
-move.w #0, D1 ; x rolled over to zero
-skipUpperWrap:
-bra moveCursor
-
-decCursorX:
-subi.w #1, D1
-bra moveCursor
-
-incCursorY:
-addi.w #1, D2
-bra moveCursor
-
-decCursorY:
-subi.w #1, D2
-;; fall through to moveCursor
-
-moveCursor:
-move.w D1, $P1_CURSOR_X ; save the new X
-move.w D2, $P1_CURSOR_Y ; save the new Y
-mulu.w #32, D1 ; convert X index to X pixel
-addi.w #8, D1  ; add the X offset (8px from edge of screen)
-mulu.w #32, D2 ; convert Y index to Y pixel
-addi.w #55, D2 ; add the Y offset (55px from top of screen)
-move.w #496, D3
-sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
-move.w D3, D2  ; move it back into D2, where moveSprite expects it
-move.w #$P1_CURSOR_SI, D0 ; load the sprite index
-jsr $2MOVE_SPRITE ; and finally, move the sprite
-
-doneWithCursor:
+;; restore the saved address registers
+move.l $STORE_A0, D1
+movea.l D1, A0
+move.l $STORE_A1, D1
+movea.l D1, A1
 
 move.b $10fdac, D0 ; load BIOS_STATCURNT
 btst #$0, D0 ; is p1 start pressed?
