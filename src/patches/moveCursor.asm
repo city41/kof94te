@@ -12,6 +12,7 @@ move.w D1, D4 ; move the sprite index off to the side
 move.w (A0), D1 ; load current cursor X
 move.w (A1), D2 ; and Y
 
+checkInput:
 btst #$3, D0 ; is Right pressed?
 beq skipIncCursorX ; it's not? skip the increment
 addi.w #1, D1
@@ -41,6 +42,18 @@ beq skipDecCursorY ; it's not? skip the decrement
 subi.w #1, D2
 ;; TODO: wrapping
 skipDecCursorY:
+
+;; did the cursor land in a dead spot?
+cmpi.w#2, D1
+ble notInDeadSpot
+cmpi.w #6, D1
+bge notInDeadSpot
+cmpi.w #2, D2
+bne notInDeadSpot
+bra checkInput ; uh oh, in a dead spot, run the routine again to get out
+
+notInDeadSpot:
+
 
 moveCursor:
 move.w D1, (A0) ; save the new X
