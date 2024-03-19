@@ -234,8 +234,9 @@ function on_pause()
 	-- for i = 130, 143 do
 	-- dump_sprite_asm(i, i - 130)
 	-- end
-	dump_sprite_asm(98, 0)
-	dump_sprite_asm(99, 0)
+	dump_sprite_asm(322, 0)
+	dump_sprite_asm(323, 1)
+	dump_sprite_asm(324, 2)
 end
 
 emu.register_frame_done(on_frame, "frame")
