@@ -1,5 +1,3 @@
-; jsr $2LOAD_P_A_L_E_T_T_E_S
-
 ;;;; NOTE: using A5 needs to be done carefully, the main game
 ;;;; expects it when we rts
 move.b #$f, $108235 ; p1 character one is Terry

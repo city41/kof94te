@@ -10,25 +10,11 @@
 ; load the palettes
 ; TODO: this should be done during vblank
 jsr $2LOAD_P_A_L_E_T_T_E_S
-; load the background/oceans image onto the screen
-; TODO: make sure this is done during vblank
-move.w #$OCEANS_IMAGE_SI, D6 ; set sprite index
-lea $2BG_OCEANS_IMAGE, A6 ; load the image pointer
-jsr $2RENDER_STATIC_IMAGE
-
-; load the logo/countries image onto the screen
-move.w #$LOGO_IMAGE_SI, D6 ; set sprite index to
-lea $2LOGO_COUNTRIES_IMAGE, A6 ; load the image pointer
-jsr $2RENDER_STATIC_IMAGE
 
 ; load the character grid image onto the screen
 move.w #$GRID_IMAGE_SI, D6 ; set sprite index
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
-
-; now init is done, go into main char select routine
-; if the timer has elapsed
-; move.l #$2CHAR_SELECT_MAIN_ROUTINE, $108584
 
 move.b #1, $IN_CHAR_SELECT_FLAG
 

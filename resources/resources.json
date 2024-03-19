@@ -18,7 +18,7 @@
     {
       "name": "character_grid",
       "imageFile": "./character_grid.png",
-      "x": 16,
+      "x": 0,
       "y": 64
     }
   ]

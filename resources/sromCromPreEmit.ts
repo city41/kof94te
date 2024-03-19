@@ -132,7 +132,7 @@ function prepareForAssembly(
 }
 
 export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
-  const startingPaletteIndex = 140;
+  const startingPaletteIndex = 130;
   console.log({ startingPaletteIndex });
   const cromImages = codeEmitData.cromImages.reduce(
     (accum: Record<string, AsmCromImage>, ci: SromCromCromImage) => {

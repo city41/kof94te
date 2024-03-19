@@ -221,22 +221,9 @@ function dump_sprite(si)
 	local tileIndexes = getSpriteTileIndexes(si, vram, h)
 
 	if h > 0 then
-		print(string.format("Sprite: %d at (%d,%d), %d tiles tall", si, x, y, h))
-
-		print("tiles")
-		for _, ti in pairs(tileIndexes) do
-			print(string.format("  %x", ti))
-		end
-
-		print("palettes")
-
 		for _, pi in pairs(paletteIndexes) do
 			palettes[pi] = true
-			print(string.format("  %x", pi))
 		end
-		print("--------------------")
-	else
-		print("sprite %d has zero height", si)
 	end
 end
 
@@ -260,9 +247,12 @@ function on_pause()
 	local palettes_in_use = get_keys(palettes)
 	table.sort(palettes_in_use)
 
+	print("palette in use dump")
+	print("-----")
 	for _, pi in pairs(palettes_in_use) do
 		print("palette in use", pi)
 	end
+	print("-----")
 end
 
 emu.register_frame_done(on_frame, "frame")

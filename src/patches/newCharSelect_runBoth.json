@@ -6,9 +6,7 @@
   },
   "symbols": {
     "IN_CHAR_SELECT_FLAG": "10f800",
-    "OCEANS_IMAGE_SI": "14a",
-    "LOGO_IMAGE_SI": "15c",
-    "GRID_IMAGE_SI": "16a"
+    "GRID_IMAGE_SI": "14a"
   },
   "patches": [
     {
@@ -24,20 +22,6 @@
       "subroutine": true,
       "symbol": "PALETTES",
       "patchAsm": "palettes.asm"
-    },
-    {
-      "type": "prom",
-      "description": "bg_oceans image",
-      "subroutine": true,
-      "symbol": "BG_OCEANS_IMAGE",
-      "patchAsm": "bg_oceans_dumped3.asm"
-    },
-    {
-      "type": "prom",
-      "description": "logo_countries image",
-      "subroutine": true,
-      "symbol": "LOGO_COUNTRIES_IMAGE",
-      "patchAsm": "logo_countries_dumped.asm"
     },
     {
       "type": "prom",
