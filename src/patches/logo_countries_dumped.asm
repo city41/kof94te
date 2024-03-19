@@ -1,6 +1,6 @@
 ;;;;; start logo_countries static sprite data ;;;;;
 dc.w 14 ; width in tiles
-dc.w 10 ; height in tiles
+dc.w 16 ; height in tiles
 
 ;;;;;;; column 0, 16 tiles high ;;;;;;;
 ;; SCB1 word pairs
@@ -38,7 +38,7 @@ dc.w $0
 dc.w $0
 
 ;; SCB3 vertical position | sticky | size
-dc.w $f850
+dc.w $f810
 
 ;; SCB4 horizontal position
 dc.w $1800

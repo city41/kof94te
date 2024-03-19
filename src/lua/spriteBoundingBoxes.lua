@@ -238,7 +238,7 @@ function dump_sprite(si)
 end
 
 function on_pause()
-	dump_sprite(99)
+	dump_sprite(330)
 end
 
 emu.register_frame_done(on_frame, "frame")

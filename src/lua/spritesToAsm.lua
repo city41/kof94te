@@ -230,10 +230,12 @@ function dump_sprite_asm(si, ci)
 end
 
 function on_pause()
-	grab_vram()
-	for i = 130, 143 do
-		dump_sprite_asm(i, i - 130)
-	end
+	-- grab_vram()
+	-- for i = 130, 143 do
+	-- dump_sprite_asm(i, i - 130)
+	-- end
+	dump_sprite_asm(98, 0)
+	dump_sprite_asm(99, 0)
 end
 
 emu.register_frame_done(on_frame, "frame")
