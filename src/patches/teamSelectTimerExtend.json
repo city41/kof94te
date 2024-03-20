@@ -1,0 +1,11 @@
+{
+  "description": "Extend the team select timer from 15 to df",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "set df",
+      "address": "136ffa",
+      "patchAsm": ["move.b #$df, $654(A5)"]
+    }
+  ]
+}
