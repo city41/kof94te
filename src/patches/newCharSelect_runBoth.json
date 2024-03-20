@@ -115,6 +115,13 @@
     },
     {
       "type": "prom",
+      "description": "clear p1 char name",
+      "subroutine": true,
+      "symbol": "CLEAR_FIX",
+      "patchAsm": "clearFix.asm"
+    },
+    {
+      "type": "prom",
       "description": "teardown routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",

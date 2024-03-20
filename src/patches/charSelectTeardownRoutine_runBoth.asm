@@ -9,4 +9,6 @@ move.b D7, $108236
 move.b $P1_CHOSEN_CHAR2, D7
 move.b D7, $108237
 
+jsr $2CLEAR_FIX
+
 rts
