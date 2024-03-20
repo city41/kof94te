@@ -25,6 +25,12 @@
   "patches": [
     {
       "type": "prom",
+      "string": true,
+      "value": "HEIDERN RALF    CLARK   ATHENA  KENSOU  CHIN    KYO     BENIMARUGORO    HEAVY D LUCKY   BRIAN   KIM     CHANG   CHOI    TERRY   ANDY    JOE     RYO     ROBERT  TAKUMA  YURI    MAI     KING    ",
+      "symbol": "CHAR_NAMES_TABLE"
+    },
+    {
+      "type": "prom",
       "description": "position in grid to character id map",
       "subroutine": true,
       "symbol": "GRID_TO_CHARACTER_ID",
@@ -92,6 +98,13 @@
       "subroutine": true,
       "symbol": "MOVE_CURSOR",
       "patchAsm": "moveCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render currently focused character name",
+      "subroutine": true,
+      "symbol": "RENDER_CUR_FOCUSED_CHAR_NAME",
+      "patchAsm": "renderCurFocusedCharName.asm"
     },
     {
       "type": "prom",

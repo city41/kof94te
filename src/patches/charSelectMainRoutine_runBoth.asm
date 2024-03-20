@@ -8,7 +8,10 @@
 
 ;;;; NOTE: using A5 needs to be done carefully, the main game
 ;;;; expects it when we rts
-
+move.l A0, D1
+move.l D1, $STORE_A0      ; store A0 as the game needs it
+move.l A1, D1
+move.l D1, $STORE_A1      ; store A1 as the game needs it
 
 
 ;;;;; CHOOSE CHARACTER IF START IS PRESSED ;;;;;
@@ -53,10 +56,6 @@ addi.b #1, D5
 move.b D5, $CHAR_SELECT_COUNTER
 
 ;;;;;;;;;;;;;;;; CURSOR ;;;;;;;;;;;;;;;;;;;;
-move.l A0, D1
-move.l D1, $STORE_A0      ; store A0 as the game needs it
-move.l A1, D1
-move.l D1, $STORE_A1      ; store A1 as the game needs it
 
 ;;;; load the common values for MOVE_CURSOR that work for both
 ;;;; the black and white cursor
@@ -87,6 +86,11 @@ hideWhiteCursor:
 move.w #$P1_CURSOR_WHITE_BORDER_SI, D0 ; load the cursor's sprite index
 hideCursor:
 jsr $2MOVE_SPRITE
+
+
+;;;; CURRENTLY FOCUSED CHARACTER NAME
+jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
+
 
 ;;;; CHOSEN TEAM AVATARS ;;;;;;;
 move.b $P1_NUM_CHOSEN_CHARS, D4
