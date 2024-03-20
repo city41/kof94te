@@ -11,6 +11,10 @@
       {
         "template": "character_grid.asm.hbr",
         "dest": "../src/patches/character_grid.asm"
+      },
+      {
+        "template": "avatars.asm.hbr",
+        "dest": "../src/patches/avatars.asm"
       }
     ]
   },

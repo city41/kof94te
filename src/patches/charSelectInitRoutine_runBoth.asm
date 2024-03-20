@@ -13,12 +13,14 @@ jsr $2LOAD_P_A_L_E_T_T_E_S
 
 ; load the character grid image onto the screen
 move.w #$GRID_IMAGE_SI, D6 ; set sprite index
+move.w #0, D5              ; offset into tile data
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the p1 cursor, black border, onto the screen
 move.w #$P1_CURSOR_BLACK_BORDER_SI, D6
 lea $2P1_CURSOR_BLACK_BORDER_IMAGE, A6
+move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; move the cursor into place
@@ -30,6 +32,7 @@ jsr $2MOVE_SPRITE
 ; load the p1 cursor, white border, onto the screen
 move.w #$P1_CURSOR_WHITE_BORDER_SI, D6
 lea $2P1_CURSOR_WHITE_BORDER_IMAGE, A6
+move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; move the cursor off screen
@@ -43,6 +46,8 @@ move.w #0, $P1_CURSOR_X
 move.w #0, $P1_CURSOR_Y
 
 
+move.b #0, $P1_NUM_CHOSEN_CHARS
+move.b #0, $LAST_FRAME_START
 move.b #1, $IN_CHAR_SELECT_FLAG
 
 

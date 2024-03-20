@@ -5,23 +5,30 @@
     "end": "bfff0"
   },
   "symbols": {
+    "P1_CHOSEN_CHAR0": "10f7f5",
+    "P1_CHOSEN_CHAR1": "10f7f6",
+    "P1_CHOSEN_CHAR2": "10f7f7",
+    "LAST_FRAME_START": "10f7f8",
+    "P1_NUM_CHOSEN_CHARS": "10f7fa",
+    "READY_TO_EXIT_CHAR_SELECT": "10f7fc",
     "CHAR_SELECT_COUNTER": "10f7fe",
     "IN_CHAR_SELECT_FLAG": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
     "STORE_A0": "10f806",
     "STORE_A1": "10f816",
-    "GRID_IMAGE_SI": "14a",
-    "P1_CURSOR_BLACK_BORDER_SI": "15e",
-    "P1_CURSOR_WHITE_BORDER_SI": "162"
+    "GRID_IMAGE_SI": "14b",
+    "P1_CURSOR_BLACK_BORDER_SI": "15f",
+    "P1_CURSOR_WHITE_BORDER_SI": "163",
+    "T1C1_SI": "167"
   },
   "patches": [
     {
       "type": "prom",
-      "description": "avatar tile table",
+      "description": "position in grid to character id map",
       "subroutine": true,
-      "symbol": "AVATAR_TILE_TABLE",
-      "patchAsm": "avatarTileTable.asm"
+      "symbol": "GRID_TO_CHARACTER_ID",
+      "patchAsm": "positionInGridToCharacterId.asm"
     },
     {
       "type": "prom",
@@ -36,6 +43,13 @@
       "subroutine": true,
       "symbol": "CHARACTER_GRID_IMAGE",
       "patchAsm": "character_grid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "avatars image",
+      "subroutine": true,
+      "symbol": "AVATARS_IMAGE",
+      "patchAsm": "avatars.asm"
     },
     {
       "type": "prom",
@@ -205,13 +219,39 @@
     },
     {
       "type": "prom",
-      "description": "Run char select after team select",
+      "description": "Run char select soon after vblank ack",
+      "address": "132be4",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what got clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne skipCharSelectMain",
+        "jsr $2LOAD_P_A_L_E_T_T_E_S",
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
+        "skipCharSelectMain:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "Check for exit after team select",
       "address": "137074",
       "subroutine": true,
       "patchAsm": [
-        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
-        ";;; ;restore what got clobbered",
+        ";;; restore what got clobbered",
         "move.b #$3c, $655(A5)",
+        ";;; end restore",
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "bne notReadyYet",
+        "move.w #$1, $108654 ; empty the timer so game naturally exits",
+        "bra done",
+        "notReadyYet:",
+        "move.b #$14, $108654 ; reload the timer so we dont exit",
+        "done:",
         "rts"
       ]
     },
@@ -236,16 +276,37 @@
     },
     {
       "type": "prom",
-      "description": "set kyo in membdisp",
+      "description": "set chosen team in membdisp",
       "address": "1379d2",
       "subroutine": true,
       "patchAsm": [
-        ";; a4 will point to all six characters in turn",
-        "move.b #6, $71(A4)",
+        "move.l A4, D7",
+        "cmpi.l #$102900, D7",
+        "bne skipChar0",
+        "move.b $P1_CHOSEN_CHAR0, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar0:",
+        "cmpi.l #$102B00, D7",
+        "bne skipChar1",
+        "move.b $P1_CHOSEN_CHAR1, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar1:",
+        "cmpi.l #$102D00, D7",
+        "bne skipChar2",
+        "move.b $P1_CHOSEN_CHAR2, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar2:",
+        ";;;; this must be player 2, ie cpu",
+        "move.b (A2,D0.w), $71(A4)",
+        "done:",
         "rts"
       ]
     },
     {
+      "skip": true,
       "type": "prom",
       "description": "load palettes just after vblank",
       "address": "132be4",

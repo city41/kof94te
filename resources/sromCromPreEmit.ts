@@ -67,11 +67,16 @@ function createAssemblyTileSCB1(
   };
 }
 
-function createAssemblyTileSBC3(column: SromCromTile[], y: number): number {
+function createAssemblyTileSBC3(
+  column: SromCromTile[],
+  y: number,
+  sticky: boolean
+): number {
   // for now, setting all ys to zero
   // onscreen y is 496-y
   const yToWrite = 496 - y;
-  return (yToWrite << 7) | column.length;
+  const stickyBit = sticky ? 1 << 6 : 0;
+  return (yToWrite << 7) | stickyBit | column.length;
 }
 
 function createAssemblyTileSBC4(tx: number, startingX: number): number {
@@ -91,7 +96,14 @@ function createAsmColumn(
     scb1.push(createAssemblyTileSCB1(tile, startingPaletteIndex));
   }
 
-  const scb3 = createAssemblyTileSBC3(sromCromColumn, cromImage.custom.y);
+  // TODO: such a hack, make every other column for avatars sticky
+  const sticky = cromImage.name === "avatars" && tx % 2 == 1;
+
+  const scb3 = createAssemblyTileSBC3(
+    sromCromColumn,
+    cromImage.custom.y,
+    sticky
+  );
   const scb4 = createAssemblyTileSBC4(tx, cromImage.custom.x);
 
   return { scb1, scb3, scb4 };

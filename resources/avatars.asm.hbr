@@ -1,9 +1,9 @@
-;;;;; start logo_countries static sprite data ;;;;;
-dc.w {{cromImages.logo_countries.width}} ; width in tiles
-dc.w {{cromImages.logo_countries.height}} ; height in tiles
+;;;;; start avatars static sprite data ;;;;;
+dc.w 2 ; width in tiles
+dc.w 2 ; height in tiles
 
 ;; start sprite tiles
-{{#each cromImages.logo_countries.columns}}
+{{#each cromImages.avatars.columns}}
 ;;; column {{@index}}
 
 ;; SCB1 word pairs

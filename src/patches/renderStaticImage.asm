@@ -3,7 +3,8 @@
 ;
 ; inputs
 ; ------
-; d6: starting sprite index (si)
+; D6: starting sprite index (si)
+; D5: offset into the data to render one image out of a list
 ; A6: address of static image (sa)
 
 ;;;;;;; SCB1: load sprite tiles
@@ -14,6 +15,9 @@ move.w (A6)+, D1   ; how wide the image is, in tiles/sprites
 move.w (A6)+, D2   ; how tall the image is, in tiles
 move.w D2, D3      ; save height
 
+;; account for the offset to jump into an array of images
+adda.w D5, A6
+
 subi.w #1, D1      ; since dbra hinges on -1 not zero
 loadSprite:
 ;; set VRAMADDR to sprite index in D6
@@ -22,7 +26,7 @@ lsl.w #6, D0 ; si * 64, since in SCB1 each sprite is 64 words
 move.w D0, $3c0000 ; VRAMADDR to SCB1, sprite si
 
 subi.w #1, D2      ; since dbra hinges on -1 not zero
-loadSpriteTiles:   ; for now, just loading one column
+loadSpriteTiles: 
 move.w (A6)+, (A1) ; lsb of tile
 move.w (A6)+, (A1) ; palette/etc of tile
 dbra D2, loadSpriteTiles
