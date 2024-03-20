@@ -25,7 +25,10 @@ skipIncCursorX:
 btst #$2, D0 ; is Left pressed?
 beq skipDecCursorX ; it's not? skip the decrement
 subi.w #1, D1
-;; TODO: wrapping
+cmpi.w #$ffff, D1
+bne skipLowerXWrap
+move.w #8, D1
+skipLowerXWrap:
 skipDecCursorX:
 
 btst #$1, D0 ; is Down pressed?
@@ -40,7 +43,10 @@ skipIncCursorY:
 btst #$0, D0 ; is Up pressed?
 beq skipDecCursorY ; it's not? skip the decrement
 subi.w #1, D2
-;; TODO: wrapping
+cmpi.w #$ffff, D2
+bne skipLowerYWrap
+move.w #2, D2
+skipLowerYWrap:
 skipDecCursorY:
 
 ;; did the cursor land in a dead spot?
@@ -61,7 +67,7 @@ move.w D2, (A1) ; save the new Y
 mulu.w #32, D1 ; convert X index to X pixel
 addi.w #8, D1  ; add the X offset (8px from edge of screen)
 mulu.w #32, D2 ; convert Y index to Y pixel
-addi.w #55, D2 ; add the Y offset (55px from top of screen)
+addi.w #56, D2 ; add the Y offset (55px from top of screen)
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
 move.w D3, D2  ; move it back into D2, where moveSprite expects it
