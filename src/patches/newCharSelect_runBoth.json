@@ -205,18 +205,13 @@
     },
     {
       "type": "prom",
-      "description": "Run char select soon after vblank ack",
-      "address": "132be4",
+      "description": "Run char select after team select",
+      "address": "137074",
       "subroutine": true,
       "patchAsm": [
-        ";;; replace what was clobbered",
-        "jsr $6536",
-        ";;; end replace",
-        "move.b $IN_CHAR_SELECT_FLAG, D5",
-        "cmpi.b #1, D5",
-        "bne skipCharSelectMain",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
-        "skipCharSelectMain:",
+        ";;; ;restore what got clobbered",
+        "move.b #$3c, $655(A5)",
         "rts"
       ]
     },
