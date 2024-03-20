@@ -5,6 +5,12 @@ const TILES_PER_PAIR = 32768;
 // this nets 220 tiles
 export const cromSpans = [
   {
+    globalOffset: TILES_PER_PAIR * 0,
+    start: 2728,
+    end: 3071,
+    pair: "c1/c2",
+  },
+  {
     globalOffset: TILES_PER_PAIR * 3,
     start: 32547,
     end: 32766,
