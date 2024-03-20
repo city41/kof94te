@@ -67,7 +67,7 @@ move.w D2, (A1) ; save the new Y
 mulu.w #32, D1 ; convert X index to X pixel
 addi.w #8, D1  ; add the X offset (8px from edge of screen)
 mulu.w #32, D2 ; convert Y index to Y pixel
-addi.w #56, D2 ; add the Y offset (55px from top of screen)
+addi.w #53, D2 ; add the Y offset (55px from top of screen)
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
 move.w D3, D2  ; move it back into D2, where moveSprite expects it

@@ -1,8 +1,7 @@
 ; loads the palettes for new char select into palette ram,
-; starting at palette 130, to match what is in sromCromPreEmit.ts
 
 move.l #$400000, D1
-addi.w #130, D1
+addi.w #16, D1 ; the starting palette index which needs to match preemit
 ; multiply by 32 to get to the starting palette index
 ; 32 because these are words but its in the 68k memory space,
 ; which is byte addressed

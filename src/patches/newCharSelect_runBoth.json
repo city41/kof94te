@@ -244,6 +244,23 @@
         "move.b #6, $71(A4)",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "load palettes just after vblank",
+      "address": "132be4",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; replace what was clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne skipLoadPalettes",
+        "jsr $2LOAD_P_A_L_E_T_T_E_S",
+        "skipLoadPalettes:",
+        "rts"
+      ]
     }
   ]
 }
