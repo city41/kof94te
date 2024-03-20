@@ -33,6 +33,7 @@ skipDecCursorX:
 
 btst #$1, D0 ; is Down pressed?
 beq skipIncCursorY ; it's not? skip the increment
+move.b #$60, $320000  ; play the sound effect
 addi.w #1, D2
 cmpi.w #2, D2
 ble.s skipUpperYWrap
@@ -42,6 +43,7 @@ skipIncCursorY:
 
 btst #$0, D0 ; is Up pressed?
 beq skipDecCursorY ; it's not? skip the decrement
+move.b #$60, $320000  ; play the sound effect
 subi.w #1, D2
 cmpi.w #$ffff, D2
 bne skipLowerYWrap

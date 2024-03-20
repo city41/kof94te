@@ -42,6 +42,7 @@ adda.w D0, A0   ; move forward based on how many characters are chosen
 move.b D1, (A0) ; set the chosen character
 addi.b #1, D0
 move.b D0, $P1_NUM_CHOSEN_CHARS ; increment number of chosen characters
+move.b #$61, $320000  ; play the sound effect
 
 skipChoosingChar:
 
