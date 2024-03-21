@@ -18,6 +18,8 @@ SCB3 = 0x8200
 SCB4 = 0x8400
 VRAM_SIZE = 0x8600
 
+SPRITE_INDEX = 332
+
 function getSpriteControlBlock()
 	if next_vram_index < FIX_LAYER then
 		if next_vram_index & 1 == 1 then
@@ -65,6 +67,8 @@ end
 
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)
+	local inCharSelect = mem:read_u8(0x10f800) == 1
+
 	if offset == REG_VRAMADDR then
 		next_vram_index = data
 	end
@@ -74,7 +78,7 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteIndex() == 326 then
+		if getSpriteIndex() == SPRITE_INDEX and inCharSelect then
 			print(string.format("%s: value: %x at PC:%s", getSpriteControlBlock(), data, cpu.state["PC"]))
 		end
 
