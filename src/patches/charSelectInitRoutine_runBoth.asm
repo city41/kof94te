@@ -38,13 +38,36 @@ jsr $2RENDER_STATIC_IMAGE
 ; move the cursor off screen
 move.w #$P1_CURSOR_WHITE_BORDER_SI, D0
 move.w #8, D1
-move.w 0, D2 ; y will be 496 and off screen
+move.w #272, D2 ; y will be 224 and off screen
 jsr $2MOVE_SPRITE
 
 ; initialize cursor's location
 move.w #0, $P1_CURSOR_X
 move.w #0, $P1_CURSOR_Y
 
+; load the p2 cpu cursor, black border, onto the screen
+move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D6
+lea $2P2_CPU_CURSOR_BLACK_BORDER_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; move the cpu cursor off screen
+move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D0
+move.w #8, D1
+move.w #272, D2 ; y will be 224 and off screen
+jsr $2MOVE_SPRITE
+
+; load the p2 cpu cursor, white border, onto the screen
+move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D6
+lea $2P2_CPU_CURSOR_WHITE_BORDER_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; move the cpu cursor off screen
+move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D0
+move.w #8, D1
+move.w #272, D2 ; y will be 224 and off screen
+jsr $2MOVE_SPRITE
 
 move.b #0, $P1_NUM_CHOSEN_CHARS
 move.b #0, $LAST_FRAME_START

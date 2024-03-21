@@ -19,8 +19,10 @@
     "STORE_A1": "10f816",
     "GRID_IMAGE_SI": "14b",
     "P1_CURSOR_BLACK_BORDER_SI": "15f",
-    "P1_CURSOR_WHITE_BORDER_SI": "163",
-    "T1C1_SI": "167"
+    "P1_CURSOR_WHITE_BORDER_SI": "162",
+    "P2_CPU_CURSOR_BLACK_BORDER_SI": "165",
+    "P2_CPU_CURSOR_WHITE_BORDER_SI": "16c",
+    "T1C1_SI": "173"
   },
   "patches": [
     {
@@ -73,6 +75,20 @@
     },
     {
       "type": "prom",
+      "description": "p2 cpu cursor, black border, image",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_BLACK_BORDER_IMAGE",
+      "patchAsm": "p2CpuCursor_blackBorder.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cpu cursor, white border, image",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_WHITE_BORDER_IMAGE",
+      "patchAsm": "p2CpuCursor_whiteBorder.asm"
+    },
+    {
+      "type": "prom",
       "description": "load palettes routine",
       "subroutine": true,
       "symbol": "LOAD_P_A_L_E_T_T_E_S",
@@ -91,6 +107,20 @@
       "subroutine": true,
       "symbol": "MOVE_SPRITE",
       "patchAsm": "moveSprite.asm"
+    },
+    {
+      "type": "prom",
+      "description": "map from team index on OG team select to XY for cpu cursor",
+      "subroutine": true,
+      "symbol": "TEAM_INDEX_TO_XY",
+      "patchAsm": "teamSelectIndexToXY.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cpu cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CPU_CURSOR",
+      "patchAsm": "moveCpuCursor.asm"
     },
     {
       "type": "prom",

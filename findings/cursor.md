@@ -52,7 +52,7 @@ the borders alternate between black and white to cause a flashing effect. This i
 | 2      | 1df8f | cd      |
 | 2      | 0     | 0       |
 
-# P2 Cursor : black border
+# P2 Cursor : white border
 
 | sprite | tile  | palette |
 | ------ | ----- | ------- |

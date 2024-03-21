@@ -15,6 +15,10 @@ move.l D1, $STORE_A1      ; store A1 as the game needs it
 
 
 ;;;;; CHOOSE CHARACTER IF START IS PRESSED ;;;;;
+; dont let them choose more than 3
+move.b $P1_NUM_CHOSEN_CHARS, D0
+cmpi.b #3, D0
+beq skipChoosingChar
 
 ; was start pressed last frame? then ignore. only want unique presses
 move.b $LAST_FRAME_START, D0
@@ -55,7 +59,7 @@ move.b $CHAR_SELECT_COUNTER, D5
 addi.b #1, D5
 move.b D5, $CHAR_SELECT_COUNTER
 
-;;;;;;;;;;;;;;;; CURSOR ;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;; P1 CURSOR ;;;;;;;;;;;;;;;;;;;;
 
 ;;;; load the common values for MOVE_CURSOR that work for both
 ;;;; the black and white cursor
@@ -66,7 +70,7 @@ lea $P1_CURSOR_Y, A1      ; pointer to cursor Y
 
 ;;;; now show the white or black cursor, depending on if the counter
 ;;;; is odd or not
-btst #3, D5
+btst #2, D5
 beq blackCursor
 move.w #$P1_CURSOR_WHITE_BORDER_SI, D1 ; load the cursor's sprite index
 bra moveCursor
@@ -78,7 +82,7 @@ jsr $2MOVE_CURSOR
 ;;;; now hide the one that should not be on screen
 move.w #0, D1 ; X
 move.w #272, D2 ; Y, which will be 224px, putting it off screen
-btst #3, D5
+btst #2, D5
 beq hideWhiteCursor
 move.w #$P1_CURSOR_BLACK_BORDER_SI, D0 ; load the cursor's sprite index
 bra hideCursor
@@ -87,6 +91,12 @@ move.w #$P1_CURSOR_WHITE_BORDER_SI, D0 ; load the cursor's sprite index
 hideCursor:
 jsr $2MOVE_SPRITE
 
+;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
+move.b $P1_NUM_CHOSEN_CHARS, D0
+cmpi.b #2, D0
+ble skipCpuCursor
+jsr $2MOVE_CPU_CURSOR
+skipCpuCursor:
 
 ;;;; CURRENTLY FOCUSED CHARACTER NAME
 jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
