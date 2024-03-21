@@ -18,4 +18,8 @@ Here is a mock up I'm shooting for
 
 ## Status
 
-Just started working on this. I've made a ton of progress and learned a lot about how the game works. I am pretty sure I can pull this off. But it will still be a while...
+I now have a mostly working character select screen. There's some bugs in it. And the hack itself still has a long way to go. I think I can pull this off, but I also think it will be a while...
+
+### YouTube video
+
+https://www.youtube.com/watch?v=anGeYuqkkM4
