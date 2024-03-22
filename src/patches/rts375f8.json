@@ -1,0 +1,11 @@
+{
+  "description": "Have routine 375f8 immediatley rts",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "rts",
+      "address": "1375f8",
+      "patchAsm": ["rts"]
+    }
+  ]
+}

@@ -133,16 +133,24 @@ function resolveLine(
   l = removeDuplicateSpaces(l);
   nextL = removeDuplicateSpaces(nextL);
 
+  if (l.trim().length === 0) {
+    return { resolvedLine: l, indentDepth: 0 };
+  }
+
+  if (l.includes("(loop") || l.includes("SAME FROM HERE")) {
+    return { resolvedLine: l, indentDepth: 0 };
+  }
+
   const [line, comment] = l.split(" ; ");
 
   const [registerS, asmS] = line.split(" -- ");
   const [rawAddress, opcode, ...params] = asmS.split(" ");
   const address = rawAddress.replace(":", "");
 
-  if (parseInt(address, 16) >= 0xc00000) {
-    // this is in the bios, so ignore it
-    return undefined;
-  }
+  // if (parseInt(address, 16) >= 0xc00000) {
+  //   // this is in the bios, so ignore it
+  //   return undefined;
+  // }
 
   let nextIndentDepth = indentDepth;
   if (opcode === "jsr" || opcode === "bsr") {
@@ -155,6 +163,7 @@ function resolveLine(
   }
 
   const registerMap = createRegisterMap(registerS, address);
+
   const [nextRegisterS] = nextL.split(" -- ");
   const nextRegisterMap = createRegisterMap(nextRegisterS);
 

@@ -1,0 +1,88 @@
+
+
+3758A -- hit always
+
+37590 -- only on A
+
+03758A: btst    D0, ($7e6,A5)
+03758E: bne     $375c0
+037590: cmpi.b  #-$1, ($7df,A5)
+
+
+
+
+;; A not pressed
+1087E6 is 03 (11b)
+
+
+
+;; A pressed
+1087E6 is 06 (110b)
+
+
+how does 1087e6 get set to six?
+
+03781A: 102C 0130      move.b  ($130,A4), D0
+03781E: 196D 501C 00D8 move.b  ($501c,A5), ($d8,A4)
+037824: 0800 0000      btst    #$0, D0
+037828: 6600 0008      bne     $37832
+03782C: 196D 501D 00D8 move.b  ($501d,A5), ($d8,A4)
+037832: 0200 007F      andi.b  #$7f, D0
+037836: 1200           move.b  D0, D1
+037838: 4600           not.b   D0
+03783A: C12D 07E6      and.b   D0, ($7e6,A5)
+03783E: E509           lsl.b   #2, D1
+037840: 832D 07E6      or.b    D1, ($7e6,A5)
+
+3781a is only hit after pressing A
+
+
+3744e - always hit
+3781a - only after A
+
+;;; path taken after pressing A
+03744E: beq     $37462
+037450: move.w  D1, D0
+037452: bsr     $374a4
+0374A4: lea     ($501c,A5), A0
+0374A8: lea     ($501d,A5), A1
+0374AC: btst    #$0, ($130,A4)
+0374B2: bne     $374bc
+0374BC: move.b  #$0, (A0)
+0374C0: cmpi.w  #$1, D0
+0374C4: bls     $374ca
+0374CA: move.b  ($7e6,A5), D0
+0374CE: andi.b  #$c, D0
+0374D2: tst.b   D0
+0374D4: beq     $374f8
+0374F8: rts
+037456: bra     $3745e
+03745E: bsr     $37806
+037806: movem.l D0-D1/A0, -(A7)
+03780A: move.w  #$121, D0
+03780E: jsr     $6588.w
+006588: lea     $51924.l, A0
+00658E: add.w   D0, D0
+006590: move.w  (A0,D0.w), ($38c0,A5)
+006596: lea     ($38c4,A5), A0
+00659A: moveq   #$0, D0
+00659C: move.b  ($38bc,A5), D0
+0065A0: move.w  ($38c0,A5), (A0,D0.w)
+0065A6: addq.b  #2, ($38bc,A5)
+0065AA: rts
+037812: movem.l (A7)+, D0-D1/A0
+037816: addq.w  #1, ($72,A4)
+03781A: move.b  ($130,A4), D0
+
+
+
+it always does this
+
+3744a: bsr 37464
+3744e: beq 37462
+
+it will only take the branch after A is pressed
+
+i think this is it
+
+3746a: btst #$4, D0

@@ -5,3 +5,10 @@ bp 37046, , { trace p1charframe.txt,,noloop, { tracelog "D0=%x D1=%x D2=%x D3=%x
 wpset 3c000c,1,w,wpdata == 4,{ printf "vblank ack"; g }
 
 wpset 3c000c,1,w,wpdata == 4,{ trace oneframe.txt,,noloop, { tracelog "D0=%x D1=%x D2=%x D3=%x D4=%x D5=%x D6=%x D7=%x A0=%x A1=%x A2=%x A3=%x A4=%x A5=%x A6=%x PC=%x -- ",d0,d1,d2,d3,d4,d6,d6,d7,a0,a1,a2,a3,a4,a5,a6,pc }}
+
+bp 32c8a,b@10fd96 != 0,{ trace traces/inputRoutine.txt,,noloop, { tracelog "D0=%x D1=%x D2=%x D3=%x D4=%x D5=%x D6=%x D7=%x A0=%x A1=%x A2=%x A3=%x A4=%x A5=%x A6=%x PC=%x 39c4=%x 39c5=%x 39c7=%x 39c8=%x 39ca=%x 39cb=%x 39cc=%x 39cd=%x 39cf=%x 39d7=%x 39e0=%x 39e1=%x 39e2=%x 39e3=%x 39e5=%x 39ed=%x 3a01=%x 3a02=%x 3a03=%x 3a05=%x -- ",d0,d1,d2,d3,d4,d6,d6,d7,a0,a1,a2,a3,a4,a5,a6,pc,b@(a5 + 39c4),b@(a5 + 39c5),b@(a5 + 39c7),b@(a5 + 39c8),b@(a5 + 39ca),b@(a5 + 39cb),b@(a5 + 39cc),b@(a5 + 39cd),b@(a5 + 39cf),b@(a5 + 39d7),b@(a5 + 39e0),b@(a5 + 39e1),b@(a5 + 39e2),b@(a5 + 39e3),b@(a5 + 39e5),b@(a5 + 39ed),b@(a5 + 3a01),b@(a5 + 3a02),b@(a5 + 3a03),b@(a5 + 3a05) }}
+
+
+bp 32c8a,b@10fd96 != 0, { trace traces/pressATeamSelec.txt,,, { tracelog "D0=%x D1=%x D2=%x D3=%x D4=%x D5=%x D6=%x D7=%x A0=%x A1=%x A2=%x A3=%x A4=%x A5=%x A6=%x PC=%x -- ",d0,d1,d2,d3,d4,d6,d6,d7,a0,a1,a2,a3,a4,a5,a6,pc }}
+
+trace traces/timerExhaustedTeamSelec.txt,,, { tracelog "D0=%x D1=%x D2=%x D3=%x D4=%x D5=%x D6=%x D7=%x A0=%x A1=%x A2=%x A3=%x A4=%x A5=%x A6=%x PC=%x -- ",d0,d1,d2,d3,d4,d6,d6,d7,a0,a1,a2,a3,a4,a5,a6,pc }

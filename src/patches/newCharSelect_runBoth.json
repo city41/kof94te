@@ -5,10 +5,10 @@
     "end": "bfff0"
   },
   "symbols": {
+    "CPU_RANDOM_SELECT_COUNTER": "1083d3",
     "P1_CHOSEN_CHAR0": "10f7f5",
     "P1_CHOSEN_CHAR1": "10f7f6",
     "P1_CHOSEN_CHAR2": "10f7f7",
-    "LAST_FRAME_START": "10f7f8",
     "P1_NUM_CHOSEN_CHARS": "10f7fa",
     "READY_TO_EXIT_CHAR_SELECT": "10f7fc",
     "CHAR_SELECT_COUNTER": "10f7fe",
@@ -372,6 +372,36 @@
         "skipLoadPalettes:",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "prevent A in team select, let the game continue once cpu random select is done",
+      "address": "137466",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; first we are only ready if char select has finished",
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "beq checkForCpuDone ; char select has finished, now go see if cpu has finished",
+        "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
+        "bra done",
+        "checkForCpuDone:",
+        "move.b $CPU_RANDOM_SELECT_COUNTER, D0 ; load the cpu random countdown",
+        "cmpi.b #$ff, D0 ; if it goes from 0 -> -1, then cpu is done random selecting",
+        "beq cpuIsDone",
+        "cmp.b D0, D0 ; cpu is not done yet, force a zero result so game doesn't move on",
+        "bra done",
+        "cpuIsDone:",
+        "cmpi.b #0, D0 ; cpu is done, force a non-zero result so game does move on",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13746c",
+      "patchAsm": ["nop"]
     }
   ]
 }

@@ -1,0 +1,18 @@
+03706C |  bcs $3707c                                                                                                     | bcs $3707c
+03707C |  move.l #$37086, $108584                                                                                        | move.l #$37086, ($584,A5)
+037084 |  rts                                                                                                            | rts
+032B30 |  move.l #$100100, D7                                             result: $100100                                | move.l #$100100, D7
+032B36 |  movea.l $100100, A4                                             result: $100100                                | movea.l D7, A4
+032B38 |  movea.l $100100, A0                                             result: $25a8                                  | movea.l (A4), A0
+032B3A |  jsr $25a8                                                                                                      | jsr (A0)
+0025A8 | . rts                                                                                                           | rts
+032B3C |  move.l $100100, D7                                              result: $100100                                | move.l A4, D7
+032B3E |  move.w $100104, D7                                              result: $100500                                | move.w ($4,A4), D7
+032B42 |  bpl $32b36                                                                                                     | bpl $32b36
+032B36 |  movea.l $100500, A4                                             result: $100500                                | movea.l D7, A4
+032B38 |  movea.l $100500, A0                                             result: $37cba                                 | movea.l (A4), A0
+032B3A |  jsr $37cba                                                                                                     | jsr (A0)
+037CBA | . move.w $1005d0, D0                                             result: $3                                     | move.w ($d0,A4), D0
+037CBE | . movea.l $100584, A0                                            result: $108584                                | movea.l ($84,A4), A0
+037CC2 | . btst $3, $108653                                                                                              | btst D0, ($cf,A0)
+037CC6 | . beq $36eac                                                                                                    | beq $36eac

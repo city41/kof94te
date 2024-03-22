@@ -1,0 +1,12 @@
+{
+  "description": "Dont btst 4 in team select. Hoping this prevents A presses",
+
+  "patches": [
+    {
+      "type": "prom",
+      "description": "clr.b D0",
+      "address": "13746a",
+      "patchAsm": ["clr.b D0", "nop"]
+    }
+  ]
+}

@@ -70,7 +70,6 @@ move.w #272, D2 ; y will be 224 and off screen
 jsr $2MOVE_SPRITE
 
 move.b #0, $P1_NUM_CHOSEN_CHARS
-move.b #0, $LAST_FRAME_START
 move.b #1, $IN_CHAR_SELECT_FLAG
 
 

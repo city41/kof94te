@@ -1,11 +1,3 @@
-; move.b #$f, $108235 ; p1 character one is Terry
-; move.b #$6, $108236 ; p1 character two is Kyo
-; move.b #$12, $108237 ; p1 character three is Ryo
-; move.b #$f, $108435 ; p2 character one is Terry
-; move.b #$f, $108436 ; p2 character two is Terry
-; move.b #$f, $108437 ; p2 character three is Terry
-
-
 ;;;; NOTE: using A5 needs to be done carefully, the main game
 ;;;; expects it when we rts
 move.l A0, D1
@@ -14,24 +6,14 @@ move.l A1, D1
 move.l D1, $STORE_A1      ; store A1 as the game needs it
 
 
-;;;;; CHOOSE CHARACTER IF START IS PRESSED ;;;;;
+;;;;; CHOOSE CHARACTER IF A IS PRESSED ;;;;;
 ; dont let them choose more than 3
 move.b $P1_NUM_CHOSEN_CHARS, D0
 cmpi.b #3, D0
 beq skipChoosingChar
 
-; was start pressed last frame? then ignore. only want unique presses
-move.b $LAST_FRAME_START, D0
-beq checkForCurrentStart
-move.b $10fdac, D0 ; load BIOS_STATCURNT
-move.b D0, $LAST_FRAME_START
-bra skipChoosingChar
-
-
-checkForCurrentStart:
-move.b $10fdac, D0 ; load BIOS_STATCURNT
-move.b D0, $LAST_FRAME_START
-btst #$0, D0 ; is p1 start pressed?
+move.b $10fd97, D0 ; load BIOS_P1CHANGE
+btst #$4, D0 ; is p1 A pressed?
 beq skipChoosingChar ; it's not? not setting a character choice then
 
 ;; figure out the character id based on cursor's location

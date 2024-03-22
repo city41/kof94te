@@ -1,0 +1,369 @@
+032C90 |  move.b $340000.l, D3                                            result: $ffff                                  | move.b $340000.l, D3
+032C96 |  not.b D0                                                        result: $200010                                | not.b D0
+032C98 |  move.b $10b9c4, D1                                              result: $df00                                  | move.b ($39c4,A5), D1
+032C9C |  move.b $10, $10b9c4                                                                                            | move.b D0, ($39c4,A5)
+032CA0 |  move.b $0, $10b9c7                                                                                             | move.b D1, ($39c7,A5)
+032CA4 |  move.b $0, D2                                                   result: $0                                     | move.b D1, D2
+032CA6 |  and.b $10, D1                                                   result: $df00                                  | and.b D0, D1
+032CA8 |  move.b $0, $10b9ca                                                                                             | move.b D1, ($39ca,A5)
+032CAC |  move.b D2, D1                                                   result: $df00                                  | move.b D2, D1
+032CAE |  eor.b $10, D1                                                   result: $df10                                  | eor.b D0, D1
+032CB0 |  and.b $10, D2                                                   result: $0                                     | and.b D1, D2
+032CB2 |  move.b D2, $10b9cc                                                                                             | move.b D2, ($39cc,A5)
+032CB6 |  lea $10b9cf, A0                                                 result: $10b9cf                                | lea ($39cf,A5), A0
+032CBA |  and.b $10, D0                                                   result: $200010                                | and.b D1, D0
+032CBC |  move.b $10b9d0, $10b9cb                                                                                        | move.b ($1,A0), ($39cb,A5)
+032CC2 |  move.b $10b9d1, $10b9d0                                                                                        | move.b ($2,A0), ($1,A0)
+032CC8 |  move.b $10b9d2, $10b9d1                                                                                        | move.b ($3,A0), ($2,A0)
+032CCE |  move.b $10b9d3, $10b9d2                                                                                        | move.b ($4,A0), ($3,A0)
+032CD4 |  move.b $10, $10b9d3                                                                                            | move.b D0, ($4,A0)
+032CD8 |  or.b $10b9d0, D0                                                result: $200010                                | or.b ($1,A0), D0
+032CDC |  or.b $10b9d1, D0                                                result: $200010                                | or.b ($2,A0), D0
+032CE0 |  or.b $10b9d2, D0                                                result: $200010                                | or.b ($3,A0), D0
+032CE4 |  move.b $10, $10b9cf                                                                                            | move.b D0, (A0)
+032CE6 |  lea $10b9d7, A0                                                 result: $10b9d7                                | lea ($39d7,A5), A0
+032CEA |  lea $10b9cd, A1                                                 result: $10b9cd                                | lea ($39cd,A5), A1
+032CEE |  move.b $10b9ca, D0                                              result: $200000                                | move.b ($39ca,A5), D0
+032CF2 |  bsr $32e08                                                                                                     | bsr $32e08
+032E08 | . moveq #$7, D1                                                  result: $7                                     | moveq #$7, D1
+032E0A | . move.b $10b9cb, $10b9cd                                                                                       | move.b (-$2,A1), (A1)
+032E0E | . addq.b #1, (A0)+                                                                                              | addq.b #1, (A0)+
+032E10 | . bne $32e18                                                                                                    | bne $32e18
+032E18 | . rol.b #1, D0                                                   result: $200000                                | rol.b #1, D0
+032E1A | . bcs $32e20                                                                                                    | bcs $32e20
+032E1C | . clr.b $10b9d7                                                                                                 | clr.b (-$1,A0)
+032E20 | . move.b $10b9d7, D5                                             result: $84418545                              | move.b (-$1,A0), D5
+032E24 | . cmp.b $10ba05, D5                                              result: $84418545                              | cmp.b ($3a05,A5), D5
+032E28 | . bls $32e3a                                                                                                    | bls $32e3a
+032E3A | . dbra $7, $32e0e                                                                                               | dbra D1, $32e0e
+032E0E | . addq.b #1, (A0)+                                                                                              | addq.b #1, (A0)+
+032E10 | . bne $32e18                                                                                                    | bne $32e18
+032E18 | . rol.b #1, D0                                                   result: $200000                                | rol.b #1, D0
+032E1A | . bcs $32e20                                                                                                    | bcs $32e20
+032E1C | . clr.b $10b9d8                                                                                                 | clr.b (-$1,A0)
+032E20 | . move.b $10b9d8, D5                                             result: $84418545                              | move.b (-$1,A0), D5
+032E24 | . cmp.b $10ba05, D5                                              result: $84418545                              | cmp.b ($3a05,A5), D5
+032E28 | . bls $32e3a                                                                                                    | bls $32e3a
+032E3A | . dbra $6, $32e0e                                                                                               | dbra D1, $32e0e
+ (loops for 54 instructions)
+032E3E |  rts                                                                                                            | rts
+032CF6 |  move.b $ff, D0                                                  result: $2000ff                                | move.b D3, D0
+032CF8 |  not.b D0                                                        result: $200000                                | not.b D0
+032CFA |  move.b $10b9c5, D1                                              result: $ff00                                  | move.b ($39c5,A5), D1
+032CFE |  move.b $0, $10b9c5                                                                                             | move.b D0, ($39c5,A5)
+032D02 |  move.b $0, $10b9c8                                                                                             | move.b D1, ($39c8,A5)
+032D06 |  move.b $0, D2                                                   result: $0                                     | move.b D1, D2
+032D08 |  and.b $0, D1                                                    result: $ff00                                  | and.b D0, D1
+032D0A |  move.b $0, $10b9e0                                                                                             | move.b D1, ($39e0,A5)
+032D0E |  move.b D2, D1                                                   result: $ff00                                  | move.b D2, D1
+032D10 |  eor.b $0, D1                                                    result: $ff00                                  | eor.b D0, D1
+032D12 |  and.b $0, D2                                                    result: $0                                     | and.b D1, D2
+032D14 |  move.b D2, $10b9e2                                                                                             | move.b D2, ($39e2,A5)
+032D18 |  lea $10b9e5, A0                                                 result: $10b9e5                                | lea ($39e5,A5), A0
+032D1C |  and.b $0, D0                                                    result: $200000                                | and.b D1, D0
+032D1E |  move.b $10b9e6, $10b9e1                                                                                        | move.b ($1,A0), ($39e1,A5)
+032D24 |  move.b $10b9e7, $10b9e6                                                                                        | move.b ($2,A0), ($1,A0)
+032D2A |  move.b $10b9e8, $10b9e7                                                                                        | move.b ($3,A0), ($2,A0)
+032D30 |  move.b $10b9e9, $10b9e8                                                                                        | move.b ($4,A0), ($3,A0)
+032D36 |  move.b $0, $10b9e9                                                                                             | move.b D0, ($4,A0)
+032D3A |  or.b $10b9e6, D0                                                result: $200000                                | or.b ($1,A0), D0
+032D3E |  or.b $10b9e7, D0                                                result: $200000                                | or.b ($2,A0), D0
+032D42 |  or.b $10b9e8, D0                                                result: $200000                                | or.b ($3,A0), D0
+032D46 |  move.b $0, $10b9e5                                                                                             | move.b D0, (A0)
+032D48 |  lea $10b9ed, A0                                                 result: $10b9ed                                | lea ($39ed,A5), A0
+032D4C |  lea $10b9e3, A1                                                 result: $10b9e3                                | lea ($39e3,A5), A1
+032D50 |  move.b $10b9e0, D0                                              result: $200000                                | move.b ($39e0,A5), D0
+032D54 |  bsr $32e08                                                                                                     | bsr $32e08
+032E08 | . moveq #$7, D1                                                  result: $7                                     | moveq #$7, D1
+032E0A | . move.b $10b9e1, $10b9e3                                                                                       | move.b (-$2,A1), (A1)
+ (loops for 72 instructions)
+032E3E |  rts                                                                                                            | rts
+
+
+
+above is input handling (pretty sure)
+
+
+
+032D58 |  clr.b $10ba01                                                                                                  | clr.b ($3a01,A5)
+032D5C |  clr.b $10ba02                                                                                                  | clr.b ($3a02,A5)
+032D60 |  clr.b $10ba03                                                                                                  | clr.b ($3a03,A5)
+032D64 |  move.b $1087e5, D0                                              result: $200001                                | move.b ($7e5,A5), D0
+032D68 |  beq $32d9e                                                                                                     | beq $32d9e
+032D6A |  move $200001, CCR                                                                                              | move D0, CCR
+032D6C |  bcc $32d80                                                                                                     | bcc $32d80
+032D6E |  move.b $10b9ca, $10ba01                                                                                        | move.b ($39ca,A5), ($3a01,A5)
+032D74 |  move.b $10b9cb, $10ba02                                                                                        | move.b ($39cb,A5), ($3a02,A5)
+032D7A |  move.b $10b9cc, $10ba03                                                                                        | move.b ($39cc,A5), ($3a03,A5)
+032D80 |  move $200001, CCR                                                                                              | move D0, CCR
+032D82 |  bvc $32d9c                                                                                                     | bvc $32d9c
+032D9C |  rts                                                                                                            | rts
+0329E2 |  btst #$5, $108785                                                                                              | btst #$5, ($785,A5)
+0329E8 |  beq $329fe                                                                                                     | beq $329fe
+0329FE |  tst.b $108785                                                                                                  | tst.b ($785,A5)
+032A02 |  bpl $32a5c                                                                                                     | bpl $32a5c
+032A5C |  bsr $32f2a                                                                                                     | bsr $32f2a
+032F2A | . tst.b $100000                                                                                                 | tst.b (-$8000,A5)
+032F2E | . bpl $32f38                                                                                                    | bpl $32f38
+032F38 | . rts                                                                                                           | rts
+032A60 |  bsr $32f3a                                                                                                     | bsr $32f3a
+032F3A | . btst #$0, $100000                                                                                             | btst #$0, (-$8000,A5)
+032F40 | . beq $32f4e                                                                                                    | beq $32f4e
+032F4E | . rts                                                                                                           | rts
+032A64 |  bsr $32f50                                                                                                     | bsr $32f50
+032F50 | . btst #$1, $100001                                                                                             | btst #$1, (-$7fff,A5)
+032F56 | . beq $32f6a                                                                                                    | beq $32f6a
+032F6A | . rts                                                                                                           | rts
+032A68 |  bsr $32f6c                                                                                                     | bsr $32f6c
+032F6C | . btst #$7, $100001                                                                                             | btst #$7, (-$7fff,A5)
+032F72 | . beq $32f86                                                                                                    | beq $32f86
+032F86 | . rts                                                                                                           | rts
+032A6C |  bsr $32f88                                                                                                     | bsr $32f88
+032F88 | . btst #$6, $100001                                                                                             | btst #$6, (-$7fff,A5)
+032F8E | . beq $32fb4                                                                                                    | beq $32fb4
+032FB4 | . rts                                                                                                           | rts
+032A70 |  btst #$3, $108785                                                                                              | btst #$3, ($785,A5)
+032A76 |  bne $32a86                                                                                                     | bne $32a86
+032A7A |  jsr $4aafc.l                                                                                                   | jsr $4aafc.l
+04AAFC | . lea $10880a, A1                                                result: $10880a                                | lea ($80a,A5), A1
+04AB00 | . move.w #$707d, D2                                              result: $707d                                  | move.w #$707d, D2
+04AB04 | . swap D2                                                        result: $707d0000                              | swap D2
+04AB06 | . tst.b $10fd82.l                                                                                               | tst.b $10fd82.l
+04AB0C | . beq $4ab4a                                                                                                    | beq $4ab4a
+04AB10 | . cmpi.b #$1, $10fd8f.l                                                                                         | cmpi.b #$1, $10fd8f.l
+04AB18 | . beq $4ab2c                                                                                                    | beq $4ab2c
+04AB1C | . cmpi.b #$3, $10fd8f.l                                                                                         | cmpi.b #$3, $10fd8f.l
+04AB24 | . beq $4ab2c                                                                                                    | beq $4ab2c
+04AB2C | . lea $10fe00.l, A1                                              result: $10fe00                                | lea $10fe00.l, A1
+04AB32 | . tst.w $10fe80.l                                                                                               | tst.w $10fe80.l
+04AB38 | . bne $4ab40                                                                                                    | bne $4ab40
+04AB3A | . lea $d00034.l, A1                                              result: $d00034                                | lea $d00034.l, A1
+04AB40 | . cmpi.b #$1, $10fd83.l                                                                                         | cmpi.b #$1, $10fd83.l
+04AB48 | . bne $4ab50                                                                                                    | bne $4ab50
+04AB4A | . bsr $4ab56                                                                                                    | bsr $4ab56
+04AB56 | .. lea $4abb2                                                                                                   | lea ($5c,PC) ; ($4abb4), A2
+04AB5A | .. move.b $d00034, D0                                            result: $200000                                | move.b (A1), D0
+04AB5C | .. cmpi.b #$2, D0                                                result: $200000                                | cmpi.b #$2, D0
+04AB60 | .. bcc $4ab66                                                                                                   | bcc $4ab66
+04AB62 | .. lea $4aba6                                                                                                   | lea ($44,PC) ; ($4aba8), A2
+04AB66 | .. moveq #$5, D7                                                 result: $5                                     | moveq #$5, D7
+04AB68 | .. move.w (A2)+, D2                                              result: $707d0367                              | move.w (A2)+, D2
+04AB6A | .. move.l $707d0367, $3c0000.l                                                                                  | move.l D2, $3c0000.l
+04AB70 | .. addi.l #$200000, D2                                           result: $709d0367                              | addi.l #$200000, D2
+04AB76 | .. dbra $5, $4ab68                                                                                              | dbra D7, $4ab68
+04AB68 | .. move.w (A2)+, D2                                              result: $709d0368                              | move.w (A2)+, D2
+04AB6A | .. move.l $709d0368, $3c0000.l                                                                                  | move.l D2, $3c0000.l
+04AB70 | .. addi.l #$200000, D2                                           result: $70bd0368                              | addi.l #$200000, D2
+04AB76 | .. dbra $4, $4ab68                                                                                              | dbra D7, $4ab68
+ (loops for 16 instructions)
+04AB7A |  move.b $d00034, D0                                              result: $200000                                | move.b (A1), D0
+04AB7C |  andi.w #$ff, D0                                                 result: $200000                                | andi.w #$ff, D0
+04AB80 |  move.w $0, D1                                                   result: $0                                     | move.w D0, D1
+04AB82 |  lsr.w #4, D1                                                    result: $0                                     | lsr.w #4, D1
+04AB84 |  addi.w #$370, D1                                                result: $370                                   | addi.w #$370, D1
+04AB88 |  move.w $370, D2                                                 result: $713d0370                              | move.w D1, D2
+04AB8A |  move.l $713d0370, $3c0000.l                                                                                    | move.l D2, $3c0000.l
+04AB90 |  addi.l #$200000, D2                                             result: $715d0370                              | addi.l #$200000, D2
+04AB96 |  andi.w #$f, D0                                                  result: $200000                                | andi.w #$f, D0
+04AB9A |  addi.w #$370, D0                                                result: $200370                                | addi.w #$370, D0
+04AB9E |  move.w $370, D2                                                 result: $715d0370                              | move.w D0, D2
+04ABA0 |  move.l $715d0370, $3c0000.l                                                                                    | move.l D2, $3c0000.l
+04ABA6 |  rts                                                                                                            | rts
+04AB4E |  addq.l #1, A1                                                   result: $d00035                                | addq.l #1, A1
+04AB50 |  move.w #$73bd, D2                                               result: $715d73bd                              | move.w #$73bd, D2
+04AB54 |  swap D2                                                         result: $73bd715d                              | swap D2
+04AB56 |  lea $4abb2                                                                                                     | lea ($5c,PC) ; ($4abb4), A2
+04AB5A |  move.b $d00035, D0                                              result: $200300                                | move.b (A1), D0
+04AB5C |  cmpi.b #$2, D0                                                  result: $200300                                | cmpi.b #$2, D0
+04AB60 |  bcc $4ab66                                                                                                     | bcc $4ab66
+04AB62 |  lea $4aba6                                                                                                     | lea ($44,PC) ; ($4aba8), A2
+04AB66 |  moveq #$5, D7                                                                                                  | moveq #$5, D7
+ (loops for 24 instructions)
+04AB7A |  move.b $d00035, D0                                              result: $200300                                | move.b (A1), D0
+04AB7C |  andi.w #$ff, D0                                                 result: $200000                                | andi.w #$ff, D0
+04AB80 |  move.w $0, D1                                                   result: $0                                     | move.w D0, D1
+04AB82 |  lsr.w #4, D1                                                    result: $0                                     | lsr.w #4, D1
+04AB84 |  addi.w #$370, D1                                                result: $370                                   | addi.w #$370, D1
+04AB88 |  move.w $370, D2                                                 result: $747d0370                              | move.w D1, D2
+04AB8A |  move.l $747d0370, $3c0000.l                                                                                    | move.l D2, $3c0000.l
+04AB90 |  addi.l #$200000, D2                                             result: $749d0370                              | addi.l #$200000, D2
+04AB96 |  andi.w #$f, D0                                                  result: $200000                                | andi.w #$f, D0
+04AB9A |  addi.w #$370, D0                                                result: $200370                                | addi.w #$370, D0
+04AB9E |  move.w $370, D2                                                 result: $749d0370                              | move.w D0, D2
+04ABA0 |  move.l $749d0370, $3c0000.l                                                                                    | move.l D2, $3c0000.l
+04ABA6 |  rts                                                                                                            | rts
+032A80 |  jsr $13b2.l                                                                                                    | jsr $13b2.l
+0013B2 | . cmpi.b #$2, $10fd8f.l                                                                                         | cmpi.b #$2, $10fd8f.l
+0013BA | . bcs $1416                                                                                                     | bcs $1416
+0013BE | . tst.b $10fd82.l                                                                                               | tst.b $10fd82.l
+0013C4 | . beq $1416                                                                                                     | beq $1416
+0013C8 | . move.w #$10, D0                                                result: $200010                                | move.w #$10, D0
+0013CC | . move.w #$1b, D1                                                result: $1b                                    | move.w #$1b, D1
+0013D0 | . jsr $5fde.l                                                                                                   | jsr $5fde.l
+005FDE | .. lsl.w #5, D0                                                  result: $200200                                | lsl.w #5, D0
+005FE0 | .. add.w $1b, D0                                                 result: $20021b                                | add.w D1, D0
+005FE2 | .. addi.w #$7002, D0                                             result: $20721d                                | addi.w #$7002, D0
+005FE6 | .. swap D0                                                       result: $721d0020                              | swap D0
+005FE8 | .. rts                                                                                                          | rts
+0013D6 | . move.w #$300, D0                                               result: $721d0300                              | move.w #$300, D0
+0013DA | . lea $4f8fa.l, A0                                               result: $4f8fa                                 | lea $4f8fa.l, A0
+0013E0 | . moveq #$4, D1                                                  result: $4                                     | moveq #$4, D1
+0013E2 | . move.b (A0)+, D0                                               result: $721d0380                              | move.b (A0)+, D0
+0013E4 | . move.l $721d0380, $3c0000.l                                                                                   | move.l D0, $3c0000.l
+0013EA | . addi.l #$200000, D0                                            result: $723d0380                              | addi.l #$200000, D0
+0013F0 | . dbra $4, $13e2                                                                                                | dbra D1, $13e2
+0013E2 | . move.b (A0)+, D0                                               result: $723d0381                              | move.b (A0)+, D0
+0013E4 | . move.l $723d0381, $3c0000.l                                                                                   | move.l D0, $3c0000.l
+0013EA | . addi.l #$200000, D0                                            result: $725d0381                              | addi.l #$200000, D0
+0013F0 | . dbra $3, $13e2                                                                                                | dbra D1, $13e2
+ (loops for 12 instructions)
+0013F4 |  move.w #$16, D0                                                 result: $72bd0016                              | move.w #$16, D0
+0013F8 |  move.w #$1b, D1                                                 result: $1b                                    | move.w #$1b, D1
+0013FC |  jsr $5fde.l                                                                                                    | jsr $5fde.l
+005FDE | . lsl.w #5, D0                                                   result: $72bd02c0                              | lsl.w #5, D0
+005FE0 | . add.w $1b, D0                                                  result: $72bd02db                              | add.w D1, D0
+005FE2 | . addi.w #$7002, D0                                              result: $72bd72dd                              | addi.w #$7002, D0
+005FE6 | . swap D0                                                        result: $72dd72bd                              | swap D0
+005FE8 | . rts                                                                                                           | rts
+001402 |  clr.w D0                                                        result: $72dd0000                              | clr.w D0
+001404 |  move.b $10fd8e.l, D0                                            result: $72dd0003                              | move.b $10fd8e.l, D0
+00140A |  addq.b #1, D0                                                   result: $72dd0004                              | addq.b #1, D0
+00140C |  addi.w #$370, D0                                                result: $72dd0374                              | addi.w #$370, D0
+001410 |  move.l $72dd0374, $3c0000.l                                                                                    | move.l D0, $3c0000.l
+001416 |  rts                                                                                                            | rts
+032A86 |  bsr $32b28                                                                                                     | bsr $32b28
+032B28 | . lea $108584, A4                                                result: $108584                                | lea ($584,A5), A4
+032B2C | . movea.l $108584, A0                                            result: $37046                                 | movea.l (A4), A0
+032B2E | . jsr $37046                                                                                                    | jsr (A0)
+037046 | .. bsr $371fe                                                                                                   | bsr $371fe
+0371FE | ... movea.l $1087ea, A6                                          result: $10b9ca                                | movea.l ($7ea,A5), A6
+037202 | ... btst #$5, $100000                                                                                           | btst #$5, (-$8000,A5)
+037208 | ... beq $3720e                                                                                                  | beq $3720e
+03720E | ... lea $108100, A4                                              result: $108100                                | lea ($100,A5), A4
+037212 | ... movea.l $108100, A0                                          result: $37274                                 | movea.l (A4), A0
+037214 | ... jsr $37274                                                                                                  | jsr (A0)
+037274 | .... btst #$0, $1081cf                                                                                          | btst #$0, ($cf,A4)
+03727A | .... bne $372c6                                                                                                 | bne $372c6
+03727C | .... tst.b $108230                                                                                              | tst.b ($130,A4)
+037280 | .... bpl $37298                                                                                                 | bpl $37298
+037282 | .... move.w #$43, $108172                                                                                       | move.w #$43, ($72,A4)
+037288 | .... btst #$0, $108230                                                                                          | btst #$0, ($130,A4)
+03728E | .... bne $372b0                                                                                                 | bne $372b0
+0372B0 | .... bsr $372da                                                                                                 | bsr $372da
+0372DA | ..... move.b $108230, D0                                         result: $72dd0381                              | move.b ($130,A4), D0
+0372DE | ..... andi.b #$7f, D0                                            result: $72dd0301                              | andi.b #$7f, D0
+0372E2 | ..... addq.b #1, D0                                              result: $72dd0302                              | addq.b #1, D0
+0372E4 | ..... btst $72dd0302, $1087e6                                                                                   | btst D0, ($7e6,A5)
+0372E8 | ..... bne $37310                                                                                                | bne $37310
+0372EA | ..... move.b $10b9cb, D0                                         result: $72dd0300                              | move.b ($1,A6), D0
+0372EE | ..... andi.w #$f, D0                                             result: $72dd0000                              | andi.w #$f, D0
+0372F2 | ..... lea $37314                                                                                                | lea ($22,PC) ; ($37316), A0
+0372F6 | ..... nop                                                                                                       | nop
+0372F8 | ..... moveq #$0, D1                                              result: $0                                     | moveq #$0, D1
+0372FA | ..... move.b $37316, D1                                          result: $ff                                    | move.b (A0,D0.w), D1
+0372FE | ..... bmi $37310                                                                                                | bmi $37310
+037310 | ..... bsr $373f6                                                                                                | bsr $373f6
+0373F6 | ...... lea $53538.l, A0                                          result: $53538                                 | lea $53538.l, A0
+0373FC | ...... btst #$0, $108230                                                                                        | btst #$0, ($130,A4)
+037402 | ...... bne $3740a                                                                                               | bne $3740a
+03740A | ...... moveq #$0, D0                                             result: $0                                     | moveq #$0, D0
+03740C | ...... move.b $108231, D0                                        result: $5                                     | move.b ($131,A4), D0
+037410 | ...... add.w $5, D0                                              result: $a                                     | add.w D0, D0
+037412 | ...... add.w $a, D0                                              result: $14                                    | add.w D0, D0
+037414 | ...... movea.l $5354c, A0                                        result: $53580                                 | movea.l (A0,D0.w), A0
+037418 | ...... move.b #$ff, $10c6fe                                                                                     | move.b #$ff, ($46fe,A5)
+03741E | ...... jsr $6086.w                                                                                              | jsr $6086.w
+006086 | ....... move.b $53580, D0                                        result: $70                                    | move.b (A0), D0
+006088 | ....... move.b $70, -(A7)                                                                                       | move.b D0, -(A7)
+00608A | ....... move.w (A7)+, D0                                         result: $700f                                  | move.w (A7)+, D0
+00608C | ....... move.b $53581, D0                                        result: $7067                                  | move.b ($1,A0), D0
+006090 | ....... move.w $7067, D2                                         result: $749d7067                              | move.w D0, D2
+006092 | ....... addq.l #2, A0                                            result: $53582                                 | addq.l #2, A0
+006094 | ....... tst.b $10c6fe                                                                                           | tst.b ($46fe,A5)
+006098 | ....... bmi $60b4                                                                                               | bmi $60b4
+0060B4 | ....... move.b (A0)+, D0                                         result: $7034                                  | move.b (A0)+, D0
+0060B6 | ....... move.b $34, -(A7)                                                                                       | move.b D0, -(A7)
+0060B8 | ....... move.w (A7)+, D0                                         result: $340f                                  | move.w (A7)+, D0
+0060BA | ....... clr.b D0                                                 result: $3400                                  | clr.b D0
+0060BC | ....... move.w $7067, $10c6fa                                                                                   | move.w D2, ($46fa,A5)
+0060C0 | ....... move.w $3400, $10c6fc                                                                                   | move.w D0, ($46fc,A5)
+0060C4 | ....... moveq #$0, D1                                            result: $0                                     | moveq #$0, D1
+0060C6 | ....... move.b (A0)+, D1                                         result: $90                                    | move.b (A0)+, D1
+0060C8 | ....... cmpi.b #$d, D1                                           result: $90                                    | cmpi.b #$d, D1
+0060CC | ....... bne $60e2                                                                                               | bne $60e2
+0060E2 | ....... cmpi.b #-$2, D1                                          result: $90                                    | cmpi.b #-$2, D1
+0060E6 | ....... beq $6086                                                                                               | beq $6086
+0060E8 | ....... cmpi.b #-$1, D1                                          result: $90                                    | cmpi.b #-$1, D1
+0060EC | ....... beq $6102                                                                                               | beq $6102
+0060EE | ....... or.w $3400, D1                                           result: $3490                                  | or.w D0, D1
+0060F0 | ....... swap D2                                                  result: $7067749d                              | swap D2
+0060F2 | ....... move.w $3490, D2                                         result: $70673490                              | move.w D1, D2
+0060F4 | ....... move.l $70673490, $3c0000.l                                                                             | move.l D2, $3c0000.l
+0060FA | ....... swap D2                                                  result: $34907067                              | swap D2
+0060FC | ....... addi.w #$20, D2                                          result: $34907087                              | addi.w #$20, D2
+006100 | ....... bra $60c4                                                                                               | bra $60c4
+0060C4 | ....... moveq #$0, D1                                            result: $0                                     | moveq #$0, D1
+0060C6 | ....... move.b (A0)+, D1                                         result: $91                                    | move.b (A0)+, D1
+0060C8 | ....... cmpi.b #$d, D1                                           result: $91                                    | cmpi.b #$d, D1
+0060CC | ....... bne $60e2                                                                                               | bne $60e2
+0060E2 | ....... cmpi.b #-$2, D1                                          result: $91                                    | cmpi.b #-$2, D1
+0060E6 | ....... beq $6086                                                                                               | beq $6086
+0060E8 | ....... cmpi.b #-$1, D1                                          result: $91                                    | cmpi.b #-$1, D1
+0060EC | ....... beq $6102                                                                                               | beq $6102
+0060EE | ....... or.w $3400, D1                                           result: $3491                                  | or.w D0, D1
+0060F0 | ....... swap D2                                                  result: $70873490                              | swap D2
+0060F2 | ....... move.w $3491, D2                                         result: $70873491                              | move.w D1, D2
+0060F4 | ....... move.l $70873491, $3c0000.l                                                                             | move.l D2, $3c0000.l
+0060FA | ....... swap D2                                                  result: $34917087                              | swap D2
+0060FC | ....... addi.w #$20, D2                                          result: $349170a7                              | addi.w #$20, D2
+006100 | ....... bra $60c4                                                                                               | bra $60c4
+ (loops for 96 instructions)
+006086 |  move.b $5358c, D0                                               result: $3470                                  | move.b (A0), D0
+006088 |  move.b $70, -(A7)                                                                                              | move.b D0, -(A7)
+00608A |  move.w (A7)+, D0                                                result: $700f                                  | move.w (A7)+, D0
+00608C |  move.b $5358d, D0                                               result: $7068                                  | move.b ($1,A0), D0
+006090 |  move.w $7068, D2                                                result: $34977068                              | move.w D0, D2
+006092 |  addq.l #2, A0                                                   result: $5358e                                 | addq.l #2, A0
+006094 |  tst.b $10c6fe                                                                                                  | tst.b ($46fe,A5)
+006098 |  bmi $60b4                                                                                                      | bmi $60b4
+0060B4 |  move.b (A0)+, D0                                                result: $7034                                  | move.b (A0)+, D0
+0060B6 |  move.b $34, -(A7)                                                                                              | move.b D0, -(A7)
+0060B8 |  move.w (A7)+, D0                                                result: $340f                                  | move.w (A7)+, D0
+0060BA |  clr.b D0                                                        result: $3400                                  | clr.b D0
+0060BC |  move.w $7068, $10c6fa                                                                                          | move.w D2, ($46fa,A5)
+0060C0 |  move.w $3400, $10c6fc                                                                                          | move.w D0, ($46fc,A5)
+ (loops for 128 instructions)
+006102 |  addq.w #1, $10c6fa                                                                                             | addq.w #1, ($46fa,A5)
+006106 |  rts                                                                                                            | rts
+037422 |  rts                                                                                                            | rts
+037314 |  rts                                                                                                            | rts
+0372B4 |  bsr $37424                                                                                                     | bsr $37424
+037424 | . move.b $108230, D0                                             result: $3481                                  | move.b ($130,A4), D0
+037428 | . andi.b #$7f, D0                                                result: $3401                                  | andi.b #$7f, D0
+03742C | . addq.b #1, D0                                                  result: $3402                                  | addq.b #1, D0
+03742E | . btst $3402, $1087e6                                                                                           | btst D0, ($7e6,A5)
+037432 | . bne $3745a                                                                                                    | bne $3745a
+037434 | . tst.b $108230                                                                                                 | tst.b ($130,A4)
+037438 | . bpl $3744a                                                                                                    | bpl $3744a
+03743C | . movea.l $108184, A0                                            result: $108584                                | movea.l ($84,A4), A0
+037440 | . cmpi.w #$141e, $108654                                                                                        | cmpi.w #$141e, ($d0,A0)
+037446 | . bgt $37462                                                                                                    | bgt $37462
+03744A | . bsr $37464                                                                                                    | bsr $37464
+037464 | .. moveq #$0, D1                                                 result: $0                                     | moveq #$0, D1
+037466 | .. move.b $10b9cb, D0                                            result: $3400                                  | move.b ($1,A6), D0
+03746A | .. btst #$4, D0                                                  result: $3400                                  | btst #$4, D0
+03746E | .. beq $37476                                                                                                   | beq $37476
+037476 | .. addq.w #1, D1                                                 result: $1                                     | addq.w #1, D1
+037478 | .. btst #$5, D0                                                  result: $3400                                  | btst #$5, D0
+03747C | .. beq $37484                                                                                                   | beq $37484
+037484 | .. addq.w #1, D1                                                 result: $2                                     | addq.w #1, D1
+037486 | .. btst #$6, D0                                                  result: $3400                                  | btst #$6, D0
+03748A | .. beq $37492                                                                                                   | beq $37492
+037492 | .. addq.w #1, D1                                                 result: $3                                     | addq.w #1, D1
+037494 | .. btst #$7, D0                                                  result: $3400                                  | btst #$7, D0
+037498 | .. beq $374a0                                                                                                   | beq $374a0
+0374A0 | .. moveq #$0, D0                                                 result: $0                                     | moveq #$0, D0
+0374A2 | .. rts                                                                                                          | rts
+03744E | . beq $37462                                                                                                    | beq $37462
+037462 | . rts                                                                                                           | rts
+0372B8 |  bra $36eac                                                                                                     | bra $36eac
