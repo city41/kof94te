@@ -8,7 +8,7 @@
     "restore": "cp kof94.zip $MAME_ROM_DIR",
     "type-check": "yarn tsc --noemit",
     "to-neosd": "bash scripts/toneosd.sh",
-    "mame": "mame -w -nofilter -nomouse kof94",
+    "mame": "mame -w -nofilter -nomouse -sound none kof94",
     "run-srom-crom": "NODE_OPTIONS='--loader ts-node/esm' yarn sromcrom -i resources/resources.json"
   },
   "dependencies": {
