@@ -17,57 +17,30 @@ move.w #0, D5              ; offset into tile data
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
-; load the p1 cursor, black border, onto the screen
-move.w #$P1_CURSOR_BLACK_BORDER_SI, D6
-lea $2P1_CURSOR_BLACK_BORDER_IMAGE, A6
+; load the p1 cursor, onto the screen
+; it loads into the correct spot, no need to move it
+move.w #$P1_CURSOR_SI, D6
+lea $2P1_CURSOR_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
-
-; move the cursor into place
-move.w #$P1_CURSOR_BLACK_BORDER_SI, D0
-move.w #8, D1
-move.w #441, D2 ; y will be 55 when on screen
-jsr $2MOVE_SPRITE
-
-; load the p1 cursor, white border, onto the screen
-move.w #$P1_CURSOR_WHITE_BORDER_SI, D6
-lea $2P1_CURSOR_WHITE_BORDER_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; move the cursor off screen
-move.w #$P1_CURSOR_WHITE_BORDER_SI, D0
-move.w #8, D1
-move.w #272, D2 ; y will be 224 and off screen
-jsr $2MOVE_SPRITE
 
 ; initialize cursor's location
 move.w #0, $P1_CURSOR_X
 move.w #0, $P1_CURSOR_Y
 
-; load the p2 cpu cursor, black border, onto the screen
-move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D6
-lea $2P2_CPU_CURSOR_BLACK_BORDER_IMAGE, A6
+; load the cpu cursor, left side, onto the screen
+; it loads itself off screen, no need to move it
+move.w #$P2_CURSOR_SI, D6
+lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
-; move the cpu cursor off screen
-move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D0
-move.w #8, D1
-move.w #272, D2 ; y will be 224 and off screen
-jsr $2MOVE_SPRITE
-
-; load the p2 cpu cursor, white border, onto the screen
-move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D6
-lea $2P2_CPU_CURSOR_WHITE_BORDER_IMAGE, A6
+; load the cpu cursor, right side, onto the screen
+; it loads itself off screen, no need to move it
+move.w #$P2_CURSOR_SI + 1, D6
+lea $2CPU_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
-
-; move the cpu cursor off screen
-move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D0
-move.w #8, D1
-move.w #272, D2 ; y will be 224 and off screen
-jsr $2MOVE_SPRITE
 
 move.b #0, $P1_NUM_CHOSEN_CHARS
 move.b #1, $IN_CHAR_SELECT_FLAG

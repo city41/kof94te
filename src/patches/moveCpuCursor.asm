@@ -10,29 +10,23 @@ lea $2TEAM_INDEX_TO_XY, A0
 ; jump ahead into the table based on which team is focused
 adda.w D0, A0
 
-; load up the parameters for moveSprite
-move.w (A0)+, D1 ; X 
-move.w (A0)+, D2 ; Y
+; load X/Y 
+move.w (A0)+, D6 ; X 
+move.w (A0)+, D7 ; Y
 
-btst #2, D5
-beq blackCursor
-move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D0
-bra moveCursor
-blackCursor:
-move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D0
-moveCursor:
+; LEFT SIDE
+; load up the parameters for moveSprite
+move.w D6, D1 ; X 
+move.w D7, D2 ; Y
+
+move.w #$P2_CURSOR_SI, D0
 jsr $2MOVE_SPRITE
 
-;; now hide the one that should not be on screen
-move.w #0, D1 ; X
-move.w #272, D2 ; Y, which will be 224px, putting it off screen
-btst #2, D5
-beq hideWhiteCursor
-move.w #$P2_CPU_CURSOR_BLACK_BORDER_SI, D0 ; load the cursor's sprite index
-bra hideCursor
-hideWhiteCursor:
-move.w #$P2_CPU_CURSOR_WHITE_BORDER_SI, D0 ; load the cursor's sprite index
-hideCursor:
+; RIGHT SIDE
+move.w D6, D1 ; X 
+move.w D7, D2 ; Y
+addi.w #80, D1  ; the ride side is 80px over
+move.w #$P2_CURSOR_SI + 1, D0
 jsr $2MOVE_SPRITE
 
 rts

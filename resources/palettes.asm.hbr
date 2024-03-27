@@ -1,6 +1,6 @@
 dc.w {{count palettes}} ; number of palettes
 {{#each palettes as |palette|}}
-;;;;; palette {{@index}} ;;;;;
+;;;;; palette {{hex @index}} ({{@index}}) ;;;;;
 {{#each palette as |num|}}
 dc.w ${{hex num}}
 {{/each}}

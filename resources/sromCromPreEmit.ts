@@ -9,10 +9,6 @@ type SromCromTile = {
    * Which palette this tile uses
    */
   paletteIndex: number;
-  /**
-   * If set, this tile has an auto animation associated with it
-   */
-  autoAnimation?: 4 | 8;
 
   flipH?: boolean;
   flipV?: boolean;
@@ -21,6 +17,7 @@ type SromCromTile = {
 type SromCromCromImage = {
   name: string;
   imageFile: string;
+  autoAnimation?: 4 | 8;
   tiles: SromCromTile[][];
   custom: {
     x: number;
@@ -47,6 +44,7 @@ type AsmCromImage = {
 };
 
 function createAssemblyTileSCB1(
+  cromImage: SromCromCromImage,
   tile: SromCromTile,
   startingPaletteIndex: number
 ): AsmCromTileSCB1 {
@@ -54,12 +52,13 @@ function createAssemblyTileSCB1(
 
   // lsb of tile index
   const evenWord = destIndex & 0xffff;
+  const autoAnim = cromImage.autoAnimation ?? 0;
 
   // [palette] | [tile msb] | [auto anim] | [vert flip] | [hor flip]
   const palette = (tile.paletteIndex + startingPaletteIndex) << 8;
   const msb = ((destIndex & 0xf0000) >> 16) << 4;
 
-  const oddWord = palette | msb;
+  const oddWord = palette | autoAnim | msb;
 
   return {
     evenWord,
@@ -93,11 +92,18 @@ function createAsmColumn(
 
   for (let y = 0; y < sromCromColumn.length; ++y) {
     const tile = sromCromColumn[y];
-    scb1.push(createAssemblyTileSCB1(tile, startingPaletteIndex));
+    scb1.push(createAssemblyTileSCB1(cromImage, tile, startingPaletteIndex));
   }
 
+  let sticky = false;
+
   // TODO: such a hack, make every other column for avatars sticky
-  const sticky = cromImage.name === "avatars" && tx % 2 == 1;
+  if (
+    (cromImage.name !== "avatars" && tx > 0) ||
+    (cromImage.name === "avatars" && tx % 2 === 1)
+  ) {
+    sticky = true;
+  }
 
   const scb3 = createAssemblyTileSBC3(
     sromCromColumn,

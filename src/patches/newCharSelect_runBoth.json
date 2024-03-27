@@ -5,6 +5,9 @@
     "end": "bfff0"
   },
   "symbols": {
+    "PALETTE_WHITE": "7fff",
+    "PALETTE_BLACK": "8000",
+    "CURSOR_PALETTE_WHITEBLACK_ADDRESS": "40048e",
     "CPU_RANDOM_SELECT_COUNTER": "1083d3",
     "P1_CHOSEN_CHAR0": "10f7f5",
     "P1_CHOSEN_CHAR1": "10f7f6",
@@ -17,12 +20,10 @@
     "P1_CURSOR_Y": "10f804",
     "STORE_A0": "10f806",
     "STORE_A1": "10f816",
-    "GRID_IMAGE_SI": "14c",
-    "P1_CURSOR_BLACK_BORDER_SI": "160",
-    "P1_CURSOR_WHITE_BORDER_SI": "163",
-    "P2_CPU_CURSOR_BLACK_BORDER_SI": "166",
-    "P2_CPU_CURSOR_WHITE_BORDER_SI": "16d",
-    "T1C1_SI": "174"
+    "GRID_IMAGE_SI": "15b",
+    "P1_CURSOR_SI": "16d",
+    "P2_CURSOR_SI": "16f",
+    "T1C1_SI": "171"
   },
   "patches": [
     {
@@ -61,31 +62,31 @@
     },
     {
       "type": "prom",
-      "description": "p1 cursor, black border, image",
+      "description": "p1 cursor, image",
       "subroutine": true,
-      "symbol": "P1_CURSOR_BLACK_BORDER_IMAGE",
-      "patchAsm": "p1Cursor_blackBorder.asm"
+      "symbol": "P1_CURSOR_IMAGE",
+      "patchAsm": "p1_cursor.asm"
     },
     {
       "type": "prom",
-      "description": "p1 cursor, white border, image",
+      "description": "p2 cursor, image",
       "subroutine": true,
-      "symbol": "P1_CURSOR_WHITE_BORDER_IMAGE",
-      "patchAsm": "p1Cursor_whiteBorder.asm"
+      "symbol": "P2_CURSOR_IMAGE",
+      "patchAsm": "p2_cursor.asm"
     },
     {
       "type": "prom",
-      "description": "p2 cpu cursor, black border, image",
+      "description": "cpu cursor, left, image",
       "subroutine": true,
-      "symbol": "P2_CPU_CURSOR_BLACK_BORDER_IMAGE",
-      "patchAsm": "p2CpuCursor_blackBorder.asm"
+      "symbol": "CPU_CURSOR_LEFT_IMAGE",
+      "patchAsm": "com_cursor_left.asm"
     },
     {
       "type": "prom",
-      "description": "p2 cpu cursor, white border, image",
+      "description": "cpu cursor, right, image",
       "subroutine": true,
-      "symbol": "P2_CPU_CURSOR_WHITE_BORDER_IMAGE",
-      "patchAsm": "p2CpuCursor_whiteBorder.asm"
+      "symbol": "CPU_CURSOR_RIGHT_IMAGE",
+      "patchAsm": "com_cursor_right.asm"
     },
     {
       "type": "prom",

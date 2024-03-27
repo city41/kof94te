@@ -46,32 +46,10 @@ move.b D5, $CHAR_SELECT_COUNTER
 ;;;; load the common values for MOVE_CURSOR that work for both
 ;;;; the black and white cursor
 move.b $10fd97, D0        ; load BIOS_P1CHANGE
-; move.b #$a, D0            ; simulate right and down being pressed
 lea $P1_CURSOR_X, A0      ; pointer to cursor X
 lea $P1_CURSOR_Y, A1      ; pointer to cursor Y
-
-;;;; now show the white or black cursor, depending on if the counter
-;;;; is odd or not
-btst #2, D5
-beq blackCursor
-move.w #$P1_CURSOR_WHITE_BORDER_SI, D1 ; load the cursor's sprite index
-bra moveCursor
-blackCursor:
-move.w #$P1_CURSOR_BLACK_BORDER_SI, D1 ; load the cursor's sprite index
-moveCursor:
+move.w #$P1_CURSOR_SI, D1 ; load the cursor's sprite index
 jsr $2MOVE_CURSOR
-
-;;;; now hide the one that should not be on screen
-move.w #0, D1 ; X
-move.w #272, D2 ; Y, which will be 224px, putting it off screen
-btst #2, D5
-beq hideWhiteCursor
-move.w #$P1_CURSOR_BLACK_BORDER_SI, D0 ; load the cursor's sprite index
-bra hideCursor
-hideWhiteCursor:
-move.w #$P1_CURSOR_WHITE_BORDER_SI, D0 ; load the cursor's sprite index
-hideCursor:
-jsr $2MOVE_SPRITE
 
 ;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
 move.b $P1_NUM_CHOSEN_CHARS, D0

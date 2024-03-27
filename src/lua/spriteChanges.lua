@@ -18,7 +18,7 @@ SCB3 = 0x8200
 SCB4 = 0x8400
 VRAM_SIZE = 0x8600
 
-SPRITE_INDEX = 332
+SPRITE_INDEX = 367
 
 function getSpriteControlBlock()
 	if next_vram_index < FIX_LAYER then
