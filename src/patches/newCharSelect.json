@@ -4,7 +4,41 @@
     "start": "97000",
     "end": "bfff0"
   },
+  "symbols": {
+    "PALETTE_WHITE": "7fff",
+    "PALETTE_BLACK": "8000",
+    "CURSOR_PALETTE_WHITEBLACK_ADDRESS": "40048e",
+    "CPU_RANDOM_SELECT_COUNTER": "1083d3",
+    "P1_CHOSEN_CHAR0": "10f7f5",
+    "P1_CHOSEN_CHAR1": "10f7f6",
+    "P1_CHOSEN_CHAR2": "10f7f7",
+    "P1_NUM_CHOSEN_CHARS": "10f7fa",
+    "READY_TO_EXIT_CHAR_SELECT": "10f7fc",
+    "CHAR_SELECT_COUNTER": "10f7fe",
+    "IN_CHAR_SELECT_FLAG": "10f800",
+    "P1_CURSOR_X": "10f802",
+    "P1_CURSOR_Y": "10f804",
+    "STORE_A0": "10f806",
+    "STORE_A1": "10f816",
+    "GRID_IMAGE_SI": "15b",
+    "P1_CURSOR_SI": "16d",
+    "P2_CURSOR_SI": "16f",
+    "T1C1_SI": "171"
+  },
   "patches": [
+    {
+      "type": "prom",
+      "string": true,
+      "value": "HEIDERN RALF    CLARK   ATHENA  KENSOU  CHIN    KYO     BENIMARUGORO    HEAVY D LUCKY   BRIAN   KIM     CHANG   CHOI    TERRY   ANDY    JOE     RYO     ROBERT  TAKUMA  YURI    MAI     KING    ",
+      "symbol": "CHAR_NAMES_TABLE"
+    },
+    {
+      "type": "prom",
+      "description": "position in grid to character id map",
+      "subroutine": true,
+      "symbol": "GRID_TO_CHARACTER_ID",
+      "patchAsm": "positionInGridToCharacterId.asm"
+    },
     {
       "type": "prom",
       "description": "palettes",
@@ -14,24 +48,45 @@
     },
     {
       "type": "prom",
-      "description": "bg_oceans image",
-      "subroutine": true,
-      "symbol": "BG_OCEANS_IMAGE",
-      "patchAsm": "bg_oceans.asm"
-    },
-    {
-      "type": "prom",
-      "description": "logo_countries image",
-      "subroutine": true,
-      "symbol": "LOGO_COUNTRIES_IMAGE",
-      "patchAsm": "logo_countries.asm"
-    },
-    {
-      "type": "prom",
       "description": "character_grid image",
       "subroutine": true,
       "symbol": "CHARACTER_GRID_IMAGE",
       "patchAsm": "character_grid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "avatars image",
+      "subroutine": true,
+      "symbol": "AVATARS_IMAGE",
+      "patchAsm": "avatars.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, image",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_IMAGE",
+      "patchAsm": "p1_cursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, image",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_IMAGE",
+      "patchAsm": "p2_cursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, left, image",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_LEFT_IMAGE",
+      "patchAsm": "com_cursor_left.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, right, image",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_RIGHT_IMAGE",
+      "patchAsm": "com_cursor_right.asm"
     },
     {
       "type": "prom",
@@ -49,10 +104,52 @@
     },
     {
       "type": "prom",
+      "description": "move sprite routine",
+      "subroutine": true,
+      "symbol": "MOVE_SPRITE",
+      "patchAsm": "moveSprite.asm"
+    },
+    {
+      "type": "prom",
+      "description": "map from team index on OG team select to XY for cpu cursor",
+      "subroutine": true,
+      "symbol": "TEAM_INDEX_TO_XY",
+      "patchAsm": "teamSelectIndexToXY.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cpu cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CPU_CURSOR",
+      "patchAsm": "moveCpuCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CURSOR",
+      "patchAsm": "moveCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render currently focused character name",
+      "subroutine": true,
+      "symbol": "RENDER_CUR_FOCUSED_CHAR_NAME",
+      "patchAsm": "renderCurFocusedCharName.asm"
+    },
+    {
+      "type": "prom",
       "description": "truncate sprites routine",
       "subroutine": true,
       "symbol": "TRUNCATE_SPRITES_ROUTINE",
       "patchAsm": "truncateSpritesRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear p1 char name",
+      "subroutine": true,
+      "symbol": "CLEAR_FIX",
+      "patchAsm": "clearFix.asm"
     },
     {
       "type": "prom",
@@ -77,9 +174,235 @@
     },
     {
       "type": "prom",
-      "description": "jump to new char select instead of 36e66",
-      "address": "13b9dc",
-      "patchAsm": ["move.l #$2CHAR_SELECT_INIT_ROUTINE, $584(A5)"]
+      "descrition": "jump to char init after team init is done",
+      "address": "13703c",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_INIT_ROUTINE",
+        "move.l #$37046, $108584",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "137042",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "13369c",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $336a6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $337a6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1336a2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "1337cc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $337d6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $338d6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1337d2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a28",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $33a32, A0",
+        "adda.w D2, A0",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $33b32, A0 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "133a2e",
+      "patchAsm": ["nop"]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "skip team select counter decrement",
+      "address": "13705a",
+      "patchAsm": ["subq.b #0, $655(a5)"]
+    },
+    {
+      "type": "prom",
+      "description": "Run char select soon after vblank ack",
+      "address": "132be4",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what got clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne skipCharSelectMain",
+        "jsr $2LOAD_P_A_L_E_T_T_E_S",
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
+        "skipCharSelectMain:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "Check for exit after team select",
+      "address": "137074",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what got clobbered",
+        "move.b #$3c, $655(A5)",
+        ";;; end restore",
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "bne notReadyYet",
+        "move.w #$1, $108654 ; empty the timer so game naturally exits",
+        "bra done",
+        "notReadyYet:",
+        "move.b #$14, $108654 ; reload the timer so we dont exit",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "run teardown just before going to order select",
+      "address": "137116",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "move.l #$37eb2, $584(A5)",
+        ";;; end restore",
+        "jsr $2CHAR_SELECT_TEARDOWN_ROUTINE",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13711c",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "set chosen team in membdisp",
+      "address": "1379d2",
+      "subroutine": true,
+      "patchAsm": [
+        "move.l A4, D7",
+        "cmpi.l #$102900, D7",
+        "bne skipChar0",
+        "move.b $P1_CHOSEN_CHAR0, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar0:",
+        "cmpi.l #$102B00, D7",
+        "bne skipChar1",
+        "move.b $P1_CHOSEN_CHAR1, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar1:",
+        "cmpi.l #$102D00, D7",
+        "bne skipChar2",
+        "move.b $P1_CHOSEN_CHAR2, D6",
+        "move.b D6, $71(A4)",
+        "bra done",
+        "skipChar2:",
+        ";;;; this must be player 2, ie cpu",
+        "move.b (A2,D0.w), $71(A4)",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "load palettes just after vblank",
+      "address": "132be4",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; replace what was clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne skipLoadPalettes",
+        "jsr $2LOAD_P_A_L_E_T_T_E_S",
+        "skipLoadPalettes:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "prevent A in team select, let the game continue once cpu random select is done",
+      "address": "137466",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; first we are only ready if char select has finished",
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "beq checkForCpuDone ; char select has finished, now go see if cpu has finished",
+        "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
+        "bra done",
+        "checkForCpuDone:",
+        "move.b $CPU_RANDOM_SELECT_COUNTER, D0 ; load the cpu random countdown",
+        "cmpi.b #$ff, D0 ; if it goes from 0 -> -1, then cpu is done random selecting",
+        "beq cpuIsDone",
+        "cmp.b D0, D0 ; cpu is not done yet, force a zero result so game doesn't move on",
+        "bra done",
+        "cpuIsDone:",
+        "cmpi.b #0, D0 ; cpu is done, force a non-zero result so game does move on",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13746c",
+      "patchAsm": ["nop"]
     }
   ]
 }
