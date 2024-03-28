@@ -4,13 +4,13 @@
 ;; parameters
 ;; D0: the input byte, typically pulled from BIOS_PXCURRENT
 ;; D1: the cursor's sprite index
-;; A0: pointer to the words of the cursor's x index
-;; A1: pointer to the words of the cursor's y index
+;; A1: pointer to the words of the cursor's x index
+;; it is assumed the y index is 2 bytes after x
 
 move.w D1, D4 ; move the sprite index off to the side
 
-move.w (A0), D1 ; load current cursor X
-move.w (A1), D2 ; and Y
+move.w (A1), D1 ; load current cursor X
+move.w $2(A1), D2 ; and Y
 
 checkInput:
 btst #$3, D0 ; is Right pressed?
@@ -64,8 +64,8 @@ notInDeadSpot:
 
 
 moveCursor:
-move.w D1, (A0) ; save the new X
-move.w D2, (A1) ; save the new Y
+move.w D1, (A1) ; save the new X
+move.w D2, $2(A1) ; save the new Y
 mulu.w #32, D1 ; convert X index to X pixel
 addi.w #16, D1  ; add the X offset (16px from edge of screen)
 mulu.w #32, D2 ; convert Y index to Y pixel

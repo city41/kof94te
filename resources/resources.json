@@ -25,12 +25,12 @@
         "dest": "../src/patches/p2_cursor.asm"
       },
       {
-        "template": "com_cursor_left.asm.hbr",
-        "dest": "../src/patches/com_cursor_left.asm"
+        "template": "cpu_cursor_left.asm.hbr",
+        "dest": "../src/patches/cpu_cursor_left.asm"
       },
       {
-        "template": "com_cursor_right.asm.hbr",
-        "dest": "../src/patches/com_cursor_right.asm"
+        "template": "cpu_cursor_right.asm.hbr",
+        "dest": "../src/patches/cpu_cursor_right.asm"
       }
     ]
   },
@@ -55,18 +55,20 @@
     {
       "name": "p2_cursor",
       "imageFile": "./p2_cursor.png",
-      "autoAnimation": 4
+      "autoAnimation": 4,
+      "x": 272,
+      "y": 440
     },
     {
-      "name": "com_cursor_left",
-      "imageFile": "./com_cursor_left.png",
+      "name": "cpu_cursor_left",
+      "imageFile": "./cpu_cursor_left.png",
       "autoAnimation": 4,
       "x": 0,
       "y": 272
     },
     {
-      "name": "com_cursor_right",
-      "imageFile": "./com_cursor_right.png",
+      "name": "cpu_cursor_right",
+      "imageFile": "./cpu_cursor_right.png",
       "autoAnimation": 4,
       "x": 0,
       "y": 272

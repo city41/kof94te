@@ -1,8 +1,13 @@
-move.b $CHAR_SELECT_COUNTER, D5
+; moves the cpu cursor based on its current location in memory
+;
+; parameters:
+; d7: sprite index of cpu cursor
+; A0: address of current CPU index
+
 
 clr.w D0
 ; load current CPU index
-move.b $1083c0, D0
+move.b (A0), D0
 ; multiply it by 4 as each xy is 4 bytes
 lsl.b #2, D0
 
@@ -10,23 +15,20 @@ lea $2TEAM_INDEX_TO_XY, A0
 ; jump ahead into the table based on which team is focused
 adda.w D0, A0
 
-; load X/Y 
-move.w (A0)+, D6 ; X 
-move.w (A0)+, D7 ; Y
-
 ; LEFT SIDE
 ; load up the parameters for moveSprite
-move.w D6, D1 ; X 
-move.w D7, D2 ; Y
+move.w (A0), D1 ; X 
+move.w $2(A0), D2 ; Y
 
-move.w #$P2_CURSOR_SI, D0
+move.w D7, D0
 jsr $2MOVE_SPRITE
 
 ; RIGHT SIDE
-move.w D6, D1 ; X 
-move.w D7, D2 ; Y
+move.w (A0), D1 ; X 
+move.w $2(A0), D2 ; Y
 addi.w #80, D1  ; the ride side is 80px over
-move.w #$P2_CURSOR_SI + 1, D0
+addi.w #1, D7   ; move onto next sprite index
+move.w D7, D0
 jsr $2MOVE_SPRITE
 
 rts

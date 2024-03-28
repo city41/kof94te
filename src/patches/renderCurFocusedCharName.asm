@@ -1,5 +1,13 @@
-move.w $P1_CURSOR_X, D0
-move.w $P1_CURSOR_Y, D1
+; renders the current focused character's name into the fix layer
+;
+; parameters
+; A0: base pointer for p1 or p2 data
+
+;; grab what we need out of A0, as we will clobber it after
+move.w $PX_CURSOR_X_OFFSET(A0), D0
+move.w $PX_CURSOR_Y_OFFSET(A0), D1
+move.w $PX_FOCUSED_CHAR_NAME_FIX_ADDRESS_OFFSET(A0), $3c0000 ; load the start of fix layer area into VRAMADDR
+
 mulu.w #9, D1 ; multiply Y by 9
 add.w D0, D1  ; then add X to get the index into the grid
 lea $2GRID_TO_CHARACTER_ID, A0
@@ -12,9 +20,8 @@ mulu.w #8, D1 ; multiply by 8 to get the offset, each name is 8 characters
 adda.w D1, A0 ; jump forward to the correct name
 
 move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally
-move.w #$7056, $3c0000 ; load the start of fix layer area into VRAMADDR
 
-move.w #7, D0
+move.w #7, D0 ; 8 chars to render, one less since dbra hinges on -1
 
 renderChar:
 clr.w D1

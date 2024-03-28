@@ -14,10 +14,10 @@ dc.w $ad0
 dc.w $2404
 
 ;; SCB3 vertical position|sticky|size
-dc.w $3
+dc.w $1c03
 
 ;; SCB4 horizontal position
-dc.w $0
+dc.w $8800
 
 ;;; column 1
 
@@ -30,9 +30,9 @@ dc.w $aac
 dc.w $1204
 
 ;; SCB3 vertical position|sticky|size
-dc.w $43
+dc.w $1c43
 
 ;; SCB4 horizontal position
-dc.w $0
+dc.w $9000
 
 ;; end tiles
