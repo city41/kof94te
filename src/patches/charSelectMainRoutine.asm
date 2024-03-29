@@ -1,11 +1,10 @@
-;;;; NOTE: using A5 needs to be done carefully, the main game
-;;;; expects it when we rts
 movem.l A0-A2,$STORE_A0A1A2
 
 move.b $BIOS_PLAYER_MOD1, D1 ; is p1 playing?
 beq skipPlayer1
 
 move.b $BIOS_P1CHANGE, $P1_CUR_INPUT
+;; the base address from which all other p1 values will derive from
 lea $P1_CUR_INPUT, A0
 move.w #$P1_CURSOR_SI, D6
 move.w #$P1C1_SI, D7
@@ -16,6 +15,7 @@ move.b $BIOS_PLAYER_MOD2, D1 ; is p2 playing?
 beq skipPlayer2
 
 move.b $BIOS_P2CHANGE, $P2_CUR_INPUT
+;; the base address from which all other p2 values will derive from
 lea $P2_CUR_INPUT, A0
 move.w #$P2_CURSOR_SI, D6
 move.w #$P2C1_SI, D7
@@ -45,6 +45,7 @@ move.w #$P1_CURSOR_SI, D7 ; use player one's cursor sprites
 lea $1081c0, A0           ; point to where the cpu index is for p2
 
 doCpuCursor:
+; if the player has not chosen three characters yet, no need for cpu cursor
 cmpi.b #2, D0
 ble skipCpuCursor
 jsr $2MOVE_CPU_CURSOR
