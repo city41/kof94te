@@ -79,7 +79,7 @@ move.w D3, D0
 mulu.w #2, D0
 add.w D7, D0
 
-move.w #32, D1 ; set X to 32px
+move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D1 ; set X to 32px or -32px
 mulu.w D3, D1  ; move over for 1st and 2nd char
 
 move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
