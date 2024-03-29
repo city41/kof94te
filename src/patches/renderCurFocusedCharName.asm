@@ -27,7 +27,7 @@ renderChar:
 clr.w D1
 move.b (A1)+, D1
 addi.w #$300, D1   ; jump forward in S1 rom to start of font plus character offset
-ori.w #$1000, D1   ; apply palette
+ori.w #$2000, D1   ; apply palette
 move.w D1, $3c0002 ; write into VRAM
 dbra D0, renderChar
 rts

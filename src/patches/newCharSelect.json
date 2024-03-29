@@ -62,6 +62,58 @@
     {
       "type": "prom",
       "string": true,
+      "value": "HACK ISNT DONE YET KOF94.MATTGREER.DEV",
+      "symbol": "NOT_DONE_DISCLAIMER"
+    },
+    {
+      "type": "prom",
+      "string": true,
+      "value": "                                      ",
+      "symbol": "DISCL_ERASE"
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "SHOW_DISCLAIMER_ROUTINE",
+      "patchAsm": [
+        "move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally",
+        "move.w #$7038, $3c0000 ; VRAMADDR, lower left of screen",
+        "lea $2NOT_DONE_DISCLAIMER, A0",
+        "drawChar:",
+        "clr.w D1",
+        "move.b (A0)+, D1",
+        "beq done ; null char? string is done",
+        "addi.w #$300, D1   ; jump forward in S1 rom to start of font plus character offset",
+        "ori.w #$b000, D1   ; apply palette",
+        "move.w D1, $3c0002 ; write into VRAM",
+        "bra drawChar",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "CLEAR_DISCLAIMER_ROUTINE",
+      "patchAsm": [
+        "move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally",
+        "move.w #$7038, $3c0000 ; VRAMADDR, lower left of screen",
+        "lea $2DISCL_ERASE, A0",
+        "drawChar:",
+        "clr.w D1",
+        "move.b (A0)+, D1",
+        "beq done ; null char? string is done",
+        "addi.w #$300, D1   ; jump forward in S1 rom to start of font plus character offset",
+        "ori.w #$b000, D1   ; apply palette",
+        "move.w D1, $3c0002 ; write into VRAM",
+        "bra drawChar",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "string": true,
       "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI    ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           ",
       "symbol": "P1_CHAR_NAME_TABLE"
     },
