@@ -16,12 +16,12 @@ clr.w D0
 move.b (A0), D1 ; character Id from grid is now in D1
 
 lea $2CHAR_NAMES_TABLE, A0
-mulu.w #8, D1 ; multiply by 8 to get the offset, each name is 8 characters
+mulu.w #15, D1 ; multiply by 15 to get the offset, each name is 15 characters
 adda.w D1, A0 ; jump forward to the correct name
 
 move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally
 
-move.w #7, D0 ; 8 chars to render, one less since dbra hinges on -1
+move.w #14, D0 ; 15 chars to render, one less since dbra hinges on -1
 
 renderChar:
 clr.w D1
