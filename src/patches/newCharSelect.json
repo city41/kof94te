@@ -400,9 +400,10 @@
         "p1_skipChar2:",
         ";;;; this must be player 2, ie cpu",
         "move.b (A2,D0.w), $71(A4)",
-        "bra done",
 
         "skipPlayer1:",
+        "move.b $BIOS_PLAYER_MOD2, D7 ; is p2 playing?",
+        "beq skipPlayer2",
         "move.l A4, D7",
         "cmpi.l #$102F00, D7",
         "bne p2_skipChar0",
@@ -426,6 +427,7 @@
         ";;;; this must be player 1, ie cpu",
         "move.b (A2,D0.w), $71(A4)",
 
+        "skipPlayer2:",
         "done:",
         "rts"
       ]

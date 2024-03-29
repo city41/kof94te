@@ -17,13 +17,6 @@ move.w #0, D5              ; offset into tile data
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
-;; first, count how many people are playing
-move.b $BIOS_PLAYER_MOD1, D6 ; is p1 playing?
-move.b $BIOS_PLAYER_MOD2, D7 ; p2?
-;; TODO: this byte can be something other than 0/1 at times
-add.b D6, D7                 ; add them together
-
-
 ;;;;;;;;;;;;;; INIT PLAYER 1 ;;;;;;;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
 beq skipPlayer1 ; no? check player 2
@@ -42,7 +35,8 @@ move.w #0, $P1_CURSOR_Y
 move.b #0, $P1_NUM_CHOSEN_CHARS
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P1 ;;;;;;;;;;;;;;
-;;; TODO: skip in versus mode
+move.b $BIOS_PLAYER_MOD2, D6 ; are they even playing?
+bne skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side, onto the screen
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_SI, D6
@@ -78,7 +72,8 @@ move.w #0, $P2_CURSOR_Y
 move.b #0, $P2_NUM_CHOSEN_CHARS
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P2 ;;;;;;;;;;;;;;
-;;; TODO: skip in versus mode
+move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
+bne skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side, onto the screen
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_SI, D6
