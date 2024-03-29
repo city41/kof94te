@@ -59,7 +59,7 @@ move.b (A1), D2 ; load chosen character id
 ;; set up the sprite index based on character index
 move.w D3, D6 
 mulu.w #2, D6
-add.w D7, D6 ; add on the staring sprite index
+add.w D7, D6 ; add on the starting sprite index
 
 move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
 mulu.w D2, D5               ; multiply the offset by the character id to get the right avatar
