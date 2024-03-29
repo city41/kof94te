@@ -54,11 +54,12 @@ skipCpuCursor:
 
 
 
-;; restore the saved address registers
-movem.l $STORE_A0A1A2,A0-A2
 
 ;;;;;; IS WHOLE TEAM CHOSEN? THEN MOVE ONTO ORDER SELECT ;;;;;
 move.b #0, D3 ; D3 will hold the number of needed chosen chars: either 3 or 6 (versus mode)
+
+clr.b D1
+clr.b D2
 
 move.b $BIOS_PLAYER_MOD1, D0 ; is p1 playing?
 beq readyToExit_skipPlayer1
@@ -83,5 +84,8 @@ bne done
 ; actually chosen, we are done with character select
 move.b #1, $READY_TO_EXIT_CHAR_SELECT ; team chosen, signal to exit
 done:
+
+;; restore the saved address registers
+movem.l $STORE_A0A1A2,A0-A2
 
 rts
