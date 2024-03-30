@@ -29,4 +29,4 @@ for f in ipsBinaries/original/*; do
     yarn ts-node src/tools/makeIpsPatch.ts ipsBinaries/original/$bf ipsBinaries/hacked/$bf ipsPatches/$GAME.$bf.ips
 done
 
-zip ipsPatches/kof94teIpsPatches.zip ipsPatches/*.ips
+(cd ipsPatches && zip kof94teIpsPatches.zip *.ips)
