@@ -13,6 +13,8 @@
     "PALETTE_BLACK": "8000",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P1": "1083d3",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P2": "1081d3",
+    "FIX_STRING_DATA": "10f7e0",
+    "MORE_STRING_DATA": "10f7f0",
     "P1_CUR_INPUT": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
@@ -62,54 +64,50 @@
     {
       "type": "prom",
       "string": true,
-      "value": "HACK ISNT DONE YET NEORH.MATTGREER.DEV",
-      "symbol": "NOT_DONE_DISCLAIMER"
+      "value": "kof94te v0.0.1",
+      "symbol": "VERSION"
     },
     {
       "type": "prom",
       "string": true,
-      "value": "                                      ",
-      "symbol": "DISCL_ERASE"
+      "value": "     Hack isn't finished yet          ",
+      "symbol": "HACK_ISNT_FINISHED_YET"
     },
     {
       "type": "prom",
+      "string": true,
+      "value": "     More info: neorh.mattgreer.dev   ",
+      "symbol": "MORE_INFO"
+    },
+    {
+      "type": "prom",
+      "description": "general string to fix layer routine",
       "subroutine": true,
-      "symbol": "SHOW_DISCLAIMER_ROUTINE",
+      "symbol": "STRING_TO_FIX_LAYER_ROUTINE",
+      "patchAsm": "stringToFixLayer.asm"
+    },
+    {
+      "type": "prom",
+      "description": "set up to show version on title screen",
+      "subroutine": true,
+      "address": "132608",
       "patchAsm": [
-        "move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally",
-        "move.w #$7022, $3c0000 ; VRAMADDR, lower left of screen",
-        "lea $2NOT_DONE_DISCLAIMER, A0",
-        "drawChar:",
-        "clr.w D1",
-        "move.b (A0)+, D1",
-        "beq done ; null char? string is done",
-        ";addi.w #$300, D1   ; jump forward in S1 rom to start of font plus character offset",
-        "ori.w #$0000, D1   ; apply palette",
-        "move.w D1, $3c0002 ; write into VRAM",
-        "bra drawChar",
-        "done:",
+        ";;; restore what was clobbered",
+        "move.b #1, $10fdaf ; set BIOS_USE_MODE to 'Title'",
+
+        ";;; set up the version string values for the general string routine",
+        ";;; [w:fix layer location][l: string pointer]",
+        "move.w #$7322, $FIX_STRING_DATA         ; set up the version string's fix write location",
+        "move.l #$2VERSION, $FIX_STRING_DATA + 2 ; set up the pointer to the version string",
+        "move.w #150, $FIX_STRING_DATA + 6      ; countdown",
         "rts"
       ]
     },
     {
       "type": "prom",
-      "subroutine": true,
-      "symbol": "CLEAR_DISCLAIMER_ROUTINE",
-      "patchAsm": [
-        "move.w #$20, $3c0004 ; VRAMMOD=32, one column to render letters horizontally",
-        "move.w #$7022, $3c0000 ; VRAMADDR, lower left of screen",
-        "lea $2DISCL_ERASE, A0",
-        "drawChar:",
-        "clr.w D1",
-        "move.b (A0)+, D1",
-        "beq done ; null char? string is done",
-        "addi.w #$300, D1   ; jump forward in S1 rom to start of font plus character offset",
-        "ori.w #$b000, D1   ; apply palette",
-        "move.w D1, $3c0002 ; write into VRAM",
-        "bra drawChar",
-        "done:",
-        "rts"
-      ]
+      "description": "clean up straggling word",
+      "address": "13260e",
+      "patchAsm": ["nop"]
     },
     {
       "type": "prom",
@@ -381,6 +379,14 @@
         "jsr $2LOAD_P_A_L_E_T_T_E_S",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
         "skipCharSelectMain:",
+
+        ";;; now put fix strings onto the screen",
+        "movem.l A5/A6,$STORE_A0A1A2",
+        "lea $FIX_STRING_DATA, A6",
+        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
+        "lea $MORE_STRING_DATA, A6",
+        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
+        "movem.l $STORE_A0A1A2, A5/A6",
         "rts"
       ]
     },

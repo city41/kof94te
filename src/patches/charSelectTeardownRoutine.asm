@@ -37,6 +37,4 @@ move.w #$P2C1_SI + 4, D6
 move.w #2, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
 
-jsr $2CLEAR_DISCLAIMER_ROUTINE
-
 rts
