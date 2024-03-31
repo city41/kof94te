@@ -97,9 +97,9 @@ skipPlayer2:
 
 ;; reset values to ensure char select starts fresh each time
 move.b #1, $IN_CHAR_SELECT_FLAG
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
-move.b #0, $P1_NUM_CHOSEN_CHARS
-move.b #0, $P2_NUM_CHOSEN_CHARS
+; move.b #0, $READY_TO_EXIT_CHAR_SELECT
+; move.b #0, $P1_NUM_CHOSEN_CHARS
+; move.b #0, $P2_NUM_CHOSEN_CHARS
 
 
 ;; focused character names
