@@ -97,9 +97,23 @@ skipPlayer2:
 
 ;; reset values to ensure char select starts fresh each time
 move.b #1, $IN_CHAR_SELECT_FLAG
-; move.b #0, $READY_TO_EXIT_CHAR_SELECT
-; move.b #0, $P1_NUM_CHOSEN_CHARS
-; move.b #0, $P2_NUM_CHOSEN_CHARS
+move.b #0, $P1_NUM_CHOSEN_CHARS
+move.b #0, $P2_NUM_CHOSEN_CHARS
+
+
+;; 1086a4 is non-zero on subsequent fights. Not sure why yet.
+;; this allows char select to minimally work past fight one,
+;; but there is more to understand
+;; past fight one, the cpu random selection is not visualized
+;; TODO: understand this more
+move.w $1086a4, D5
+beq firstCharSelect
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
+bra pastReady
+firstCharSelect: 
+move.b #0, $READY_TO_EXIT_CHAR_SELECT
+pastReady:
+
 
 
 ;; focused character names
