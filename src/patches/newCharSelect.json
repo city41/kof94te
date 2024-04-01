@@ -550,6 +550,18 @@
       "description": "clean up straggling word",
       "address": "13746c",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "prevent win screens from locking up by always choosing team leader",
+      "address": "13fd40",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; nothing to restore from the clobber",
+        ";;;just always pick the team leader",
+        "move.w #0, D2",
+        "rts"
+      ]
     }
   ]
 }
