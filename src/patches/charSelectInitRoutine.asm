@@ -7,8 +7,6 @@
 ; ; this is the bios routine for clearing all sprites
 ; jsr $c004c8
 
-; load the palettes
-; TODO: this should be done during vblank
 jsr $2LOAD_P_A_L_E_T_T_E_S
 
 ; load the character grid image onto the screen
