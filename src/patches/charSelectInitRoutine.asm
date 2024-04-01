@@ -132,11 +132,11 @@ move.w #-32, $P2CTSX_MULTIPLIER
 
 ;;; put the disclaimer string up
 ;;; [w:fix layer location][l: string pointer][w: countdown]
-move.w #$7023, $FIX_STRING_DATA         ; set up the version string's fix write location
+move.w #$7024, $FIX_STRING_DATA         ; set up the version string's fix write location
 move.l #$2HACK_ISNT_FINISHED_YET, $FIX_STRING_DATA + 2 ; set up the pointer to the version string
 move.w #300, $FIX_STRING_DATA + 6      ; countdown
 
-move.w #$7024, $MORE_STRING_DATA         ; set up the version string's fix write location
+move.w #$7025, $MORE_STRING_DATA         ; set up the version string's fix write location
 move.l #$2MORE_INFO, $MORE_STRING_DATA + 2 ; set up the pointer to the version string
 move.w #300, $MORE_STRING_DATA + 6      ; countdown
 

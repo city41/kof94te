@@ -10,22 +10,11 @@ function on_health_memory_read(offset, data, mask)
 	end
 end
 
-timer_written = false
-
 --- sets the timer to 1 instead of 60
 function on_timer_memory_write(offset, data, mask)
 	local tag = mem:read_range(0x108110, 0x108117, 8)
 
-	if
-		tag == "PLAYER 1"
-		and offset == timer_address
-		and mask == 0xff00
-		and (data & mask) == 0x6000
-		and not timer_written
-	then
-		-- only setting the first round to one second
-		-- as winning the match by time out causes a different win sequence (opponent doesn't fall)
-		timer_written = true
+	if tag == "PLAYER 1" and offset == timer_address and mask == 0xff00 and (data & mask) == 0x6000 then
 		print("returning one")
 		return 0x100
 	end
