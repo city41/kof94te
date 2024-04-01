@@ -1,11 +1,11 @@
-; originally 36e66 called these routines to set things up
-; so far, just blindly calling them too
-; jsr $3604
-; jsr $15a0
-; jsr $25aa
-; jsr $5e72
-; ; this is the bios routine for clearing all sprites
-; jsr $c004c8
+;; reset the player mode, we'll figure it out through the course of init
+;; 
+;; NUM_PLAYER_MODE values:
+;; 0 - undetermined
+;; 1 - single player, p1 side (bit 0 is set)
+;; 2 - single player, p2 side (bit 1 is set)
+;; 3 - versus mode (bit 0 and 1 are set)
+move.b #0, $NUM_PLAYER_MODE
 
 jsr $2LOAD_P_A_L_E_T_T_E_S
 
@@ -19,7 +19,10 @@ jsr $2RENDER_STATIC_IMAGE
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
 beq skipPlayer1 ; no? check player 2
 
-; load the p1 cursor, onto the screen
+;; side p1 is playing, add it to the mode
+ori.b #1, $NUM_PLAYER_MODE
+
+; load the p1 cursor
 ; it loads into the correct spot, no need to move it
 move.w #$P1_CURSOR_SI, D6
 lea $2P1_CURSOR_IMAGE, A6
@@ -30,19 +33,18 @@ jsr $2RENDER_STATIC_IMAGE
 ; this is a 2d index into the grid, not pixels
 move.w #0, $P1_CURSOR_X ; start at Terry
 move.w #0, $P1_CURSOR_Y
-move.b #0, $P1_NUM_CHOSEN_CHARS
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P1 ;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD2, D6 ; are they even playing?
 bne skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
-; load the cpu cursor, left side, onto the screen
+; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
-; load the cpu cursor, right side, onto the screen
+; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_SI + 1, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
@@ -56,7 +58,10 @@ skipPlayer1:
 move.b $BIOS_PLAYER_MOD2, D6
 beq skipPlayer2 ; skip if p2 is not playing
 
-; load the p2 cursor, onto the screen
+;; side p2 is playing, add it to the mode
+ori.b #2, $NUM_PLAYER_MODE
+
+; load the p2 cursor
 ; it loads into the correct spot, no need to move it
 move.w #$P2_CURSOR_SI, D6
 lea $2P2_CURSOR_IMAGE, A6
@@ -67,19 +72,18 @@ jsr $2RENDER_STATIC_IMAGE
 ; this is a 2d index into the grid, not pixels
 move.w #8, $P2_CURSOR_X ; start at Clark
 move.w #0, $P2_CURSOR_Y
-move.b #0, $P2_NUM_CHOSEN_CHARS
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P2 ;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
 bne skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
-; load the cpu cursor, left side, onto the screen
+; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
-; load the cpu cursor, right side, onto the screen
+; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_SI + 1, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
@@ -92,28 +96,60 @@ skipPlayer2:
 
 
 ;; GENERAL VALUE INITIALIZATION
-
-;; reset values to ensure char select starts fresh each time
 move.b #1, $IN_CHAR_SELECT_FLAG
-move.b #0, $P1_NUM_CHOSEN_CHARS
-move.b #0, $P2_NUM_CHOSEN_CHARS
 
 
-;; 1086a4 is non-zero on subsequent fights. Not sure why yet.
-;; this allows char select to minimally work past fight one,
+btst #0, $NUM_PLAYER_MODE
+beq p1_pastReady ; p1 isn't playing? skip
+btst #1, $NUM_PLAYER_MODE ; but p2 is playing too? versus mode, skip
+bne p1_pastReady
+
+; single player mode, p1 side
+;; 1086a4 is non-zero on subsequent fights for single player mode. Not sure why yet.
+;; this allows char select to work past fight one,
 ;; but there is more to understand
 ;; TODO: understand this more
 move.w $1086a4, D5
-beq firstCharSelect
+;; if it is zero, this is the very first char select
+beq p1_firstCharSelect
+;; set flag to indicate to main this is not the first char select
+move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
+;; have main move onto cpu select right away
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ;; by setting to 3 chars, cpu randomization happens
-;; TODO: account for single player, p2 side
 move.b #3, $P1_NUM_CHOSEN_CHARS
-bra pastReady
-firstCharSelect: 
+bra p1_pastReady
+p1_firstCharSelect: 
+;; first time in char select for single player, p1 side
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
-pastReady:
+move.b #0, $P1_NUM_CHOSEN_CHARS
+p1_pastReady:
 
+btst #1, $NUM_PLAYER_MODE
+beq p2_pastReady ; p2 isn't playing? skip
+btst #0, $NUM_PLAYER_MODE ; but p1 is playing too? versus mode, skip
+bne p2_pastReady
+
+; single player mode, p2 side
+;; 1086a4 is non-zero on subsequent fights for single player mode on p2 side too. Not sure why yet.
+;; this allows char select to work past fight one,
+;; but there is more to understand
+;; TODO: understand this more
+move.w $1086a4, D5
+;; if it is zero, this is the very first char select
+beq p2_firstCharSelect
+;; set flag to indicate to main this is not the first char select
+move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
+;; have main move onto cpu select right away
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
+;; by setting to 3 chars, cpu randomization happens
+move.b #3, $P2_NUM_CHOSEN_CHARS
+bra p2_pastReady
+p2_firstCharSelect: 
+;; first time in char select for single player, p2 side
+move.b #0, $READY_TO_EXIT_CHAR_SELECT
+move.b #0, $P2_NUM_CHOSEN_CHARS
+p2_pastReady:
 
 
 ;; focused character names
@@ -122,7 +158,7 @@ move.l #$2P1_CHAR_NAME_TABLE, $P1_CHAR_NAME_TABLE_ADDRESS
 move.w #$P2_FOCUSED_NAME_FIX_ADDRESS_VALUE, $P2_FOCUSED_CHAR_NAME_FIX_ADDRESS
 move.l #$2P2_CHAR_NAME_TABLE, $P2_CHAR_NAME_TABLE_ADDRESS
 
-;; chosen team avatars
+;; chosen team avatar related
 move.w #32, $P1_CHOSEN_TEAM_SCREEN_X
 move.w #32, $P1CTSX_MULTIPLIER
 move.w #256, $P2_CHOSEN_TEAM_SCREEN_X
