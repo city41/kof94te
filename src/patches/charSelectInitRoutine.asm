@@ -104,11 +104,13 @@ move.b #0, $P2_NUM_CHOSEN_CHARS
 ;; 1086a4 is non-zero on subsequent fights. Not sure why yet.
 ;; this allows char select to minimally work past fight one,
 ;; but there is more to understand
-;; past fight one, the cpu random selection is not visualized
 ;; TODO: understand this more
 move.w $1086a4, D5
 beq firstCharSelect
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
+;; by setting to 3 chars, cpu randomization happens
+;; TODO: account for single player, p2 side
+move.b #3, $P1_NUM_CHOSEN_CHARS
 bra pastReady
 firstCharSelect: 
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
