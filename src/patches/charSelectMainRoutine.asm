@@ -24,15 +24,15 @@ jsr $2CHAR_SELECT_PLAYER_ROUTINE
 skipPlayer2:
 
 ;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
-move.b $BIOS_PLAYER_MOD1, D1 ; is p1 playing?
+btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq prepCpuCursor ; not playing? then we know there is a cpu
-move.b $BIOS_PLAYER_MOD2, D1 ; is p2 playing?
+btst #1, $NUM_PLAYER_MODE ; is p2 playing?
 beq prepCpuCursor ; not playing? then we know there is a cpu
 bra skipCpuCursor ; both players are playing, no cpu (versus mode)
 
 prepCpuCursor:
 
-move.b $BIOS_PLAYER_MOD1, D1 ; is p1 playing?
+btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq cpuCursor_skipPlayer1
 move.b $P1_NUM_CHOSEN_CHARS, D0
 move.w #$P2_CURSOR_SI, D7 ; use player two's cursor sprites

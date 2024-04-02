@@ -1,7 +1,7 @@
 move.b #0, $IN_CHAR_SELECT_FLAG
 
 ;; move player 1's choices where the game expects them
-move.b $BIOS_PLAYER_MOD1, D1 ; is p1 playing?
+btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq skipPlayer1
 
 move.b $P1_CHOSEN_CHAR0, D7
@@ -16,7 +16,7 @@ move.b D7, $108237
 skipPlayer1:
 
 ;; move player 2's choices where the game expects them
-move.b $BIOS_PLAYER_MOD2, D1 ; is p2 playing?
+btst #1, $NUM_PLAYER_MODE ; is p2 playing?
 beq skipPlayer2
 
 move.b $P2_CHOSEN_CHAR0, D7

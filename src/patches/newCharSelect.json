@@ -444,7 +444,7 @@
       "address": "1379d2",
       "subroutine": true,
       "patchAsm": [
-        "move.b $BIOS_PLAYER_MOD1, D7 ; is p1 playing?",
+        "btst #0, $NUM_PLAYER_MODE ; is p1 playing?",
         "beq skipPlayer1",
         "move.l A4, D7",
         "cmpi.l #$102900, D7",
@@ -469,7 +469,7 @@
         "move.b (A2,D0.w), $71(A4)",
 
         "skipPlayer1:",
-        "move.b $BIOS_PLAYER_MOD2, D7 ; is p2 playing?",
+        "btst #1, $NUM_PLAYER_MODE ; is p2 playing?",
         "beq skipPlayer2",
         "move.l A4, D7",
         "cmpi.l #$102F00, D7",
@@ -530,7 +530,7 @@
         "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
         "bra done",
         "checkForCpuDone:",
-        "move.b $BIOS_PLAYER_MOD1, D0 ; is p1 playing?",
+        "btst #0, $NUM_PLAYER_MODE ; is p1 playing?",
         "beq skipPlayer1",
         "move.b $CPU_RANDOM_SELECT_COUNTER_FOR_P1, D0 ; load the cpu random countdown",
         "bra checkIfCpuIsDone",
