@@ -17,7 +17,8 @@ jsr $2RENDER_STATIC_IMAGE
 
 ;;;;;;;;;;;;;; INIT PLAYER 1 ;;;;;;;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
-beq skipPlayer1 ; no? check player 2
+cmpi.b #1, D6 ;; look specifically for 1: playing
+bne skipPlayer1 ; no? check player 2
 
 ;; side p1 is playing, add it to the mode
 ori.b #1, $NUM_PLAYER_MODE
@@ -36,7 +37,8 @@ move.w #0, $P1_CURSOR_Y
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P1 ;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD2, D6 ; are they even playing?
-bne skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
+cmpi.b #1, D6 ;; look specifically for 1: playing
+beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_SI, D6
@@ -56,7 +58,8 @@ skipPlayer1:
 
 ;;;;;;;;;;;;;; INIT PLAYER 2 ;;;;;;;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD2, D6
-beq skipPlayer2 ; skip if p2 is not playing
+cmpi.b #1, D6 ;; look specifically for 1: playing
+bne skipPlayer2 ; skip if p2 is not playing
 
 ;; side p2 is playing, add it to the mode
 ori.b #2, $NUM_PLAYER_MODE
@@ -75,7 +78,8 @@ move.w #0, $P2_CURSOR_Y
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P2 ;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
-bne skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
+cmpi.b #1, D6 ;; look specifically for 1: playing
+beq skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_SI, D6
