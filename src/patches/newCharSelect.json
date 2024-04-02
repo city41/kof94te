@@ -66,12 +66,6 @@
     {
       "type": "prom",
       "string": true,
-      "value": "kof94te v0.1.1",
-      "symbol": "VERSION"
-    },
-    {
-      "type": "prom",
-      "string": true,
       "value": "     Hack isn't finished yet          ",
       "symbol": "HACK_ISNT_FINISHED_YET"
     },
