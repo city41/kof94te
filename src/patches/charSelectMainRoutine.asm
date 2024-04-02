@@ -49,11 +49,8 @@ doCpuCursor:
 cmpi.b #2, D0
 ble skipCpuCursor
 jsr $2MOVE_CPU_CURSOR
+
 skipCpuCursor:
-
-
-
-
 
 ;;;;;; IS WHOLE TEAM CHOSEN? THEN MOVE ONTO ORDER SELECT ;;;;;
 move.b #0, D3 ; D3 will hold the number of needed chosen chars: either 3 or 6 (versus mode)
