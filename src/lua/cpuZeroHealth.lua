@@ -20,5 +20,14 @@ function on_timer_memory_write(offset, data, mask)
 	end
 end
 
+-- winner_address = 0x10d064
+
+-- function on_winner_write(offset, data, mask)
+-- 	print(string.format("winner write, offset: %x, data: %x, mask: %x", offset, data, mask))
+-- 	return 0x0f0f
+-- end
+
 health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
 timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
+
+-- winner_handler = mem:install_write_tap(winner_address, winner_address + 3, "winner write", on_winner_write)
