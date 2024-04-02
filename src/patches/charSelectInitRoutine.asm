@@ -107,7 +107,10 @@ move.b #0, $SINGLE_PLAYER_PAST_FIRST_FIGHT
 btst #0, $NUM_PLAYER_MODE
 beq p1_pastReady ; p1 isn't playing? skip
 btst #1, $NUM_PLAYER_MODE ; but p2 is playing too? versus mode, skip
-bne p1_pastReady
+; jumping here sets up char select well for versus mode
+; but it does let p1 rechoose their team. The original game did not do this
+; but it's a nice bonus, so letting it slide
+bne p1_firstCharSelect
 
 ; single player mode, p1 side
 ;; 1086a4 is non-zero on subsequent fights for single player mode. Not sure why yet.
@@ -133,7 +136,10 @@ p1_pastReady:
 btst #1, $NUM_PLAYER_MODE
 beq p2_pastReady ; p2 isn't playing? skip
 btst #0, $NUM_PLAYER_MODE ; but p1 is playing too? versus mode, skip
-bne p2_pastReady
+; jumping here sets up char select well for versus mode
+; but it does let p1 rechoose their team. The original game did not do this
+; but it's a nice bonus, so letting it slide
+bne p2_firstCharSelect
 
 ; single player mode, p2 side
 ;; 1086a4 is non-zero on subsequent fights for single player mode on p2 side too. Not sure why yet.
