@@ -24,7 +24,7 @@ cp $MAME_ROM_DIR/$GAME.zip ipsBinaries/hacked/
 # CROM1='055-c1.c1'
 # CROM2='055-c2.c2'
 
-for f in ipsBinaries/original/*; do
+for f in `ls ipsBinaries/original/ -I kof94.zip`; do
     bf=`basename $f`
     yarn ts-node src/tools/makeIpsPatch.ts ipsBinaries/original/$bf ipsBinaries/hacked/$bf ipsPatches/$GAME.$bf.ips
 done
