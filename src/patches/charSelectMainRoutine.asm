@@ -1,6 +1,6 @@
 movem.l A0-A2,$STORE_A0A1A2
 
-move.b $BIOS_PLAYER_MOD1, D1 ; is p1 playing?
+btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq skipPlayer1
 
 move.b $BIOS_P1CHANGE, $P1_CUR_INPUT
@@ -11,7 +11,7 @@ move.w #$P1C1_SI, D7
 jsr $2CHAR_SELECT_PLAYER_ROUTINE
 
 skipPlayer1:
-move.b $BIOS_PLAYER_MOD2, D1 ; is p2 playing?
+btst #1, $NUM_PLAYER_MODE ; is p2 playing?
 beq skipPlayer2
 
 move.b $BIOS_P2CHANGE, $P2_CUR_INPUT
@@ -61,14 +61,14 @@ move.b #0, D3 ; D3 will hold the number of needed chosen chars: either 3 or 6 (v
 clr.b D1
 clr.b D2
 
-move.b $BIOS_PLAYER_MOD1, D0 ; is p1 playing?
+btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq readyToExit_skipPlayer1
 move.b $P1_NUM_CHOSEN_CHARS, D1
 addi.b #3, D3
 
 readyToExit_skipPlayer1:
 
-move.b $BIOS_PLAYER_MOD2, D0 ; is p2 playing?
+btst #1, $NUM_PLAYER_MODE ; is p2 playing?
 beq readyToExit_skipPlayer2
 move.b $P2_NUM_CHOSEN_CHARS, D2
 addi.b #3, D3

@@ -10,6 +10,8 @@
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
 beq skipChoosingChar ; if three have been chosen, don't choose more
+move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
+bne skipChoosingChar
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; load effectively BIOS_PXCHANGE
 btst #$4, D0 ; is A pressed?
@@ -37,12 +39,25 @@ skipChoosingChar:
 
 ;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
 
+move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
+bne hidePlayerCursor
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
+cmpi.b #3, D0
+beq hidePlayerCursor
+
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; load effectively BIOS_PXCHANGE
 lea $PX_CURSOR_X_OFFSET(A0), A1      ; pointer to cursor X
 move.w D6, D1 ; load the cursor's sprite index
 jsr $2MOVE_CURSOR
+bra donePlayerCursor
 
+hidePlayerCursor:
+move.w D6, D0 ; load the cursor's sprite index
+move.w #0, D1  ; x
+move.w #272, D2 ; set y to 224, moving cursor off screen
+jsr $2MOVE_SPRITE
 
+donePlayerCursor:
 
 ;;;; RENDER CHOSEN TEAM ;;;;;;;;;;;;;;
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D1
