@@ -66,7 +66,7 @@
     {
       "type": "prom",
       "string": true,
-      "value": "kof94te v0.0.1",
+      "value": "kof94te v0.1.1",
       "symbol": "VERSION"
     },
     {
