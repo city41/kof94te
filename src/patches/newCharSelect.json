@@ -444,6 +444,10 @@
       "address": "1379d2",
       "subroutine": true,
       "patchAsm": [
+        ";;; dont set member disp if in char select, it can cause",
+        ";;; sprite corruption with Changs, and its not needed to boot",
+        "move.b $IN_CHAR_SELECT_FLAG, D7",
+        "bne done",
         "btst #0, $NUM_PLAYER_MODE ; is p1 playing?",
         "beq skipPlayer1",
         "move.l A4, D7",
