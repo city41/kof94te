@@ -35,6 +35,47 @@ addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
 move.b #$61, $320000  ; play the sound effect
 
+;;; now render the newly chosen character into chosen team area
+;; set up the sprite index based on character index
+move.w D0, D6  ; move num of chosen characters in
+subi.w #1, D6  ; but we already incremented, so it's one too big
+mulu.w #2, D6
+add.w D7, D6 ; add on the starting sprite index
+
+move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
+mulu.w D1, D5               ; multiply the offset by the character id to get the right avatar
+lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
+
+;; parameters
+;; D5: offset into the data
+;; D6: starting sprite index
+;; A6: pointer to tile data
+movem.w D0-D3, $MOVEM_STORAGE
+jsr $2RENDER_STATIC_IMAGE
+movem.w $MOVEM_STORAGE, D0-D3
+
+;;; now move it into place
+;; set up the sprite index based on character index
+move.w D0, D7 ; save num chosen chars
+subi.w #1, D7 ; but we already incremented, so it's one too big
+move.w D6, D0 ; move the sprite index where MOVE_SPRITE expects it
+subi.w #2, D0 ; RENDER_STATIC_IMAGE moved D6 forward by 2 sprites, moving back
+move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D2 ; set X to 32px or -32px
+mulu.w D7, D2  ; move over for 1st and 2nd char
+
+move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
+add.w D6, D2 ; offset X depending on if p1/p2
+move.w D2, D1 ; move X where MOVE_SPRITE expects it
+move.w #315, D2 ; set Y to 181px
+
+;; parameters
+;; D0: sprite index
+;; D1: x
+;; D2: y
+movem.w D0-D3, $MOVEM_STORAGE
+jsr $2MOVE_SPRITE
+movem.w $MOVEM_STORAGE, D0-D3
+
 skipChoosingChar:
 
 ;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
@@ -59,64 +100,64 @@ jsr $2MOVE_SPRITE
 
 donePlayerCursor:
 
-;;;; RENDER CHOSEN TEAM ;;;;;;;;;;;;;;
-move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D1
-beq doneRenderingChosenTeam ; none chosen yet? skip this section
+; ;;;; RENDER CHOSEN TEAM ;;;;;;;;;;;;;;
+; move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D1
+; beq doneRenderingChosenTeam ; none chosen yet? skip this section
 
-clr.w D3 ; starting with the 0'th character on the team
+; clr.w D3 ; starting with the 0'th character on the team
 
-renderChosenChar:
-lea $PX_CHOSEN_CHAR0_OFFSET(A0), A1 ; load the first character id address
-adda.w D3, A1   ; move forward based on which character we are on
-clr.w D2
-move.b (A1), D2 ; load chosen character id
+; renderChosenChar:
+; lea $PX_CHOSEN_CHAR0_OFFSET(A0), A1 ; load the first character id address
+; adda.w D3, A1   ; move forward based on which character we are on
+; clr.w D2
+; move.b (A1), D2 ; load chosen character id
 
-;; set up the sprite index based on character index
-move.w D3, D6 
-mulu.w #2, D6
-add.w D7, D6 ; add on the starting sprite index
+; ;; set up the sprite index based on character index
+; move.w D3, D6 
+; mulu.w #2, D6
+; add.w D7, D6 ; add on the starting sprite index
 
-move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
-mulu.w D2, D5               ; multiply the offset by the character id to get the right avatar
-lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
+; move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
+; mulu.w D2, D5               ; multiply the offset by the character id to get the right avatar
+; lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
 
-;; parameters
-;; D5: offset into the data
-;; D6: starting sprite index
-;; A6: pointer to tile data
-movem.w D0-D3, $MOVEM_STORAGE
-jsr $2RENDER_STATIC_IMAGE
-movem.w $MOVEM_STORAGE, D0-D3
+; ;; parameters
+; ;; D5: offset into the data
+; ;; D6: starting sprite index
+; ;; A6: pointer to tile data
+; movem.w D0-D3, $MOVEM_STORAGE
+; jsr $2RENDER_STATIC_IMAGE
+; movem.w $MOVEM_STORAGE, D0-D3
 
-;;; now move it into place
-;; set up the sprite index based on character index
-move.w D3, D0 
-mulu.w #2, D0
-add.w D7, D0
+; ;;; now move it into place
+; ;; set up the sprite index based on character index
+; move.w D3, D0 
+; mulu.w #2, D0
+; add.w D7, D0
 
-move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D1 ; set X to 32px or -32px
-mulu.w D3, D1  ; move over for 1st and 2nd char
+; move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D1 ; set X to 32px or -32px
+; mulu.w D3, D1  ; move over for 1st and 2nd char
 
-move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
-add.w D6, D1 ; offset X depending on if p1/p2
-move.w #315, D2 ; set Y to 181px
+; move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
+; add.w D6, D1 ; offset X depending on if p1/p2
+; move.w #315, D2 ; set Y to 181px
 
-;; parameters
-;; D0: sprite index
-;; D1: x
-;; D2: y
-movem.w D0-D3, $MOVEM_STORAGE
-jsr $2MOVE_SPRITE
-movem.w $MOVEM_STORAGE, D0-D3
+; ;; parameters
+; ;; D0: sprite index
+; ;; D1: x
+; ;; D2: y
+; movem.w D0-D3, $MOVEM_STORAGE
+; jsr $2MOVE_SPRITE
+; movem.w $MOVEM_STORAGE, D0-D3
 
-;; now loop to next char if there is one
-addq.w #1, D3 ; increment to next character index
-clr.w D0
-move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0 ; how many characters there are
-cmp.w D3, D0
-bne renderChosenChar ; if D3 != D0, then there are more characters to render
+; ;; now loop to next char if there is one
+; addq.w #1, D3 ; increment to next character index
+; clr.w D0
+; move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0 ; how many characters there are
+; cmp.w D3, D0
+; bne renderChosenChar ; if D3 != D0, then there are more characters to render
 
-doneRenderingChosenTeam:
+; doneRenderingChosenTeam:
 
 
 ;;;; CURRENTLY FOCUSED CHARACTER NAME
