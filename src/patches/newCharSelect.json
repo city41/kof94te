@@ -366,13 +366,9 @@
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
-        ";;; restore what got clobbered",
-        "jsr $6536",
-        ";;; end replace",
         "move.b $IN_CHAR_SELECT_FLAG, D5",
         "cmpi.b #1, D5",
         "bne skipCharSelectMain",
-        "jsr $2LOAD_P_A_L_E_T_T_E_S",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
         "skipCharSelectMain:",
 
@@ -383,6 +379,30 @@
         "lea $MORE_STRING_DATA, A6",
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "movem.l $STORE_A0A1A2, A5/A6",
+
+        ";;; restore what got clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "have the game leave our palettes alone",
+      "address": "133642",
+      "subroutine": true,
+      "patchAsm": [
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne skip ; not in char select? nothing to do",
+        "cmpi.w #15, D0",
+        "ble skip ; not touching one of our palettes? nothing to do",
+        "cmpi.w #78, D0",
+        "bge skip ; not touching one of our palettes? nothing to do",
+        "move.w #78, D0  ; have it write into palette 78",
+        "skip:",
+        "lea $400000, A1",
+        "done:",
         "rts"
       ]
     },
@@ -494,24 +514,6 @@
 
         "skipPlayer2:",
         "done:",
-        "rts"
-      ]
-    },
-    {
-      "skip": true,
-      "type": "prom",
-      "description": "load palettes just after vblank",
-      "address": "132be4",
-      "subroutine": true,
-      "patchAsm": [
-        ";;; replace what was clobbered",
-        "jsr $6536",
-        ";;; end replace",
-        "move.b $IN_CHAR_SELECT_FLAG, D5",
-        "cmpi.b #1, D5",
-        "bne skipLoadPalettes",
-        "jsr $2LOAD_P_A_L_E_T_T_E_S",
-        "skipLoadPalettes:",
         "rts"
       ]
     },
