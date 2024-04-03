@@ -370,7 +370,6 @@
         "cmpi.b #1, D5",
         "bne skipCharSelectMain",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
-        "skipCharSelectMain:",
 
         ";;; now put fix strings onto the screen",
         "movem.l A5/A6,$STORE_A0A1A2",
@@ -380,6 +379,7 @@
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "movem.l $STORE_A0A1A2, A5/A6",
 
+        "skipCharSelectMain:",
         ";;; restore what got clobbered",
         "jsr $6536",
         ";;; end replace",
