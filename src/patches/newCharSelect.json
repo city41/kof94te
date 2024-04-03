@@ -13,6 +13,7 @@
     "PALETTE_BLACK": "8000",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P1": "1083d3",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P2": "1081d3",
+    "VSTRING_DATA": "10f7d0",
     "FIX_STRING_DATA": "10f7e0",
     "MORE_STRING_DATA": "10f7f0",
     "NUM_PLAYER_MODE": "10f7fc",
@@ -81,23 +82,6 @@
       "subroutine": true,
       "symbol": "STRING_TO_FIX_LAYER_ROUTINE",
       "patchAsm": "stringToFixLayer.asm"
-    },
-    {
-      "type": "prom",
-      "description": "set up to show version on title screen",
-      "subroutine": true,
-      "address": "132608",
-      "patchAsm": [
-        ";;; restore what was clobbered",
-        "move.b #1, $10fdaf ; set BIOS_USE_MODE to 'Title'",
-
-        ";;; set up the version string values for the general string routine",
-        ";;; [w:fix layer location][l: string pointer]",
-        "move.w #$7322, $FIX_STRING_DATA         ; set up the version string's fix write location",
-        "move.l #$2VERSION, $FIX_STRING_DATA + 2 ; set up the pointer to the version string",
-        "move.w #150, $FIX_STRING_DATA + 6      ; countdown",
-        "rts"
-      ]
     },
     {
       "type": "prom",
@@ -369,10 +353,12 @@
         "move.b $IN_CHAR_SELECT_FLAG, D5",
         "cmpi.b #1, D5",
         "bne skipCharSelectMain",
-        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
 
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
         ";;; now put fix strings onto the screen",
         "movem.l A5/A6,$STORE_A0A1A2",
+        "lea $VSTRING_DATA, A6",
+        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "lea $FIX_STRING_DATA, A6",
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "lea $MORE_STRING_DATA, A6",

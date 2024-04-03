@@ -185,4 +185,9 @@ move.w #$7025, $MORE_STRING_DATA         ; set up the version string's fix write
 move.l #$2MORE_INFO, $MORE_STRING_DATA + 2 ; set up the pointer to the version string
 move.w #300, $MORE_STRING_DATA + 6      ; countdown
 
+;;; put the version string up
+move.w #$7026, $VSTRING_DATA         ; set up the version string's fix write location
+move.l #$2VERSION, $VSTRING_DATA + 2 ; set up the pointer to the version string
+move.w #300, $VSTRING_DATA + 6      ; countdown
+
 rts

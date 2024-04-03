@@ -207,7 +207,7 @@ function getVersionStringPatch(): StringPromPatch {
   return {
     type: "prom",
     string: true,
-    value: `kof94te v${version}`,
+    value: `     v${version}                           `,
     symbol: "VERSION",
   };
 }
