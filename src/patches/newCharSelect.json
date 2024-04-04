@@ -5,6 +5,7 @@
     "end": "bfff0"
   },
   "symbols": {
+    "ROM_CONTINUE_POSITION_TABLE": "45448",
     "BIOS_PLAYER_MOD1": "10fdb6",
     "BIOS_PLAYER_MOD2": "10fdb7",
     "BIOS_P1CHANGE": "10fd97",
@@ -44,7 +45,7 @@
     "IN_CHAR_SELECT_FLAG": "10f8e4",
     "STORE_A0A1A2": "10f8e6",
     "MOVEM_STORAGE": "10f8f2",
-    "WIN_SCREEN_POSITION_TABLE": "10f910",
+    "AFTER_SCREEN_POSITION_TABLE": "10f910",
     "GRID_IMAGE_SI": "15b",
     "P1_CURSOR_SI": "16d",
     "P2_CURSOR_SI": "16f",
@@ -555,7 +556,7 @@
         ";;; and normally the game would use that to pick which init routine to use",
         "move.w #0, D2 ; here we are just forcing the game to always choose the first routine",
 
-        "lea $WIN_SCREEN_POSITION_TABLE, A0 ; get our position table set up",
+        "lea $AFTER_SCREEN_POSITION_TABLE, A0 ; get our position table set up",
 
         ";; first character, move to center",
         "clr.w D6",
@@ -590,18 +591,16 @@
     },
     {
       "type": "prom",
+      "description": "Have game use our dynamic x position table for continue screen instead of the canned rom one",
+      "address": "145422",
+      "patchAsm": ["lea $AFTER_SCREEN_POSITION_TABLE, A0"]
+    },
+    {
+      "type": "prom",
       "description": "Load the actual losing characters into the continue screen",
       "address": "145da8",
       "subroutine": true,
-      "patchAsm": [
-        ";;; nothing to restore from the clobber",
-        ";;; this has characters overlap with each other depending on if they are",
-        ";;; leader, first, or second, similar to win scene",
-        "move.b $P1_CHOSEN_CHAR0, $5552(A5)",
-        "move.b $P1_CHOSEN_CHAR1, $5553(A5)",
-        "move.b $P1_CHOSEN_CHAR2, $5554(A5)",
-        "rts"
-      ]
+      "patchAsm": "continueScreenInit.asm"
     }
   ]
 }

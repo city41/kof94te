@@ -38,3 +38,5 @@ The table at 45448 looks like it might be 48 words, x/y for each character?
 If that is true, then Heidern will be at (9d,61) or (157,97)
 
 continueX.lua confirms that is the table indeed!
+
+At 45428, it does move.l, so this implies the table is xy pairs
