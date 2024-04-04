@@ -552,6 +552,21 @@
         "move.w #0, D2",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "Load the actual losing characters into the continue screen",
+      "address": "145da8",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; nothing to restore from the clobber",
+        ";;; this has characters overlap with each other depending on if they are",
+        ";;; leader, first, or second, similar to win scene",
+        "move.b $P1_CHOSEN_CHAR0, $5552(A5)",
+        "move.b $P1_CHOSEN_CHAR1, $5553(A5)",
+        "move.b $P1_CHOSEN_CHAR2, $5554(A5)",
+        "rts"
+      ]
     }
   ]
 }
