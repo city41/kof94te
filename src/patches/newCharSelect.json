@@ -44,6 +44,7 @@
     "IN_CHAR_SELECT_FLAG": "10f8e4",
     "STORE_A0A1A2": "10f8e6",
     "MOVEM_STORAGE": "10f8f2",
+    "WIN_SCREEN_POSITION_TABLE": "10f910",
     "GRID_IMAGE_SI": "15b",
     "P1_CURSOR_SI": "16d",
     "P2_CURSOR_SI": "16f",
@@ -543,13 +544,47 @@
     },
     {
       "type": "prom",
-      "description": "prevent win screens from locking up by always choosing team leader",
+      "description": "Set up win screen based on custom team",
       "address": "13fd40",
       "subroutine": true,
       "patchAsm": [
         ";;; nothing to restore from the clobber",
-        ";;;just always pick the team leader",
-        "move.w #0, D2",
+        ";;;just always pick the team leader routine for now",
+        ";;; there are three win screen init routines, each put characters in different locations",
+        ";;; depending on who won the match, D2 will be 0, 1 or 2",
+        ";;; and normally the game would use that to pick which init routine to use",
+        "move.w #0, D2 ; here we are just forcing the game to always choose the first routine",
+
+        "lea $WIN_SCREEN_POSITION_TABLE, A0 ; get our position table set up",
+
+        ";; first character, move to center",
+        "clr.w D6",
+        "lea $62756, A2",
+        "move.b $P1_CHOSEN_CHAR0, D6",
+        "add.w D6, D6",
+        "add.w D6, D6",
+        "move.w (A2, D6.w), D7",
+        "move.w D7, (A0, D6.w)",
+
+        ";; second character, to a side",
+        "clr.w D6",
+        "lea $626ee, A2",
+        "move.b $P1_CHOSEN_CHAR1, D6",
+        "add.w D6, D6",
+        "add.w D6, D6",
+        "move.w (A2, D6.w), D7",
+        "move.w D7, (A0, D6.w)",
+
+        ";; third character, to a side",
+        "clr.w D6",
+        "lea $627be, A2",
+        "move.b $P1_CHOSEN_CHAR2, D6",
+        "add.w D6, D6",
+        "add.w D6, D6",
+        "move.w (A2, D6.w), D7",
+        "move.w D7, (A0, D6.w)",
+
+        "lea $P1_CHOSEN_CHAR0, A2 ; point the game at our custom team list instead of the canned ones",
         "rts"
       ]
     },

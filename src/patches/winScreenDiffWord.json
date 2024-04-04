@@ -1,0 +1,15 @@
+{
+  "description": "have 3fd76 set 3fdb0's word",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "word",
+      "address": "13fda6",
+      "patchAsm": ["move.l #$627be, $506a(A5)"]
+    }
+  ]
+}

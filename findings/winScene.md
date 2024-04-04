@@ -188,3 +188,43 @@ But this often shows a widly different team from what the player is expecting. B
 ## Displaying the winners
 
 The three routines, 3fd76, 3fdb0, 3fdea all are very similar. They move several things into memory, but most notably they move the current team into 10d065-7. All three do this. They move other things too, but that sticks out.
+
+## The double words at the end
+
+At the end of these functions they each move a differet double word to 10d06a
+
+3fd76 -> 626ee Terry needs to win to hit this, order: Andy/Terry/Joe
+
+- 10d062: 1112 130f 1011
+
+3fdb0 -> 62756 Andy needs to win, order: Terry/Andy/Joe
+
+- 10d062: 1112 130f 1011
+
+3fdea -> 627be Joe needs to win, order: Andy/Joe/Terry
+
+- 10d062: 1312 1111 100f
+
+These seem like rom addresses
+
+(Terry is the winner)
+having 3fd76 set 62756: from Andy/Terry/Joe to Terry/Andy/Joe
+having 3fd76 set 627be: from Andy/Terry/Joe to Andy/Joe/Terry
+
+## positioning routine
+
+The routine at 3fba4 is used to position the portraits, using one of the rom addresses that one of the three init routines set.
+
+## Plan
+
+If character is a leader
+
+- table 626ee -> center
+- 62756 -> left
+- 627be -> right
+
+If character is second
+
+- table 62756 -> center
+- 626ee -> left
+- 627be -> right

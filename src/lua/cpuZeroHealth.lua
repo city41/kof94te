@@ -31,3 +31,14 @@ health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "r
 timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
 
 -- winner_handler = mem:install_write_tap(winner_address, winner_address + 3, "winner write", on_winner_write)
+
+-- portrait_address = 0x10913c
+
+-- function on_portrait_memory_read(offset, data, mask)
+-- 	if offset == portrait_address and data == 0xffdf then
+-- 		print("returning 0")
+-- 		return 0
+-- 	end
+-- end
+
+-- portrait_mem_handler = mem:install_read_tap(portrait_address, portrait_address + 1, "read", on_portrait_memory_read)
