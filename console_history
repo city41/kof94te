@@ -1,0 +1,6 @@
+print(tonumber("12"))
+print(tonumber("12",16))
+print(tonumber("012",16))
+print(tonumber(manager.machine.devices[":maincpu"].state["PC"] ,16))
+print(tonumber(tostring(manager.machine.devices[":maincpu"].state["PC"]),16))
+

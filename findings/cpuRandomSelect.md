@@ -141,10 +141,6 @@ A1 = 101B00
 
 ### btst'ing
 
-## D0 when this gets hit prepping a team select
-
-(guessing on the team assignments)
-
 | bit | value | team    |
 | --- | ----- | ------- |
 | 6   | 40    | Mexico  |
