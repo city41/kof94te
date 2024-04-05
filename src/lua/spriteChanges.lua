@@ -65,9 +65,13 @@ function getSpriteIndex()
 	return -1
 end
 
+function getPalette(data)
+	return data >> 8
+end
+
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)
-	local inCharSelect = mem:read_u8(0x10f800) == 1
+	local tag = mem:read_range(0x108110, 0x108117, 8)
 
 	if offset == REG_VRAMADDR then
 		next_vram_index = data
@@ -78,8 +82,11 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteIndex() == SPRITE_INDEX and inCharSelect then
-			print(string.format("%s: value: %x at PC:%s", getSpriteControlBlock(), data, cpu.state["PC"]))
+		if getSpriteControlBlock() == "scb1/odd" and tag == "P1  TEAM" then
+			-- print(string.format("%s: value: %x at PC:%s", getSpriteControlBlock(), data, cpu.state["PC"]))
+			if getPalette(data) == 0xe9 then
+				print(string.format("setting grey palette at %s for si %d", cpu.state["PC"], getSpriteIndex()))
+			end
 		end
 
 		vram[next_vram_index] = data
