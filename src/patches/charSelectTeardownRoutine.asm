@@ -13,6 +13,7 @@ move.b D7, $108236
 move.b $P1_CHOSEN_CHAR2, D7
 move.b D7, $108237
 
+
 skipPlayer1:
 
 ;; move player 2's choices where the game expects them

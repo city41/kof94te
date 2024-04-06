@@ -1,0 +1,23 @@
+yarn run v1.22.21
+$ mame -w -nofilter -nomouse aes kof94 -sound none -autoboot_script src/lua/altColorTas.lua -debug
+pressing start to enter title, o: 380000, d: 7fff, m: ff00
+continuing to press start to enter title, o: 380000, d: 7fff, m: ff00
+continuing to press start to enter title, o: 380000, d: 7fff, m: ff00
+pressing start to play, o: 380000, d: 7fff, m: ff00
+continuing to press start to play, o: 380000, d: 7fff, m: ff00
+continuing to press start to play, o: 380000, d: 7fff, m: ff00
+continuing to press start to play, o: 380000, d: 7fff, m: ff00
+pressing a to choose team play, o: 300000, d: ff00, m: ff00
+continuing to press a to choose team play, o: 300000, d: ff00, m: ff00
+continuing to press a to choose team play, o: 300000, d: ff00, m: ff00
+pressing a to choose difficulty, o: 300000, d: ff00, m: ff00
+continuing to press a to choose difficulty, o: 300000, d: ff00, m: ff00
+continuing to press a to choose difficulty, o: 300000, d: ff00, m: ff00
+pressing a to skip how to play, o: 300000, d: ff00, m: ff00
+continuing to press a to skip how to play, o: 300000, d: ff00, m: ff00
+continuing to press a to skip how to play, o: 300000, d: ff00, m: ff00
+pressing to choose Italy, o: 300000, d: ff00, m: ff00
+continuing to press to choose Italy, o: 300000, d: ff00, m: ff00
+continuing to press to choose Italy, o: 300000, d: ff00, m: ff00
+Average speed: 95.78% (15 seconds)
+Done in 19.90s.

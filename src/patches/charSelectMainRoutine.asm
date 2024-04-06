@@ -1,5 +1,9 @@
 movem.l A0-A2,$STORE_A0A1A2
 
+;; force alt colors for p1 side
+move.b #1, $10d01c
+move.b #1, $1029d8
+
 btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq skipPlayer1
 

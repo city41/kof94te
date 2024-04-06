@@ -155,3 +155,15 @@ The game writes 1 at 1029d8 for char0, but it also writes ff to 102978 at 379d8
 1081d8 for p1 side and 1083d8 for p2 side is a byte that determines if the entire team gets alt colors in team and order select.
 
 The coloring does not carry into the game
+
+## TAS findings
+
+At 3746a, the game tests to see if any buttons are pressed. If A or B are pressed, 0 is written to 10d01, otherwise a 1 is written there.
+
+Later the game pulls that 0/1 back out at 32f0. Here it uses this value to setup a ROM address pointer.
+
+At 32e6 it loads the character id at 102970 into D0. It then quadruples D0 and adds on that 0/1 value as well, which is also quadrupled.
+
+The result is a pointer to a palette set, either the main palette or alternate, depending on that 0/1.
+
+This all happens in subroutine 32e4.
