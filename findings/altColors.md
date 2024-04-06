@@ -167,3 +167,119 @@ At 32e6 it loads the character id at 102970 into D0. It then quadruples D0 and a
 The result is a pointer to a palette set, either the main palette or alternate, depending on that 0/1.
 
 This all happens in subroutine 32e4.
+
+## subroutine 32e4
+
+Input parameters
+
+| reg | offset | use                                                                      |
+| --- | ------ | ------------------------------------------------------------------------ |
+| A4  | $70    | pointer to character id                                                  |
+| A4  | $d8    | pointer to reg/alt palette flag                                          |
+| A4  | $30    | It adds $10 to it and writes it to $109a66, it is E in the case of Terry |
+
+    cycles  660
+     beamx    54
+     beamy    69
+     frame  752
+     flags  ..S........
+
+---
+
+        PC  0032E4
+        SR  2000
+        SP  0010F2F0
+       USP  00000000
+       SSP  0010F2F0
+        D0  00000000
+        D1  00200000
+        D2  749D0023
+        D3  0000FFFF
+        D4  709B0F20
+        D5  8021FFFF
+        D6  00010000
+        D7  00102900
+        A0  000379A2
+        A1  00108902
+        A2  000534F0
+        A3  00108FA8
+        A4  00102900
+        A5  00108000
+        A6  0010BA1E
+        A7  0010F2F0
+        IR  00004EB9
+
+PREF_ADDR 2BE540
+PREF_DATA 000049F9
+
+before
+
+    cycles  658
+     beamx    55
+     beamy    69
+     frame  758
+     flags  ..S..........Z.
+
+---
+
+        PC  2BE544
+        SR  2004
+        SP  0010F2F4
+       USP  00000000
+       SSP  0010F2F4
+        D0  00000000
+        D1  00200000
+        D2  749D0023
+        D3  0000FFFF
+        D4  709B0F20
+        D5  8041FFFF
+        D6  00010000
+        D7  00102900
+        A0  000379A2
+        A1  00108902
+        A2  000534F0
+        A3  00108FA8
+        A4  00102900
+        A5  00108000
+        A6  0010BA1E
+        A7  0010F2F4
+        IR  00006600
+
+PREF_ADDR 2BE542
+PREF_DATA 000000EE
+
+after
+
+    cycles  588
+     beamx    90
+     beamy    74
+     frame  758
+     flags  ..S............
+
+---
+
+        PC  2BE578
+        SR  2000
+        SP  0010F2F4
+       USP  00000000
+       SSP  0010F2F4
+        D0  00000000
+        D1  00200000
+        D2  749D0023
+        D3  0000FFFF
+        D4  709B0F20
+        D5  8041FFFF
+        D6  00010000
+        D7  00102900
+        A0  000379A2
+        A1  00108902
+        A2  000534F0
+        A3  00108FA8
+        A4  00102900
+        A5  00108000
+        A6  0010BA1E
+        A7  0010F2F4
+        IR  00004CF9
+
+PREF_ADDR 2BE578
+PREF_DATA 00000839
