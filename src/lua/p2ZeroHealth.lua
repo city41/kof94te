@@ -20,25 +20,20 @@ function on_timer_memory_write(offset, data, mask)
 	end
 end
 
--- winner_address = 0x10d064
-
--- function on_winner_write(offset, data, mask)
--- 	print(string.format("winner write, offset: %x, data: %x, mask: %x", offset, data, mask))
--- 	return 0x0f0f
--- end
-
 health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
 timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
 
--- winner_handler = mem:install_write_tap(winner_address, winner_address + 3, "winner write", on_winner_write)
+portrait_address = 0x10f94c
 
--- portrait_address = 0x10913c
+ret = 0
 
--- function on_portrait_memory_read(offset, data, mask)
--- 	if offset == portrait_address and data == 0xffdf then
--- 		print("returning 0")
--- 		return 0
--- 	end
--- end
+function on_portrait_memory_read(offset, data, mask)
+	if offset == portrait_address then
+		local r = data
+		ret = ret + 10
+		print(string.format("returning %d for terry, o: %x, d: %x, m: %x", r, offset, data, mask))
+		return r
+	end
+end
 
--- portrait_mem_handler = mem:install_read_tap(portrait_address, portrait_address + 1, "read", on_portrait_memory_read)
+portrait_mem_handler = mem:install_read_tap(portrait_address, portrait_address + 1, "read", on_portrait_memory_read)

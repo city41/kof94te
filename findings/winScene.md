@@ -205,7 +205,7 @@ At the end of these functions they each move a differet double word to 10d06a
 
 - 10d062: 1312 1111 100f
 
-These seem like rom addresses
+THese are rom addresses for three x/y position tables. Each character gets two words, one for x and one for y. There are 26 xy pairs, so for the 24 characters plus the two rugals?
 
 (Terry is the winner)
 having 3fd76 set 62756: from Andy/Terry/Joe to Terry/Andy/Joe
@@ -248,3 +248,11 @@ When the win screen runs, it needs to know who won the match. How does it do tha
 
 it looks like if 108238 is $80, then p1 lost
 and if 108438 is $80, then p2 lost
+
+## x/y location of portraits
+
+| character | word | where ends up |
+| --------- | ---- | ------------- |
+| Terry     | 0038 | center        |
+| Athena    | ffd7 | center        |
+| Kyo       | ff87 | center        |

@@ -53,6 +53,7 @@
     "STORE_A0A1A2": "10f8e6",
     "MOVEM_STORAGE": "10f8f2",
     "AFTER_SCREEN_POSITION_TABLE": "10f910",
+    "WIN_SCREEN_ALREADY_SET_LEFT": "10f912",
     "GRID_IMAGE_SI": "15b",
     "P1_CURSOR_SI": "16d",
     "P2_CURSOR_SI": "16f",
@@ -552,9 +553,22 @@
     },
     {
       "type": "prom",
+      "description": "Have game use our dynamic x position table for win screen instead of the canned rom one",
+      "address": "13fda6",
+      "patchAsm": ["move.l #$AFTER_SCREEN_POSITION_TABLE, $506a(A5)"]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "WIN_SCREEN_TABLES",
+      "patchAsm": "winScreenTables.asm"
+    },
+    {
+      "type": "prom",
       "description": "Set up win screen based on custom team",
       "address": "13fd40",
       "subroutine": true,
+      "symbol": "WINNER_SCREEN_INIT",
       "patchAsm": "winScreenInit.asm"
     },
     {
