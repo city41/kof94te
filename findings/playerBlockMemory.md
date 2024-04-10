@@ -207,7 +207,16 @@ PLAYER 1 79
 
 | start  | end (inclusive) | description                     |
 | ------ | --------------- | ------------------------------- |
-| 108110 | 108117          | 'P1 TEAM' is ascii              |
+| 108110 | 108117          | 'P1 TEAM' in ascii              |
 | 108235 | 108237          | Character IDs of p1 chosen team |
-| 108310 | 108317          | 'P2 TEAM' is ascii              |
-| 108435 | 108437          | Character IDs of p2 chosen team |
+
+# PLAYER X Decoded
+
+the blocks are tagged "PLAYER 1" and "PLAYER 2" while playing the match
+
+| start  | end (inclusive) | description                                      |
+| ------ | --------------- | ------------------------------------------------ |
+| 108110 | 108117          | 'PLAYER 1' in ascii                              |
+| 108231 | 108231          | The team Id (see teamIds.md), example Italy is 5 |
+| 108232 | 108234          | The character ids in order of when they fight    |
+| 108235 | 108237          | Character IDs of p1 chosen team, in team order   |

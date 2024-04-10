@@ -228,3 +228,23 @@ If character is second
 - table 62756 -> center
 - 626ee -> left
 - 627be -> right
+
+## Determining who the winning team was
+
+When the win screen runs, it needs to know who won the match. How does it do that?
+
+03FD0A moveq #$0, D0 7000
+; load team 1 id into D0
+03FD0C move.b ($231,A5), D0 102D 0231
+; load team 1's base address into A0 (108100)
+03FD10 lea ($100,A5), A0 41ED 0100
+; is 108238 -$80?
+03FD14 cmpi.b #-$80, ($238,A5) 0C2D 0080 0238
+; if it is, skip ahead
+03FD1A bne $3fd26 6600 000A
+; load team 2 id into D0
+03FD1E move.b ($431,A5), D0 102D 0431
+; load team 2's base address into A0 (108300)
+
+it looks like if 108238 is $80, then p1 lost
+and if 108438 is $80, then p2 lost
