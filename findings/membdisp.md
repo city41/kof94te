@@ -92,3 +92,16 @@ Team Italy
 | ecd48 | 18  | Rugal               |
 |       | 19  | O.Rugal             |
 |       | 1a  | Invisible Rugal (?) |
+
+# 108100 vs 108300
+
+379b6 cmpi.l #$108100, ($84, A4)
+
+I think the game is checking is this character on team one or two
+
+102984: 108100
+102b84: 108100
+102d84: 108100
+102f84: 108300
+103184: 108300
+103384: 108300

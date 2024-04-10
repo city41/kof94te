@@ -14,6 +14,10 @@
     "PALETTE_BLACK": "8000",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P1": "1083d3",
     "CPU_RANDOM_SELECT_COUNTER_FOR_P2": "1081d3",
+    "P1_CHOSEN_CHARS_IN_ORDER_OF_FIGHTING": "108232",
+    "P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108235",
+    "P2_CHOSEN_CHARS_IN_ORDER_OF_FIGHTING": "108432",
+    "P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108435",
     "VSTRING_DATA": "10f7d0",
     "FIX_STRING_DATA": "10f7e0",
     "MORE_STRING_DATA": "10f7f0",
@@ -23,8 +27,8 @@
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
     "P1_CHOSEN_CHAR0": "10f806",
-    "P1_CHOSEN_CHAR1": "10f807",
-    "P1_CHOSEN_CHAR2": "10f808",
+    "P1_CHOSEN_CHAR1": "10f808",
+    "P1_CHOSEN_CHAR2": "10f80a",
     "P1_NUM_CHOSEN_CHARS": "10f80c",
     "P1_FOCUSED_CHAR_NAME_FIX_ADDRESS": "10f80e",
     "P1_CHAR_NAME_TABLE_ADDRESS": "10f810",
@@ -33,8 +37,8 @@
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
-    "P2_CHOSEN_CHAR0": "10f8a8",
-    "P2_CHOSEN_CHAR1": "10f8a7",
+    "P2_CHOSEN_CHAR0": "10f8aa",
+    "P2_CHOSEN_CHAR1": "10f8a8",
     "P2_CHOSEN_CHAR2": "10f8a6",
     "P2_NUM_CHOSEN_CHARS": "10f8ac",
     "P2_FOCUSED_CHAR_NAME_FIX_ADDRESS": "10f8ae",
@@ -42,6 +46,8 @@
     "P2_CHOSEN_TEAM_SCREEN_X": "10f8b4",
     "P2CTSX_MULTIPLIER": "10f8b6",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
+    "AFTER_CHAR_SELECT_FLAG": "10f8e1",
+    "SET_CHAR_COLORS_COUNTER": "10f8e2",
     "IN_CHAR_SELECT_FLAG": "10f8e4",
     "STORE_A0A1A2": "10f8e6",
     "MOVEM_STORAGE": "10f8f2",
@@ -601,6 +607,15 @@
       "address": "145da8",
       "subroutine": true,
       "patchAsm": "continueScreenInit.asm"
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match)",
+      "address": "1032f0",
+      "subroutine": true,
+      "symbol": "SETUP_CHARACTER_COLORS",
+      "patchAsm": "setupCharacterColors.asm"
     }
   ]
 }

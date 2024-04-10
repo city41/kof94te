@@ -166,120 +166,52 @@ At 32e6 it loads the character id at 102970 into D0. It then quadruples D0 and a
 
 The result is a pointer to a palette set, either the main palette or alternate, depending on that 0/1.
 
-This all happens in subroutine 32e4.
+This all happens in subroutine 32e4
 
-## subroutine 32e4
+## How to know which character is which for setupCharacteColors
 
-Input parameters
+### It loads Terry and Ryo during HTP
 
-| reg | offset | use                                                                      |
-| --- | ------ | ------------------------------------------------------------------------ |
-| A4  | $70    | pointer to character id                                                  |
-| A4  | $d8    | pointer to reg/alt palette flag                                          |
-| A4  | $30    | It adds $10 to it and writes it to $109a66, it is E in the case of Terry |
+Terry: A4 101500, a4+84 is 108584
+Ryo: A4 101700 a4+84 is 108584
 
-    cycles  660
-     beamx    54
-     beamy    69
-     frame  752
-     flags  ..S........
+### It loads all six characters during demo --> ????
 
----
+### It will load all six characters for order select
 
-        PC  0032E4
-        SR  2000
-        SP  0010F2F0
-       USP  00000000
-       SSP  0010F2F0
-        D0  00000000
-        D1  00200000
-        D2  749D0023
-        D3  0000FFFF
-        D4  709B0F20
-        D5  8021FFFF
-        D6  00010000
-        D7  00102900
-        A0  000379A2
-        A1  00108902
-        A2  000534F0
-        A3  00108FA8
-        A4  00102900
-        A5  00108000
-        A6  0010BA1E
-        A7  0010F2F0
-        IR  00004EB9
+if a4+84 == 108100 --> team 1
+if a4+84 == 108300 --> team 2
 
-PREF_ADDR 2BE540
-PREF_DATA 000049F9
+### It will load all six characters at the start of each round
 
-before
+if a4 == 108100 --> team 1, char about to fight
+if a4 == 108300 --> team 2, char about to fight
+else
+if a4+84 == 108100 --> team 1
+if a4+84 == 108300 --> team 2
 
-    cycles  658
-     beamx    55
-     beamy    69
-     frame  758
-     flags  ..S..........Z.
+### win screen: p1 (human) lost to cpu
 
----
+- falling fighter: a4: 100900, a4+84: 108584
+- portrait 1: a4: 10907c, a4+84: 108584
+- portrait 2: a4: 10917c, a4+84: 108584
+- portrait 3: a4: 10927c, a4+84: 108584
 
-        PC  2BE544
-        SR  2004
-        SP  0010F2F4
-       USP  00000000
-       SSP  0010F2F4
-        D0  00000000
-        D1  00200000
-        D2  749D0023
-        D3  0000FFFF
-        D4  709B0F20
-        D5  8041FFFF
-        D6  00010000
-        D7  00102900
-        A0  000379A2
-        A1  00108902
-        A2  000534F0
-        A3  00108FA8
-        A4  00102900
-        A5  00108000
-        A6  0010BA1E
-        A7  0010F2F4
-        IR  00006600
+### win screen: p2 (human) lost to cpu
 
-PREF_ADDR 2BE542
-PREF_DATA 000000EE
+- falling fighter: a4: 100900, a4+84: 108584
+- portrait 1: a4: 10907c, a4+84: 108584
+- portrait 2: a4: 10917c, a4+84: 108584
+- portrait 3: a4: 10927c, a4+84: 108584
 
-after
+### continue screen: p1 (human) lost to cpu
 
-    cycles  588
-     beamx    90
-     beamy    74
-     frame  758
-     flags  ..S............
+- char 1: a4: 100500, a4+94: 108584
+- char 2: a4: 100700, a4+94: 108584
+- char 3: a4: 100900, a4+94: 108584
 
----
+### continue screen: p2 (human) lost to cpu
 
-        PC  2BE578
-        SR  2000
-        SP  0010F2F4
-       USP  00000000
-       SSP  0010F2F4
-        D0  00000000
-        D1  00200000
-        D2  749D0023
-        D3  0000FFFF
-        D4  709B0F20
-        D5  8041FFFF
-        D6  00010000
-        D7  00102900
-        A0  000379A2
-        A1  00108902
-        A2  000534F0
-        A3  00108FA8
-        A4  00102900
-        A5  00108000
-        A6  0010BA1E
-        A7  0010F2F4
-        IR  00004CF9
-
-PREF_ADDR 2BE578
-PREF_DATA 00000839
+- char 1: a4: 100500, a4+94: 108584
+- char 2: a4: 100700, a4+94: 108584
+- char 3: a4: 100900, a4+94: 108584

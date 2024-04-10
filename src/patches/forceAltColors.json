@@ -1,0 +1,16 @@
+{
+  "description": "Force characters to always use alt colors",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "Force alt color palette",
+      "address": "1032f0",
+      "subroutine": true,
+      "patchAsm": ["move.b #1, D1", "add.w D1, D1", "rts"]
+    }
+  ]
+}

@@ -10,13 +10,43 @@
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
 beq skipChoosingChar ; if three have been chosen, don't choose more
+; is this a single player game, and they are past the first fight? 
+; then char select is just about showing who they fight next, don't
+; let them do anything
 move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
+; if it is not zero, then the flag is set, don't let them choose
 bne skipChoosingChar
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; load effectively BIOS_PXCHANGE
 btst #$4, D0 ; is A pressed?
-beq skipChoosingChar ; no? not setting a character choice then
+bne choosingCharRegPalette ; yes? go on and set the character, regular palette
+btst #$5, D0 ; What about B?
+bne choosingCharRegPalette ; yes? go on and set the character, regular palette
+btst #$6, D0 ; Now C
+bne choosingCharAltPalette ; yes? set the character and alternate palette
+btst #$7, D0 ; And finally D
+bne choosingCharAltPalette ; yes? set the character and alternate palette
+bra skipChoosingChar ; nothing is pressed? then don't choose a character
 
+choosingCharRegPalette:
+move.b #0, D4 ; move the regular palette flag value into D4
+bra choosingChar
+
+
+choosingCharAltPalette:
+move.b #1, D4 ; move the alternate palette flag value into D4
+bra choosingChar
+
+choosingChar:
+; first set their palette flag
+movea.l A0, A2 ; load the player struct starting address
+adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0 ; grab how many chars have been chosen so far
+lsl.b #1, D0 ; double it, as characters are words : [char id]|[palette flag]
+adda.w D0, A2
+adda.w #1, A2 ; the palette flag is one byte past the character Id
+move.b D4, (A2) ; set the palette flag (either 0 for reg, or 1 for alt)
+; and then from here just set the character
 ;; figure out the character id based on cursor's location
 move.w $PX_CURSOR_X_OFFSET(A0), D0
 move.w $PX_CURSOR_Y_OFFSET(A0), D1
@@ -25,12 +55,14 @@ add.w D0, D1  ; then add X to get the index into the grid
 lea $2GRID_TO_CHARACTER_ID, A1
 adda.w D1, A1
 move.b (A1), D1 ; character Id from grid is now in D1
-movea.l A0, A2 ; load the first character chosen address
-adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2
+movea.l A0, A2 ; load the player struct starting address
+adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
+lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
 adda.w D0, A2   ; move forward based on how many characters are chosen
 move.b D1, (A2) ; set the chosen character
+lsr.b #1, D0 ; and de-double it, as we need to store how many chars are selected
 addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
 move.b #$61, $320000  ; play the sound effect
@@ -81,14 +113,13 @@ skipChoosingChar:
 ;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
 
 move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
-bne hidePlayerCursor
+bne hidePlayerCursor ; if past first fight, never show the player's cursor
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
-beq hidePlayerCursor
+beq hidePlayerCursor ; all three chosen? no need for a cursor anymore
 
-move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; load effectively BIOS_PXCHANGE
-lea $PX_CURSOR_X_OFFSET(A0), A1      ; pointer to cursor X
-move.w D6, D1 ; load the cursor's sprite index
+move.w D6, D0 ; load the cursor's sprite index
+; MOVE_CURSOR also wants the base player data in A0, which is already there
 jsr $2MOVE_CURSOR
 bra donePlayerCursor
 
@@ -100,68 +131,7 @@ jsr $2MOVE_SPRITE
 
 donePlayerCursor:
 
-; ;;;; RENDER CHOSEN TEAM ;;;;;;;;;;;;;;
-; move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D1
-; beq doneRenderingChosenTeam ; none chosen yet? skip this section
-
-; clr.w D3 ; starting with the 0'th character on the team
-
-; renderChosenChar:
-; lea $PX_CHOSEN_CHAR0_OFFSET(A0), A1 ; load the first character id address
-; adda.w D3, A1   ; move forward based on which character we are on
-; clr.w D2
-; move.b (A1), D2 ; load chosen character id
-
-; ;; set up the sprite index based on character index
-; move.w D3, D6 
-; mulu.w #2, D6
-; add.w D7, D6 ; add on the starting sprite index
-
-; move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
-; mulu.w D2, D5               ; multiply the offset by the character id to get the right avatar
-; lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
-
-; ;; parameters
-; ;; D5: offset into the data
-; ;; D6: starting sprite index
-; ;; A6: pointer to tile data
-; movem.w D0-D3, $MOVEM_STORAGE
-; jsr $2RENDER_STATIC_IMAGE
-; movem.w $MOVEM_STORAGE, D0-D3
-
-; ;;; now move it into place
-; ;; set up the sprite index based on character index
-; move.w D3, D0 
-; mulu.w #2, D0
-; add.w D7, D0
-
-; move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D1 ; set X to 32px or -32px
-; mulu.w D3, D1  ; move over for 1st and 2nd char
-
-; move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
-; add.w D6, D1 ; offset X depending on if p1/p2
-; move.w #315, D2 ; set Y to 181px
-
-; ;; parameters
-; ;; D0: sprite index
-; ;; D1: x
-; ;; D2: y
-; movem.w D0-D3, $MOVEM_STORAGE
-; jsr $2MOVE_SPRITE
-; movem.w $MOVEM_STORAGE, D0-D3
-
-; ;; now loop to next char if there is one
-; addq.w #1, D3 ; increment to next character index
-; clr.w D0
-; move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0 ; how many characters there are
-; cmp.w D3, D0
-; bne renderChosenChar ; if D3 != D0, then there are more characters to render
-
-; doneRenderingChosenTeam:
-
-
-;;;; CURRENTLY FOCUSED CHARACTER NAME
-;;; this clobbers A0, so putting last allows it to run safely
+; for the character currently under the cursor, show their name on the fix layer
 jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
 
 rts
