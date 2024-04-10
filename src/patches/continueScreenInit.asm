@@ -1,6 +1,6 @@
 ;;; continue screen init
 ;;; this routine clobbers the existing continue screen init routine
-;;; here we set it up to show the actualy chosen custom team instead of
+;;; here we set it up to show the actually chosen custom team instead of
 ;;; a canned team
 ;;; nothing to restore from the clobber
 
@@ -15,9 +15,10 @@ doneChoosingPlayer:
 
 
 ;; load the character ids from the team where the game will look for them
+;; note the incrememt is by two as characters are words [char id]|[palete flag]
 move.b (A2), $5552(A5)
-move.b $1(A2), $5553(A5)
-move.b $2(A2), $5554(A5)
+move.b $2(A2), $5553(A5)
+move.b $4(A2), $5554(A5)
 
 lea $AFTER_SCREEN_POSITION_TABLE, A0 ; get our position table set up
 lea $ROM_CONTINUE_POSITION_TABLE, A1 ; get our position table set up
@@ -37,7 +38,7 @@ move.l D7, (A0, D6.w) ; and stick it in place so the game can read it
 
 ;; second character, move to left
 clr.w D6
-move.b $1(A2), D6 ; get char1's character id
+move.b $2(A2), D6 ; get char1's character id
 add.w D6, D6 ; setting a long in memory, need to quadruple the offset
 add.w D6, D6 ; setting a long in memory, need to quadruple the offset
 move.l (A1, D6.w), D7 ; get the canned position which is an x word followed by a y word
@@ -50,7 +51,7 @@ move.l D7, (A0, D6.w) ; and stick it in place so the game can read it
 
 ;; third character, move to right
 clr.w D6
-move.b $2(A2), D6 ; get char2's character id
+move.b $4(A2), D6 ; get char2's character id
 add.w D6, D6 ; setting a long in memory, need to quadruple the offset
 add.w D6, D6 ; setting a long in memory, need to quadruple the offset
 move.l (A1, D6.w), D7 ; get the canned position which is an x word followed by a y word
