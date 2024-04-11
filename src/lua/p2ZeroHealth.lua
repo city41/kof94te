@@ -22,18 +22,3 @@ end
 
 health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
 timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
-
-portrait_address = 0x10f94c
-
-ret = 0
-
-function on_portrait_memory_read(offset, data, mask)
-	if offset == portrait_address then
-		local r = data
-		ret = ret + 10
-		print(string.format("returning %d for terry, o: %x, d: %x, m: %x", r, offset, data, mask))
-		return r
-	end
-end
-
-portrait_mem_handler = mem:install_read_tap(portrait_address, portrait_address + 1, "read", on_portrait_memory_read)

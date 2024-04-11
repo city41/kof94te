@@ -47,13 +47,11 @@
     "P2_CHOSEN_TEAM_SCREEN_X": "10f8b4",
     "P2CTSX_MULTIPLIER": "10f8b6",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
-    "AFTER_CHAR_SELECT_FLAG": "10f8e1",
-    "SET_CHAR_COLORS_COUNTER": "10f8e2",
     "IN_CHAR_SELECT_FLAG": "10f8e4",
     "STORE_A0A1A2": "10f8e6",
-    "MOVEM_STORAGE": "10f8f2",
     "AFTER_SCREEN_POSITION_TABLE": "10f910",
     "WIN_SCREEN_ALREADY_SET_LEFT": "10f912",
+    "MOVEM_STORAGE": "10f914",
     "GRID_IMAGE_SI": "15b",
     "P1_CURSOR_SI": "16d",
     "P2_CURSOR_SI": "16f",
@@ -585,7 +583,6 @@
       "patchAsm": "continueScreenInit.asm"
     },
     {
-      "skip": true,
       "type": "prom",
       "description": "Set up character colors (reg or alt, ie mirror match)",
       "address": "1032f0",

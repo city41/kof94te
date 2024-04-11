@@ -17,3 +17,5 @@ bp 32f0,, { printf "a4: %x, a4+84: %x",a4,d@(a4 + 84); g }
 
 
 bp 32ea,(d0 & ff) == 3
+
+bp 3530,, { printf "A3: %x, A2: %x, A4: %x",a3,a2,a4; g }
