@@ -55,6 +55,9 @@ move.b $2(A4), $P2_CHOSEN_CHAR0
 
 player2Done: 
 
+
+
+done:
 jsr $2CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE
 ;; and the last two sprites the game leaves, so need to truncate them
 move.w #$P2C1_SI + 4, D6
