@@ -9,8 +9,6 @@
 ;; 
 ;; see altColors.md for info on how to know what character is being loaded when this routine is called
 
-
-
 ;; store lots of stuff the game is using
 movem.l A0-A6/D0/D2-D7, $MOVEM_STORAGE
 
@@ -18,6 +16,7 @@ movem.l A0-A6/D0/D2-D7, $MOVEM_STORAGE
 move.b $IN_CHAR_SELECT_FLAG, D6
 cmpi.b #1, D6
 beq defaultChoice
+
 
 ;; figure out which character is loading
 move.l A4, D6
