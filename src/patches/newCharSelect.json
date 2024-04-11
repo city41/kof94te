@@ -393,9 +393,9 @@
         "bne skip ; not in char select? nothing to do",
         "cmpi.w #15, D0",
         "ble skip ; not touching one of our palettes? nothing to do",
-        "cmpi.w #78, D0",
+        "cmpi.w #80, D0",
         "bge skip ; not touching one of our palettes? nothing to do",
-        "move.w #78, D0  ; have it write into palette 78",
+        "move.w #80, D0  ; have it write into palette 78",
         "skip:",
         "lea $400000, A1",
         "done:",
@@ -592,6 +592,28 @@
       "subroutine": true,
       "symbol": "SETUP_CHARACTER_COLORS",
       "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Dont set character palettes during char select",
+      "address": "1032e4",
+      "subroutine": true,
+      "patchAsm": [
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "beq inCharSelect",
+        "; not in char select, set up D3 for looping as before",
+        "moveq #$d, D3",
+        "bra done",
+        "inCharSelect:",
+        "; in char select, set D3 to 1 so only one loop happens, less cpu usage",
+        "move.w #1, D3",
+        "lea $401900, A2 ; have it write to palette #200, which we don't care about",
+        "done:",
+        ";;; restore what was clobbered",
+        "move.w $70(A4), D0",
+        "rts"
+      ]
     }
   ]
 }

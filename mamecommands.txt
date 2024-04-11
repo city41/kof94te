@@ -15,3 +15,5 @@ trace traces/timerExhaustedTeamSelec.txt,,, { tracelog "D0=%x D1=%x D2=%x D3=%x 
 
 bp 32f0,, { printf "a4: %x, a4+84: %x",a4,d@(a4 + 84); g }
 
+
+bp 32ea,(d0 & ff) == 3
