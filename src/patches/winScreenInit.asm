@@ -4,7 +4,6 @@
 
 ;;; nothing to restore from the clobber
 
-movem.l A4/A5, $MOVEM_STORAGE
 
 ;; did the cpu win? if so, bail and just let the original win scene routines run
 btst #0, $NUM_PLAYER_MODE ; is p1 playing?
@@ -23,6 +22,7 @@ bne humanWon
 
 ;; cpu won, so just run the original routines
 cpuWon:
+movem.l A4/A5/D2, $MOVEM_STORAGE
 ;; but first, set human's team to not be a mirror match or england
 btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq cpuWon_setPlayerTwoTeam
@@ -38,10 +38,12 @@ bsr fudgeTeams
 bra cpuWon_done
 
 cpuWon_done:
+movem.l $MOVEM_STORAGE, A4/A5/D2
 jsr $3fd58
-bra done
+rts
 
 humanWon:
+movem.l A4/A5, $MOVEM_STORAGE
 btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq alteringTeams_checkP2
 ;; p1 is a human, make sure to fix the teams if needed
@@ -133,7 +135,7 @@ dbra D5, loadCharactersLoop
 
 movea.l A4, A2 ; point the game at the winning team list instead of the canned ones
 
-done:
+humanWon_done:
 movem.l $MOVEM_STORAGE, A4/A5
 rts
 
