@@ -65,7 +65,7 @@ dc.w $0
 dc.w $b9a
 dc.w $4d00
 dc.w $bca
-dc.w $2c00
+dc.w $2b00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $2
