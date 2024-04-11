@@ -187,8 +187,8 @@ bne figureOutCharPalette_cpu_checkChar1
 ;; flag and flip it
 move.b $1(A6), D3 ; get the other team's character's palette flag
 move.b #1, D2
-sub.b D2, D3 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
-move.b D3, D1 ; move the final answer into D1, where ultimately the game wants it
+sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
 bra figureOutCharPalette_done
 
 figureOutCharPalette_cpu_checkChar1:
@@ -199,8 +199,8 @@ bne figureOutCharPalette_cpu_checkChar2
 ;; flag and flip it
 move.b $3(A6), D3 ; get the other team's character's palette flag
 move.b #1, D2
-sub.b D2, D3 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
-move.b D3, D1 ; move the final answer into D1, where ultimately the game wants it
+sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
 bra figureOutCharPalette_done
 
 figureOutCharPalette_cpu_checkChar2:
@@ -211,8 +211,8 @@ bne figureOutCharPalette_defaultChoice ; chose a character the human didn't choo
 ;; flag and flip it
 move.b $5(A6), D3 ; get the other team's character's palette flag
 move.b #1, D2
-sub.b D2, D3 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
-move.b D3, D1 ; move the final answer into D1, where ultimately the game wants it
+sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
 bra figureOutCharPalette_done
 
 figureOutCharPalette_defaultChoice:
