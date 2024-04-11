@@ -593,6 +593,22 @@
     },
     {
       "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match) at the second location",
+      "address": "103374",
+      "subroutine": true,
+      "symbol": "SECOND_LOCATION_CAR_COLS",
+      "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match) at the second location",
+      "address": "103318",
+      "subroutine": true,
+      "symbol": "THIRD_LOCATION_CAR_COLS",
+      "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
       "description": "Dont set character palettes during char select",
       "address": "1032e4",
       "subroutine": true,
