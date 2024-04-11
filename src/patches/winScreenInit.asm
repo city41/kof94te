@@ -62,25 +62,33 @@ lea $WINNING_TEAM_LIST, A4 ; get the winning list ready to be populated
 
 ;; loop all three characters in
 move.w #2, D5   ; our loop counter
+
 loadCharactersLoop:
-lea $2WIN_SCREEN_TABLES, A2 ; load the x/y table starting addresses
 clr.w D6
+lea $2WIN_SCREEN_TABLES, A2 ; load the x/y table starting addresses
 move.b (A6), D6 ; get the character id into d6
 ;; the winner of the match is in D0, a gift to us from the game
 cmp.b D0, D6 ; did this character win the match?
-beq finishSettingUpChar
+beq setWinner
 cmpi.b #1, $WIN_SCREEN_ALREADY_SET_LEFT
 beq setRight
+
 ;;; ok this will be the left character
 move.b #1, $WIN_SCREEN_ALREADY_SET_LEFT
 adda.w #96, A2 ; move forward to the left table
+move.b D6, $1(A4) ; stick it second in the winning list
 bra finishSettingUpChar
 
 setRight:
 adda.w #192, A2 ; move forward to the right table
+move.b D6, $2(A4) ; stick it third in the winning list
+bra finishSettingUpChar
+
+setWinner:
+move.b D6, (A4) ; stick it first into the winning list
+bra finishSettingUpChar
 
 finishSettingUpChar:
-move.b D6, (A4)+ ; stick it into the winning list
 adda.w #2, A6   ; move the pointer to the next character
 add.w D6, D6    ; quadruple it as we are about to index into a table of double words 
 add.w D6, D6    ; quadruple it as we are about to index into a table of double words
@@ -91,7 +99,6 @@ move.w (A2, D6.w), D7 ; jump into the table and grab the y word
 move.w D7, (A0, D6.w) ; place the y word into our own dynamic table
 dbra D5, loadCharactersLoop
 
-suba.w #3, A4 ; move a4 back to the start, it got incremented 3 times
 movea.l A4, A2 ; point the game at the winning team list instead of the canned ones
 
 movem.l $MOVEM_STORAGE, A4
