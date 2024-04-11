@@ -2,6 +2,7 @@
 ;
 ; parameters
 ; A0: base pointer for p1 or p2 data
+; A1: base pointer for other player's data
 ; D6: sprite index start for cursor
 ; D7: sprite index start for chosen team
 
@@ -38,23 +39,17 @@ move.b #1, D4 ; move the alternate palette flag value into D4
 bra choosingChar
 
 choosingChar:
-; first set their palette flag
-movea.l A0, A2 ; load the player struct starting address
-adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
-move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0 ; grab how many chars have been chosen so far
-lsl.b #1, D0 ; double it, as characters are words : [char id]|[palette flag]
-adda.w D0, A2
-adda.w #1, A2 ; the palette flag is one byte past the character Id
-move.b D4, (A2) ; set the palette flag (either 0 for reg, or 1 for alt)
 ; and then from here just set the character
-;; figure out the character id based on cursor's location
+;; first, figure out the character id based on cursor's location
 move.w $PX_CURSOR_X_OFFSET(A0), D0
 move.w $PX_CURSOR_Y_OFFSET(A0), D1
 mulu.w #9, D1 ; multiply Y by 9
 add.w D0, D1  ; then add X to get the index into the grid
-lea $2GRID_TO_CHARACTER_ID, A1
-adda.w D1, A1
-move.b (A1), D1 ; character Id from grid is now in D1
+lea $2GRID_TO_CHARACTER_ID, A3
+adda.w D1, A3
+move.b (A3), D1 ; character Id from grid is now in D1
+
+; now set the chosen char id
 movea.l A0, A2 ; load the player struct starting address
 adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
 clr.w D0
@@ -62,6 +57,13 @@ move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
 adda.w D0, A2   ; move forward based on how many characters are chosen
 move.b D1, (A2) ; set the chosen character
+
+; then set their palette flag
+bsr flipPaletteFlagIfNeeded
+adda.w #1, A2 ; move forward one byte to the palette flag
+move.b D4, (A2) ; set the palette flag (either 0 for reg, or 1 for alt)
+
+; now store how many characters have been chosen
 lsr.b #1, D0 ; and de-double it, as we need to store how many chars are selected
 addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
@@ -134,4 +136,64 @@ donePlayerCursor:
 ; for the character currently under the cursor, show their name on the fix layer
 jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
 
+rts
+
+
+;; flipPaletteFlagIfNeeded
+;; -----
+;; given the incoming character and palette flag, switches to the other palette flag if:
+;; - this is versus mode
+;; - and the other player has already chosen this char/palette
+;;
+;; parameters
+;; ----------
+;; D1: the character id that was just chosen
+;; D4: the palette flag that was chosen
+;; A1: base pointer for other player's data
+;; 
+
+flipPaletteFlagIfNeeded:
+;; first see if this is versus mode
+btst #0, $NUM_PLAYER_MODE
+beq flipPaletteFlagIfNeeded_done ; p1 is not playing, not versus mode
+btst #1, $NUM_PLAYER_MODE
+beq flipPaletteFlagIfNeeded_done ; p2 is not playing, not versus mode
+;; this is versus mode
+cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
+beq flipPaletteFlagIfNeeded_done ; other player has not chosen any chars yet, no need to flip
+
+;; is their first character what we just chose?
+flipPaletteFlagIfNeeded_checkFirstChar:
+lea $PX_CHOSEN_CHAR0_OFFSET(A1), A6
+cmp.b (A6), D1
+bne flipPaletteFlagIfNeeded_checkSecondChar ; first character is someone else, move on
+adda.w #1, A6 ; move forward to the palette flag
+cmp.b (A6), D4 ; are the palettes the same?
+bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
+bra doFlip ; both teams chose same char, same palette, need to flip
+
+flipPaletteFlagIfNeeded_checkSecondChar:
+lea $PX_CHOSEN_CHAR1_OFFSET(A1), A6
+cmp.b (A6), D1
+bne flipPaletteFlagIfNeeded_checkThirdChar ; second character is someone else, move on
+adda.w #1, A6 ; move forward to the palette flag
+cmp.b (A6), D4 ; are the palettes the same?
+bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
+bra doFlip ; both teams chose same char, same palette, need to flip
+
+flipPaletteFlagIfNeeded_checkThirdChar:
+lea $PX_CHOSEN_CHAR2_OFFSET(A1), A6
+cmp.b (A6), D1
+bne flipPaletteFlagIfNeeded_done ; third character is someone else, we are good
+adda.w #1, A6 ; move forward to the palette flag
+cmp.b (A6), D4 ; are the palettes the same?
+bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
+bra doFlip ; both teams chose same char, same palette, need to flip
+
+doFlip:
+move.b #1, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+sub.b D4, D2  ; move the answer to D4, where it is expected
+move.b D2, D4
+
+flipPaletteFlagIfNeeded_done:
 rts
