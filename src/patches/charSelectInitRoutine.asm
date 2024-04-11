@@ -116,12 +116,8 @@ btst #1, $NUM_PLAYER_MODE ; but p2 is playing too? versus mode, skip
 bne p1_firstCharSelect
 
 ; single player mode, p1 side
-;; 1086a4 is non-zero on subsequent fights for single player mode. Not sure why yet.
-;; this allows char select to work past fight one,
-;; but there is more to understand
-;; TODO: understand this more
-move.w $1086a4, D5
-;; if it is zero, this is the very first char select
+cmpi.b #$80, $108238 ; player 1 is human, did they lose?
+;; if it is $80, then they lost and they continued, this is the very first char select
 beq p1_firstCharSelect
 ;; set flag to indicate to main this is not the first char select
 move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
@@ -145,12 +141,8 @@ btst #0, $NUM_PLAYER_MODE ; but p1 is playing too? versus mode, skip
 bne p2_firstCharSelect
 
 ; single player mode, p2 side
-;; 1086a4 is non-zero on subsequent fights for single player mode on p2 side too. Not sure why yet.
-;; this allows char select to work past fight one,
-;; but there is more to understand
-;; TODO: understand this more
-move.w $1086a4, D5
-;; if it is zero, this is the very first char select
+cmpi.b #$80, $108438 ; player 2 is human, did they lose?
+;; if it is $80, then they lost and they continued, this is the very first char select
 beq p2_firstCharSelect
 ;; set flag to indicate to main this is not the first char select
 move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
