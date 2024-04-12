@@ -119,6 +119,8 @@ bne p1_firstCharSelect
 cmpi.b #$80, $108238 ; player 1 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
 beq p1_firstCharSelect
+cmpi.b #$80, $108438
+bne p1_firstCharSelect ; if player 2 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
 ;; have main move onto cpu select right away
@@ -144,6 +146,8 @@ bne p2_firstCharSelect
 cmpi.b #$80, $108438 ; player 2 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
 beq p2_firstCharSelect
+cmpi.b #$80, $108238
+bne p2_firstCharSelect ; if player 1 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
 ;; have main move onto cpu select right away
