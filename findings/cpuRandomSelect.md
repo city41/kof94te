@@ -199,3 +199,14 @@ maybe another byte is how many teams have been defeated?
 ### After beating Mexico
 
 1087df: 4
+
+### Where the defeat byte is read
+
+| address | times       | theory                                                             |
+| ------- | ----------- | ------------------------------------------------------------------ |
+| 35100   | 8           | at start of fight, calculating how hard the cpu opponent should be |
+| 35100   | 8           | determing if 4 or 8 teams have been defeated for cutscene or boss  |
+| 35044   | 1           | noting a team has been defeated with bset                          |
+| 37dc8   | every frame | ???                                                                |
+| 37596   | every frame | ???                                                                |
+| 3765a   | every frame | ???                                                                |
