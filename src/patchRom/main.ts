@@ -297,7 +297,10 @@ async function main(patchJsonPaths: string[]) {
           subroutineInsertEnd = result.subroutineInsertEnd;
           symbolTable = result.symbolTable;
 
-          if (subroutineInsertEnd < subroutineInsertStart) {
+          if (
+            !!patchJson.subroutineSpace &&
+            subroutineInsertEnd < subroutineInsertStart
+          ) {
             throw new Error("patch used up all of the subroutine space");
           }
         } catch (e) {
