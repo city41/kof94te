@@ -210,3 +210,26 @@ maybe another byte is how many teams have been defeated?
 | 37dc8   | every frame | ???                                                                |
 | 37596   | every frame | ???                                                                |
 | 3765a   | every frame | ???                                                                |
+
+## calling the rng
+
+When the user presses A on team select, routine 375f8 is called
+
+This is only called once, just before cpu random select.
+
+;; call the RNG (I think), leaving a random byte in D0
+0375F8: 4EB8 2582 jsr $2582.w
+;; knock that random byte down to four bits
+0375FC: 0200 000F      andi.b  #$f, D0
+;; knock it down to 3 bits
+037600: E208 lsr.b #1, D0
+;; add 8 to it
+037602: 5040 addq.w #8, D0
+;; move it to 1081d2 (if p2 is playing) or 1083d2 (if p1 is playing)
+;; since the whole word is moved, the byte ends up in 108(1/3)d3, known
+;; to be CPU_RANDOM_SELECT_COUNTER_FOR_PX
+037604: 3940 00D2 move.w D0, ($d2,A4)
+037608: 397C 0004 00D4 move.w  #$4, ($d4,A4)
+03760E: 396C 00D4 00D6 move.w ($d4,A4), ($d6,A4)
+037614: 526C 00D0 addq.w #1, ($d0,A4)
+037618: 4E75 rts

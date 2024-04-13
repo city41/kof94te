@@ -103,6 +103,11 @@ skipPlayer2:
 
 
 ;; GENERAL VALUE INITIALIZATION
+cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams
+bne skipResetIndexes
+move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker byte
+skipResetIndexes:
+
 move.b #1, $IN_CHAR_SELECT_FLAG
 move.b #0, $SINGLE_PLAYER_PAST_FIRST_FIGHT
 

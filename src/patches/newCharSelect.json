@@ -18,6 +18,7 @@
     "P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108235",
     "P2_CHOSEN_CHARS_IN_ORDER_OF_FIGHTING": "108432",
     "P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108435",
+    "DEFEATED_TEAMS": "1087df",
     "WINNING_TEAM_LIST": "10f7c0",
     "VSTRING_DATA": "10f7d0",
     "FIX_STRING_DATA": "10f7e0",
@@ -53,6 +54,7 @@
     "CHAR_SELECT_COUNTER": "10f911",
     "AFTER_SCREEN_POSITION_TABLE": "10f912",
     "MOVEM_STORAGE": "10fa10",
+    "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb00",
     "GRID_IMAGE_SI": "15b",
     "P1_CURSOR_SI": "16d",
     "P2_CURSOR_SI": "16f",
@@ -661,6 +663,36 @@
         "move.w $70(A4), D0",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "Choose the next cpu team in single player mode, for now just incrementally",
+      "address": "1375fc",
+      "subroutine": true,
+      "patchAsm": [
+        ";; D0 contains the raw rng result",
+        "getNextTeam:",
+        "andi.w #$7, D0 ; chop it down to bottom 3 bits",
+        ";;; at this point we have a random 0-7",
+        ";;; now as long as it is a defeated team, increment",
+        "btst D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES",
+        "beq done ; not a defeated team, we're good",
+        "addi.b #1, D0 ; move onto the next team and try again",
+        "bra getNextTeam",
+        "done:",
+        "bset D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; store we've seen this team for next time",
+        ";;; this +7 causes a minimum of one loop for visual effect",
+        ";;; but will still land on the team we decided on",
+        ";;; 7 and not 8 because the game is using dbra",
+        "addq.w #7, D0",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "Get rid of the game's add 8 as we are adding 7 now (above)",
+      "address": "137602",
+      "patchAsm": ["nop"]
     }
   ]
 }
