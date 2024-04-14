@@ -56,10 +56,12 @@
     "MOVEM_STORAGE": "10fa10",
     "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb00",
     "GRID_IMAGE_SI": "15b",
-    "P1_CURSOR_SI": "16d",
-    "P2_CURSOR_SI": "16f",
-    "P1C1_SI": "171",
-    "P2C1_SI": "177",
+
+    "P1C1_SI": "16d",
+    "P2C1_SI": "173",
+    "P1_CURSOR_SI": "179",
+    "P2_CURSOR_SI": "17b",
+
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
     "PX_CURSOR_Y_OFFSET": "4",
@@ -132,6 +134,13 @@
       "subroutine": true,
       "symbol": "CHARACTER_GRID_IMAGE",
       "patchAsm": "character_grid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "rugal_character_grid image",
+      "subroutine": true,
+      "symbol": "RUGAL_CG_IMG",
+      "patchAsm": "rugal_character_grid.asm"
     },
     {
       "type": "prom",
@@ -251,6 +260,13 @@
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",
       "patchAsm": "charSelectMainRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "adds Rugal to the char select grid for the boss fight",
+      "subroutine": true,
+      "symbol": "PUT_RUGAL_ON_GRID",
+      "patchAsm": "putRugalOnGrid.asm"
     },
     {
       "type": "prom",
@@ -394,9 +410,9 @@
         "bne skip ; not in char select? nothing to do",
         "cmpi.w #15, D0",
         "ble skip ; not touching one of our palettes? nothing to do",
-        "cmpi.w #80, D0",
+        "cmpi.w #81, D0",
         "bge skip ; not touching one of our palettes? nothing to do",
-        "move.w #80, D0  ; have it write into palette 78",
+        "move.w #81, D0  ; have it write into palette 78",
         "skip:",
         "lea $400000, A1",
         "done:",
@@ -531,9 +547,13 @@
         "beq cpuIsDone ; it is versus mode, no need to wait for cpu",
         "btst #0, $NUM_PLAYER_MODE ; is p1 playing?",
         "beq skipPlayer1",
+        "cmpi.b #8, $108431 ; is the next fight Rugal?",
+        "beq cpuIsDone",
         "move.b $CPU_RANDOM_SELECT_COUNTER_FOR_P1, D0 ; load the cpu random countdown",
         "bra checkIfCpuIsDone",
         "skipPlayer1:",
+        "cmpi.b #8, $108231 ; is the next fight Rugal?",
+        "beq cpuIsDone",
         "move.b $CPU_RANDOM_SELECT_COUNTER_FOR_P2, D0 ; load the cpu random countdown",
         "checkIfCpuIsDone:",
         "cmpi.b #$ff, D0 ; if it goes from 0 -> -1, then cpu is done random selecting",

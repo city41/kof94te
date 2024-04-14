@@ -59,6 +59,26 @@ const tilesToClear = [
     start: 1762,
     end: 1767,
   },
+  {
+    // First Rugal span
+    start: 1456,
+    end: 1460,
+  },
+  {
+    // Second Rugal span
+    start: 1472,
+    end: 1476,
+  },
+  {
+    // Third Rugal span
+    start: 1755,
+    end: 1759,
+  },
+  {
+    // Fourth Rugal span
+    start: 1771,
+    end: 1775,
+  },
 ];
 
 const FIX_TILE_SIZE = 32;

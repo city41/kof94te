@@ -14,5 +14,6 @@ It sometimes uses these values either as distinct bytes or as bits in a single b
 | 5   | 20         | Italy   |
 | 6   | 40         | Mexico  |
 | 7   | 80         | England |
+| 8   |            | Rugal   |
 
 "byte value" means that when these are used in bits, that is what the byte looks like. When used as bits they are stored in the same byte, so value 3 (bits 0 and 1) means "Brazil and China"

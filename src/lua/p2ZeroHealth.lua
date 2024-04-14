@@ -15,7 +15,7 @@ function on_timer_memory_write(offset, data, mask)
 	local tag = mem:read_range(0x108110, 0x108117, 8)
 
 	if tag == "PLAYER 1" and offset == timer_address and mask == 0xff00 and (data & mask) == 0x6000 then
-		print("returning one")
+		print("returning 1")
 		return 0x100
 	end
 end

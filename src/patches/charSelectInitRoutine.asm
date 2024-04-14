@@ -101,6 +101,15 @@ jsr $2RENDER_STATIC_IMAGE
 skipPlayer2:
 
 
+cmpi.b #$ff, $DEFEATED_TEAMS
+beq doRugal
+bra skipRugal
+
+doRugal:
+jsr $2PUT_RUGAL_ON_GRID
+skipRugal:
+
+
 
 ;; GENERAL VALUE INITIALIZATION
 cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams

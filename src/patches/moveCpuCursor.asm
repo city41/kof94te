@@ -4,7 +4,25 @@
 ; d7: sprite index of cpu cursor
 ; A0: address of current CPU index
 
+cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
+bne doRegularCpuCursor
+;; all teams have been defeated, place the cursor on Rugal
 
+;; left side for Rugal
+move.w #142, D1 ; X 
+move.w #353, D2 ; Y
+move.w D7, D0
+jsr $2MOVE_SPRITE
+
+;; right side for Rugal
+move.w #160, D1 ; X 
+move.w #353, D2 ; Y
+move.w D7, D0
+addi.w #1, D0   ; move onto next sprite index
+jsr $2MOVE_SPRITE
+bra done
+
+doRegularCpuCursor:
 clr.w D0
 ; load current CPU index
 move.b (A0), D0
@@ -31,4 +49,5 @@ addi.w #1, D7   ; move onto next sprite index
 move.w D7, D0
 jsr $2MOVE_SPRITE
 
+done:
 rts

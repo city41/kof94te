@@ -13,6 +13,10 @@
         "dest": "../src/patches/character_grid.asm"
       },
       {
+        "template": "rugal_character_grid.asm.hbr",
+        "dest": "../src/patches/rugal_character_grid.asm"
+      },
+      {
         "template": "avatars.asm.hbr",
         "dest": "../src/patches/avatars.asm"
       },
@@ -40,6 +44,12 @@
       "imageFile": "./character_grid.png",
       "x": 16,
       "y": 62
+    },
+    {
+      "name": "rugal_character_grid",
+      "imageFile": "./rugal_character_grid.png",
+      "x": 144,
+      "y": 144
     },
     {
       "name": "avatars",

@@ -41,11 +41,8 @@ jsr $2CHAR_SELECT_PLAYER_ROUTINE
 skipPlayer2:
 
 ;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
-beq prepCpuCursor ; not playing? then we know there is a cpu
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
-beq prepCpuCursor ; not playing? then we know there is a cpu
-bra skipCpuCursor ; both players are playing, no cpu (versus mode)
+cmpi.b #3, $NUM_PLAYER_MODE ; is this versus mode?
+beq skipCpuCursor ; it is? no cpu then
 
 prepCpuCursor:
 

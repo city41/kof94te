@@ -1,4 +1,4 @@
-dc.w 64 ; number of palettes
+dc.w 65 ; number of palettes
 ;;;;; palette 0 (0) ;;;;;
 dc.w $8000
 dc.w $8000
@@ -1038,6 +1038,23 @@ dc.w $8d00
 dc.w $9002
 ;;;;; palette 3d (61) ;;;;;
 dc.w $5f0f
+dc.w $b72
+dc.w $eb3
+dc.w $3fd6
+dc.w $4010
+dc.w $4f90
+dc.w $7fff
+dc.w $8341
+dc.w $8620
+dc.w $8e95
+dc.w $9b51
+dc.w $afb9
+dc.w $efeb
+dc.w $f000
+dc.w $8000
+dc.w $8000
+;;;;; palette 3e (62) ;;;;;
+dc.w $5f0f
 dc.w $3
 dc.w $750
 dc.w $1000
@@ -1053,7 +1070,7 @@ dc.w $8000
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 3e (62) ;;;;;
+;;;;; palette 3f (63) ;;;;;
 dc.w $5f0f
 dc.w $e21
 dc.w $fa4
@@ -1070,7 +1087,7 @@ dc.w $ff98
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 3f (63) ;;;;;
+;;;;; palette 40 (64) ;;;;;
 dc.w $5f0f
 dc.w $59a5
 dc.w $5b61

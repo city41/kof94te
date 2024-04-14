@@ -1,0 +1,22 @@
+;;;;; start rugal_character_grid static sprite data ;;;;;
+dc.w {{cromImages.rugal_character_grid.width}} ; width in tiles
+dc.w {{cromImages.rugal_character_grid.height}} ; height in tiles
+
+;; start sprite tiles
+{{#each cromImages.rugal_character_grid.columns}}
+;;; column {{@index}}
+
+;; SCB1 word pairs
+{{#each scb1}}
+dc.w ${{hex evenWord}}
+dc.w ${{hex oddWord}}
+{{/each}}
+
+;; SCB3 vertical position|sticky|size
+dc.w ${{hex scb3}}
+
+;; SCB4 horizontal position
+dc.w ${{hex scb4}}
+
+{{/each}}
+;; end tiles
