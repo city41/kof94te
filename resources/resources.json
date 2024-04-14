@@ -13,6 +13,10 @@
         "dest": "../src/patches/character_grid.asm"
       },
       {
+        "template": "team_to_grey_out_table.asm.hbr",
+        "dest": "../src/patches/team_to_grey_out_table.asm"
+      },
+      {
         "template": "rugal_character_grid.asm.hbr",
         "dest": "../src/patches/rugal_character_grid.asm"
       },
@@ -54,6 +58,10 @@
     {
       "name": "avatars",
       "imageFile": "./avatars.png"
+    },
+    {
+      "name": "character_grid_grey",
+      "imageFile": "./character_grid_grey.png"
     },
     {
       "name": "p1_cursor",

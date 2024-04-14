@@ -1,8 +1,6 @@
 // kof94's crom pairs are 4 megabytes
 const TILES_PER_PAIR = 32768;
 // tiles in the croms that are empty or unused
-// the hack needs about 110 tiles
-// this nets 220 tiles
 export const cromSpans = [
   {
     globalOffset: TILES_PER_PAIR * 0,

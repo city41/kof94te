@@ -5,6 +5,7 @@
     "end": "bfff0"
   },
   "symbols": {
+    "VRAMADDR": "3c0000",
     "ROM_CONTINUE_POSITION_TABLE": "45448",
     "BIOS_PLAYER_MOD1": "10fdb6",
     "BIOS_PLAYER_MOD2": "10fdb7",
@@ -127,6 +128,13 @@
       "subroutine": true,
       "symbol": "PALETTES",
       "patchAsm": "palettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "team to grey out table for greying out defeated teams",
+      "subroutine": true,
+      "symbol": "TEAM_TO_GREY_OUT_TABLE",
+      "patchAsm": "team_to_grey_out_table.asm"
     },
     {
       "type": "prom",
@@ -270,6 +278,13 @@
     },
     {
       "type": "prom",
+      "description": "greys out teams that have been defeated on the character grid",
+      "subroutine": true,
+      "symbol": "GREY_OUT_TEAMS",
+      "patchAsm": "greyOutDefeatedTeams.asm"
+    },
+    {
+      "type": "prom",
       "description": "init routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_INIT_ROUTINE",
@@ -408,11 +423,11 @@
         "move.b $IN_CHAR_SELECT_FLAG, D5",
         "cmpi.b #1, D5",
         "bne skip ; not in char select? nothing to do",
-        "cmpi.w #15, D0",
-        "ble skip ; not touching one of our palettes? nothing to do",
-        "cmpi.w #81, D0",
-        "bge skip ; not touching one of our palettes? nothing to do",
-        "move.w #81, D0  ; have it write into palette 78",
+        ";;cmpi.w #15, D0",
+        ";;ble skip ; not touching one of our palettes? nothing to do",
+        ";;cmpi.w #82, D0",
+        ";;bge skip ; not touching one of our palettes? nothing to do",
+        "move.w #113, D0  ; have it write into a palette that isn't ours",
         "skip:",
         "lea $400000, A1",
         "done:",

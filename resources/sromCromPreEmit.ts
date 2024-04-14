@@ -149,6 +149,81 @@ function prepareForAssembly(
   };
 }
 
+// these are in order of team ids
+const teamToGridSpriteData = [
+  {
+    // brazil
+    spriteIndexOffset: 12,
+    tileIndexOffset: 0,
+  },
+  {
+    // china
+    spriteIndexOffset: 0,
+    tileIndexOffset: 2,
+  },
+  {
+    // japan
+    spriteIndexOffset: 0,
+    tileIndexOffset: 4,
+  },
+  {
+    // usa
+    spriteIndexOffset: 6,
+    tileIndexOffset: 0,
+  },
+  {
+    // korea
+    spriteIndexOffset: 6,
+    tileIndexOffset: 2,
+  },
+  {
+    // italy
+    spriteIndexOffset: 0,
+    tileIndexOffset: 0,
+  },
+  {
+    // mexico
+    spriteIndexOffset: 12,
+    tileIndexOffset: 4,
+  },
+  {
+    // england
+    spriteIndexOffset: 12,
+    tileIndexOffset: 2,
+  },
+];
+
+// taken from the patch's symbols
+const GRID_IMAGE_SI = 0x15b;
+const SCB1_TILE_WORDS_PER_SPRITE = 64;
+
+// take the grey crom image data and generate the data that will ultimately
+// create TEAM_TO_GREY_OUT_TABLE used in greyOutDefeatedTeam.asm
+function createGreyCharacterGridEmit(greyCromImage: AsmCromImage) {
+  return teamToGridSpriteData.flatMap((teamSpriteData, i) => {
+    const scb1Columns = greyCromImage.columns.slice(i * 6, (i + 1) * 6);
+
+    const data: number[] = [];
+
+    for (let x = 0; x < scb1Columns.length; ++x) {
+      const column = scb1Columns[x];
+      const si = GRID_IMAGE_SI + teamSpriteData.spriteIndexOffset + x;
+
+      for (let y = 0; y < column.scb1.length; ++y) {
+        const ti = teamSpriteData.tileIndexOffset + y;
+        // SCB1 starts at 0
+        const vramAddress = si * SCB1_TILE_WORDS_PER_SPRITE + ti * 2;
+        data.push(vramAddress);
+        data.push(column.scb1[y].evenWord);
+        data.push(vramAddress + 1);
+        data.push(column.scb1[y].oddWord);
+      }
+    }
+
+    return data;
+  });
+}
+
 export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
   const startingPaletteIndex = 16;
   console.log({ startingPaletteIndex });
@@ -163,6 +238,9 @@ export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
   const finalCodeEmitData = {
     ...codeEmitData,
     cromImages,
+    greyCharacterGrid: createGreyCharacterGridEmit(
+      cromImages.character_grid_grey
+    ),
   };
 
   return finalCodeEmitData;
