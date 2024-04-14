@@ -100,6 +100,41 @@ jsr $2RENDER_STATIC_IMAGE
 
 skipPlayer2:
 
+;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
+
+cmpi.b #0, $NUM_PLAYER_MODE
+bne skipDemoMode
+;; this is demo mode, we need to do both cpu cursors
+
+;; p1 side cpu cursor, left half
+move.w #$P1_CURSOR_SI, D6
+lea $2CPU_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; p1 side cpu cursor, right half
+; it loads itself off screen, no need to move it
+move.w #$P1_CURSOR_SI + 1, D6
+lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+;; p1 side cpu cursor, left half
+move.w #$P2_CURSOR_SI, D6
+lea $2CPU_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; p1 side cpu cursor, right half
+; it loads itself off screen, no need to move it
+move.w #$P2_CURSOR_SI + 1, D6
+lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
+
+skipDemoMode:
 
 cmpi.b #$ff, $DEFEATED_TEAMS
 beq doRugal

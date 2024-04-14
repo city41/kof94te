@@ -43,8 +43,19 @@ skipPlayer2:
 ;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
 cmpi.b #3, $NUM_PLAYER_MODE ; is this versus mode?
 beq skipCpuCursor ; it is? no cpu then
+cmpi.b #0, $NUM_PLAYER_MODE ; is this demo mode?
+bne prepCpuCursorForSinglePlayerMode
+;; this is demo mode, there are two cpu cursors
+;; first, cpu 1
+move.w #$P1_CURSOR_SI, D7 ; use player one's cursor sprites
+lea $1081c0, A0           ; point to where the cpu index is for p1
+jsr $2MOVE_CPU_CURSOR
+move.w #$P2_CURSOR_SI, D7 ; use player one's cursor sprites
+lea $1083c0, A0           ; point to where the cpu index is for p2
+jsr $2MOVE_CPU_CURSOR
+bra skipCpuCursor
 
-prepCpuCursor:
+prepCpuCursorForSinglePlayerMode:
 
 btst #0, $NUM_PLAYER_MODE ; is p1 playing?
 beq cpuCursor_skipPlayer1
