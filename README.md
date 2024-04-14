@@ -14,12 +14,10 @@ This hack is bringing this character select screen into KOF94. It will look very
 
 Here is a mock up I'm shooting for
 
-![kof94 team select mock up](https://github.com/city41/kof94te/blob/main/mockup.png?raw=true)
-
 ## Status
 
-I now have a mostly working character select screen. There's some bugs in it. And the hack itself still has a long way to go. I think I can pull this off, but I also think it will be a while...
+![kof94te char select](https://github.com/city41/kof94te/blob/main/kof94teCharSelect.png?raw=true)
 
-### YouTube video
+The hack is now very far along. It is fully functional but has several bugs and several more things to do. See the [milestones](https://github.com/city41/kof94te/milestones) for more info.
 
-https://www.youtube.com/watch?v=anGeYuqkkM4
+You can build the rom and try it yourself here: https://neorh.mattgreer.dev
