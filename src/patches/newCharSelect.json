@@ -526,6 +526,12 @@
         "move.b (A2,D0.w), $71(A4)",
 
         "skipPlayer2:",
+
+        ";; demo mode",
+        "cmpi.b #0, $NUM_PLAYER_MODE",
+        "bne done",
+        "move.b (A2,D0.w), $71(A4)",
+
         "done:",
         "rts"
       ]
