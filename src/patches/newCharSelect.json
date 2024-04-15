@@ -701,7 +701,7 @@
     },
     {
       "type": "prom",
-      "description": "Choose the next cpu team in single player mode, for now just incrementally",
+      "description": "Choose the next cpu team in single player mode",
       "address": "1375fc",
       "subroutine": true,
       "patchAsm": [
