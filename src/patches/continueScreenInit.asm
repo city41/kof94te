@@ -4,7 +4,7 @@
 ;;; a canned team
 ;;; nothing to restore from the clobber
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq setForPlayerTwo
 lea $P1_CHOSEN_CHAR0, A2 ; set it up to use p1 characters
 bra doneChoosingPlayer

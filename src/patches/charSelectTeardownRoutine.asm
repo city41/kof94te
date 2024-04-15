@@ -4,7 +4,7 @@ move.b #0, $IN_CHAR_SELECT_FLAG
 ;; move player 1's choices where the game expects them
 lea $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, A4
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq player1IsCpu ; oh p1 is cpu, jump ahead
 
 ; they are playing, move their choses where the game expects them 
@@ -24,6 +24,8 @@ player1IsCpu:
 move.b (A4), $P1_CHOSEN_CHAR0
 move.b $1(A4), $P1_CHOSEN_CHAR1
 move.b $2(A4), $P1_CHOSEN_CHAR2
+;; store the team id to enable continuing
+move.b $108231, $1087e0
 
 
 player1Done:
@@ -31,7 +33,7 @@ player1Done:
 ;; move player 2's choices where the game expects them
 lea $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, A4
 
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 beq player2IsCpu ; oh p2 is cpu, jump ahed
 
 ; they are playing, move their choses where the game expects them 
@@ -51,6 +53,8 @@ player2IsCpu:
 move.b (A4), $P2_CHOSEN_CHAR2
 move.b $1(A4), $P2_CHOSEN_CHAR1
 move.b $2(A4), $P2_CHOSEN_CHAR0
+;; store the team id to enable continuing
+move.b $108431, $1087e0
 
 
 player2Done: 

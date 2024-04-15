@@ -1,11 +1,16 @@
 ;; reset the player mode, we'll figure it out through the course of init
 ;; 
-;; NUM_PLAYER_MODE values:
-;; 0 - undetermined
-;; 1 - single player, p1 side (bit 0 is set)
-;; 2 - single player, p2 side (bit 1 is set)
-;; 3 - versus mode (bit 0 and 1 are set)
-move.b #0, $NUM_PLAYER_MODE
+;; PLAY_MODE values:
+;; 0 - no players, demo mode
+;; bit 0       | 1 | - single player, p1 side
+;; bit 1       | 2 | - single player, p2 side
+;; bit 0 and 1 | 3 | - versus mode
+;; bit 6       |   | - single player continued
+;; bit 7       |   | - single player, char select should be read only
+;;   --- this happens when the player has beaten their first team
+;;   --- all subsequent char selects are read only
+;;   --- but if they lose and continue, this bit will be uncleared
+move.b #0, $PLAY_MODE
 
 jsr $2LOAD_P_A_L_E_T_T_E_S
 
@@ -26,7 +31,7 @@ cmpi.b #1, D6 ;; look specifically for 1: playing
 bne skipPlayer1 ; no? check player 2
 
 ;; side p1 is playing, add it to the mode
-ori.b #1, $NUM_PLAYER_MODE
+ori.b #1, $PLAY_MODE
 
 ; load the p1 cursor
 ; it loads into the correct spot, no need to move it
@@ -67,7 +72,7 @@ cmpi.b #1, D6 ;; look specifically for 1: playing
 bne skipPlayer2 ; skip if p2 is not playing
 
 ;; side p2 is playing, add it to the mode
-ori.b #2, $NUM_PLAYER_MODE
+ori.b #2, $PLAY_MODE
 
 ; load the p2 cursor
 ; it loads into the correct spot, no need to move it
@@ -104,7 +109,7 @@ skipPlayer2:
 
 ;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
-cmpi.b #0, $NUM_PLAYER_MODE
+cmpi.b #0, $PLAY_MODE
 bne skipDemoMode
 ;; this is demo mode, we need to do both cpu cursors
 
@@ -155,12 +160,11 @@ move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker 
 skipResetIndexes:
 
 move.b #1, $IN_CHAR_SELECT_FLAG
-move.b #0, $SINGLE_PLAYER_PAST_FIRST_FIGHT
 
 
-btst #0, $NUM_PLAYER_MODE
+btst #0, $PLAY_MODE
 beq p1_pastReady ; p1 isn't playing? skip
-btst #1, $NUM_PLAYER_MODE ; but p2 is playing too? versus mode, skip
+btst #1, $PLAY_MODE ; but p2 is playing too? versus mode, skip
 ; jumping here sets up char select well for versus mode
 ; but it does let p1 rechoose their team. The original game did not do this
 ; but it's a nice bonus, so letting it slide
@@ -169,25 +173,28 @@ bne p1_firstCharSelect
 ; single player mode, p1 side
 cmpi.b #$80, $108238 ; player 1 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
-beq p1_firstCharSelect
+beq p1_continued
 cmpi.b #$80, $108438
 bne p1_firstCharSelect ; if player 2 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
-move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
+bset #7, $PLAY_MODE
 ;; have main move onto cpu select right away
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P1_NUM_CHOSEN_CHARS
 bra p1_pastReady
+p1_continued:
+;; set the continue flag so char select knows to show the cpu team
+bset #6, $PLAY_MODE
 p1_firstCharSelect: 
 ;; first time in char select for single player, p1 side
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
 move.b #0, $P1_NUM_CHOSEN_CHARS
 p1_pastReady:
 
-btst #1, $NUM_PLAYER_MODE
+btst #1, $PLAY_MODE
 beq p2_pastReady ; p2 isn't playing? skip
-btst #0, $NUM_PLAYER_MODE ; but p1 is playing too? versus mode, skip
+btst #0, $PLAY_MODE ; but p1 is playing too? versus mode, skip
 ; jumping here sets up char select well for versus mode
 ; but it does let p1 rechoose their team. The original game did not do this
 ; but it's a nice bonus, so letting it slide
@@ -196,16 +203,19 @@ bne p2_firstCharSelect
 ; single player mode, p2 side
 cmpi.b #$80, $108438 ; player 2 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
-beq p2_firstCharSelect
+beq p2_continued
 cmpi.b #$80, $108238
 bne p2_firstCharSelect ; if player 1 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
-move.b #1, $SINGLE_PLAYER_PAST_FIRST_FIGHT
+bset #7, $PLAY_MODE
 ;; have main move onto cpu select right away
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P2_NUM_CHOSEN_CHARS
 bra p2_pastReady
+p2_continued:
+;; set the continue flag so char select knows to show the cpu team
+bset #6, $PLAY_MODE
 p2_firstCharSelect: 
 ;; first time in char select for single player, p2 side
 move.b #0, $READY_TO_EXIT_CHAR_SELECT

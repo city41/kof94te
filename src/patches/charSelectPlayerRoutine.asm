@@ -14,7 +14,7 @@ beq skipChoosingChar ; if three have been chosen, don't choose more
 ; is this a single player game, and they are past the first fight? 
 ; then char select is just about showing who they fight next, don't
 ; let them do anything
-move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
+btst #7, $PLAY_MODE
 ; if it is not zero, then the flag is set, don't let them choose
 bne skipChoosingChar
 
@@ -114,7 +114,7 @@ skipChoosingChar:
 
 ;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
 
-move.b $SINGLE_PLAYER_PAST_FIRST_FIGHT, D0
+btst #7, $PLAY_MODE
 bne hidePlayerCursor ; if past first fight, never show the player's cursor
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
@@ -154,9 +154,9 @@ rts
 
 flipPaletteFlagIfNeeded:
 ;; first see if this is versus mode
-btst #0, $NUM_PLAYER_MODE
+btst #0, $PLAY_MODE
 beq flipPaletteFlagIfNeeded_done ; p1 is not playing, not versus mode
-btst #1, $NUM_PLAYER_MODE
+btst #1, $PLAY_MODE
 beq flipPaletteFlagIfNeeded_done ; p2 is not playing, not versus mode
 ;; this is versus mode
 cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)

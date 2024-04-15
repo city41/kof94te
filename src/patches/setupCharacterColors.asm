@@ -161,7 +161,7 @@ rts
 ;; ------
 ;; palette flag in D1
 figureOutCharPalette:
-btst D5, $NUM_PLAYER_MODE
+btst D5, $PLAY_MODE
 beq figureOutCharPalette_cpu ; jump ahead, this is a cpu player
 movea.l A5, A4 ; copy the base address into A4, as we need to manipulate it
 adda.w D6, A4 ;; add char index to offset into chosen characters list

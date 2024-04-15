@@ -2,7 +2,7 @@
 ;; this routine only loads his avatar. The cursor also needs to be placed on him,
 ;; but that is the job of moveCpuCursor
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq setupRugalForPlayerTwo
 move.w #$P2C1_SI, D6 ; it is p1, so use p2's chosen team sprites
 bra renderRugal

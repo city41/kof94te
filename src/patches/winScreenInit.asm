@@ -6,9 +6,9 @@
 
 
 ;; did the cpu win? if so, bail and just let the original win scene routines run
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq checkPlayerTwo
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 bne humanWon ; versus mode, so a human won
 ; player 2 is the cpu, did player 1 lose?
 cmpi.b #$80, $108238 ; player 1 is human, did they lose?
@@ -24,7 +24,7 @@ bne humanWon
 cpuWon:
 movem.l A4/A5/D2, $MOVEM_STORAGE
 ;; but first, set human's team to not be a mirror match or england
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq cpuWon_setPlayerTwoTeam
 lea $108231, A4
 lea $108431, A5
@@ -44,7 +44,7 @@ rts
 
 humanWon:
 movem.l A4/A5, $MOVEM_STORAGE
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq alteringTeams_checkP2
 ;; p1 is a human, make sure to fix the teams if needed
 lea $108231, A4
@@ -53,7 +53,7 @@ bsr fudgeTeams
 bra doneAlteringTeams
 
 alteringTeams_checkP2:
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 beq doneAlteringTeams
 ;; p2 is a human, make sure to fix the teams if needed
 lea $108431, A4
@@ -63,7 +63,7 @@ bsr fudgeTeams
 
 doneAlteringTeams:
 ;; second, who won? p1 or p2? need to consider versus mode
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq onlyPlayerTwoIsHuman
 cmpi.b #$80, $108238 ; player 1 is human, did they lose?
 beq playerOneLost

@@ -12,8 +12,6 @@ Instead you must choose from pre-formed teams. From King of Fighters '95 on, you
 
 This hack is bringing this character select screen into KOF94. It will look very much like KOF95's, but using KOF94 theming. Then you can create whatever team you want in KOF94.
 
-Here is a mock up I'm shooting for
-
 ## Status
 
 ![kof94te char select](https://github.com/city41/kof94te/blob/main/kof94teCharSelect.png?raw=true)

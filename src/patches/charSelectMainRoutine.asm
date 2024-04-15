@@ -1,9 +1,9 @@
 movem.l A0-A2,$STORE_A0A1A2
 
 ;; if this is versus mode, randomize the team to get a random stage
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq skipVersusRandomStage ; nope not versus, as p1 is not playing
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 beq skipVersusRandomStage ; nope not versus, as p2 is not playing
 ;; this is versus mode, randomize the team ids to get a random stage
 move.b $CHAR_SELECT_COUNTER, D6 ; load the counter
@@ -15,7 +15,7 @@ move.b D6, $108431 ; and team 2 too
 skipVersusRandomStage:
 
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq skipPlayer1
 
 move.b $BIOS_P1CHANGE, $P1_CUR_INPUT
@@ -27,7 +27,7 @@ move.w #$P1C1_SI, D7
 jsr $2CHAR_SELECT_PLAYER_ROUTINE
 
 skipPlayer1:
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 beq skipPlayer2
 
 move.b $BIOS_P2CHANGE, $P2_CUR_INPUT
@@ -41,9 +41,9 @@ jsr $2CHAR_SELECT_PLAYER_ROUTINE
 skipPlayer2:
 
 ;;;;;;;;;;;;;;;;;; CPU CURSOR ;;;;;;;;;;;;;;;;;;;;;;;;
-cmpi.b #3, $NUM_PLAYER_MODE ; is this versus mode?
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
 beq skipCpuCursor ; it is? no cpu then
-cmpi.b #0, $NUM_PLAYER_MODE ; is this demo mode?
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
 ;; first, cpu 1
@@ -57,7 +57,7 @@ bra skipCpuCursor
 
 prepCpuCursorForSinglePlayerMode:
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq cpuCursor_skipPlayer1
 move.b $P1_NUM_CHOSEN_CHARS, D0
 move.w #$P2_CURSOR_SI, D7 ; use player two's cursor sprites
@@ -72,7 +72,15 @@ lea $1081c0, A0           ; point to where the cpu index is for p2
 doCpuCursor:
 ; if the player has not chosen three characters yet, no need for cpu cursor
 cmpi.b #2, D0
-ble skipCpuCursor
+; player hasn't selected their team, we probably wont show the cpu cursor
+; but we still will if they continued
+ble doCpuCursor_playerTeamNotSelected
+bra moveCpuCursor ; player has chosen their team, so yes show cursor
+doCpuCursor_playerTeamNotSelected:
+btst #6, $PLAY_MODE ; see if the player continued
+beq skipCpuCursor ; they didn't? no cursor
+
+moveCpuCursor:
 jsr $2MOVE_CPU_CURSOR
 
 skipCpuCursor:
@@ -83,14 +91,14 @@ move.b #0, D3 ; D3 will hold the number of needed chosen chars: either 3 or 6 (v
 clr.b D1
 clr.b D2
 
-btst #0, $NUM_PLAYER_MODE ; is p1 playing?
+btst #0, $PLAY_MODE ; is p1 playing?
 beq readyToExit_skipPlayer1
 move.b $P1_NUM_CHOSEN_CHARS, D1
 addi.b #3, D3
 
 readyToExit_skipPlayer1:
 
-btst #1, $NUM_PLAYER_MODE ; is p2 playing?
+btst #1, $PLAY_MODE ; is p2 playing?
 beq readyToExit_skipPlayer2
 move.b $P2_NUM_CHOSEN_CHARS, D2
 addi.b #3, D3
