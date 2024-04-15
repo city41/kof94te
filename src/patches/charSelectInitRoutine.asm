@@ -23,7 +23,6 @@ move.w #0, D5              ; offset into tile data
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
-jsr $2GREY_OUT_TEAMS
 
 ;;;;;;;;;;;;;; INIT PLAYER 1 ;;;;;;;;;;;;;;;;;;;;
 move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
@@ -152,6 +151,12 @@ jsr $2PUT_RUGAL_ON_GRID
 skipRugal:
 
 
+cmpi.b #0, $PLAY_MODE
+beq skipGreyOut ; don't grey out in demo mode
+cmpi.b #3, $PLAY_MODE
+beq skipGreyOut ; don't grey out in versus mode
+jsr $2GREY_OUT_TEAMS
+skipGreyOut:
 
 ;; GENERAL VALUE INITIALIZATION
 cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams
