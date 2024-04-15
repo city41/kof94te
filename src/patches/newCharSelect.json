@@ -728,6 +728,23 @@
       "description": "Get rid of the game's add 8 as we are adding 7 now (above)",
       "address": "137602",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Have the game stop playing the 'chose team' sound effect",
+      "address": "106556",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne play ; not in char select, let the sound play",
+        "cmpi.b #$61, D0 ; in char select, is the sound the chose team sound effect?",
+        "bne play ; some other sound, let it play",
+        "bra done",
+        "play:",
+        "move.b D0, $320000",
+        "done:",
+        "rts"
+      ]
     }
   ]
 }
