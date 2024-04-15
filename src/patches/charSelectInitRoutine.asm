@@ -159,10 +159,11 @@ jsr $2GREY_OUT_TEAMS
 skipGreyOut:
 
 ;; GENERAL VALUE INITIALIZATION
-cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams
-bne skipResetIndexes
-move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker byte
-skipResetIndexes:
+bsr setCpuAlreadyUsedIndex
+; cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams
+; bne skipResetIndexes
+; move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker byte
+; skipResetIndexes:
 
 move.b #1, $IN_CHAR_SELECT_FLAG
 
@@ -256,3 +257,113 @@ move.l #$2VERSION, $VSTRING_DATA + 2 ; set up the pointer to the version string
 move.w #300, $VSTRING_DATA + 6      ; countdown
 
 rts
+
+
+
+
+;; consults the team defeat byte and sets
+;; the already used indexes byte accordingly
+setCpuAlreadyUsedIndex:
+
+btst #0, $PLAY_MODE
+beq setCpuAlreadyUsedIndex_player2 ; player 1 is not playing, onto player 2
+
+clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+btst #0, $DEFEATED_TEAMS
+beq p1_skipBrazil
+bset #2, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipBrazil:
+btst #1, $DEFEATED_TEAMS
+beq p1_skipChina
+bset #6, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipChina:
+btst #2, $DEFEATED_TEAMS
+beq p1_skipJapan
+bset #5, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipJapan:
+btst #3, $DEFEATED_TEAMS
+beq p1_skipUSA
+bset #4, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipUSA:
+btst #4, $DEFEATED_TEAMS
+beq p1_skipKorea
+bset #3, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipKorea:
+btst #5, $DEFEATED_TEAMS
+beq p1_skipItaly
+bset #7, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipItaly:
+btst #6, $DEFEATED_TEAMS
+beq p1_skipMexico
+bset #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipMexico:
+btst #7, $DEFEATED_TEAMS
+beq p1_skipEngland
+bset #1, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p1_skipEngland:
+bra setCpuAlreadyUsedIndex_done
+
+setCpuAlreadyUsedIndex_player2:
+btst #1, $PLAY_MODE
+beq setCpuAlreadyUsedIndex_done ; player two is not playing, nothing to do
+
+clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+btst #0, $DEFEATED_TEAMS
+beq p2_skipBrazil
+bset #5, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipBrazil:
+btst #1, $DEFEATED_TEAMS
+beq p2_skipChina
+bset #1, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipChina:
+btst #2, $DEFEATED_TEAMS
+beq p2_skipJapan
+bset #2, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipJapan:
+btst #3, $DEFEATED_TEAMS
+beq p2_skipUSA
+bset #3, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipUSA:
+btst #4, $DEFEATED_TEAMS
+beq p2_skipKorea
+bset #4, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipKorea:
+btst #5, $DEFEATED_TEAMS
+beq p2_skipItaly
+bset #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipItaly:
+btst #6, $DEFEATED_TEAMS
+beq p2_skipMexico
+bset #7, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipMexico:
+btst #7, $DEFEATED_TEAMS
+beq p2_skipEngland
+bset #6, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+
+p2_skipEngland:
+
+setCpuAlreadyUsedIndex_done:
+rts
+
+
+
+
+
+
