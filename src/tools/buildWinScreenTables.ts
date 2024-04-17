@@ -1,7 +1,7 @@
 /**
  * buildWinScreenTables.ts
  *
- * The game inclues three tables of xy words for all characters to position
+ * The game includes three tables of xy words for all characters to position
  * them during the win screen. A table is chosen depending on who won the match,
  * character 0 (leader), 1 or 2.
  *

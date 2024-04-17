@@ -1,0 +1,17 @@
+{
+  "description": "Changes Andy X and Y positions in the table used by the second cutscene",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "new X value",
+      "address": "143d06",
+      "patchAsm": ["dc.w $0073"]
+    },
+    {
+      "type": "prom",
+      "description": "new Y value",
+      "address": "143d08",
+      "patchAsm": ["dc.w $0099"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "description": "Changes the two d780s values in ROM",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "change1",
+      "address": "1840f2",
+      "patchAsm": ["dc.w $d700"]
+    },
+    {
+      "type": "prom",
+      "description": "change2",
+      "address": "1dfa66",
+      "patchAsm": ["dc.w $d740"]
+    }
+  ]
+}

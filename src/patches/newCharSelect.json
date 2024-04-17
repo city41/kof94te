@@ -745,6 +745,26 @@
         "done:",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "CUTSCENE2_TABLES",
+      "patchAsm": "cutscene2Tables.asm"
+    },
+    {
+      "type": "prom",
+      "description": "load the chosen team for sprites in the second cutscene",
+      "address": "13511e",
+      "subroutine": true,
+      "symbol": "CUTSCENE2_INIT",
+      "patchAsm": "cutscene2Init.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Have game use our dynamic x/y position table for cutscene2 instead of the canned rom one. This fits because the rom has a nop right after",
+      "address": "143cb0",
+      "patchAsm": ["lea $AFTER_SCREEN_POSITION_TABLE, A0"]
     }
   ]
 }
