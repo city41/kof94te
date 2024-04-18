@@ -5,7 +5,6 @@
 ;; - players choice (ie pressed A/B or C/D in char select for the given character)
 ;; - mirror matches, but only at the character level
 ;;    - if the cpu team also has the same character, give the cpu character the opposite color
-;; TODO: versus mode where both players press C/D on the same character?
 ;; 
 ;; see altColors.md for info on how to know what character is being loaded when this routine is called
 

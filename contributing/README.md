@@ -149,7 +149,7 @@ WARNING: these steps might be out of date as I will probably forget to update th
 
 You will need an unzipped vanilla ROM somewhere.
 
-1. `yarn ts-node src/tools/buildWinScreenTable.ts <dir with unzipped vanilla ROM>/055-p1.p1`
+1. `yarn ts-node src/tools/buildWinScreenTables.ts <dir with unzipped vanilla ROM>/055-p1.p1`
 2. `yarn ts-node src/tools/buildCutscene2Tables.ts <dir with unzipped vanilla ROM>/055-p1.p1`
 3. `yarn run-srom-crom`
 4. `yrn ts-node src/patchRom/main.ts src/patches/newCharSelect.json`
