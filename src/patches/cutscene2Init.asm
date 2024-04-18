@@ -1,5 +1,5 @@
 
-;;;;;;;; Have the gamse us the chosen team ids instead of ones from a pre-formed team
+;;;;;;;; Have the game use the chosen team ids instead of ones from a pre-formed team
 
 ;; need to use winning team list as game wants bytes, not words",
 lea $WINNING_TEAM_LIST, A0
