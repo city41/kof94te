@@ -51,9 +51,9 @@ From there the hack interjects itself and has the game use the custom team inste
 
 The game stores a team id and 3 character ids per player. For example in vanilla KOF94 if you picked team Italy, in RAM would be `050f 1011`. `5` is the id for team Italy, `f` is the id for Terry, `10` for Andy and `11` for Joe (this is in hex btw). This is very simplified, but the point is the game keeps track of both your team (Italy, China, etc) _and_ the characters.
 
-In the hack, it might be `0501 080e`, which is Italy (`05`): Ralf (`01`), Goro (`08`) and Choi (`0e`). You must set a team id, there is no way around it. If you just set it to zero, well that's team Brazil.
+In the hack, it might be `0501 080e`, which is Italy (`05`): Ralf (`01`), Goro (`08`) and Choi (`0e`). You must set a team id, there is no way around it. If you just set it to zero, well that's team Brazil. This means the hack has to get involved and interject whenever the game would consult the team id instead of character ids, which is explained below.
 
-### Gamplay
+### Gameplay
 
 Thankfully the hack does not get involved in gameplay at all. Once you tell the game what 6 characters to use for a fight, the engine can take it from there. If the hack only cared about custom teams fighting, it would be a pretty simple hack.
 
@@ -73,7 +73,7 @@ In ROM, there is a list of who is on which team starting at `534dc`
 
 This list is just `<member1><member2><member3>FF`, so for example Italy is in here as `0F1011FF`. also the last team `181919FF` is Rugal's team.
 
-The character Ids all ascend in order, so this list isn't stricly necessary. The game is actually using it to figure out which position on a team a member is. For example Heidern is position 0, Ralf is position 1, and Clark at position 2. Or Terry at 0, Andy at 1, Joe at 2.
+The character Ids all ascend in order, so this list isn't strictly necessary. The game is mostly using it to figure out which position on a team a member is. For example Heidern is position 0, Ralf is position 1, and Clark at position 2. Or Terry at 0, Andy at 1, Joe at 2.
 
 The hack has the game look for this list in RAM instead of in ROM. So the hack can then write to that place in RAM and build out a dynamic list of the characters the player actually chose.
 
@@ -81,15 +81,14 @@ The hack has the game look for this list in RAM instead of in ROM. So the hack c
 
 When the win screen pops up, the player that actually won the match is in the center, and the other two team members are to the sides. The game does this by first figuring out which position in the team the winning character is (0, 1 or 2). Then based on that, runs one of three routines that will set up where the characters should go on the screen. These routines all just consult tables stored in ROM of where each character should go depending on who won the match. So one table will place Terry in the center of the screen, another will place him to the left, and another to the right.
 
-The hack deals with this in two steps
+The hack deals with this in two steps:
 
-First it has its own tables it consults to figure out where characters should go. They are built with `src/tools/buildWinscreenTables.ts`. This script uses the tables already in the game to build out three new tables. Each table places characters at different positions. So the first table it builds places all characters in the center. The second one, all to the left, and the last has them all to the right. These tables can be seen at `src/patches/winscreenTables.asm`.
-
-Then depending on who won the match and the makeup of the custom team, a dynamic table is built in RAM that only has the three characters in it. The game is then told to look up the positions using this RAM table instead of its normal ROM table, and the end result is custom teams showing up on the win screen correctly
+- First it has its own tables it consults to figure out where characters should go. They are built with `src/tools/buildWinscreenTables.ts`. This script uses the tables already in the game to build out three new tables. Each table places characters at different positions. So the first table it builds places all characters in the center. The second one, all to the left, and the last has them all to the right. These tables can be seen at `src/patches/winscreenTables.asm`.
+- Then depending on who won the match and the makeup of the custom team, a dynamic table is built in RAM that only has the three characters in it. The game is then told to look up the positions using this RAM table instead of its normal ROM table, and the end result is custom teams showing up on the win screen correctly
 
 ![win screen with a custom team](https://github.com/city41/kof94te/blob/main/contributing/winScreen.png?raw=true)
 
-This all happens in `winScreenInit.asm`
+This all happens in `winScreenInit.asm`.
 
 #### Character positioning on the continue screen
 
@@ -129,9 +128,17 @@ This routine is at `setupCharacterColors.asm`
 
 This palette set choice needs to be made often:
 
+- attract mode order select
+- attract mode gameplay
+- Terry and Ryo in the how to play screen
 - in order select
 - each round of the match
-- the falling character when a match ends
+- the final blow that ends the match
+  - the character falling in slow motion and the stage background still being present is handled separately and reloads palettes
+- the falling character on the white background when a match ends
 - the winning team on the win screen
 - the losing team on the continue screen
 - all cutscenes
+- possibly more places
+
+Also since the game just needs to do a simple `move.b` to load the palette flag, it does this in several places. I have swapped in the `setupCharacterColors` routine in most of those places, but probably not all.
