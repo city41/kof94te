@@ -59,8 +59,10 @@
 
     "P1C1_SI": "16d",
     "P2C1_SI": "173",
-    "P1_CURSOR_SI": "179",
-    "P2_CURSOR_SI": "17b",
+    "P1_CURSOR_LEFT_SI": "179",
+    "P1_CURSOR_RIGHT_SI": "17a",
+    "P2_CURSOR_LEFT_SI": "17b",
+    "P2_CURSOR_RIGHT_SI": "17c",
 
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
@@ -158,17 +160,31 @@
     },
     {
       "type": "prom",
-      "description": "p1 cursor, image",
+      "description": "p1 cursor, left image",
       "subroutine": true,
-      "symbol": "P1_CURSOR_IMAGE",
-      "patchAsm": "p1_cursor.asm"
+      "symbol": "P1_CURSOR_LEFT_IMAGE",
+      "patchAsm": "p1_cursor_left.asm"
     },
     {
       "type": "prom",
-      "description": "p2 cursor, image",
+      "description": "p1 cursor, right image",
       "subroutine": true,
-      "symbol": "P2_CURSOR_IMAGE",
-      "patchAsm": "p2_cursor.asm"
+      "symbol": "P1_CURSOR_RIGHT_IMAGE",
+      "patchAsm": "p1_cursor_right.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, left image",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_LEFT_IMAGE",
+      "patchAsm": "p2_cursor_left.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, right image",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_RIGHT_IMAGE",
+      "patchAsm": "p2_cursor_right.asm"
     },
     {
       "type": "prom",

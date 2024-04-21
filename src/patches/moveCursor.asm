@@ -107,14 +107,46 @@ bra checkInput ; and rerun the routine with right
 moveCursor:
 move.w D1, $PX_CURSOR_X_OFFSET(A0) ; save the new X
 move.w D2, $PX_CURSOR_Y_OFFSET(A0) ; save the new Y
+
+;; now move the sprites
+
+;; move left sprite
+
+;; check for nudge
+move.w #0, D4 ; assume we're not nudging
+cmpi.b #0, D1
+beq nudgeForLeader
+cmpi.b #3, D1
+beq nudgeForLeader
+cmpi.b #6, D1
+beq nudgeForLeader
+bra skipNudge
+
+;; this is a leader, move its left cursor over 1 pixel
+;; to make it look just a little better
+nudgeForLeader:
+move.w #1, D4
+
+skipNudge:
+
 mulu.w #32, D1 ; convert X index to X pixel
-addi.w #16, D1  ; add the X offset (16px from edge of screen)
+addi.w #15, D1  ; add the X offset (16px from edge of screen)
+add.w D4, D1   ; add the nudge in
 mulu.w #32, D2 ; convert Y index to Y pixel
 addi.w #56, D2 ; add the Y offset (54px from top of screen)
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
 move.w D3, D2  ; move it back into D2, where moveSprite expects it
 move.w D6, D0 ; load the sprite index
+
+movem.w D1-D3, $MOVEM_STORAGE
+jsr $2MOVE_SPRITE ; and finally, move the sprite
+movem.w $MOVEM_STORAGE, D1-D3
+
+;; and the right one
+addi.w #19, D1
+move.w D6, D0 ; load the sprite index
+addi.w #1, D0 ; we need the sprite next door for right
 jsr $2MOVE_SPRITE ; and finally, move the sprite
 
 rts

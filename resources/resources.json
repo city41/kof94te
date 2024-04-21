@@ -25,12 +25,20 @@
         "dest": "../src/patches/avatars.asm"
       },
       {
-        "template": "p1_cursor.asm.hbr",
-        "dest": "../src/patches/p1_cursor.asm"
+        "template": "p1_cursor_left.asm.hbr",
+        "dest": "../src/patches/p1_cursor_left.asm"
       },
       {
-        "template": "p2_cursor.asm.hbr",
-        "dest": "../src/patches/p2_cursor.asm"
+        "template": "p1_cursor_right.asm.hbr",
+        "dest": "../src/patches/p1_cursor_right.asm"
+      },
+      {
+        "template": "p2_cursor_left.asm.hbr",
+        "dest": "../src/patches/p2_cursor_left.asm"
+      },
+      {
+        "template": "p2_cursor_right.asm.hbr",
+        "dest": "../src/patches/p2_cursor_right.asm"
       },
       {
         "template": "cpu_cursor_left.asm.hbr",
@@ -64,18 +72,32 @@
       "imageFile": "./character_grid_grey.png"
     },
     {
-      "name": "p1_cursor",
-      "imageFile": "./p1_cursor.png",
+      "name": "p1_cursor_left",
+      "imageFile": "./p1_cursor_left.png",
       "autoAnimation": 4,
-      "x": 16,
-      "y": 440
+      "x": 15,
+      "y": 56
     },
     {
-      "name": "p2_cursor",
-      "imageFile": "./p2_cursor.png",
+      "name": "p1_cursor_right",
+      "imageFile": "./p1_cursor_right.png",
+      "autoAnimation": 4,
+      "x": 34,
+      "y": 56
+    },
+    {
+      "name": "p2_cursor_left",
+      "imageFile": "./p2_cursor_left.png",
       "autoAnimation": 4,
       "x": 272,
-      "y": 440
+      "y": 56
+    },
+    {
+      "name": "p2_cursor_right",
+      "imageFile": "./p2_cursor_right.png",
+      "autoAnimation": 4,
+      "x": 288,
+      "y": 56
     },
     {
       "name": "cpu_cursor_left",

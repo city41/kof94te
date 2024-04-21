@@ -126,7 +126,14 @@ jsr $2MOVE_CURSOR
 bra donePlayerCursor
 
 hidePlayerCursor:
+;; hide the left cursor
 move.w D6, D0 ; load the cursor's sprite index
+move.w #0, D1  ; x
+move.w #272, D2 ; set y to 224, moving cursor off screen
+jsr $2MOVE_SPRITE
+;; and now the right
+move.w D6, D0 ; load the cursor's sprite index
+addi.w #1, D0 ; bump to next sprite
 move.w #0, D1  ; x
 move.w #272, D2 ; set y to 224, moving cursor off screen
 jsr $2MOVE_SPRITE

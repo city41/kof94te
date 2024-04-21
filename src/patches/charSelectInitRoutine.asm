@@ -32,10 +32,17 @@ bne skipPlayer1 ; no? check player 2
 ;; side p1 is playing, add it to the mode
 ori.b #1, $PLAY_MODE
 
-; load the p1 cursor
+; load the p1 cursor, left
 ; it loads into the correct spot, no need to move it
-move.w #$P1_CURSOR_SI, D6
-lea $2P1_CURSOR_IMAGE, A6
+move.w #$P1_CURSOR_LEFT_SI, D6
+lea $2P1_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; load the p1 cursor, right
+; it loads into the correct spot, no need to move it
+move.w #$P1_CURSOR_RIGHT_SI, D6
+lea $2P1_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
@@ -50,14 +57,14 @@ cmpi.b #1, D6 ;; look specifically for 1: playing
 beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_SI, D6
+move.w #$P2_CURSOR_LEFT_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_SI + 1, D6
+move.w #$P2_CURSOR_RIGHT_SI, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
@@ -73,10 +80,17 @@ bne skipPlayer2 ; skip if p2 is not playing
 ;; side p2 is playing, add it to the mode
 ori.b #2, $PLAY_MODE
 
-; load the p2 cursor
+; load the p2 cursor, left
 ; it loads into the correct spot, no need to move it
-move.w #$P2_CURSOR_SI, D6
-lea $2P2_CURSOR_IMAGE, A6
+move.w #$P2_CURSOR_LEFT_SI, D6
+lea $2P2_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; load the p2 cursor, right
+; it loads into the correct spot, no need to move it
+move.w #$P2_CURSOR_RIGHT_SI, D6
+lea $2P2_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
@@ -91,14 +105,14 @@ cmpi.b #1, D6 ;; look specifically for 1: playing
 beq skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_SI, D6
+move.w #$P1_CURSOR_LEFT_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_SI + 1, D6
+move.w #$P1_CURSOR_RIGHT_SI, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
@@ -113,27 +127,27 @@ bne skipDemoMode
 ;; this is demo mode, we need to do both cpu cursors
 
 ;; p1 side cpu cursor, left half
-move.w #$P1_CURSOR_SI, D6
+move.w #$P1_CURSOR_LEFT_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_SI + 1, D6
+move.w #$P1_CURSOR_RIGHT_SI, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ;; p1 side cpu cursor, left half
-move.w #$P2_CURSOR_SI, D6
+move.w #$P2_CURSOR_LEFT_SI, D6
 lea $2CPU_CURSOR_LEFT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_SI + 1, D6
+move.w #$P2_CURSOR_RIGHT_SI, D6
 lea $2CPU_CURSOR_RIGHT_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE

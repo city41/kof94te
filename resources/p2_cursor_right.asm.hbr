@@ -1,9 +1,9 @@
-;;;;; start p2_cursor static sprite data ;;;;;
-dc.w {{cromImages.p2_cursor.width}} ; width in tiles
-dc.w {{cromImages.p2_cursor.height}} ; height in tiles
+;;;;; start p2_cursor_right static sprite data ;;;;;
+dc.w {{cromImages.p2_cursor_right.width}} ; width in tiles
+dc.w {{cromImages.p2_cursor_right.height}} ; height in tiles
 
 ;; start sprite tiles
-{{#each cromImages.p2_cursor.columns}}
+{{#each cromImages.p2_cursor_right.columns}}
 ;;; column {{@index}}
 
 ;; SCB1 word pairs
