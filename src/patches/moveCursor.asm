@@ -89,7 +89,7 @@ beq redoToAvoidChosenChar ; they are, uh oh, run the routine again to get out
 bra moveCursor
 
 ;; if we get in here, they are currently over a character they have chosen, get them off
-;; of it by setting the input to be down, and then rerun the routine
+;; of it by setting the input to be right, and then rerun the routine
 redoToAvoidChosenChar:
 btst #0, D0 ; did the player push up?
 bne checkInput ; they did press up, so just use it again

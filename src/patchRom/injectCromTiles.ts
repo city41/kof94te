@@ -6,7 +6,7 @@ import { RomFileBuffer } from "./types";
 
 // todo: can this be calculated?
 const NEW_TILES_FIRST_INDEX = 256;
-const NEW_TILES_LAST_INDEX = 679;
+const NEW_TILES_LAST_INDEX = 620;
 const TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
 
 // a crom tile is 128 bytes, but this is since it's split across two files

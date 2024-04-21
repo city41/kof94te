@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@city41/sromcrom@^0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@city41/sromcrom/-/sromcrom-0.15.0.tgz#af44ee9cf073f0a3bd45dce41a5a6e2432404e6f"
-  integrity sha512-H+5j+ypMHmLKGOXUPYQpWdl5KECe1equ5k2b3S5i74VQsVcVy/nUBBMNA/H/0s071eA+n0GW6pnLferYOWzrtA==
+"@city41/sromcrom@^0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@city41/sromcrom/-/sromcrom-0.15.1.tgz#af48f26935147975d8698961ac5baed99479ca55"
+  integrity sha512-ZeG2pwr1v2tdr/vVj/Myn7CzQ6Va7AoWk8dgK/nWCZ6I2iZP5bWeFlD1UvivgRAGNOcdrNhjbZ038AArZNTj1g==
   dependencies:
     canvas "^2.11.2"
     commander "^11.0.0"
