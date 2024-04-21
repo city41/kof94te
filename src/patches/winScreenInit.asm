@@ -21,41 +21,28 @@ cmpi.b #$80, $108438 ; player 2 is human, did they lose?
 bne humanWon
 
 ;; cpu won, so just run the original routines
+;; and leave teams alone. It's important to never alter a cpu team id
+;; and since win quotes are actually based on who won the match, not the team id,
+;; altering the player team id has no effect
 cpuWon:
-movem.l A4/A5/D2, $MOVEM_STORAGE
-;; but first, set human's team to not be a mirror match or england
-btst #0, $PLAY_MODE ; is p1 playing?
-beq cpuWon_setPlayerTwoTeam
-lea $108231, A4
-lea $108431, A5
-bsr fudgeTeams
-bra cpuWon_done
-
-cpuWon_setPlayerTwoTeam:
-lea $108431, A4
-lea $108231, A5
-bsr fudgeTeams
-bra cpuWon_done
-
-cpuWon_done:
-movem.l $MOVEM_STORAGE, A4/A5/D2
 jsr $3fd58
 rts
 
 humanWon:
 movem.l A4/A5, $MOVEM_STORAGE
-btst #0, $PLAY_MODE ; is p1 playing?
-beq alteringTeams_checkP2
-;; p1 is a human, make sure to fix the teams if needed
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
+bne doneAlteringTeams ; only alter teams in versus mode
+
+cmpi.b #$80, $108238 ; did player 1 lose?
+beq alteringTeams_doP2
+;; p1 won, so alter the teams based on p1's winner
 lea $108231, A4
 lea $108431, A5
 bsr fudgeTeams
 bra doneAlteringTeams
 
-alteringTeams_checkP2:
-btst #1, $PLAY_MODE ; is p2 playing?
-beq doneAlteringTeams
-;; p2 is a human, make sure to fix the teams if needed
+alteringTeams_doP2:
+;; p2 won, so alter the teams based on p2's winner
 lea $108431, A4
 lea $108231, A5
 bsr fudgeTeams
@@ -152,13 +139,27 @@ cmpi.b #$7, (A4)
 bne fudgeTeams_p1doneWithEnglandCheck
 move.b #$5, (A4) ; they were England, so make them Italy
 fudgeTeams_p1doneWithEnglandCheck:
-move.b (A4), D2 ; load current player's team
-cmp.b (A5), D2  ; is this a "mirror match"?
-bne fudgeTeams_done ; not a mirror match? we're good then
-;; uh oh this is a mirror match
-addi.b #1, (A4) ; increment current team to the next one
-cmpi.b #6, (A4)
+
+;; now see if the winner is on the other player's team, according to vanilla
+;; so let's say the winner is Athena, is the other team China?
+;; if so, change the other team to avoid mirror quotes
+clr.w D2
+move.b (A5), D2 ; move the other team's id in
+mulu.w #3, D2 ; multiply the team id by two, team id->team leader character id 
+move.w D0, D3 ; copy over winner, as we need to clobber it in a sub
+sub.w D2, D3 ; D3 = <winner> - <other team leader id>
+cmpi.w #0, D3 ; a diff of zero means the winner is mirrored to the other team
+bra fudgeTeams_mirrorMatch
+cmpi.w #1, D3 ; a diff of one means the winner is mirrored to the other team
+bra fudgeTeams_mirrorMatch
+cmpi.w #2, D3 ; a diff of two means the winner is mirrored to the other team
+bra fudgeTeams_mirrorMatch
+bra fudgeTeams_done
+fudgeTeams_mirrorMatch:
+addi.b #1, (A5) ; increment current team to the next one
+cmpi.b #6, (A5)
 ble fudgeTeams_done
-move.b #0, (A4) ; either team id got out of range or became England, either case, set it to Brazil
+move.b #0, (A5) ; either team id got out of range or became England, either case, set it to Brazil
+
 fudgeTeams_done:
 rts
