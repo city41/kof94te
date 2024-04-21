@@ -1,7 +1,7 @@
 /**
  * buildCutscene2Tables.ts
  *
- * The game includess a table of xy words for all characters to position
+ * The game includes a table of xy words for all characters to position
  * them during the second cutscreen screen. Characters xy values in this table
  * are dependent on if they are character 0, 1 or 2 for the team, but also account for
  * size, such as Chang and Choi.

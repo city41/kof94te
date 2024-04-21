@@ -151,8 +151,11 @@ You will need an unzipped vanilla ROM somewhere.
 
 1. `yarn ts-node src/tools/buildWinScreenTables.ts <dir with unzipped vanilla ROM>/055-p1.p1`
 2. `yarn ts-node src/tools/buildCutscene2Tables.ts <dir with unzipped vanilla ROM>/055-p1.p1`
-3. `yarn run-srom-crom`
-4. `yrn ts-node src/patchRom/main.ts src/patches/newCharSelect.json`
+3. `yarn ts-node src/tools/copyOrderSelectBgToTeamSelect.ts <dir with unzipped vanilla ROM>/055-p1.p1`
+4. `yarn run-srom-crom`
+5. `yrn ts-node src/patchRom/main.ts src/patches/newCharSelect.json`
+
+Note that the tools generate asm files that get checked into the repo. So strictly speaking only the `run-srom-crom` step is needed. But this documents the entire patch creation process.
 
 Unfortunately if clownassembler encounters an error, it does not return a non-zero exit code. So the only way to know if something went wrong is examine the output. I search my terminal for "error". I need to fix this.
 

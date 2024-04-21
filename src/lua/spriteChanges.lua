@@ -82,10 +82,10 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteControlBlock() == "scb1/odd" and tag == "P1  TEAM" then
+		if getSpriteControlBlock() == "scb1/even" and tag == "P1  TEAM" then
 			-- print(string.format("%s: value: %x at PC:%s", getSpriteControlBlock(), data, cpu.state["PC"]))
-			if getPalette(data) == 0xe9 then
-				print(string.format("setting grey palette at %s for si %d", cpu.state["PC"], getSpriteIndex()))
+			if getSpriteIndex() == 98 then
+				print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
 			end
 		end
 
