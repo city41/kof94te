@@ -45,6 +45,7 @@ beq team2Character
 bra defaultChoice ; something else like demo mode, how to play, etc. For now punting
 
 ;; this is the fighter that just lost and is falling
+;; btw the falling fighter char id is at 100971
 fallingFighter:
 ;; the same conditions for falling fighter work for continue screen too
 continueScreen:

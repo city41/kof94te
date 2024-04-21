@@ -645,6 +645,12 @@
     {
       "type": "prom",
       "subroutine": true,
+      "symbol": "CHAR_ID_TO_TEAM_ID",
+      "patchAsm": "charIdToTeamId.asm"
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
       "symbol": "WIN_SCREEN_TABLES",
       "patchAsm": "winScreenTables.asm"
     },

@@ -20,11 +20,36 @@ checkPlayerTwo:
 cmpi.b #$80, $108438 ; player 2 is human, did they lose?
 bne humanWon
 
-;; cpu won, so just run the original routines
-;; and leave teams alone. It's important to never alter a cpu team id
-;; and since win quotes are actually based on who won the match, not the team id,
-;; altering the player team id has no effect
+;; cpu won
+;; leave the cpu team id alone, but set the player's team id
+;; based on which player lost the match to whoever their "real"
+;; team is. This will cause the CPU's win quote to be pretty good
+;; and pretty topical
+;;
+;; TODO: this does not work when there is a timeout. The losing
+;; character Id is not loaded into 100971
+;;
 cpuWon:
+movem.l A4/D2, $MOVEM_STORAGE
+clr.w D2
+btst #0, $PLAY_MODE ; is p1 playing?
+beq cpuWon_setP2Team
+move.b $108171, D2 ; load the losing p1 char id
+lea $2CHAR_ID_TO_TEAM_ID, A4
+adda.w D2, A4
+move.b (A4), D2 ; go from char id to team id
+move.b D2, $108231 ; set P1's team to match the falling character
+bra cpuWon_done
+
+cpuWon_setP2Team:
+move.b $108371, D2 ; load the losing p2 char id
+lea $2CHAR_ID_TO_TEAM_ID, A4
+adda.w D2, A4
+move.b (A4), D2 ; go from char id to team id
+move.b D2, $108431 ; set P1's team to match the falling character
+
+cpuWon_done:
+movem.l $MOVEM_STORAGE, A4/D2
 jsr $3fd58
 rts
 
