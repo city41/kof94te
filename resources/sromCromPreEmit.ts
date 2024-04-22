@@ -194,7 +194,7 @@ const teamToGridSpriteData = [
 ];
 
 // taken from the patch's symbols
-const GRID_IMAGE_SI = 0x157;
+const GRID_IMAGE_SI = 0x153;
 const SCB1_TILE_WORDS_PER_SPRITE = 64;
 
 // take the grey crom image data and generate the data that will ultimately

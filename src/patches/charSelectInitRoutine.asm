@@ -172,6 +172,8 @@ beq skipGreyOut ; don't grey out in versus mode
 jsr $2GREY_OUT_TEAMS
 skipGreyOut:
 
+jsr $2INIT_EMPTY_AVATARS
+
 ;; GENERAL VALUE INITIALIZATION
 bsr setCpuAlreadyUsedIndex
 ; cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams

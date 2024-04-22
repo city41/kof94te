@@ -76,39 +76,46 @@ subi.w #1, D6  ; but we already incremented, so it's one too big
 mulu.w #2, D6
 add.w D7, D6 ; add on the starting sprite index
 
-move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
-mulu.w D1, D5               ; multiply the offset by the character id to get the right avatar
-lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
-
 ;; parameters
-;; D5: offset into the data
-;; D6: starting sprite index
-;; A6: pointer to tile data
-movem.w D0-D3, $MOVEM_STORAGE
-jsr $2RENDER_STATIC_IMAGE
-movem.w $MOVEM_STORAGE, D0-D3
+;; D6.w - sprite index
+;; D7.w - character id
+clr.w D7
+move.b D1, D7
+jsr $2RENDER_CHOSEN_AVATAR
 
-;;; now move it into place
-;; set up the sprite index based on character index
-move.w D0, D7 ; save num chosen chars
-subi.w #1, D7 ; but we already incremented, so it's one too big
-move.w D6, D0 ; move the sprite index where MOVE_SPRITE expects it
-subi.w #2, D0 ; RENDER_STATIC_IMAGE moved D6 forward by 2 sprites, moving back
-move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D2 ; set X to 32px or -32px
-mulu.w D7, D2  ; move over for 1st and 2nd char
+; move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
+; mulu.w D1, D5               ; multiply the offset by the character id to get the right avatar
+; lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
 
-move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
-add.w D6, D2 ; offset X depending on if p1/p2
-move.w D2, D1 ; move X where MOVE_SPRITE expects it
-move.w #315, D2 ; set Y to 181px
+; ;; parameters
+; ;; D5: offset into the data
+; ;; D6: starting sprite index
+; ;; A6: pointer to tile data
+; movem.w D0-D3, $MOVEM_STORAGE
+; jsr $2RENDER_STATIC_IMAGE
+; movem.w $MOVEM_STORAGE, D0-D3
 
-;; parameters
-;; D0: sprite index
-;; D1: x
-;; D2: y
-movem.w D0-D3, $MOVEM_STORAGE
-jsr $2MOVE_SPRITE
-movem.w $MOVEM_STORAGE, D0-D3
+; ;;; now move it into place
+; ;; set up the sprite index based on character index
+; move.w D0, D7 ; save num chosen chars
+; subi.w #1, D7 ; but we already incremented, so it's one too big
+; move.w D6, D0 ; move the sprite index where MOVE_SPRITE expects it
+; subi.w #2, D0 ; RENDER_STATIC_IMAGE moved D6 forward by 2 sprites, moving back
+; move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D2 ; set X to 32px or -32px
+; mulu.w D7, D2  ; move over for 1st and 2nd char
+
+; move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
+; add.w D6, D2 ; offset X depending on if p1/p2
+; move.w D2, D1 ; move X where MOVE_SPRITE expects it
+; move.w #315, D2 ; set Y to 181px
+
+; ;; parameters
+; ;; D0: sprite index
+; ;; D1: x
+; ;; D2: y
+; movem.w D0-D3, $MOVEM_STORAGE
+; jsr $2MOVE_SPRITE
+; movem.w $MOVEM_STORAGE, D0-D3
 
 skipChoosingChar:
 

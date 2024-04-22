@@ -47,6 +47,10 @@
       {
         "template": "cpu_cursor_right.asm.hbr",
         "dest": "../src/patches/cpu_cursor_right.asm"
+      },
+      {
+        "template": "empty_chosen_avatar.asm.hbr",
+        "dest": "../src/patches/empty_chosen_avatar.asm"
       }
     ]
   },
@@ -112,6 +116,10 @@
       "autoAnimation": 4,
       "x": 0,
       "y": 272
+    },
+    {
+      "name": "empty_chosen_avatar",
+      "imageFile": "./empty_chosen_avatar.png"
     }
   ]
 }

@@ -55,14 +55,16 @@
     "AFTER_SCREEN_POSITION_TABLE": "10f912",
     "MOVEM_STORAGE": "10fa10",
     "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb00",
-    "GRID_IMAGE_SI": "157",
 
-    "P1C1_SI": "16d",
-    "P2C1_SI": "173",
-    "P1_CURSOR_LEFT_SI": "179",
-    "P1_CURSOR_RIGHT_SI": "17a",
-    "P2_CURSOR_LEFT_SI": "17b",
-    "P2_CURSOR_RIGHT_SI": "17c",
+    "GRID_IMAGE_SI": "153",
+    "P1C1_SI": "169",
+    "P2C1_SI": "16f",
+    "P1_CURSOR_LEFT_SI": "175",
+    "P1_CURSOR_RIGHT_SI": "176",
+    "P2_CURSOR_LEFT_SI": "177",
+    "P2_CURSOR_RIGHT_SI": "178",
+    "RUGAL_SI": "179",
+    "RANDOM_SELECT_SI": "17b",
 
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
@@ -202,6 +204,13 @@
     },
     {
       "type": "prom",
+      "description": "empty chosen avatar",
+      "subroutine": true,
+      "symbol": "EMPTY_CHOSEN_AVATAR",
+      "patchAsm": "empty_chosen_avatar.asm"
+    },
+    {
+      "type": "prom",
       "description": "load palettes routine",
       "subroutine": true,
       "symbol": "LOAD_P_A_L_E_T_T_E_S",
@@ -272,6 +281,13 @@
     },
     {
       "type": "prom",
+      "description": "render chosen avatar routine",
+      "subroutine": true,
+      "symbol": "RENDER_CHOSEN_AVATAR",
+      "patchAsm": "renderChosenAvatar.asm"
+    },
+    {
+      "type": "prom",
       "description": "player routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_PLAYER_ROUTINE",
@@ -297,6 +313,13 @@
       "subroutine": true,
       "symbol": "GREY_OUT_TEAMS",
       "patchAsm": "greyOutDefeatedTeams.asm"
+    },
+    {
+      "type": "prom",
+      "description": "init empty chosen avatars routine",
+      "subroutine": true,
+      "symbol": "INIT_EMPTY_AVATARS",
+      "patchAsm": "initEmptyChosenAvatars.asm"
     },
     {
       "type": "prom",
