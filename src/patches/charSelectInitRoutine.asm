@@ -252,10 +252,6 @@ move.w #$P2_FOCUSED_NAME_FIX_ADDRESS_VALUE, $P2_FOCUSED_CHAR_NAME_FIX_ADDRESS
 move.l #$2P2_CHAR_NAME_TABLE, $P2_CHAR_NAME_TABLE_ADDRESS
 
 ;; chosen team avatar related
-move.w #32, $P1_CHOSEN_TEAM_SCREEN_X
-move.w #32, $P1CTSX_MULTIPLIER
-move.w #256, $P2_CHOSEN_TEAM_SCREEN_X
-move.w #-32, $P2CTSX_MULTIPLIER
 
 ;;; put the disclaimer string up
 ;;; [w:fix layer location][l: string pointer][w: countdown]
