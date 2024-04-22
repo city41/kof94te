@@ -10,7 +10,13 @@
 ;;   --- this happens when the player has beaten their first team
 ;;   --- all subsequent char selects are read only
 ;;   --- but if they lose and continue, this bit will be uncleared
+move.b #1, $IN_CHAR_SELECT_FLAG
+
 move.b #0, $PLAY_MODE
+
+;; reset these back to zero, we'll set them to 3 down below if needed
+move.b #0, $P1_NUM_CHOSEN_CHARS
+move.b #0, $P2_NUM_CHOSEN_CHARS
 
 jsr $2LOAD_P_A_L_E_T_T_E_S
 
@@ -181,7 +187,6 @@ bsr setCpuAlreadyUsedIndex
 ; move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker byte
 ; skipResetIndexes:
 
-move.b #1, $IN_CHAR_SELECT_FLAG
 
 
 btst #0, $PLAY_MODE
@@ -251,7 +256,7 @@ move.l #$2P1_CHAR_NAME_TABLE, $P1_CHAR_NAME_TABLE_ADDRESS
 move.w #$P2_FOCUSED_NAME_FIX_ADDRESS_VALUE, $P2_FOCUSED_CHAR_NAME_FIX_ADDRESS
 move.l #$2P2_CHAR_NAME_TABLE, $P2_CHAR_NAME_TABLE_ADDRESS
 
-;; chosen team avatar related
+bsr renderChosenAvatars
 
 ;;; put the disclaimer string up
 ;;; [w:fix layer location][l: string pointer][w: countdown]
@@ -376,6 +381,48 @@ rts
 
 
 
+;; renderChosenAvatars
+;; for both players, will render in the chosen avatars
+;; this will be either 0 or 3 chosen avatars at this point
+renderChosenAvatars:
+
+;; player 1
+tst.b $P1_NUM_CHOSEN_CHARS
+beq renderChosenAvatar_skipPlayer1 ; none chosen? nothing to do
+;; if we get here, we know all three have been chosen
+move.w #$P1C1_SI, D6
+clr.w D7
+move.b $P1_CHOSEN_CHAR0, D7
+jsr $2RENDER_CHOSEN_AVATAR
+move.w #$P1C1_SI + 2, D6
+clr.w D7
+move.b $P1_CHOSEN_CHAR1, D7
+jsr $2RENDER_CHOSEN_AVATAR
+move.w #$P1C1_SI + 4, D6
+clr.w D7
+move.b $P1_CHOSEN_CHAR2, D7
+jsr $2RENDER_CHOSEN_AVATAR
+
+renderChosenAvatar_skipPlayer1:
+;; player 2
+tst.b $P2_NUM_CHOSEN_CHARS
+beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
+;; if we get here, we know all three have been chosen
+move.w #$P2C1_SI, D6
+clr.w D7
+move.b $P2_CHOSEN_CHAR0, D7
+jsr $2RENDER_CHOSEN_AVATAR
+move.w #$P2C1_SI + 2, D6
+clr.w D7
+move.b $P2_CHOSEN_CHAR1, D7
+jsr $2RENDER_CHOSEN_AVATAR
+move.w #$P2C1_SI + 4, D6
+clr.w D7
+move.b $P2_CHOSEN_CHAR2, D7
+jsr $2RENDER_CHOSEN_AVATAR
+
+renderChosenAvatar_skipPlayer2:
+rts
 
 
 
