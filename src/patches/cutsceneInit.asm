@@ -1,4 +1,26 @@
+;; first, which cutscene is this? let's count the number of defeated teams to determine that
+jsr $350f8 ; the built in "count defeated teams" subroutine
 
+cmpi.w #4, D0 ; 4 defeated teams?
+bne secondCutscene ; no? must be second cutscene then
+
+;; this is the first cutscene. The only thing we need to do is ensure
+;; the player is set to team Brazil for its team id, so Rugal says generic stuff
+btst #0, $PLAY_MODE
+beq firstCutscene_setPlayer2
+;; this is player one, set them to team Brazil
+move.b #0, $108231
+bra firstCutscene_done
+
+firstCutscene_setPlayer2:
+;; this is player two, set them to team Brazil
+move.b #0, $108431
+
+firstCutscene_done:
+rts
+
+
+secondCutscene:
 ;;;;;;;; Have the game use the chosen team ids instead of ones from a pre-formed team
 
 ;; need to use winning team list as game wants bytes, not words",
@@ -22,7 +44,7 @@ suba.l D0, A0
 ;; need to create the dynamic XY table based on the characters that will be displayed
 lea $AFTER_SCREEN_POSITION_TABLE, A1 ; get our position table set up
 
-;; team member 1, on the right side
+;; team member 1, on the right sideload the chosen team for sprites in the second cutscen
 clr.w D6
 move.b (A0), D6 ; load the first team member id
 add.w D6, D6    ; quadruple it for offsetting into the table

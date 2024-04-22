@@ -776,11 +776,11 @@
     },
     {
       "type": "prom",
-      "description": "load the chosen team for sprites in the second cutscene",
+      "description": "Inits cutscene 1 and 2 (and 3?)",
       "address": "13511e",
       "subroutine": true,
-      "symbol": "CUTSCENE2_INIT",
-      "patchAsm": "cutscene2Init.asm"
+      "symbol": "CUTSCENE_INIT",
+      "patchAsm": "cutsceneInit.asm"
     },
     {
       "type": "prom",
