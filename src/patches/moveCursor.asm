@@ -6,6 +6,9 @@
 ;; A0: base pointer to for p1 or p2 data
 ;; it is assumed the y index is 2 bytes after x
 
+tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+bne done
+
 move.w D0, D6 ; move the sprite index off to the side
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; move current input into D0
@@ -149,4 +152,5 @@ move.w D6, D0 ; load the sprite index
 addi.w #1, D0 ; we need the sprite next door for right
 jsr $2MOVE_SPRITE ; and finally, move the sprite
 
+done:
 rts
