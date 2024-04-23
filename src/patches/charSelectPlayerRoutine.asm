@@ -248,6 +248,26 @@ rts
 ;; need to fill the chosen team section with random characters
 randomSelect:
 
+;; due to throttling it's possible to pick random select very fast
+;; and end up with three heiderns as throttling will prevent random char ids
+;; from being generated
+;; this flag avoids that problem
+;; TODO: random select will have a "slot machine effect" that makes this irrelevant
+; move.b $PX_HAS_RANDOM_SELECTED_OFFSET(A0), D4
+tst.b $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
+beq randomSelect_dontThrottle
+
+
+;; throttle back the speed of random select
+move.b $CHAR_SELECT_COUNTER, D4
+andi.b #$3, D4
+;; if there are any lower bits, bail
+;; this means only random select every 4 frames
+bne randomSelect_done
+
+randomSelect_dontThrottle:
+move.b #1, $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
+
 move.w D7, D6 ; move si where it is needed
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
@@ -302,12 +322,17 @@ move.w D3, D6
 addi.w #2, D6 ; move to next avatar
 dbra D4, randomSelect_pickRandomChar
 
+randomSelect_done:
 rts
 
 ;; clearRandomSelect
 ;; clears out any avatars in chosen area that are unchosen
 ;; this cleans up the random avatars that randomSelect may have placed there
 clearRandomSelect:
+;; clear the flag for next time player comes back to random select
+;; TODO: random select will have a "slot machine effect" that makes this irrelevant
+move.b #0, $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
+
 move.w D7, D6 ; move si where it is needed
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each

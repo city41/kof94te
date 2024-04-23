@@ -14,7 +14,7 @@ beq clearFocusedName ; all three chosen? then clear the name instead
 ;; grab what we need out of A0, as we will clobber it after
 move.w $PX_CURSOR_X_OFFSET(A0), D0
 move.w $PX_CURSOR_Y_OFFSET(A0), D1
-movea.l $PX_CHAR_NAME_TABLE_ADDRESS(A0), A1 ; deref to get the table pointer into A1
+movea.l $PX_CHAR_NAME_TABLE_ADDRESS_OFFSET(A0), A1 ; deref to get the table pointer into A1
 
 mulu.w #9, D1 ; multiply Y by 9
 add.w D0, D1  ; then add X to get the index into the grid

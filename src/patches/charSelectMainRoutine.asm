@@ -1,14 +1,15 @@
 movem.l A0-A2,$STORE_A0A1A2
 
-;; if this is versus mode, randomize the team to get a random stage
-btst #0, $PLAY_MODE ; is p1 playing?
-beq skipVersusRandomStage ; nope not versus, as p1 is not playing
-btst #1, $PLAY_MODE ; is p2 playing?
-beq skipVersusRandomStage ; nope not versus, as p2 is not playing
-;; this is versus mode, randomize the team ids to get a random stage
+;; this counter is used just below for random stages in versus mode
+;; it's also used to throttle character random select
 move.b $CHAR_SELECT_COUNTER, D6 ; load the counter
 addi.b #1, D6
 move.b D6, $CHAR_SELECT_COUNTER ; save its new value
+
+;; if this is versus mode, randomize the team to get a random stage
+cmpi.b #3, $PLAY_MODE
+bne skipVersusRandomStage ; nope not versus
+;; this is versus mode, randomize the team ids to get a random stage
 andi.b #$7, D6 ; only keep the bottom three bits, that is our team id
 move.b D6, $108231 ; set team 1 to this random id
 move.b D6, $108431 ; and team 2 too
