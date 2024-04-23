@@ -57,14 +57,14 @@ chooseRandomSelect:
 ;; first, set the palette flag for the random characters based on if player
 ;; pressed A/B or C/D. And flip flags if necessary, per character (oi...)
 move.w #2, D5
-sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D5 ; decrement D4 by number already chosen
+sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D5 ; decrement D5 by number already chosen
 
 chooseRandomSelect_setPaletteFlag:
 lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 move.w #2, D6
 sub.w D5, D6
-adda.w D6, A1 ; add it twice since chosen chars are words
-adda.w D6, A1 ; add it twice since chosen chars are words
+adda.w D6, A2 ; add it twice since chosen chars are words
+adda.w D6, A2 ; add it twice since chosen chars are words
 move.b (A2), D1
 bsr flipPaletteFlagIfNeeded
 ;; at this point, D4 is the correct palette flag for this character
