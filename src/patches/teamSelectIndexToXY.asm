@@ -17,7 +17,7 @@ dc.w 112 ; Korea-x
 dc.w 401 ; Korea-y
 
 dc.w 208 ; Brazil-x
-dc.w 432 ; Brazil-y
+dc.w 433 ; Brazil-y
 
 dc.w 208 ; England-x
 dc.w 401 ; England-y
