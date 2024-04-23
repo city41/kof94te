@@ -103,13 +103,13 @@
     {
       "type": "prom",
       "string": true,
-      "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZAKI   ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           ",
+      "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI    ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           RUGAL          O.RUGAL        ROULETTE?      ",
       "symbol": "P1_CHAR_NAME_TABLE"
     },
     {
       "type": "prom",
       "string": true,
-      "value": "        HEIDERN           RALF          CLARK ATHENA ASAMIYA     SIE KENSOU   CHIN GENTSAI   KYO KUSANAGI    BENIMARU N.    GORO DAIMON       HEAVY D!  LUCKY GLAUBER  BRIAN BATTLER    KIM KAPHWAN   CHANG KOEHAN    CHOI BOUNGE   TERRY BOGARD    ANDY BOGARD    JOE HIGASHI   RYO SAKAZAKI  ROBERT GARCIATAKUMA SAKAZAKI  YURI SAKAZAKI   MAI SHIRANUI           KING",
+      "value": "        HEIDERN           RALF          CLARK ATHENA ASAMIYA     SIE KENSOU   CHIN GENTSAI   KYO KUSANAGI    BENIMARU N.    GORO DAIMON       HEAVY D!  LUCKY GLAUBER  BRIAN BATTLER    KIM KAPHWAN   CHANG KOEHAN    CHOI BOUNGE   TERRY BOGARD    ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI  ROBERT GARCIATAKUMA SAKAZAKI  YURI SAKAZAKI   MAI SHIRANUI           KING          RUGAL        O.RUGAL      ROULETTE?",
       "symbol": "P2_CHAR_NAME_TABLE"
     },
     {
@@ -272,6 +272,13 @@
       "subroutine": true,
       "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",
       "patchAsm": "charSelectTeardownRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear chosen avatar routine",
+      "subroutine": true,
+      "symbol": "CLEAR_CHOSEN_AVATAR",
+      "patchAsm": "clearChosenAvatar.asm"
     },
     {
       "type": "prom",

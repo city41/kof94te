@@ -16,7 +16,7 @@ dc.w $b1e
 dc.w $1d00
 dc.w $b30
 dc.w $2900
-dc.w $b3d
+dc.w $b41
 dc.w $2900
 
 ;; SCB3 vertical position|sticky|size
@@ -38,7 +38,7 @@ dc.w $b1f
 dc.w $1d00
 dc.w $b31
 dc.w $2900
-dc.w $b3e
+dc.w $b42
 dc.w $2900
 
 ;; SCB3 vertical position|sticky|size
@@ -60,7 +60,7 @@ dc.w $b20
 dc.w $2300
 dc.w $b32
 dc.w $2a00
-dc.w $b3f
+dc.w $b43
 dc.w $2800
 
 ;; SCB3 vertical position|sticky|size
@@ -82,7 +82,7 @@ dc.w $b21
 dc.w $2300
 dc.w $b33
 dc.w $2800
-dc.w $b40
+dc.w $b44
 dc.w $2a00
 
 ;; SCB3 vertical position|sticky|size
@@ -104,7 +104,7 @@ dc.w $b22
 dc.w $1f00
 dc.w $b34
 dc.w $2b00
-dc.w $b41
+dc.w $b45
 dc.w $2b00
 
 ;; SCB3 vertical position|sticky|size
@@ -126,8 +126,8 @@ dc.w $b23
 dc.w $1f00
 dc.w $b35
 dc.w $2b00
-dc.w $b42
-dc.w $2400
+dc.w $b46
+dc.w $2b00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $d846
@@ -147,9 +147,9 @@ dc.w $1c00
 dc.w $b24
 dc.w $1c00
 dc.w $b36
-dc.w $1200
-dc.w $b36
-dc.w $1200
+dc.w $1500
+dc.w $b47
+dc.w $1500
 
 ;; SCB3 vertical position|sticky|size
 dc.w $d846
@@ -168,10 +168,10 @@ dc.w $b13
 dc.w $1c00
 dc.w $b25
 dc.w $2400
-dc.w $b36
-dc.w $1200
-dc.w $b36
-dc.w $1200
+dc.w $b37
+dc.w $1500
+dc.w $b48
+dc.w $1500
 
 ;; SCB3 vertical position|sticky|size
 dc.w $d846
@@ -190,9 +190,9 @@ dc.w $b14
 dc.w $1e00
 dc.w $b26
 dc.w $1e00
-dc.w $b36
+dc.w $b38
 dc.w $1200
-dc.w $b36
+dc.w $b38
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
@@ -212,9 +212,9 @@ dc.w $b15
 dc.w $1e00
 dc.w $b27
 dc.w $2200
-dc.w $b36
+dc.w $b38
 dc.w $1200
-dc.w $b36
+dc.w $b38
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
@@ -234,10 +234,10 @@ dc.w $b16
 dc.w $2000
 dc.w $b28
 dc.w $2500
-dc.w $b36
-dc.w $1200
-dc.w $b36
-dc.w $1200
+dc.w $b39
+dc.w $2400
+dc.w $b49
+dc.w $2400
 
 ;; SCB3 vertical position|sticky|size
 dc.w $d846
@@ -256,10 +256,10 @@ dc.w $b17
 dc.w $2000
 dc.w $b29
 dc.w $1b00
-dc.w $b36
-dc.w $1200
-dc.w $b36
-dc.w $1200
+dc.w $b3a
+dc.w $2400
+dc.w $b4a
+dc.w $2300
 
 ;; SCB3 vertical position|sticky|size
 dc.w $d846
@@ -278,9 +278,9 @@ dc.w $b18
 dc.w $2100
 dc.w $b2a
 dc.w $2100
-dc.w $b37
+dc.w $b3b
 dc.w $2c00
-dc.w $b43
+dc.w $b4b
 dc.w $2e00
 
 ;; SCB3 vertical position|sticky|size
@@ -300,9 +300,9 @@ dc.w $b19
 dc.w $2100
 dc.w $b2b
 dc.w $2600
-dc.w $b38
+dc.w $b3c
 dc.w $2c00
-dc.w $b44
+dc.w $b4c
 dc.w $2e00
 
 ;; SCB3 vertical position|sticky|size
@@ -322,9 +322,9 @@ dc.w $b1a
 dc.w $2000
 dc.w $b2c
 dc.w $2700
-dc.w $b39
+dc.w $b3d
 dc.w $2c00
-dc.w $b45
+dc.w $b4d
 dc.w $2f00
 
 ;; SCB3 vertical position|sticky|size
@@ -344,9 +344,9 @@ dc.w $b1b
 dc.w $2200
 dc.w $b2d
 dc.w $2700
-dc.w $b3a
+dc.w $b3e
 dc.w $2c00
-dc.w $b46
+dc.w $b4e
 dc.w $2c00
 
 ;; SCB3 vertical position|sticky|size
@@ -366,9 +366,9 @@ dc.w $b1c
 dc.w $2100
 dc.w $b2e
 dc.w $2600
-dc.w $b3b
+dc.w $b3f
 dc.w $2d00
-dc.w $b47
+dc.w $b4f
 dc.w $2d00
 
 ;; SCB3 vertical position|sticky|size
@@ -388,9 +388,9 @@ dc.w $b1d
 dc.w $2100
 dc.w $b2f
 dc.w $2800
-dc.w $b3c
+dc.w $b40
 dc.w $2d00
-dc.w $b48
+dc.w $b50
 dc.w $2d00
 
 ;; SCB3 vertical position|sticky|size

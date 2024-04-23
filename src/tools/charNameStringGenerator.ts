@@ -23,6 +23,9 @@ const characters = [
   "Yuri Sakazaki",
   "Mai Shiranui",
   "King",
+  "Rugal",
+  "O.Rugal",
+  "Roulette?",
 ];
 
 const p1Str = characters.reduce((accum, c) => {

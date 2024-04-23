@@ -8,6 +8,7 @@
 
 ; how many characters have been chosen so far?
 ; don't let them choose more than 3
+
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
 beq skipChoosingChar ; if three have been chosen, don't choose more
@@ -45,6 +46,20 @@ move.w $PX_CURSOR_X_OFFSET(A0), D0
 move.w $PX_CURSOR_Y_OFFSET(A0), D1
 mulu.w #9, D1 ; multiply Y by 9
 add.w D0, D1  ; then add X to get the index into the grid
+
+cmpi.b #21, D1 ; are they on the left random select?
+beq chooseRandomSelect
+cmpi.b #23, D1 ; are they on the right random select?
+beq chooseRandomSelect
+bra skipChooseRandomSelect
+
+chooseRandomSelect:
+;; for now, just immediately go with what is there
+move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
+move.b #$61, $320000  ; play the sound effect
+bra skipChoosingChar
+
+skipChooseRandomSelect:
 lea $2GRID_TO_CHARACTER_ID, A3
 adda.w D1, A3
 move.b (A3), D1 ; character Id from grid is now in D1
@@ -79,43 +94,11 @@ add.w D7, D6 ; add on the starting sprite index
 ;; parameters
 ;; D6.w - sprite index
 ;; D7.w - character id
+move.w D7, D5 ;; D7 has the starting sprite index, we need to save it
 clr.w D7
 move.b D1, D7
 jsr $2RENDER_CHOSEN_AVATAR
-
-; move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
-; mulu.w D1, D5               ; multiply the offset by the character id to get the right avatar
-; lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
-
-; ;; parameters
-; ;; D5: offset into the data
-; ;; D6: starting sprite index
-; ;; A6: pointer to tile data
-; movem.w D0-D3, $MOVEM_STORAGE
-; jsr $2RENDER_STATIC_IMAGE
-; movem.w $MOVEM_STORAGE, D0-D3
-
-; ;;; now move it into place
-; ;; set up the sprite index based on character index
-; move.w D0, D7 ; save num chosen chars
-; subi.w #1, D7 ; but we already incremented, so it's one too big
-; move.w D6, D0 ; move the sprite index where MOVE_SPRITE expects it
-; subi.w #2, D0 ; RENDER_STATIC_IMAGE moved D6 forward by 2 sprites, moving back
-; move.w $PXCTSX_MULTIPLIER_OFFSET(A0), D2 ; set X to 32px or -32px
-; mulu.w D7, D2  ; move over for 1st and 2nd char
-
-; move.w $PX_CHOSEN_TEAM_SCREEN_X_OFFSET(A0), D6
-; add.w D6, D2 ; offset X depending on if p1/p2
-; move.w D2, D1 ; move X where MOVE_SPRITE expects it
-; move.w #315, D2 ; set Y to 181px
-
-; ;; parameters
-; ;; D0: sprite index
-; ;; D1: x
-; ;; D2: y
-; movem.w D0-D3, $MOVEM_STORAGE
-; jsr $2MOVE_SPRITE
-; movem.w $MOVEM_STORAGE, D0-D3
+move.w D5, D7
 
 skipChoosingChar:
 
@@ -130,6 +113,32 @@ beq hidePlayerCursor ; all three chosen? no need for a cursor anymore
 move.w D6, D0 ; load the cursor's sprite index
 ; MOVE_CURSOR also wants the base player data in A0, which is already there
 jsr $2MOVE_CURSOR
+
+;; RANDOM SELECT
+;; are they currently hovering on a random select space?
+move.w $PX_CURSOR_X_OFFSET(A0), D0
+move.w $PX_CURSOR_Y_OFFSET(A0), D1
+
+mulu.w #9, D1 ; multiply Y by 9
+add.w D0, D1  ; then add X to get the index into the grid
+
+
+cmpi.w #21, D1 ; are they on the left random select space?
+beq doRandomSelect
+cmpi.w #23, D1 ; are they on the right random select space?
+beq doRandomSelect
+bra doClearRandomSelect
+
+doRandomSelect:
+bsr randomSelect
+bra doneRandomSelect
+
+doClearRandomSelect:
+;; if they aren't on random select, then possibly they were before
+;; need to clean up the left behind random avatars
+bsr clearRandomSelect
+
+doneRandomSelect:
 bra donePlayerCursor
 
 hidePlayerCursor:
@@ -146,6 +155,7 @@ move.w #272, D2 ; set y to 224, moving cursor off screen
 jsr $2MOVE_SPRITE
 
 donePlayerCursor:
+
 
 ; for the character currently under the cursor, show their name on the fix layer
 jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
@@ -210,4 +220,88 @@ sub.b D4, D2  ; move the answer to D4, where it is expected
 move.b D2, D4
 
 flipPaletteFlagIfNeeded_done:
+rts
+
+
+;; randomSelect
+;; called if a player's cursor is over random select
+;; need to fill the chosen team section with random characters
+randomSelect:
+
+move.w D7, D6 ; move si where it is needed
+add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
+add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
+move.w #2, D4
+sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4 ; decrement D4 by number already chosen
+
+randomSelect_pickRandomChar:
+;; get a random number between 0-23
+;; the game's rng uses A0
+movem.l A0, $MOVEM_STORAGE
+jsr $2582 ; call the game's rng, it leaves a random byte in D0
+movem.l $MOVEM_STORAGE, A0
+andi.b #$1f, D0 ; chop the random byte down to 5 bits -> 0 through 31
+cmpi.b #24, D0
+bge randomSelect_pickRandomChar ;; it was too big, try again
+
+cmpi.b #0, D4
+bne randomSelect_checkFirst
+;; this means D0 is destined for the third character
+;; let's make sure char 0 and 1 aren't already this character
+cmp.b $PX_CHOSEN_CHAR0_OFFSET(A0), D0
+beq randomSelect_pickRandomChar ; they already have this character, choose again
+cmp.b $PX_CHOSEN_CHAR1_OFFSET(A0), D0
+beq randomSelect_pickRandomChar ; they already have this character, choose again
+randomSelect_checkFirst:
+cmpi.b #1, D4
+bne randomSelect_saveChar ; if D4 is 2, then this is the very first character, no checks needed
+;; this makes D0 is destined for the second character
+;; let's make sure char 0 isn't already this character
+cmp.b $PX_CHOSEN_CHAR0_OFFSET(A0), D0
+beq randomSelect_pickRandomChar ; they already have this character, choose again
+
+
+randomSelect_saveChar:
+;; save the chosen id into CHOSEN_CHAR
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A1
+move.w #2, D5
+sub.w D4, D5
+adda.w D5, A1 ; add it twice since chosen chars are words
+adda.w D5, A1 ; add it twice since chosen chars are words
+move.b D0, (A1)
+
+clr.w D7
+move.b D0, D7 ; load up the random char id
+;; parameters
+;; D6.w - sprite index
+;; D7.w - character id
+move.w D6, D3
+jsr $2RENDER_CHOSEN_AVATAR
+move.w D3, D6
+
+addi.w #2, D6 ; move to next avatar
+dbra D4, randomSelect_pickRandomChar
+
+rts
+
+;; clearRandomSelect
+;; clears out any avatars in chosen area that are unchosen
+;; this cleans up the random avatars that randomSelect may have placed there
+clearRandomSelect:
+move.w D7, D6 ; move si where it is needed
+add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
+add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
+move.w #2, D4
+sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4 ; decrement D4 by number already chosen
+
+clearRandomSelect_clearChar:
+;; parameters
+;; D6.w - sprite index
+move.w D6, D3
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w D3, D6
+
+addi.w #2, D6 ; move to next avatar
+dbra D4, clearRandomSelect_clearChar
+
 rts

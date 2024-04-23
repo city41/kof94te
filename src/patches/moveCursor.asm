@@ -53,9 +53,9 @@ skipLowerYWrap:
 skipDecCursorY:
 
 ;; did the cursor land in a dead spot?
-cmpi.w#2, D1
+cmpi.w#3, D1
 ble notInDeadSpot
-cmpi.w #6, D1
+cmpi.w #5, D1
 bge notInDeadSpot
 cmpi.w #2, D2
 bne notInDeadSpot
