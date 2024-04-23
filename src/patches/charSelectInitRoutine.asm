@@ -7,6 +7,7 @@ move.b #1, $IN_CHAR_SELECT_FLAG
 ;; bit 0       | 1 | - single player, p1 side
 ;; bit 1       | 2 | - single player, p2 side
 ;; bit 0 and 1 | 3 | - versus mode
+;; bit 5       |   | - single player randomize
 ;; bit 6       |   | - single player continued
 ;; bit 7       |   | - single player, char select should be read only
 ;;   --- this happens when the player has beaten their first team
@@ -18,6 +19,10 @@ move.w #$P1_CURSOR_LEFT_SI, $P1_CURSOR_SPRITEINDEX
 move.w #$P2_CURSOR_LEFT_SI, $P2_CURSOR_SPRITEINDEX
 move.w #$P1C1_SI, $P1_CHOSEN_TEAM_SPRITEINDEX
 move.w #$P2C1_SI, $P2_CHOSEN_TEAM_SPRITEINDEX
+;; to help account for the fact the chosen characters are
+;; backwards on the p2 side
+move.l #$P1_CHOSEN_CHAR0, $P1_STARTING_CHOSE_CHAR_ADDRESS
+move.l #$P2_CHOSEN_CHAR2, $P2_STARTING_CHOSE_CHAR_ADDRESS
 
 
 ;; reset these back to zero, we'll set them to 3 down below if needed
@@ -264,6 +269,44 @@ move.l #$2P2_CHAR_NAME_TABLE, $P2_CHAR_NAME_TABLE_ADDRESS
 
 bsr renderChosenAvatars
 
+;; is this a single player game, past the first round, and they 
+;; chose random select? If so, have char select re randomize
+btst #7, $PLAY_MODE ; is this single player, past the first stage?
+beq clearRandomSelectFlags
+btst #0, $PLAY_MODE ; is player 1 one playing?
+beq randomSelectBit_checkPlayer2
+tst.b $P1_CHOSE_RANDOM_SELECT
+beq clearRandomSelectFlags
+;; set up char select to randomize for p1
+;; TODO: technically this should be 36, 24, or 12, depending on the number
+;; of characters to randomly select, but going with 36 for now
+move.b #36, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+;; maintain the non random characters
+move.b $P1_NUM_NON_RANDOM_CHARS, $P1_NUM_CHOSEN_CHARS 
+move.b #0, $P2_CHOSE_RANDOM_SELECT ; clear player 2 just in case
+bset #5, $PLAY_MODE
+bra doneRandomSelectFlags
+randomSelectBit_checkPlayer2:
+tst.b $P2_CHOSE_RANDOM_SELECT
+beq clearRandomSelectFlags
+;; set up char select to randomize for p2 here
+;; TODO: technically this should be 36, 24, or 12, depending on the number
+;; of characters to randomly select, but going with 36 for now
+move.b #36, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+;; maintain the non random characters
+move.b $P2_NUM_NON_RANDOM_CHARS, $P2_NUM_CHOSEN_CHARS 
+move.b #0, $P1_CHOSE_RANDOM_SELECT ; clear player 1 just in case
+bset #5, $PLAY_MODE
+bra doneRandomSelectFlags
+
+clearRandomSelectFlags:
+move.b #0, $P1_CHOSE_RANDOM_SELECT ; clear player 1 flag
+move.b #0, $P2_CHOSE_RANDOM_SELECT ; clear player 2 flag
+bclr #5, $PLAY_MODE
+
+doneRandomSelectFlags:
+
+
 ;;; put the disclaimer string up
 ;;; [w:fix layer location][l: string pointer][w: countdown]
 move.w #$7024, $FIX_STRING_DATA         ; set up the version string's fix write location
@@ -416,7 +459,7 @@ beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
 ;; if we get here, we know all three have been chosen
 move.w #$P2C1_SI, D6
 clr.w D7
-move.b $P2_CHOSEN_CHAR0, D7
+move.b $P2_CHOSEN_CHAR2, D7
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P2C1_SI + 2, D6
 clr.w D7
@@ -424,7 +467,7 @@ move.b $P2_CHOSEN_CHAR1, D7
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P2C1_SI + 4, D6
 clr.w D7
-move.b $P2_CHOSEN_CHAR2, D7
+move.b $P2_CHOSEN_CHAR0, D7
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer2:

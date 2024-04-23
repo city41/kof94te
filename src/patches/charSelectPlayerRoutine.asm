@@ -9,6 +9,11 @@
 cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 beq skipChoosingChar ; if three have been chosen, don't choose more
 
+; is this a single player game, they chose randomize when choosing their characters
+; and now it's a subsequent fight? then randomize again
+btst #5, $PLAY_MODE
+bne doSlotMachine
+
 ; is this a single player game, and they are past the first fight? 
 ; then char select is just about showing who they fight next, don't
 ; let them do anything
@@ -16,6 +21,7 @@ btst #7, $PLAY_MODE
 bne skipChoosingChar
 
 ;;;;;;;;;;;;;;;;;;; SLOT MACHINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+doSlotMachine:
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 beq skipSlotMachine
 
@@ -40,8 +46,7 @@ bra slotMachine_skipChooseChar
 slotMachine_chooseChar:
 ;; take the palette flag choice they made before and restore it to D4
 move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), D4
-movea.l A0, A2 ; load the player struct starting address
-adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
@@ -52,7 +57,7 @@ move.b (A2), D1 ; pull the chosen char back out
 bsr saveChar
 
 slotMachine_skipChooseChar:
-bsr randomSelect
+jsr $2RANDOM_SELECT
 
 slotMachine_done:
 rts
@@ -95,7 +100,14 @@ bra skipChooseRandomSelect
 
 chooseRandomSelect:
 ;; first remember the palette flag choice, as we won't apply it for several frames
+;; it will also be used for future randomizations in single player mode
 move.b D4, $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0)
+;; set the flag so in subsequent single player fights we can re-random
+move.b #1, $PX_CHOSE_RANDOM_SELECT_OFFSET(A0)
+;; remember how many characters were not randomly selected, so subsequent re-randomizes
+;; will only rerandom the random characters
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4
+move.b D4, $PX_NUM_NON_RANDOM_CHARS_OFFSET(A0)
 
 ;; set up the countdown which will allow gradually choosing the characters
 ;; set the countdown based on number of characters chosen. More characters -> shorter countdown
@@ -168,7 +180,7 @@ beq doRandomSelect
 bra doClearRandomSelect
 
 doRandomSelect:
-bsr randomSelect
+jsr $2RANDOM_SELECT
 bra doneRandomSelect
 
 doClearRandomSelect:
@@ -255,83 +267,6 @@ move.b D2, D4
 flipPaletteFlagIfNeeded_done:
 rts
 
-
-;; randomSelect
-;; called if a player's cursor is over random select
-;; need to fill the chosen team section with random characters
-randomSelect:
-cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-beq randomSelect_done ; chose three characters? don't randomize then
-
-;; throttle back the speed of random select
-move.b $CHAR_SELECT_COUNTER, D4
-andi.b #$3, D4
-;; if there are any lower bits, bail
-;; this means only random select every 4 frames
-bne randomSelect_done
-
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6 ; load si
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
-move.w #2, D4
-sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4 ; decrement D4 by number already chosen
-
-randomSelect_pickRandomChar:
-;; get a random number between 0-23
-;; the game's rng uses A0
-movem.l A0, $MOVEM_STORAGE
-jsr $2582 ; call the game's rng, it leaves a random byte in D0
-movem.l $MOVEM_STORAGE, A0
-andi.b #$1f, D0 ; chop the random byte down to 5 bits -> 0 through 31
-cmpi.b #24, D0
-bge randomSelect_pickRandomChar ;; it was too big, try again
-
-cmpi.b #0, D4
-bne randomSelect_checkFirst
-;; this means D0 is destined for the third character
-;; let's make sure char 0 and 1 aren't already this character
-cmp.b $PX_CHOSEN_CHAR0_OFFSET(A0), D0
-beq randomSelect_pickRandomChar ; they already have this character, choose again
-cmp.b $PX_CHOSEN_CHAR1_OFFSET(A0), D0
-beq randomSelect_pickRandomChar ; they already have this character, choose again
-randomSelect_checkFirst:
-cmpi.b #1, D4
-bne randomSelect_saveChar ; if D4 is 2, then this is the very first character, no checks needed
-;; this makes D0 is destined for the second characterG
-;; let's make sure char 0 isn't already this character
-cmp.b $PX_CHOSEN_CHAR0_OFFSET(A0), D0
-beq randomSelect_pickRandomChar ; they already have this character, choose again
-
-
-randomSelect_saveChar:
-;; save the chosen id into CHOSEN_CHAR
-lea $PX_CHOSEN_CHAR0_OFFSET(A0), A1
-move.w #2, D5
-sub.w D4, D5
-adda.w D5, A1 ; add it twice since chosen chars are words
-adda.w D5, A1 ; add it twice since chosen chars are words
-move.b D0, (A1)
-
-clr.w D7
-move.b D0, D7 ; load up the random char id
-;; parameters
-;; D6.w - sprite index
-;; D7.w - character id
-move.w D6, D3
-jsr $2RENDER_CHOSEN_AVATAR
-move.w D3, D6
-tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
-; don't play the sfx during slot machine, as kof94 can only play one sfx at a time
-bne randomSelect_skipSoundEffect ; don't play the sfx during slot machine
-move.b #$60, $320000  ; play the sound effect
-randomSelect_skipSoundEffect:
-
-addi.w #2, D6 ; move to next avatar
-dbra D4, randomSelect_pickRandomChar
-
-randomSelect_done:
-rts
-
 ;; clearRandomSelect
 ;; clears out any avatars in chosen area that are unchosen
 ;; this cleans up the random avatars that randomSelect may have placed there
@@ -367,8 +302,7 @@ rts
 ;; D4: chosen palette flag to save
 saveChar:
 ; now set the chosen char id
-movea.l A0, A2 ; load the player struct starting address
-adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]

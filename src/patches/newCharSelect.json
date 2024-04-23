@@ -38,6 +38,9 @@
     "P1_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10f815",
     "P1_CURSOR_SPRITEINDEX": "10f816",
     "P1_CHOSEN_TEAM_SPRITEINDEX": "10f818",
+    "P1_CHOSE_RANDOM_SELECT": "10f81a",
+    "P1_NUM_NON_RANDOM_CHARS": "10f81b",
+    "P1_STARTING_CHOSE_CHAR_ADDRESS": "10f81c",
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
@@ -51,6 +54,9 @@
     "P2_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10f8b5",
     "P2_CURSOR_SPRITEINDEX": "10f8b6",
     "P2_CHOSEN_TEAM_SPRITEINDEX": "10f8b8",
+    "P2_CHOSE_RANDOM_SELECT": "10f8ba",
+    "P2_NUM_NON_RANDOM_CHARS": "10f8bb",
+    "P2_STARTING_CHOSE_CHAR_ADDRESS": "10f8bc",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "IN_CHAR_SELECT_FLAG": "10f8e4",
     "STORE_A0A1A2": "10f8e6",
@@ -83,6 +89,10 @@
     "PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET": "15",
     "PX_CURSOR_SPRITEINDEX_OFFSET": "16",
     "PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET": "18",
+    "PX_CHOSE_RANDOM_SELECT_OFFSET": "1a",
+    "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
+    "PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET": "1c",
+
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
     "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "72f6"
   },
@@ -298,6 +308,13 @@
       "subroutine": true,
       "symbol": "RENDER_CHOSEN_AVATAR",
       "patchAsm": "renderChosenAvatar.asm"
+    },
+    {
+      "type": "prom",
+      "description": "random select routine",
+      "subroutine": true,
+      "symbol": "RANDOM_SELECT",
+      "patchAsm": "randomSelect.asm"
     },
     {
       "type": "prom",
