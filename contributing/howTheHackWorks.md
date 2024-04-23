@@ -35,7 +35,7 @@ A common theme throughout the hack is always handling player 1 and player 2, no 
 
 ### Pushing team select and the sprite engine aside
 
-Inside `newCharSelect.json` are a lot of small patches that deal with making enough room for character select to run. They do things like not allow team select to load any sprites, and guard the palettes character select is using. This has the double bonus of reducing how much of vblank team select uses, as we want to hog as much vblank time to ourselves that we can.
+Inside `kof94te.json` are a lot of small patches that deal with making enough room for character select to run. They do things like not allow team select to load any sprites, and guard the palettes character select is using. This has the double bonus of reducing how much of vblank team select uses, as we want to hog as much vblank time to ourselves that we can.
 
 ### Moving forward into order select
 

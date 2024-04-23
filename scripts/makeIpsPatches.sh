@@ -13,7 +13,7 @@ mkdir ipsBinaries/hacked
 yarn restore;
 cp $MAME_ROM_DIR/$GAME.zip ipsBinaries/original/
 
-yarn ts-node src/patchRom/main.ts src/patches/newCharSelect.json
+yarn ts-node src/patchRom/main.ts src/patches/kof94te.json
 cp $MAME_ROM_DIR/$GAME.zip ipsBinaries/hacked/
 
 (cd ipsBinaries/original/ && unzip $GAME.zip)

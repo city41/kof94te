@@ -127,7 +127,7 @@ These are random typescript scripts that do many various things. Mostly used to 
 
 ### src/patches
 
-These are patches that can be applied to the game. `newCharSelect.json` is the main patch. Any json file in this directory is a patch that can be applied with `yarn ts-node src/patchRom/main.ts src/patches/<patch>.json`. All `.asm` files in this directory are used by patches. If you look inside `newCharSelect.json` you will see the assembly is sometimes right in the json file as string array, and sometimes external to the file in an `.asm` file.
+These are patches that can be applied to the game. `kof94te.json` is the main patch. Any json file in this directory is a patch that can be applied with `yarn ts-node src/patchRom/main.ts src/patches/<patch>.json`. All `.asm` files in this directory are used by patches. If you look inside `kof94te.json` you will see the assembly is sometimes right in the json file as string array, and sometimes external to the file in an `.asm` file.
 
 ### findings
 
@@ -153,7 +153,7 @@ You will need an unzipped vanilla ROM somewhere.
 2. `yarn ts-node src/tools/buildCutscene2Tables.ts <dir with unzipped vanilla ROM>/055-p1.p1`
 3. `yarn ts-node src/tools/copyOrderSelectBgToTeamSelect.ts <dir with unzipped vanilla ROM>/055-p1.p1`
 4. `yarn run-srom-crom`
-5. `yrn ts-node src/patchRom/main.ts src/patches/newCharSelect.json`
+5. `yrn ts-node src/patchRom/main.ts src/patches/kof94te.json`
 
 Note that the tools generate asm files that get checked into the repo. So strictly speaking only the `run-srom-crom` step is needed. But this documents the entire patch creation process.
 
