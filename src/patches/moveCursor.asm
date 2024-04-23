@@ -2,14 +2,11 @@
 ;; Moves the input according to the input byte
 ;;
 ;; parameters
-;; D0: the cursor's sprite index
 ;; A0: base pointer to for p1 or p2 data
 ;; it is assumed the y index is 2 bytes after x
 
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bne done
-
-move.w D0, D6 ; move the sprite index off to the side
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; move current input into D0
 move.w $PX_CURSOR_X_OFFSET(A0), D1 ; load current cursor X
@@ -140,7 +137,7 @@ addi.w #56, D2 ; add the Y offset (54px from top of screen)
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
 move.w D3, D2  ; move it back into D2, where moveSprite expects it
-move.w D6, D0 ; load the sprite index
+move.w $PX_CURSOR_SPRITEINDEX_OFFSET(A0), D0 ; load the sprite index
 
 movem.w D1-D3, $MOVEM_STORAGE
 jsr $2MOVE_SPRITE ; and finally, move the sprite
@@ -148,7 +145,7 @@ movem.w $MOVEM_STORAGE, D1-D3
 
 ;; and the right one
 addi.w #19, D1
-move.w D6, D0 ; load the sprite index
+move.w $PX_CURSOR_SPRITEINDEX_OFFSET(A0), D0 ; load the sprite index
 addi.w #1, D0 ; we need the sprite next door for right
 jsr $2MOVE_SPRITE ; and finally, move the sprite
 

@@ -1,3 +1,5 @@
+move.b #1, $IN_CHAR_SELECT_FLAG
+
 ;; reset the player mode, we'll figure it out through the course of init
 ;; 
 ;; PLAY_MODE values:
@@ -10,9 +12,13 @@
 ;;   --- this happens when the player has beaten their first team
 ;;   --- all subsequent char selects are read only
 ;;   --- but if they lose and continue, this bit will be uncleared
-move.b #1, $IN_CHAR_SELECT_FLAG
-
 move.b #0, $PLAY_MODE
+
+move.w #$P1_CURSOR_LEFT_SI, $P1_CURSOR_SPRITEINDEX
+move.w #$P2_CURSOR_LEFT_SI, $P2_CURSOR_SPRITEINDEX
+move.w #$P1C1_SI, $P1_CHOSEN_TEAM_SPRITEINDEX
+move.w #$P2C1_SI, $P2_CHOSEN_TEAM_SPRITEINDEX
+
 
 ;; reset these back to zero, we'll set them to 3 down below if needed
 move.b #0, $P1_NUM_CHOSEN_CHARS

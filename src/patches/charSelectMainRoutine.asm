@@ -23,8 +23,6 @@ move.b $BIOS_P1CHANGE, $P1_CUR_INPUT
 ;; the base address from which all other p1 values will derive from
 lea $P1_CUR_INPUT, A0
 lea $P2_CUR_INPUT, A1
-move.w #$P1_CURSOR_LEFT_SI, D6
-move.w #$P1C1_SI, D7
 jsr $2CHAR_SELECT_PLAYER_ROUTINE
 
 skipPlayer1:
@@ -35,8 +33,6 @@ move.b $BIOS_P2CHANGE, $P2_CUR_INPUT
 ;; the base address from which all other p2 values will derive from
 lea $P2_CUR_INPUT, A0
 lea $P1_CUR_INPUT, A1
-move.w #$P2_CURSOR_LEFT_SI, D6
-move.w #$P2C1_SI, D7
 jsr $2CHAR_SELECT_PLAYER_ROUTINE
 
 skipPlayer2:
