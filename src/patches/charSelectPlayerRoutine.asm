@@ -54,7 +54,24 @@ beq chooseRandomSelect
 bra skipChooseRandomSelect
 
 chooseRandomSelect:
-;; for now, just immediately go with what is there
+;; first, set the palette flag for the random characters based on if player
+;; pressed A/B or C/D. And flip flags if necessary, per character (oi...)
+move.w #2, D5
+sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D5 ; decrement D4 by number already chosen
+
+chooseRandomSelect_setPaletteFlag:
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
+move.w #2, D6
+sub.w D5, D6
+adda.w D6, A1 ; add it twice since chosen chars are words
+adda.w D6, A1 ; add it twice since chosen chars are words
+move.b (A2), D1
+bsr flipPaletteFlagIfNeeded
+;; at this point, D4 is the correct palette flag for this character
+adda.w #1, A2 ; move forward one more byte to get to the palette flag
+move.b D4, (A2) ; and finally save it
+dbra D5, chooseRandomSelect_setPaletteFlag
+
 move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
 move.b #$61, $320000  ; play the sound effect
 bra skipChoosingChar
@@ -175,6 +192,9 @@ rts
 ;; D4: the palette flag that was chosen
 ;; A1: base pointer for other player's data
 ;; 
+;; return
+;; -----
+;; D4: the palette flag, flipped if needed
 
 flipPaletteFlagIfNeeded:
 ;; first see if this is versus mode
@@ -255,7 +275,7 @@ beq randomSelect_pickRandomChar ; they already have this character, choose again
 randomSelect_checkFirst:
 cmpi.b #1, D4
 bne randomSelect_saveChar ; if D4 is 2, then this is the very first character, no checks needed
-;; this makes D0 is destined for the second character
+;; this makes D0 is destined for the second characterG
 ;; let's make sure char 0 isn't already this character
 cmp.b $PX_CHOSEN_CHAR0_OFFSET(A0), D0
 beq randomSelect_pickRandomChar ; they already have this character, choose again
