@@ -12,12 +12,44 @@
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
 beq skipChoosingChar ; if three have been chosen, don't choose more
+
 ; is this a single player game, and they are past the first fight? 
 ; then char select is just about showing who they fight next, don't
 ; let them do anything
 btst #7, $PLAY_MODE
 ; if it is not zero, then the flag is set, don't let them choose
 bne skipChoosingChar
+
+tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+beq skipSlotMachine
+
+;; we are in the slot machine
+subi.b #1, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+
+cmpi.b #24, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+beq slotMachine_chooseChar
+cmpi.b #12, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+beq slotMachine_chooseChar
+cmpi.b #0, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+beq slotMachine_chooseChar
+bra skipChoosingChar
+;; ready to choose the first character
+
+slotMachine_chooseChar:
+;; take the palette flag choice they made before and restore it to D4
+move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), D4
+movea.l A0, A2 ; load the player struct starting address
+adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
+clr.w D0
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
+lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
+adda.w D0, A2   ; move forward based on how many characters are chosen
+move.b (A2), D1 ; pull the chosen char back out
+;; saveChar will take D1 (charId) and D4 (palette flag)
+;; and do everything needed to save the character
+bra saveChar
+
+skipSlotMachine:
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; load effectively BIOS_PXCHANGE
 btst #$4, D0 ; is A pressed?
@@ -54,26 +86,20 @@ beq chooseRandomSelect
 bra skipChooseRandomSelect
 
 chooseRandomSelect:
-;; first, set the palette flag for the random characters based on if player
-;; pressed A/B or C/D. And flip flags if necessary, per character (oi...)
-move.w #2, D5
-sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D5 ; decrement D5 by number already chosen
+;; first remember the palette flag choice, as we won't apply it for several frames
+move.b D4, $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0)
 
-chooseRandomSelect_setPaletteFlag:
-lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
-move.w #2, D6
-sub.w D5, D6
-adda.w D6, A2 ; add it twice since chosen chars are words
-adda.w D6, A2 ; add it twice since chosen chars are words
-move.b (A2), D1
-bsr flipPaletteFlagIfNeeded
-;; at this point, D4 is the correct palette flag for this character
-adda.w #1, A2 ; move forward one more byte to get to the palette flag
-move.b D4, (A2) ; and finally save it
-dbra D5, chooseRandomSelect_setPaletteFlag
-
-move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
-move.b #$61, $320000  ; play the sound effect
+;; set up the countdown which will allow gradually choosing the characters
+;; set the countdown based on number of characters chosen. More characters -> shorter countdown
+;; 0 characters chosen -> countdown = 36
+;; 1 character chosen -> countdown = 24
+;; 2 character chosen -> countdown = 12
+move.b #36, D5
+clr.w D4
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4
+mulu.w #12, D4
+sub.b D4, D5
+move.b D5, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bra skipChoosingChar
 
 skipChooseRandomSelect:
@@ -81,6 +107,7 @@ lea $2GRID_TO_CHARACTER_ID, A3
 adda.w D1, A3
 move.b (A3), D1 ; character Id from grid is now in D1
 
+saveChar:
 ; now set the chosen char id
 movea.l A0, A2 ; load the player struct starting address
 adda.w #$PX_CHOSEN_CHAR0_OFFSET, A2 ; and move forward to first chosen char
@@ -248,25 +275,12 @@ rts
 ;; need to fill the chosen team section with random characters
 randomSelect:
 
-;; due to throttling it's possible to pick random select very fast
-;; and end up with three heiderns as throttling will prevent random char ids
-;; from being generated
-;; this flag avoids that problem
-;; TODO: random select will have a "slot machine effect" that makes this irrelevant
-; move.b $PX_HAS_RANDOM_SELECTED_OFFSET(A0), D4
-tst.b $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
-beq randomSelect_dontThrottle
-
-
 ;; throttle back the speed of random select
 move.b $CHAR_SELECT_COUNTER, D4
 andi.b #$3, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 4 frames
 bne randomSelect_done
-
-randomSelect_dontThrottle:
-move.b #1, $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
 
 move.w D7, D6 ; move si where it is needed
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
@@ -318,6 +332,11 @@ move.b D0, D7 ; load up the random char id
 move.w D6, D3
 jsr $2RENDER_CHOSEN_AVATAR
 move.w D3, D6
+tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+; don't play the sfx during slot machine, as kof94 can only play one sfx at a time
+bne randomSelect_skipSoundEffect ; don't play the sfx during slot machine
+move.b #$60, $320000  ; play the sound effect
+randomSelect_skipSoundEffect:
 
 addi.w #2, D6 ; move to next avatar
 dbra D4, randomSelect_pickRandomChar
@@ -329,10 +348,6 @@ rts
 ;; clears out any avatars in chosen area that are unchosen
 ;; this cleans up the random avatars that randomSelect may have placed there
 clearRandomSelect:
-;; clear the flag for next time player comes back to random select
-;; TODO: random select will have a "slot machine effect" that makes this irrelevant
-move.b #0, $PX_HAS_RANDOM_SELECTED_OFFSET(A0)
-
 move.w D7, D6 ; move si where it is needed
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
 add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
