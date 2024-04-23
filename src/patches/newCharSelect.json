@@ -746,7 +746,7 @@
     },
     {
       "type": "prom",
-      "description": "Set up character colors (reg or alt, ie mirror match) at the second location",
+      "description": "Set up character colors (reg or alt, ie mirror match) at the third location",
       "address": "103318",
       "subroutine": true,
       "symbol": "THIRD_LOCATION_CAR_COLS",
