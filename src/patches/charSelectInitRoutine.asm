@@ -1,3 +1,4 @@
+move.b #$PHASE_INIT, $HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 
 ;; reset the player mode, we'll figure it out through the course of init
@@ -42,26 +43,11 @@ jsr $2RENDER_STATIC_IMAGE
 
 
 ;;;;;;;;;;;;;; INIT PLAYER 1 ;;;;;;;;;;;;;;;;;;;;
-move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
-cmpi.b #1, D6 ;; look specifically for 1: playing
+cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
 bne skipPlayer1 ; no? check player 2
 
 ;; side p1 is playing, add it to the mode
 ori.b #1, $PLAY_MODE
-
-; load the p1 cursor, left
-; it loads into the correct spot, no need to move it
-move.w #$P1_CURSOR_LEFT_SI, D6
-lea $2P1_CURSOR_LEFT_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; load the p1 cursor, right
-; it loads into the correct spot, no need to move it
-move.w #$P1_CURSOR_RIGHT_SI, D6
-lea $2P1_CURSOR_RIGHT_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
 
 ; initialize cursor's location
 ; this is a 2d index into the grid, not pixels
@@ -69,8 +55,7 @@ move.w #0, $P1_CURSOR_X ; start at Terry
 move.w #0, $P1_CURSOR_Y
 
 ;;;;;;;;;;;;;;; INIT CPU AGAINST P1 ;;;;;;;;;;;;;;
-move.b $BIOS_PLAYER_MOD2, D6 ; are they even playing?
-cmpi.b #1, D6 ;; look specifically for 1: playing
+cmpi.b #1, $BIOS_PLAYER_MOD2 ;; is player 2 playing?
 beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
@@ -90,26 +75,11 @@ jsr $2RENDER_STATIC_IMAGE
 skipPlayer1:
 
 ;;;;;;;;;;;;;; INIT PLAYER 2 ;;;;;;;;;;;;;;;;;;;;
-move.b $BIOS_PLAYER_MOD2, D6
-cmpi.b #1, D6 ;; look specifically for 1: playing
+cmpi.b #1, $BIOS_PLAYER_MOD2 ;; is player 2 playing?
 bne skipPlayer2 ; skip if p2 is not playing
 
 ;; side p2 is playing, add it to the mode
 ori.b #2, $PLAY_MODE
-
-; load the p2 cursor, left
-; it loads into the correct spot, no need to move it
-move.w #$P2_CURSOR_LEFT_SI, D6
-lea $2P2_CURSOR_LEFT_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; load the p2 cursor, right
-; it loads into the correct spot, no need to move it
-move.w #$P2_CURSOR_RIGHT_SI, D6
-lea $2P2_CURSOR_RIGHT_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
 
 ; initialize cursor's location
 ; this is a 2d index into the grid, not pixels
@@ -191,13 +161,7 @@ skipGreyOut:
 
 jsr $2INIT_EMPTY_AVATARS
 
-;; GENERAL VALUE INITIALIZATION
 bsr setCpuAlreadyUsedIndex
-; cmpi.b #0, $DEFEATED_TEAMS ; if there are zero defeated teams
-; bne skipResetIndexes
-; move.b #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; then reset the rng tracker byte
-; skipResetIndexes:
-
 
 
 btst #0, $PLAY_MODE
@@ -216,8 +180,6 @@ cmpi.b #$80, $108438
 bne p1_firstCharSelect ; if player 2 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 bset #7, $PLAY_MODE
-;; have main move onto cpu select right away
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P1_NUM_CHOSEN_CHARS
 bra p1_pastReady
@@ -225,8 +187,6 @@ p1_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
 p1_firstCharSelect: 
-;; first time in char select for single player, p1 side
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
 move.b #0, $P1_NUM_CHOSEN_CHARS
 p1_pastReady:
 
@@ -246,8 +206,6 @@ cmpi.b #$80, $108238
 bne p2_firstCharSelect ; if player 1 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 bset #7, $PLAY_MODE
-;; have main move onto cpu select right away
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P2_NUM_CHOSEN_CHARS
 bra p2_pastReady
@@ -255,8 +213,6 @@ p2_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
 p2_firstCharSelect: 
-;; first time in char select for single player, p2 side
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
 move.b #0, $P2_NUM_CHOSEN_CHARS
 p2_pastReady:
 
@@ -306,6 +262,81 @@ bclr #5, $PLAY_MODE
 
 doneRandomSelectFlags:
 
+;;;;;;;;;;; DETERMINE THE PHASE FOR MAIN ;;;;;;;;;;;;;;;
+cmpi.b #0, $PLAY_MODE
+;; demo mode
+beq setCpuSelect
+cmpi.b #3, $PLAY_MODE
+;; versus mode
+beq setPlayerSelect
+btst #5, $PLAY_MODE
+;; single player random select
+bra setPlayerSelect
+btst #7, $PLAY_MODE
+;; subsequent match in a single player game
+bne setCpuSelect
+bra setPlayerSelect
+
+setCpuSelect:
+move.b #$PHASE_CPU_SELECT, $HACK_PHASE
+move.b #0, $READY_TO_EXIT_CHAR_SELECT
+move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
+bra doneSettingPhase
+
+setPlayerSelect:
+move.b #$PHASE_PLAYER_SELECT, $HACK_PHASE
+move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
+move.b #0, $READY_TO_EXIT_CHAR_SELECT
+bra doneSettingPhase
+
+doneSettingPhase:
+;;;;;;;;;;; END DETERMINE THE PHASE FOR MAIN ;;;;;;;;;;;;;;;
+
+;;;;;;;;;;; LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; load the p1 cursor, left
+; it loads into the correct spot, no need to move it
+btst #0, $PLAY_MODE ; is player 1 playing?
+beq skipPlayer1Cursor ; no? no need for their cursor
+btst #7, $PLAY_MODE ; is this a subsequent single player match? this covers re-randomize case too
+bne skipPlayer1Cursor ; yes ? no need for their cursor
+
+move.w #$P1_CURSOR_LEFT_SI, D6
+lea $2P1_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; load the p1 cursor, right
+; it loads into the correct spot, no need to move it
+move.w #$P1_CURSOR_RIGHT_SI, D6
+lea $2P1_CURSOR_RIGHT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+skipPlayer1Cursor:
+
+btst #1, $PLAY_MODE ; is player 2 playing?
+beq skipPlayer2Cursor ; no? no need for their cursor
+btst #7, $PLAY_MODE ; is this a subsequent single player match? this covers re-randomize case too
+bne skipPlayer2Cursor ; yes ? no need for their cursor
+
+; load the p2 cursor, left
+; it loads into the correct spot, no need to move it
+move.w #$P2_CURSOR_LEFT_SI, D6
+lea $2P2_CURSOR_LEFT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+; load the p2 cursor, right
+; it loads into the correct spot, no need to move it
+move.w #$P2_CURSOR_RIGHT_SI, D6
+lea $2P2_CURSOR_RIGHT_IMAGE, A6
+move.w #0, D5              ; offset into tile data
+jsr $2RENDER_STATIC_IMAGE
+
+skipPlayer2Cursor:
+
+;;;;;;;;;;; END LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; put the disclaimer string up
 ;;; [w:fix layer location][l: string pointer][w: countdown]

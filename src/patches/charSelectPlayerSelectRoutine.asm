@@ -1,11 +1,44 @@
+;; charSelectPlayerSelectRoutine
+;; handles everything related to a human selecting their characters
+
+btst #0, $PLAY_MODE ; is p1 playing?
+beq skipPlayer1
+
+move.b $BIOS_P1CHANGE, $P1_CUR_INPUT
+;; the base address from which all other p1 values will derive from
+lea $P1_CUR_INPUT, A0
+lea $P2_CUR_INPUT, A1
+bsr doSinglePlayer
+
+skipPlayer1:
+btst #1, $PLAY_MODE ; is p2 playing?
+beq skipPlayer2
+
+move.b $BIOS_P2CHANGE, $P2_CUR_INPUT
+;; the base address from which all other p2 values will derive from
+lea $P2_CUR_INPUT, A0
+lea $P1_CUR_INPUT, A1
+bsr doSinglePlayer
+
+skipPlayer2:
+rts
+
+;;;;
+;;;; SUBROUTINES BELOW
+;;;;
+
+; doSinglePlayer
+; --------------
 ; handles character selection and cursor movement for either p1 or p2
 ;
 ; parameters
 ; A0: base pointer for p1 or p2 data
 ; A1: base pointer for other player's data
+doSinglePlayer:
 
 ; how many characters have been chosen so far?
 ; don't let them choose more than 3
+
 cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 beq skipChoosingChar ; if three have been chosen, don't choose more
 
@@ -149,7 +182,7 @@ skipChoosingChar:
 ;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
 
 btst #7, $PLAY_MODE
-bne doHidePlayerCursor ; if past first fight, never show the player's cursor
+bne skipCursor ; if past first fight, never show the player's cursor
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 cmpi.b #3, D0
 beq doHidePlayerCursor ; all three chosen? no need for a cursor anymore
@@ -159,9 +192,8 @@ bra donePlayerCursor
 
 doHidePlayerCursor:
 bsr hidePlayerCursor
-bra donePlayerCursor
 
-
+skipCursor:
 donePlayerCursor:
 
 ;;;;;;;;;;;;;;;;;;; RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -200,9 +232,6 @@ jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
 rts
 
 
-;;;;
-;;;; SUBROUTINES BELOW
-;;;;
 
 
 ;; flipPaletteFlagIfNeeded

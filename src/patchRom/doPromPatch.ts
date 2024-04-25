@@ -10,10 +10,13 @@ function hexDump(bytes: number[]): string {
   return bytes.map((b) => b.toString(16)).join(" ");
 }
 
-async function assemble(asm: string[]): Promise<number[]> {
+async function assemble(
+  asm: string[],
+  name: string = "tmp"
+): Promise<number[]> {
   mkdirp.sync(asmTmpDir);
-  const inputAsmPath = path.resolve(asmTmpDir, "tmp.asm");
-  const outputBinPath = path.resolve(asmTmpDir, "tmp.bin");
+  const inputAsmPath = path.resolve(asmTmpDir, `${name}.asm`);
+  const outputBinPath = path.resolve(asmTmpDir, `${name}.bin`);
 
   const asmSrc = asm.map((a) => `\t${a}`).join("\n");
   console.log("asm\n", asmSrc);
@@ -35,9 +38,10 @@ async function assemble(asm: string[]): Promise<number[]> {
 async function replaceAt(
   data: number[],
   address: string,
-  asm: string[]
+  asm: string[],
+  name?: string
 ): Promise<number[]> {
-  const asmBytes = await assemble(asm);
+  const asmBytes = await assemble(asm, name);
 
   console.log("asmBytes", hexDump(asmBytes));
 
@@ -126,7 +130,7 @@ async function replaceWithSubroutine(
   subroutineInsertEnd: number,
   patch: AddressPromPatch
 ): Promise<{ patchedPromData: number[]; subroutineInsertEnd: number }> {
-  const subroutineBytes = await assemble(patch.patchAsm);
+  const subroutineBytes = await assemble(patch.patchAsm, patch.symbol);
   console.log(
     "replaceWithSubroutine: subroutinebytes",
     hexDump(subroutineBytes)
@@ -144,7 +148,7 @@ async function replaceWithSubroutine(
 
   if ("address" in patch && typeof patch.address === "string") {
     jsrAsm = await formJsrAsm(6, subroutineStartAddress);
-    jsrAddedData = await replaceAt(data, patch.address, jsrAsm);
+    jsrAddedData = await replaceAt(data, patch.address, jsrAsm, patch.symbol);
   } else {
     console.log(
       "subroutine has no address for jsr specified, just inserting it into rom"
