@@ -21,14 +21,6 @@
     "P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108435",
     "DEFEATED_TEAMS": "1087df",
 
-    "PHASE_UNKNOWN": "0",
-    "PHASE_INIT": "1",
-    "PHASE_PLAYER_SELECT": "2",
-    "PHASE_CPU_SELECT": "3",
-    "PHASE_SCALE_DOWN": "4",
-    "PHASE_DONE": "5",
-    "HACK_PHASE": "10f7bf",
-
     "WINNING_TEAM_LIST": "10f7c0",
     "VSTRING_DATA": "10f7d0",
     "FIX_STRING_DATA": "10f7e0",
@@ -75,6 +67,16 @@
     "AFTER_SCREEN_POSITION_TABLE": "10f912",
     "MOVEM_STORAGE": "10fa10",
     "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb00",
+
+    "PHASE_UNKNOWN": "0",
+    "PHASE_INIT": "1",
+    "PHASE_PLAYER_SELECT": "2",
+    "PHASE_CPU_SELECT": "3",
+    "PHASE_WRAP_UP": "4",
+    "PHASE_DONE": "5",
+    "HACK_PHASE": "10fb02",
+
+    "WRAP_UP_COUNTDOWN": "10fb04",
 
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
@@ -339,6 +341,13 @@
       "subroutine": true,
       "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
       "patchAsm": "charSelectCpuSelectRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "char select wrap up routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_WRAP_UP_ROUTINE",
+      "patchAsm": "charSelectWrapUpRoutine.asm"
     },
     {
       "type": "prom",

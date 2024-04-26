@@ -7,7 +7,7 @@
 ; D6.w - sprite index
 ; D7.w - character Id to be rendered
 
-movem.l A1/A6/D5, $MOVEM_STORAGE
+movem.l A1/A6/D5/D6, $MOVEM_STORAGE
 
 ;; set up A6 to point to the avatar data
 lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
@@ -48,6 +48,6 @@ move.w (A6)+, (A1) ; palette/etc of tile
 move.w (A6)+, (A1) ; lsb of tile
 move.w (A6)+, (A1) ; palette/etc of tile
 
-movem.l $MOVEM_STORAGE, A1/A6/D5
+movem.l $MOVEM_STORAGE, A1/A6/D5/D6
 
 rts

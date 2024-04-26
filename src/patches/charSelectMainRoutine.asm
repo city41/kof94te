@@ -23,6 +23,8 @@ cmpi.b #$PHASE_PLAYER_SELECT, $HACK_PHASE
 beq doPlayerSelect
 cmpi.b #$PHASE_CPU_SELECT, $HACK_PHASE
 beq doCpuSelect
+cmpi.b #$PHASE_WRAP_UP, $HACK_PHASE
+beq doCharSelectWrapUp
 
 
 doPlayerSelect:
@@ -33,6 +35,11 @@ bra done
 doCpuSelect:
 jsr $2CHAR_SELECT_CPU_SELECT_ROUTINE
 bsr checkIfCpuSelectIsDone
+bra done
+
+doCharSelectWrapUp:
+jsr $2CHAR_SELECT_WRAP_UP_ROUTINE
+bsr checkIfWrapUpIsDone
 bra done
 
 done:
@@ -93,7 +100,7 @@ rts
 
 
 ;;; checkIfCpuSelectIsDone
-;;; looks to see if the cpu randomizatoin is done
+;;; looks to see if the cpu randomization is done
 ;;; if so, sets phase to DONE
 
 checkIfCpuSelectIsDone:
@@ -114,10 +121,56 @@ beq checkIfCpuSelectIsDone_cpuIsDone
 bra checkIfCpuSelectIsDone_done
 
 checkIfCpuSelectIsDone_cpuIsDone:
-;; cpu is done, so set the signal
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
+;; cpu is done, show their team in the chosen section
+bsr renderCpuChosenTeam
+move.b #$PHASE_WRAP_UP, $HACK_PHASE
 
 checkIfCpuSelectIsDone_done:
 rts
 
+;;; checkIfWrapUpIsDone
+checkIfWrapUpIsDone:
+cmpi.b #$ff, $WRAP_UP_COUNTDOWN
+bne checkIfWrapUpIsDone_done
+;;; wrap up has concluded, time to signal char select is done
+move.b #$PHASE_DONE, $HACK_PHASE
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
 
+checkIfWrapUpIsDone_done:
+rts
+
+;;; renderCpuChosenTeam
+;;; takes the cpu's chosen team and renders it into the chosen avatar area
+;;; this is to match what KOF95 does
+renderCpuChosenTeam:
+clr.w D1
+btst #0, $PLAY_MODE ; is p1 playing?
+bne renderCpuChosenTeam_renderCpuOnP2Side
+;; p1 is not playing, so cpu is p1
+move.w #$P1C1_SI, D6
+move.b $108231, D1
+bra renderCpuChosenTeam_doRender
+
+renderCpuChosenTeam_renderCpuOnP2Side:
+;; p1 is playing, so cpu is p2
+move.w #$P2C1_SI, D6
+move.b $108431, D1
+
+renderCpuChosenTeam_doRender:
+move.w #2, D4 ; get dba primed, 2 since it hinges on -1
+
+;; ok, we have the cpu team id, but not the characters, we need to look them up
+lea $534DC, A0 ; load the starting team->character list address
+mulu.w #4, D1  ; multiply team id by 4, as there are 4 bytes per team (three characters and a ff delimiter)
+adda.w D1, A0  ; move into the list to the correct team
+
+
+renderCpuChosenTeam_renderChar:
+clr.w D7
+move.b (A0), D7 ; load character id
+jsr $2RENDER_CHOSEN_AVATAR
+adda.w #1, A0 ; move to next character
+addi.w #2, D6 ; move to next sprite index
+dbra D4, renderCpuChosenTeam_renderChar
+
+rts
