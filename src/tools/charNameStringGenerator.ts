@@ -23,8 +23,8 @@ const characters = [
   "Yuri Sakazaki",
   "Mai Shiranui",
   "King",
-  "Rugal",
-  "O.Rugal",
+  "Debug Rugal",
+  "", // full form Rugal, never used, intentionally left blank
   "Roulette?",
 ];
 

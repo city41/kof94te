@@ -31,8 +31,8 @@ dc.b $7
 dc.b $8
 ; roulette space 1
 dc.b $1a
-; dead area
-dc.b 0
+; rugal if debug dip 1-4 is on
+dc.b $18
 ; roulette space 2
 dc.b $1a
 ; Mexico

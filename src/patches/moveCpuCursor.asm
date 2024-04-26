@@ -10,13 +10,13 @@ bne doRegularCpuCursor
 
 ;; left side for Rugal
 move.w #142, D1 ; X 
-move.w #353, D2 ; Y
+move.w #337, D2 ; Y
 move.w D7, D0
 jsr $2MOVE_SPRITE
 
 ;; right side for Rugal
 move.w #160, D1 ; X 
-move.w #353, D2 ; Y
+move.w #337, D2 ; Y
 move.w D7, D0
 addi.w #1, D0   ; move onto next sprite index
 jsr $2MOVE_SPRITE

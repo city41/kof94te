@@ -53,13 +53,23 @@ skipLowerYWrap:
 skipDecCursorY:
 
 ;; did the cursor land in a dead spot?
+btst #3, $100000 ; is the Rugal debug dip turned on?
+beq doDeadSpot   ; Rugal is on, so there is no dead spot
+bra notInDeadSpot
+
+doDeadSpot:
 cmpi.w#3, D1
 ble notInDeadSpot
 cmpi.w #5, D1
 bge notInDeadSpot
 cmpi.w #2, D2
 bne notInDeadSpot
-bra checkInput ; uh oh, in a dead spot, run the routine again to get out
+;; ok we are in the dead spot
+;; we might have gotten here by turning on rugal dip -> nav to him -> turn it off
+;; so in that case, there would be no input
+;; the easiest way to get out is to jump to redoToAvoidChosenChar
+;; which handles both having and not having input
+bra redoToAvoidChosenChar ; uh oh, in a dead spot, run the routine again to get out
 
 notInDeadSpot:
 
@@ -122,6 +132,7 @@ cmpi.b #6, D1
 beq nudgeForLeader
 bra skipNudge
 
+
 ;; this is a leader, move its left cursor over 1 pixel
 ;; to make it look just a little better
 nudgeForLeader:
@@ -129,11 +140,28 @@ move.w #1, D4
 
 skipNudge:
 
+;; check for Rugal nudge
+move.w #0, D5  ; assume we're not nudging
+btst #3, $100000 ; is the Rugal debug dip turned on?
+beq skipRugalNudge ; nope, no Rugal, no nudge
+; ok Rugal is on, but is the cursor at his location?
+cmpi.b #4, D1
+bne skipRugalNudge
+cmpi.b #2, D2
+bne skipRugalNudge
+
+; we are on Rugal, need to nudge Y down
+move.w #32, D5
+
+
+skipRugalNudge:
+
 mulu.w #32, D1 ; convert X index to X pixel
 addi.w #15, D1  ; add the X offset (16px from edge of screen)
 add.w D4, D1   ; add the nudge in
 mulu.w #32, D2 ; convert Y index to Y pixel
 addi.w #56, D2 ; add the Y offset (54px from top of screen)
+add.w D5, D2   ; add in the Rugal nudge, if any
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
 move.w D3, D2  ; move it back into D2, where moveSprite expects it

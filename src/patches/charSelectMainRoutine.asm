@@ -1,5 +1,18 @@
 movem.l A0-A2,$STORE_A0A1A2
 
+btst #3, $100000 ; is the Rugal debug dip turned on?
+beq takeRugalOffGrid
+jsr $2PUT_RUGAL_ON_GRID
+bra doneRugalOnGrid
+
+takeRugalOffGrid:
+cmpi.b #$ff, $DEFEATED_TEAMS
+beq doneRugalOnGrid ; don't remove him if this is the Rugal fight
+move.w #$RUGAL_SI, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+
+doneRugalOnGrid:
+
 ;; this counter is used just below for random stages in versus mode
 ;; it's also used to throttle character random select
 move.b $CHAR_SELECT_COUNTER, D6 ; load the counter
@@ -156,6 +169,9 @@ renderCpuChosenTeam_renderCpuOnP2Side:
 move.w #$P2C1_SI, D6
 move.b $108431, D1
 
+cmpi.b #8, D1 ; is this Rugal?
+beq renderCpuChosenTeam_rugal
+
 renderCpuChosenTeam_doRender:
 move.w #2, D4 ; get dba primed, 2 since it hinges on -1
 
@@ -172,5 +188,11 @@ jsr $2RENDER_CHOSEN_AVATAR
 adda.w #1, A0 ; move to next character
 addi.w #2, D6 ; move to next sprite index
 dbra D4, renderCpuChosenTeam_renderChar
+bra renderCpuChosenTeam_done
 
+renderCpuChosenTeam_rugal:
+move.w #$18, D7 ; ensure Rugal's id is loaded
+jsr $2RENDER_CHOSEN_AVATAR
+
+renderCpuChosenTeam_done:
 rts

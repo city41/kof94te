@@ -156,6 +156,32 @@ move.b D5, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bra skipChoosingChar
 
 skipChooseRandomSelect:
+cmpi.b #22, D1 ; are they on Rugal (with debug dip on?)
+bne skipChooseRugal
+;; they chose Rugal
+move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; first reset back to an unchosen team
+move.b #$18, D1
+bsr saveChar ; save the first Rugal
+move.b #$19, D1
+bsr saveChar ; save the second Rugal
+move.b #$19, D1
+bsr saveChar ; save the third Rugal
+;; now render him as the first chosen char
+move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
+move.w #$18, D7
+jsr $2RENDER_CHOSEN_AVATAR
+;; now clear out the second chosen char
+move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
+addi.w #2, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+;; now clear out the third chosen char
+move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
+addi.w #4, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+;; and done, Rugal is all set
+bra skipChoosingChar
+
+skipChooseRugal:
 lea $2GRID_TO_CHARACTER_ID, A3
 adda.w D1, A3
 move.b (A3), D1 ; character Id from grid is now in D1

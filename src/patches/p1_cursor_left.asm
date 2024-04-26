@@ -15,6 +15,6 @@ dc.w $1404
 dc.w $dc02
 
 ;; SCB4 horizontal position
-dc.w $780
+dc.w $800
 
 ;; end tiles

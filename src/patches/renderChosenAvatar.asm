@@ -9,6 +9,14 @@
 
 movem.l A1/A6/D5/D6, $MOVEM_STORAGE
 
+cmpi.w #$18, D7 ; is this Rugal?
+bne setupForRegularCharacter
+;; this is Rugal
+lea $2RUGAL_CG_IMG, A6
+lea $4(A6), A6 ; move forward past the width and height words
+bra renderCharacter
+
+setupForRegularCharacter:
 ;; set up A6 to point to the avatar data
 lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
 lea $4(A6), A6 ; move forward past the width and height words
@@ -17,6 +25,7 @@ mulu.w D7, D5               ; multiply the offset by the character id to get the
 ;; account for the offset to jump into an array of images
 adda.w D5, A6
 
+renderCharacter:
 ;;;;;;; SCB1: load sprite tiles
 lea $3c0002, A1    ; VRAMRW
 move.w #1, $3c0004 ; VRAMMOD=1

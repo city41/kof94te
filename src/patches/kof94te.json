@@ -81,12 +81,11 @@
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
     "P2C1_SI": "16f",
-    "P1_CURSOR_LEFT_SI": "175",
-    "P1_CURSOR_RIGHT_SI": "176",
-    "P2_CURSOR_LEFT_SI": "177",
-    "P2_CURSOR_RIGHT_SI": "178",
-    "RUGAL_SI": "179",
-    "RANDOM_SELECT_SI": "17b",
+    "RUGAL_SI": "175",
+    "P1_CURSOR_LEFT_SI": "177",
+    "P1_CURSOR_RIGHT_SI": "178",
+    "P2_CURSOR_LEFT_SI": "179",
+    "P2_CURSOR_RIGHT_SI": "17a",
 
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
@@ -137,13 +136,13 @@
     {
       "type": "prom",
       "string": true,
-      "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI    ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           RUGAL          O.RUGAL        ROULETTE?      ",
+      "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI    ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           DEBUG RUGAL                   ROULETTE?      ",
       "symbol": "P1_CHAR_NAME_TABLE"
     },
     {
       "type": "prom",
       "string": true,
-      "value": "        HEIDERN           RALF          CLARK ATHENA ASAMIYA     SIE KENSOU   CHIN GENTSAI   KYO KUSANAGI    BENIMARU N.    GORO DAIMON       HEAVY D!  LUCKY GLAUBER  BRIAN BATTLER    KIM KAPHWAN   CHANG KOEHAN    CHOI BOUNGE   TERRY BOGARD    ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI  ROBERT GARCIATAKUMA SAKAZAKI  YURI SAKAZAKI   MAI SHIRANUI           KING          RUGAL        O.RUGAL      ROULETTE?",
+      "value": "        HEIDERN           RALF          CLARK ATHENA ASAMIYA     SIE KENSOU   CHIN GENTSAI   KYO KUSANAGI    BENIMARU N.    GORO DAIMON       HEAVY D!  LUCKY GLAUBER  BRIAN BATTLER    KIM KAPHWAN   CHANG KOEHAN    CHOI BOUNGE   TERRY BOGARD    ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI  ROBERT GARCIATAKUMA SAKAZAKI  YURI SAKAZAKI   MAI SHIRANUI           KING    DEBUG RUGAL                     ROULETTE?",
       "symbol": "P2_CHAR_NAME_TABLE"
     },
     {
@@ -351,17 +350,17 @@
     },
     {
       "type": "prom",
-      "description": "main routine",
-      "subroutine": true,
-      "symbol": "CHAR_SELECT_MAIN_ROUTINE",
-      "patchAsm": "charSelectMainRoutine.asm"
-    },
-    {
-      "type": "prom",
       "description": "adds Rugal to the char select grid for the boss fight",
       "subroutine": true,
       "symbol": "PUT_RUGAL_ON_GRID",
       "patchAsm": "putRugalOnGrid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "main routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_MAIN_ROUTINE",
+      "patchAsm": "charSelectMainRoutine.asm"
     },
     {
       "type": "prom",
