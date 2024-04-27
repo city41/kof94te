@@ -731,9 +731,25 @@
     },
     {
       "type": "prom",
+      "description": "The continue sfx char id to sfx offset table",
+      "subroutine": true,
+      "symbol": "CHARID_TO_CONTINUE_SFX_OFFSET_TABLE",
+      "patchAsm": "charIdToContinueSfxOffset.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Load the proper continue sfx depending on who lost the match",
+      "address": "144c2a",
+      "subroutine": true,
+      "symbol": "LOAD_CONTINUE_SFX_BASED_ON_WHO_LOST",
+      "patchAsm": "loadContinueSfxBasedOnWhoLost.asm"
+    },
+    {
+      "type": "prom",
       "description": "Load the actual losing characters into the continue screen",
       "address": "145da8",
       "subroutine": true,
+      "symbol": "CONTINUE_SCREEN_INIT",
       "patchAsm": "continueScreenInit.asm"
     },
     {

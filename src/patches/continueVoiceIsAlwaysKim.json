@@ -1,0 +1,16 @@
+{
+  "description": "When continuing, the yell sfx always comes from Kim",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "force Kim",
+      "address": "144c2a",
+      "subroutine": true,
+      "patchAsm": [";;;; nothing to restore", "move.w #$16B, D0", "rts"]
+    }
+  ]
+}
