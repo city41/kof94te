@@ -3,7 +3,7 @@ coverage/
 dist/
 node_modules/
 out/
-history/
+history/*
 
 # Logs
 logs
