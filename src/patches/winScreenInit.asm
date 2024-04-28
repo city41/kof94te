@@ -91,7 +91,7 @@ lea $P2_CHOSEN_CHAR2, A6 ; player 2 won, get their characters ready
 
 setupChars:
 
-move.b #0, $WIN_SCREEN_ALREADY_SET_LEFT
+move.b #0, $AFTER_SCREEN_ALREADY_SET_LEFT
 
 ;;; there are three win screen init routines, each put characters in different locations
 ;;; depending on who won the match, D2 will be 0, 1 or 2
@@ -116,11 +116,11 @@ move.b (A6), D6 ; get the character id into d6
 ;; the winner of the match is in D0, a gift to us from the game
 cmp.b D0, D6 ; did this character win the match?
 beq setWinner
-cmpi.b #1, $WIN_SCREEN_ALREADY_SET_LEFT
+cmpi.b #1, $AFTER_SCREEN_ALREADY_SET_LEFT
 beq setRight
 
 ;;; ok this will be the left character
-move.b #1, $WIN_SCREEN_ALREADY_SET_LEFT
+move.b #1, $AFTER_SCREEN_ALREADY_SET_LEFT
 adda.w #96, A2 ; move forward to the left table
 move.b D6, $1(A4) ; stick it second in the winning list
 bra finishSettingUpChar
