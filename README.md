@@ -16,7 +16,7 @@ This hack is bringing this character select screen into KOF94. It will look very
 
 ![kof94te char select](https://github.com/city41/kof94te/blob/main/kof94teCharSelect.png?raw=true)
 
-The hack is now very far along. It is fully functional but has several bugs and several more things to do. See the [milestones](https://github.com/city41/kof94te/milestones) for more info.
+The hack is just about done. It is fully functional and just has a few more things to tackle. See the [milestones](https://github.com/city41/kof94te/milestones) for more info.
 
 You can build the rom and try it yourself here: https://neorh.mattgreer.dev
 
