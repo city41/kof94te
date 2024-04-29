@@ -60,6 +60,15 @@ bra team1Character   ; p2 lost, team1Character can handle it from here
 
 
 team1Character:
+
+;;; special case, demo mode. in demo mode, give p1 reg and p2 alt
+cmpi.b #0, $PLAY_MODE
+bne team1SkipDemoMode
+move.b #0, D1
+bra done
+
+team1SkipDemoMode:
+
 ;; D0 is the character ID, but quadrupled
 ;; figure out which character it is in P1_CHOSEN_CHARX then do the subroutine
 clr.w D6
@@ -96,6 +105,14 @@ bsr figureOutCharPalette
 bra done
 
 team2Character:
+;;; special case, demo mode. in demo mode, give p1 reg and p2 alt
+cmpi.b #0, $PLAY_MODE
+bne team2SkipDemoMode
+move.b #1, D1
+bra done
+
+team2SkipDemoMode:
+
 ;; D0 is the character ID, but quadrupled
 ;; figure out which character it is in P1_CHOSEN_CHARX then do the subroutine
 clr.w D6
