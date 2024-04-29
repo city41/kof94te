@@ -25,18 +25,19 @@ const characters = [
   "King",
   "Debug Rugal",
   "", // full form Rugal, never used, intentionally left blank
-  "Roulette?",
+  "Character Roulette",
+  "Team Roulette",
 ];
 
 const p1Str = characters.reduce((accum, c) => {
-  const neededSpaces = 15 - c.length;
+  const neededSpaces = 18 - c.length;
   const spaces = new Array(neededSpaces).fill(" ").join("");
 
   return `${accum}${c.toUpperCase()}${spaces}`;
 }, "");
 
 const p2Str = characters.reduce((accum, c) => {
-  const neededSpaces = 15 - c.length;
+  const neededSpaces = 18 - c.length;
   const spaces = new Array(neededSpaces).fill(" ").join("");
 
   return `${accum}${spaces}${c.toUpperCase()}`;

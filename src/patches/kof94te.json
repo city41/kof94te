@@ -39,7 +39,7 @@
     "P1_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10f815",
     "P1_CURSOR_SPRITEINDEX": "10f816",
     "P1_CHOSEN_TEAM_SPRITEINDEX": "10f818",
-    "P1_CHOSE_RANDOM_SELECT": "10f81a",
+    "P1_RANDOM_SELECT_TYPE": "10f81a",
     "P1_NUM_NON_RANDOM_CHARS": "10f81b",
     "P1_STARTING_CHOSE_CHAR_ADDRESS": "10f81c",
     "P2_CUR_INPUT": "10f8a0",
@@ -55,7 +55,7 @@
     "P2_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10f8b5",
     "P2_CURSOR_SPRITEINDEX": "10f8b6",
     "P2_CHOSEN_TEAM_SPRITEINDEX": "10f8b8",
-    "P2_CHOSE_RANDOM_SELECT": "10f8ba",
+    "P2_RANDOM_SELECT_TYPE": "10f8ba",
     "P2_NUM_NON_RANDOM_CHARS": "10f8bb",
     "P2_STARTING_CHOSE_CHAR_ADDRESS": "10f8bc",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
@@ -100,12 +100,16 @@
     "PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET": "15",
     "PX_CURSOR_SPRITEINDEX_OFFSET": "16",
     "PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET": "18",
-    "PX_CHOSE_RANDOM_SELECT_OFFSET": "1a",
+    "PX_RANDOM_SELECT_TYPE_OFFSET": "1a",
     "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
     "PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET": "1c",
 
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
-    "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "72f6"
+    "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7296",
+
+    "RANDOM_SELECT_TYPE_NONE": "0",
+    "RANDOM_SELECT_TYPE_CHAR": "1",
+    "RANDOM_SELECT_TYPE_TEAM": "2"
   },
   "patches": [
     {
@@ -136,13 +140,13 @@
     {
       "type": "prom",
       "string": true,
-      "value": "HEIDERN        RALF           CLARK          ATHENA ASAMIYA SIE KENSOU     CHIN GENTSAI   KYO KUSANAGI   BENIMARU N.    GORO DAIMON    HEAVY D!       LUCKY GLAUBER  BRIAN BATTLER  KIM KAPHWAN    CHANG KOEHAN   CHOI BOUNGE    TERRY BOGARD   ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI    ROBERT GARCIA  TAKUMA SAKAZAKIYURI SAKAZAKI  MAI SHIRANUI   KING           DEBUG RUGAL                   ROULETTE?      ",
+      "value": "HEIDERN           RALF              CLARK             ATHENA ASAMIYA    SIE KENSOU        CHIN GENTSAI      KYO KUSANAGI      BENIMARU N.       GORO DAIMON       HEAVY D!          LUCKY GLAUBER     BRIAN BATTLER     KIM KAPHWAN       CHANG KOEHAN      CHOI BOUNGE       TERRY BOGARD      ANDY BOGARD       JOE HIGASHI       RYO SAKAZKI       ROBERT GARCIA     TAKUMA SAKAZAKI   YURI SAKAZAKI     MAI SHIRANUI      KING              DEBUG RUGAL                         CHARACTER ROULETTETEAM ROULETTE     ",
       "symbol": "P1_CHAR_NAME_TABLE"
     },
     {
       "type": "prom",
       "string": true,
-      "value": "        HEIDERN           RALF          CLARK ATHENA ASAMIYA     SIE KENSOU   CHIN GENTSAI   KYO KUSANAGI    BENIMARU N.    GORO DAIMON       HEAVY D!  LUCKY GLAUBER  BRIAN BATTLER    KIM KAPHWAN   CHANG KOEHAN    CHOI BOUNGE   TERRY BOGARD    ANDY BOGARD    JOE HIGASHI    RYO SAKAZKI  ROBERT GARCIATAKUMA SAKAZAKI  YURI SAKAZAKI   MAI SHIRANUI           KING    DEBUG RUGAL                     ROULETTE?",
+      "value": "           HEIDERN              RALF             CLARK    ATHENA ASAMIYA        SIE KENSOU      CHIN GENTSAI      KYO KUSANAGI       BENIMARU N.       GORO DAIMON          HEAVY D!     LUCKY GLAUBER     BRIAN BATTLER       KIM KAPHWAN      CHANG KOEHAN       CHOI BOUNGE      TERRY BOGARD       ANDY BOGARD       JOE HIGASHI       RYO SAKAZKI     ROBERT GARCIA   TAKUMA SAKAZAKI     YURI SAKAZAKI      MAI SHIRANUI              KING       DEBUG RUGAL                  CHARACTER ROULETTE     TEAM ROULETTE",
       "symbol": "P2_CHAR_NAME_TABLE"
     },
     {
@@ -329,10 +333,17 @@
     },
     {
       "type": "prom",
-      "description": "random select routine",
+      "description": "character random select routine",
       "subroutine": true,
-      "symbol": "RANDOM_SELECT",
-      "patchAsm": "randomSelect.asm"
+      "symbol": "CHAR_RANDOM_SELECT",
+      "patchAsm": "charRandomSelect.asm"
+    },
+    {
+      "type": "prom",
+      "description": "team random select routine",
+      "subroutine": true,
+      "symbol": "TEAM_RANDOM_SELECT",
+      "patchAsm": "teamRandomSelect.asm"
     },
     {
       "type": "prom",

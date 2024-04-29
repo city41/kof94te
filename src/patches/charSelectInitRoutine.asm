@@ -192,6 +192,9 @@ p1_continued:
 bset #6, $PLAY_MODE
 p1_firstCharSelect: 
 move.b #0, $P1_NUM_CHOSEN_CHARS
+move.b #0, $P1_RANDOM_SELECT_TYPE
+move.b #0, $P1_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
+
 p1_pastReady:
 
 btst #1, $PLAY_MODE
@@ -218,6 +221,9 @@ p2_continued:
 bset #6, $PLAY_MODE
 p2_firstCharSelect: 
 move.b #0, $P2_NUM_CHOSEN_CHARS
+move.b #0, $P2_RANDOM_SELECT_TYPE
+move.b #0, $P2_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
+
 p2_pastReady:
 
 
@@ -235,7 +241,7 @@ btst #7, $PLAY_MODE ; is this single player, past the first stage?
 beq clearRandomSelectFlags
 btst #0, $PLAY_MODE ; is player 1 one playing?
 beq randomSelectBit_checkPlayer2
-tst.b $P1_CHOSE_RANDOM_SELECT
+tst.b $P1_RANDOM_SELECT_TYPE
 beq clearRandomSelectFlags
 ;; set up char select to randomize for p1
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
@@ -243,11 +249,11 @@ beq clearRandomSelectFlags
 move.b #36, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P1_NUM_NON_RANDOM_CHARS, $P1_NUM_CHOSEN_CHARS 
-move.b #0, $P2_CHOSE_RANDOM_SELECT ; clear player 2 just in case
+move.b #0, $P2_RANDOM_SELECT_TYPE ; clear player 2 just in case
 bset #5, $PLAY_MODE
 bra doneRandomSelectFlags
 randomSelectBit_checkPlayer2:
-tst.b $P2_CHOSE_RANDOM_SELECT
+tst.b $P2_RANDOM_SELECT_TYPE
 beq clearRandomSelectFlags
 ;; set up char select to randomize for p2 here
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
@@ -255,13 +261,15 @@ beq clearRandomSelectFlags
 move.b #36, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P2_NUM_NON_RANDOM_CHARS, $P2_NUM_CHOSEN_CHARS 
-move.b #0, $P1_CHOSE_RANDOM_SELECT ; clear player 1 just in case
+move.b #0, $P1_RANDOM_SELECT_TYPE ; clear player 1 just in case
 bset #5, $PLAY_MODE
 bra doneRandomSelectFlags
 
 clearRandomSelectFlags:
-move.b #0, $P1_CHOSE_RANDOM_SELECT ; clear player 1 flag
-move.b #0, $P2_CHOSE_RANDOM_SELECT ; clear player 2 flag
+move.b #0, $P1_RANDOM_SELECT_TYPE ; clear player 1 flag
+move.b #0, $P2_RANDOM_SELECT_TYPE ; clear player 2 flag
+move.b #0, $P1_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
+move.b #0, $P2_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
 bclr #5, $PLAY_MODE
 
 doneRandomSelectFlags:

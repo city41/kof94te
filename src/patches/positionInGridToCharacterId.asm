@@ -34,7 +34,7 @@ dc.b $1a
 ; rugal if debug dip 1-4 is on
 dc.b $18
 ; roulette space 2
-dc.b $1a
+dc.b $1b
 ; Mexico
 dc.b $12
 dc.b $13

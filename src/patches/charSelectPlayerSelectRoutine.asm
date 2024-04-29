@@ -68,13 +68,21 @@ subi.b #1, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 
 ;; now see if we are ready to save a character
 cmpi.b #24, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
-beq slotMachine_chooseChar
+beq slotMachine_setupChooseChar
 cmpi.b #12, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
-beq slotMachine_chooseChar
+beq slotMachine_setupChooseChar
 cmpi.b #0, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
-beq slotMachine_chooseChar
+beq slotMachine_setupChooseChar
 bra slotMachine_skipChooseChar
 ;; ready to choose the first character
+
+slotMachine_setupChooseChar:
+cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq slotMachine_chooseSingleChar
+move.w #2, D3 ; this is team select, loop to select three chars
+bra slotMachine_chooseChar
+slotMachine_chooseSingleChar:
+move.w #0, D3 ; this is char select, loop to select a single char
 
 slotMachine_chooseChar:
 ;; take the palette flag choice they made before and restore it to D4
@@ -104,10 +112,20 @@ add.w D7, D6 ; add on the starting sprite index
 clr.w D7
 move.b D1, D7
 jsr $2RENDER_CHOSEN_AVATAR
+dbra D3, slotMachine_chooseChar ; is this team select? go back and keep saving chars then
 
 
 slotMachine_skipChooseChar:
-jsr $2RANDOM_SELECT
+;; not ready to choose, need to keep the randomization going
+;; we'll jump to one of the randomization routines depending on
+;; which type the player chose
+cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq slotMachine_doCharRandomSelect
+jsr $2TEAM_RANDOM_SELECT
+bra slotMachine_done
+
+slotMachine_doCharRandomSelect:
+jsr $2CHAR_RANDOM_SELECT
 
 slotMachine_done:
 rts
@@ -143,17 +161,17 @@ mulu.w #9, D1 ; multiply Y by 9
 add.w D0, D1  ; then add X to get the index into the grid
 
 cmpi.b #21, D1 ; are they on the left random select?
-beq chooseRandomSelect
+beq chooseCharRandomSelect
 cmpi.b #23, D1 ; are they on the right random select?
-beq chooseRandomSelect
+beq chooseTeamRandomSelect
 bra skipChooseRandomSelect
 
-chooseRandomSelect:
+chooseCharRandomSelect:
 ;; first remember the palette flag choice, as we won't apply it for several frames
 ;; it will also be used for future randomizations in single player mode
 move.b D4, $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0)
 ;; set the flag so in subsequent single player fights we can re-random
-move.b #1, $PX_CHOSE_RANDOM_SELECT_OFFSET(A0)
+move.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 ;; remember how many characters were not randomly selected, so subsequent re-randomizes
 ;; will only rerandom the random characters
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4
@@ -170,6 +188,19 @@ move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4
 mulu.w #12, D4
 sub.b D4, D5
 move.b D5, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+bra skipChoosingChar
+
+chooseTeamRandomSelect:
+;; first remember the palette flag choice, as we won't apply it for several frames
+;; it will also be used for future randomizations in single player mode
+move.b D4, $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0)
+;; set the flag so in subsequent single player fights we can re-random
+move.b #$RANDOM_SELECT_TYPE_TEAM, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+;; since this is whole team random select, set num of non-random chars to zero
+move.b #0, $PX_NUM_NON_RANDOM_CHARS_OFFSET(A0)
+move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; ensure any saved characters are overwritten
+;; since this whole team random select, set the timer lower than char select
+move.b #11, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bra skipChoosingChar
 
 skipChooseRandomSelect:
@@ -251,13 +282,17 @@ add.w D0, D1  ; then add X to get the index into the grid
 
 
 cmpi.w #21, D1 ; are they on the left random select space?
-beq doRandomSelect
+beq doCharRandomSelect
 cmpi.w #23, D1 ; are they on the right random select space?
-beq doRandomSelect
+beq doTeamRandomSelect
 bra doClearRandomSelect
 
-doRandomSelect:
-jsr $2RANDOM_SELECT
+doCharRandomSelect:
+jsr $2CHAR_RANDOM_SELECT
+bra doneRandomSelect
+
+doTeamRandomSelect:
+jsr $2TEAM_RANDOM_SELECT
 bra doneRandomSelect
 
 doClearRandomSelect:

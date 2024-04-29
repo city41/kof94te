@@ -23,11 +23,11 @@ adda.w D1, A0
 clr.w D0
 move.b (A0), D1 ; character Id from grid is now in D1
 
-mulu.w #15, D1 ; multiply by 15 to get the offset, each name is 15 characters
+mulu.w #18, D1 ; multiply by 18 to get the offset, each name is 18 characters
 adda.w D1, A1 ; jump forward to the correct name
 
 
-move.w #14, D0 ; 15 chars to render, one less since dbra hinges on -1
+move.w #17, D0 ; 18 chars to render, one less since dbra hinges on -1
 
 renderChar:
 clr.w D1
@@ -39,7 +39,7 @@ dbra D0, renderChar
 bra done
 
 clearFocusedName:
-move.b #14, D0 ; clear out 15 tiles, 14 since dbra hinges on -1
+move.b #17, D0 ; clear out 18 tiles, 17 since dbra hinges on -1
 clearChar:
 move.w #$f20, $3c0002 ; write the blank tile into vram
 dbra D0, clearChar
