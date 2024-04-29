@@ -277,10 +277,10 @@ vram_handler = mem:install_write_tap(REG_VRAMADDR, REG_VRAMMOD + 1, "vram", on_v
 -- health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
 -- timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
 
--- defeat_address = 0x1087de
+defeat_address = 0x1087de
 
--- function on_defeat_memory_read(offset, data, mask)
--- 	return 0xffff
--- end
+function on_defeat_memory_read(offset, data, mask)
+	return 0xffff
+end
 
--- defeat_mem_handler = mem:install_read_tap(defeat_address, defeat_address + 1, "reads", on_defeat_memory_read)
+defeat_mem_handler = mem:install_read_tap(defeat_address, defeat_address + 1, "reads", on_defeat_memory_read)

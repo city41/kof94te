@@ -22,7 +22,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $bb8
 dc.w $3500
-dc.w $bcb
+dc.w $bd0
 dc.w $1700
 
 ;; SCB3 vertical position|sticky|size
@@ -92,7 +92,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $bb9
 dc.w $3600
-dc.w $bcc
+dc.w $bd1
 dc.w $3600
 
 ;; SCB3 vertical position|sticky|size
@@ -106,7 +106,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $bba
 dc.w $3600
-dc.w $bcd
+dc.w $bd2
 dc.w $3600
 
 ;; SCB3 vertical position|sticky|size
@@ -120,8 +120,8 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b5f
 dc.w $1e00
-dc.w $bce
-dc.w $3c00
+dc.w $bd3
+dc.w $3e00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -134,8 +134,8 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b60
 dc.w $1e00
-dc.w $bcf
-dc.w $3c00
+dc.w $bd4
+dc.w $3e00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -148,7 +148,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $bbb
 dc.w $3700
-dc.w $bd0
+dc.w $bd5
 dc.w $3700
 
 ;; SCB3 vertical position|sticky|size
@@ -162,7 +162,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $bbc
 dc.w $3700
-dc.w $bd1
+dc.w $bd6
 dc.w $3700
 
 ;; SCB3 vertical position|sticky|size
@@ -174,9 +174,9 @@ dc.w $0
 ;;; column 12
 
 ;; SCB1 word pairs
-dc.w $b63
+dc.w $bbd
 dc.w $2900
-dc.w $b93
+dc.w $bd7
 dc.w $2900
 
 ;; SCB3 vertical position|sticky|size
@@ -188,9 +188,9 @@ dc.w $0
 ;;; column 13
 
 ;; SCB1 word pairs
-dc.w $b64
+dc.w $bbe
 dc.w $2900
-dc.w $b94
+dc.w $bd8
 dc.w $2900
 
 ;; SCB3 vertical position|sticky|size
@@ -230,7 +230,7 @@ dc.w $0
 ;;; column 16
 
 ;; SCB1 word pairs
-dc.w $bbd
+dc.w $bbf
 dc.w $3800
 dc.w $b97
 dc.w $2b00
@@ -244,7 +244,7 @@ dc.w $0
 ;;; column 17
 
 ;; SCB1 word pairs
-dc.w $bbe
+dc.w $bc0
 dc.w $3800
 dc.w $b98
 dc.w $2400
@@ -258,10 +258,10 @@ dc.w $0
 ;;; column 18
 
 ;; SCB1 word pairs
-dc.w $bbf
+dc.w $bc1
 dc.w $3200
-dc.w $bd2
-dc.w $3d00
+dc.w $bd9
+dc.w $3c00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -272,9 +272,9 @@ dc.w $0
 ;;; column 19
 
 ;; SCB1 word pairs
-dc.w $bc0
+dc.w $bc2
 dc.w $3300
-dc.w $bd3
+dc.w $bda
 dc.w $3300
 
 ;; SCB3 vertical position|sticky|size
@@ -286,7 +286,7 @@ dc.w $0
 ;;; column 20
 
 ;; SCB1 word pairs
-dc.w $bc1
+dc.w $bc3
 dc.w $3900
 dc.w $b9b
 dc.w $1500
@@ -300,9 +300,9 @@ dc.w $0
 ;;; column 21
 
 ;; SCB1 word pairs
-dc.w $bc2
+dc.w $bc4
 dc.w $3900
-dc.w $bd4
+dc.w $bdb
 dc.w $3900
 
 ;; SCB3 vertical position|sticky|size
@@ -314,10 +314,10 @@ dc.w $0
 ;;; column 22
 
 ;; SCB1 word pairs
-dc.w $bc3
+dc.w $bc5
 dc.w $3a00
-dc.w $bd5
-dc.w $3e00
+dc.w $bdc
+dc.w $3f00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -328,9 +328,9 @@ dc.w $0
 ;;; column 23
 
 ;; SCB1 word pairs
-dc.w $bc4
+dc.w $bc6
 dc.w $3a00
-dc.w $bd6
+dc.w $bdd
 dc.w $3a00
 
 ;; SCB3 vertical position|sticky|size
@@ -344,7 +344,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b6f
 dc.w $1c00
-dc.w $bd7
+dc.w $bde
 dc.w $3300
 
 ;; SCB3 vertical position|sticky|size
@@ -358,8 +358,8 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b70
 dc.w $1c00
-dc.w $bd8
-dc.w $3f00
+dc.w $bdf
+dc.w $4000
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -400,7 +400,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b73
 dc.w $2000
-dc.w $bd9
+dc.w $be0
 dc.w $2500
 
 ;; SCB3 vertical position|sticky|size
@@ -426,9 +426,9 @@ dc.w $0
 ;;; column 30
 
 ;; SCB1 word pairs
-dc.w $bc5
+dc.w $bc7
 dc.w $3a00
-dc.w $bda
+dc.w $be1
 dc.w $1a00
 
 ;; SCB3 vertical position|sticky|size
@@ -440,9 +440,9 @@ dc.w $0
 ;;; column 31
 
 ;; SCB1 word pairs
-dc.w $bc6
+dc.w $bc8
 dc.w $3b00
-dc.w $bdb
+dc.w $be2
 dc.w $1a00
 
 ;; SCB3 vertical position|sticky|size
@@ -482,8 +482,8 @@ dc.w $0
 ;;; column 34
 
 ;; SCB1 word pairs
-dc.w $b79
-dc.w $1400
+dc.w $bc9
+dc.w $3b00
 dc.w $ba9
 dc.w $1400
 
@@ -496,10 +496,10 @@ dc.w $0
 ;;; column 35
 
 ;; SCB1 word pairs
-dc.w $b7a
-dc.w $1400
-dc.w $baa
-dc.w $1400
+dc.w $bca
+dc.w $3c00
+dc.w $be3
+dc.w $3b00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -526,8 +526,8 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b7c
 dc.w $2c00
-dc.w $bdc
-dc.w $4000
+dc.w $be4
+dc.w $4100
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -538,7 +538,7 @@ dc.w $0
 ;;; column 38
 
 ;; SCB1 word pairs
-dc.w $bc7
+dc.w $bcb
 dc.w $2300
 dc.w $bad
 dc.w $2f00
@@ -552,7 +552,7 @@ dc.w $0
 ;;; column 39
 
 ;; SCB1 word pairs
-dc.w $bc8
+dc.w $bcc
 dc.w $2c00
 dc.w $bae
 dc.w $2c00
@@ -568,8 +568,8 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b7f
 dc.w $2d00
-dc.w $bdd
-dc.w $4100
+dc.w $be5
+dc.w $4200
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -582,7 +582,7 @@ dc.w $0
 ;; SCB1 word pairs
 dc.w $b80
 dc.w $2d00
-dc.w $bde
+dc.w $be6
 dc.w $2d00
 
 ;; SCB3 vertical position|sticky|size
@@ -594,9 +594,9 @@ dc.w $0
 ;;; column 42
 
 ;; SCB1 word pairs
-dc.w $bc9
-dc.w $3b00
-dc.w $bdf
+dc.w $bcd
+dc.w $3d00
+dc.w $be7
 dc.w $3d00
 
 ;; SCB3 vertical position|sticky|size
@@ -608,10 +608,10 @@ dc.w $0
 ;;; column 43
 
 ;; SCB1 word pairs
-dc.w $bca
-dc.w $3b00
-dc.w $be0
-dc.w $4200
+dc.w $bce
+dc.w $3d00
+dc.w $be8
+dc.w $3d00
 
 ;; SCB3 vertical position|sticky|size
 dc.w $42
@@ -636,9 +636,9 @@ dc.w $0
 ;;; column 45
 
 ;; SCB1 word pairs
-dc.w $b84
-dc.w $2200
-dc.w $bb4
+dc.w $bcf
+dc.w $2700
+dc.w $be9
 dc.w $2700
 
 ;; SCB3 vertical position|sticky|size

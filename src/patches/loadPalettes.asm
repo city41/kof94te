@@ -13,6 +13,15 @@ subi.w #1, D2      ; sub one as dbra hinges on -1
 
 ;;; move 1 entire palettes into palette ram
 loadPalette:
+; make all palettes pure red, for debugging
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
+; move.l #$cf00cf00, (a0)+
 move.l (A1)+, (A0)+ ; color 0-1
 move.l (A1)+, (A0)+ ; color 2-3
 move.l (A1)+, (A0)+ ; color 4-5
