@@ -89,6 +89,23 @@ move.b (A2), D1 ; pull the chosen char back out
 ;; and do everything needed to save the character
 bsr saveChar
 
+;; now rerender the chosen avatar, in case the final palette is alternate
+
+move.w D0, D6  ; move num of chosen characters in
+subi.w #1, D6  ; but we already incremented, so it's one too big
+mulu.w #2, D6
+move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D7
+add.w D7, D6 ; add on the starting sprite index
+
+;; parameters
+;; D4.b - palette flag, already there
+;; D6.w - sprite index
+;; D7.w - character id
+clr.w D7
+move.b D1, D7
+jsr $2RENDER_CHOSEN_AVATAR
+
+
 slotMachine_skipChooseChar:
 jsr $2RANDOM_SELECT
 
