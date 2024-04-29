@@ -24,8 +24,10 @@ cmpi.b #3, $PLAY_MODE
 bne skipVersusRandomStage ; nope not versus
 ;; this is versus mode, randomize the team ids to get a random stage
 andi.b #$7, D6 ; only keep the bottom three bits, that is our team id
-move.b D6, $108231 ; set team 1 to this random id
-move.b D6, $108431 ; and team 2 too
+; move.b D6, $108231 ; set team 1 to this random id
+; move.b D6, $108431 ; and team 2 too
+move.b #1, $108231 ; set team 1 to this random id
+move.b #1, $108431 ; and team 2 too
 skipVersusRandomStage:
 
 cmpi.b #$PHASE_DONE, $HACK_PHASE
@@ -162,18 +164,20 @@ bne renderCpuChosenTeam_renderCpuOnP2Side
 ;; p1 is not playing, so cpu is p1
 move.w #$P1C1_SI, D6
 move.b $108231, D1
+lea $P2_CHOSEN_CHAR2, A2
 bra renderCpuChosenTeam_doRender
 
 renderCpuChosenTeam_renderCpuOnP2Side:
 ;; p1 is playing, so cpu is p2
 move.w #$P2C1_SI, D6
 move.b $108431, D1
+lea $P1_CHOSEN_CHAR0, A2
 
 cmpi.b #8, D1 ; is this Rugal?
 beq renderCpuChosenTeam_rugal
 
 renderCpuChosenTeam_doRender:
-move.w #2, D4 ; get dba primed, 2 since it hinges on -1
+move.w #2, D3 ; get dba primed, 2 since it hinges on -1
 
 ;; ok, we have the cpu team id, but not the characters, we need to look them up
 lea $534DC, A0 ; load the starting team->character list address
@@ -184,14 +188,24 @@ adda.w D1, A0  ; move into the list to the correct team
 renderCpuChosenTeam_renderChar:
 clr.w D7
 move.b (A0), D7 ; load character id
+
+;;; get the cpu palette flag
+;;; params
+;;; D7: char id
+;;; A2: the player's chosen char starting address 
+movem.w D3, $MOVEM_STORAGE
+jsr $2DETERMINE_CPU_CHAR_PALETTE_FLAG
+movem.w $MOVEM_STORAGE, D3
+
 jsr $2RENDER_CHOSEN_AVATAR
 adda.w #1, A0 ; move to next character
 addi.w #2, D6 ; move to next sprite index
-dbra D4, renderCpuChosenTeam_renderChar
+dbra D3, renderCpuChosenTeam_renderChar
 bra renderCpuChosenTeam_done
 
 renderCpuChosenTeam_rugal:
 move.w #$18, D7 ; ensure Rugal's id is loaded
+move.b #0, D4   ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderCpuChosenTeam_done:

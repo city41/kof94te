@@ -4,6 +4,7 @@
 ; in one of the 0th, 1st or 2nd position
 ;
 ; parameters
+; D4.b - palette flag (0 = reg, 1 = alt)
 ; D6.w - sprite index
 ; D7.w - character Id to be rendered
 
@@ -17,8 +18,16 @@ lea $4(A6), A6 ; move forward past the width and height words
 bra renderCharacter
 
 setupForRegularCharacter:
+cmpi.b #0, D4
+bne setAltAvatarImg
 ;; set up A6 to point to the avatar data
 lea $2AVATARS_IMAGE, A6 ; load the pointer to the tile data
+bra setAvatarImgDone
+
+setAltAvatarImg:
+lea $2AVATARS_ALT_IMAGE, A6 ; load the pointer to the tile data
+
+setAvatarImgDone:
 lea $4(A6), A6 ; move forward past the width and height words
 move.w #24, D5              ; offset into tile data, each avatar is 24 bytes
 mulu.w D7, D5               ; multiply the offset by the character id to get the right avatar

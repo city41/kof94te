@@ -28,8 +28,6 @@ andi.b #$1f, D0 ; chop the random byte down to 5 bits -> 0 through 31
 cmpi.b #24, D0
 bge randomSelect_pickRandomChar ;; it was too big, try again
 
-;;; TODO this is a bug for player 2, it will end up comparing the wrong characters
-;;; need to use $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET
 cmpi.b #0, D4
 bne randomSelect_checkFirst
 ;; this means D0 is destined for the third character
@@ -62,8 +60,12 @@ move.b D0, (A2)
 clr.w D7
 move.b D0, D7 ; load up the random char id
 ;; parameters
+;; D4.b - palette flag
 ;; D6.w - sprite index
 ;; D7.w - character id
+;; TODO: this really should use the alternate palette flag by looking at the
+;; other team, but punting on that for now
+; move.b #0, D4
 move.w D6, D3
 jsr $2RENDER_CHOSEN_AVATAR
 move.w D3, D6

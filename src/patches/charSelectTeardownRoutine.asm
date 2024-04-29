@@ -63,13 +63,5 @@ player2Done:
 
 done:
 jsr $2CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE
-;; and the last two sprites the game leaves, so need to truncate them
-move.w #$P2_CURSOR_LEFT_SI, D6
-move.w #1, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
-move.w #$P2_CURSOR_RIGHT_SI, D6
-move.w #1, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
-
 movem.l $MOVEM_STORAGE, A4
 rts

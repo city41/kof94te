@@ -169,6 +169,7 @@ bsr saveChar ; save the third Rugal
 ;; now render him as the first chosen char
 move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
 move.w #$18, D7
+move.b #0, D4 ; palette flag, this is correct as Rugal doesn't have an alternate avatar
 jsr $2RENDER_CHOSEN_AVATAR
 ;; now clear out the second chosen char
 move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
@@ -197,6 +198,7 @@ move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D7
 add.w D7, D6 ; add on the starting sprite index
 
 ;; parameters
+;; D4.b - palette flag
 ;; D6.w - sprite index
 ;; D7.w - character id
 clr.w D7

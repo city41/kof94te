@@ -477,14 +477,17 @@ beq renderChosenAvatar_skipPlayer1 ; none chosen? nothing to do
 move.w #$P1C1_SI, D6
 clr.w D7
 move.b $P1_CHOSEN_CHAR0, D7
+move.b $P1_CHOSEN_CHAR0 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P1C1_SI + 2, D6
 clr.w D7
 move.b $P1_CHOSEN_CHAR1, D7
+move.b $P1_CHOSEN_CHAR1 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P1C1_SI + 4, D6
 clr.w D7
 move.b $P1_CHOSEN_CHAR2, D7
+move.b $P1_CHOSEN_CHAR2 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer1:
@@ -495,14 +498,17 @@ beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
 move.w #$P2C1_SI, D6
 clr.w D7
 move.b $P2_CHOSEN_CHAR2, D7
+move.b $P2_CHOSEN_CHAR2 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P2C1_SI + 2, D6
 clr.w D7
 move.b $P2_CHOSEN_CHAR1, D7
+move.b $P2_CHOSEN_CHAR1 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #$P2C1_SI + 4, D6
 clr.w D7
 move.b $P2_CHOSEN_CHAR0, D7
+move.b $P2_CHOSEN_CHAR0 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer2:

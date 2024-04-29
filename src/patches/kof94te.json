@@ -189,6 +189,13 @@
     },
     {
       "type": "prom",
+      "description": "avatars alt image",
+      "subroutine": true,
+      "symbol": "AVATARS_ALT_IMAGE",
+      "patchAsm": "avatars_alt.asm"
+    },
+    {
+      "type": "prom",
       "description": "p1 cursor, left image",
       "subroutine": true,
       "symbol": "P1_CURSOR_LEFT_IMAGE",
@@ -357,6 +364,13 @@
     },
     {
       "type": "prom",
+      "description": "determine cpu char palette flag routine",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_CHAR_PALETTE_FLAG",
+      "patchAsm": "determineCpuCharPaletteFlag.asm"
+    },
+    {
+      "type": "prom",
       "description": "main routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",
@@ -513,14 +527,13 @@
       "address": "133642",
       "subroutine": true,
       "patchAsm": [
-        "move.b $IN_CHAR_SELECT_FLAG, D5",
-        "cmpi.b #1, D5",
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne skip ; not in char select? nothing to do",
         "cmpi.w #15, D0",
         "ble skip ; not touching one of our palettes? nothing to do",
-        "cmpi.w #89, D0",
+        "cmpi.w #94, D0",
         "bge skip ; not touching one of our palettes? nothing to do",
-        "move.w #89, D0  ; have it write into a palette that isn't ours",
+        "move.w #94, D0  ; have it write into a palette that isn't ours",
         "skip:",
         "lea $400000, A1",
         "done:",

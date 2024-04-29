@@ -26,7 +26,7 @@ FIX_LAYER = 0x7000
 
 -- toggle sprites/fix on/off
 SHOW_SPRITES = true
-SHOW_FIX_LAYER = true
+SHOW_FIX_LAYER = false
 
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)
@@ -47,11 +47,7 @@ function on_vram_write(offset, data)
 		end
 
 		if (not SHOW_SPRITES) and next_vram_index >= SCB3 and next_vram_index <= SCB4 then
-			if next_vram_index < SCB3 + 129 then
-				return 0
-			end
-
-			if next_vram_index > SCB3 + 144 then
+			if next_vram_index < SCB3 + 150 then
 				return 0
 			end
 		end
@@ -259,32 +255,32 @@ emu.register_pause(on_pause, "pause")
 
 vram_handler = mem:install_write_tap(REG_VRAMADDR, REG_VRAMMOD + 1, "vram", on_vram_write)
 
-health_address = 0x108420
-timer_address = 0x10882e
+-- health_address = 0x108420
+-- timer_address = 0x10882e
 
-function on_health_memory_read(offset, data, mask)
-	if offset == health_address then
-		return 0
-	end
-end
+-- function on_health_memory_read(offset, data, mask)
+-- 	if offset == health_address then
+-- 		return 0
+-- 	end
+-- end
 
---- sets the timer to 1 instead of 60
-function on_timer_memory_write(offset, data, mask)
-	local tag = mem:read_range(0x108110, 0x108117, 8)
+-- --- sets the timer to 1 instead of 60
+-- function on_timer_memory_write(offset, data, mask)
+-- 	local tag = mem:read_range(0x108110, 0x108117, 8)
 
-	if tag == "PLAYER 1" and offset == timer_address and mask == 0xff00 and (data & mask) == 0x6000 then
-		print("returning 1")
-		return 0x100
-	end
-end
+-- 	if tag == "PLAYER 1" and offset == timer_address and mask == 0xff00 and (data & mask) == 0x6000 then
+-- 		print("returning 1")
+-- 		return 0x100
+-- 	end
+-- end
 
-health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
-timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
+-- health_mem_handler = mem:install_read_tap(health_address, health_address + 1, "read health", on_health_memory_read)
+-- timer_mem_handler = mem:install_write_tap(timer_address, timer_address + 3, "write timer", on_timer_memory_write)
 
-defeat_address = 0x1087de
+-- defeat_address = 0x1087de
 
-function on_defeat_memory_read(offset, data, mask)
-	return 0xffff
-end
+-- function on_defeat_memory_read(offset, data, mask)
+-- 	return 0xffff
+-- end
 
-defeat_mem_handler = mem:install_read_tap(defeat_address, defeat_address + 1, "reads", on_defeat_memory_read)
+-- defeat_mem_handler = mem:install_read_tap(defeat_address, defeat_address + 1, "reads", on_defeat_memory_read)

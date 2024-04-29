@@ -76,6 +76,11 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
+"@types/color-diff@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/color-diff/-/color-diff-1.2.5.tgz#497a8ff063cdd724a2d82082379b51b680a99e34"
+  integrity sha512-O+poH2XxhkQg8yGA5c4ejheHLpFcZaE33BG6rLp1eJq2W39iij9+9kGldqsoLq5BQuNt1FjsKwmdDitniK/Qtw==
+
 "@types/mkdirp@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-2.0.0.tgz#d14f087a889c3744e7cc41e82ad762b047ebc636"
@@ -161,6 +166,11 @@ chownr@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
+
+color-diff@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/color-diff/-/color-diff-1.4.0.tgz#f63c7020c4819b3f7bc379e61d8d19eabf6e1b8a"
+  integrity sha512-4oDB/o78lNdppbaqrg0HjOp7pHmUc+dfCxWKWFnQg6AB/1dkjtBDop3RZht5386cq9xBUDRvDvSCA7WUlM9Jqw==
 
 color-support@^1.1.2:
   version "1.1.3"

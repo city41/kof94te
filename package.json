@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@city41/sromcrom": "^0.15.1",
+    "@types/color-diff": "^1.2.5",
     "@types/mkdirp": "^2.0.0",
     "@types/node": "^20.11.25",
     "canvas": "^2.11.2",
+    "color-diff": "^1.4.0",
     "mkdirp": "^3.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"

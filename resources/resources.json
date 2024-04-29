@@ -25,6 +25,10 @@
         "dest": "../src/patches/avatars.asm"
       },
       {
+        "template": "avatars_alt.asm.hbr",
+        "dest": "../src/patches/avatars_alt.asm"
+      },
+      {
         "template": "p1_cursor_left.asm.hbr",
         "dest": "../src/patches/p1_cursor_left.asm"
       },
@@ -70,6 +74,10 @@
     {
       "name": "avatars",
       "imageFile": "./avatars.png"
+    },
+    {
+      "name": "avatars_alt",
+      "imageFile": "./avatars_alt.png"
     },
     {
       "name": "character_grid_grey",
