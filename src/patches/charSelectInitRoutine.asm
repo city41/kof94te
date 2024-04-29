@@ -374,6 +374,18 @@ rts
 ;; the already used indexes byte accordingly
 setCpuAlreadyUsedIndex:
 
+cmpi.b #0, $PLAY_MODE
+bne setCpuAlreadyUsedIndex_skipDemoModeClear
+;; this is demo mode. Clear out the byte altogether
+;; to ensure demo mode can always select two random teams
+;; this means in demo mode it can pick the same team multiple
+;; times if you let demo mode run numerous times, but the original
+;; game did that too
+clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+bra setCpuAlreadyUsedIndex_done
+
+setCpuAlreadyUsedIndex_skipDemoModeClear:
+
 btst #0, $PLAY_MODE
 beq setCpuAlreadyUsedIndex_player2 ; player 1 is not playing, onto player 2
 
