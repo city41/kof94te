@@ -42,6 +42,7 @@
     "P1_RANDOM_SELECT_TYPE": "10f81a",
     "P1_NUM_NON_RANDOM_CHARS": "10f81b",
     "P1_STARTING_CHOSE_CHAR_ADDRESS": "10f81c",
+    "P1_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f820",
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
@@ -58,6 +59,7 @@
     "P2_RANDOM_SELECT_TYPE": "10f8ba",
     "P2_NUM_NON_RANDOM_CHARS": "10f8bb",
     "P2_STARTING_CHOSE_CHAR_ADDRESS": "10f8bc",
+    "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
     "IN_CHAR_SELECT_FLAG": "10f8e4",
@@ -103,6 +105,7 @@
     "PX_RANDOM_SELECT_TYPE_OFFSET": "1a",
     "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
     "PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET": "1c",
+    "PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET": "20",
 
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
     "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7296",
@@ -330,6 +333,13 @@
       "subroutine": true,
       "symbol": "RENDER_CHOSEN_AVATAR",
       "patchAsm": "renderChosenAvatar.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render chosen avatars for a player",
+      "subroutine": true,
+      "symbol": "RND_CHSN_AVATARS",
+      "patchAsm": "renderChosenAvatars.asm"
     },
     {
       "type": "prom",

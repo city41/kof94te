@@ -87,7 +87,20 @@ move.w #0, D3 ; this is char select, loop to select a single char
 slotMachine_chooseChar:
 ;; take the palette flag choice they made before and restore it to D4
 move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), D4
+
+;; now we either need to use the real chosen char memory or the temp one
+;; depending on if this is team or char select
+cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq slotMachine_loadStartingAddressChar
+;; this is team random, go off the temp ids set aside just for it
+lea $PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET(A0), A2
+bra slotMachine_doneLoadStartingAddress
+
+slotMachine_loadStartingAddressChar:
+;; this is char random, use the real chose char ids
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+
+slotMachine_doneLoadStartingAddress:
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
@@ -96,24 +109,7 @@ move.b (A2), D1 ; pull the chosen char back out
 ;; saveChar will take D1 (charId) and D4 (palette flag)
 ;; and do everything needed to save the character
 bsr saveChar
-
-;; now rerender the chosen avatar, in case the final palette is alternate
-
-move.w D0, D6  ; move num of chosen characters in
-subi.w #1, D6  ; but we already incremented, so it's one too big
-mulu.w #2, D6
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D7
-add.w D7, D6 ; add on the starting sprite index
-
-;; parameters
-;; D4.b - palette flag, already there
-;; D6.w - sprite index
-;; D7.w - character id
-clr.w D7
-move.b D1, D7
-jsr $2RENDER_CHOSEN_AVATAR
 dbra D3, slotMachine_chooseChar ; is this team select? go back and keep saving chars then
-
 
 slotMachine_skipChooseChar:
 ;; not ready to choose, need to keep the randomization going
@@ -128,7 +124,7 @@ slotMachine_doCharRandomSelect:
 jsr $2CHAR_RANDOM_SELECT
 
 slotMachine_done:
-rts
+bra done
 ;;;;;;;;;;;;;;;;;;; END SLOT MACHINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 skipSlotMachine:
 
@@ -214,20 +210,6 @@ move.b #$19, D1
 bsr saveChar ; save the second Rugal
 move.b #$19, D1
 bsr saveChar ; save the third Rugal
-;; now render him as the first chosen char
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
-move.w #$18, D7
-move.b #0, D4 ; palette flag, this is correct as Rugal doesn't have an alternate avatar
-jsr $2RENDER_CHOSEN_AVATAR
-;; now clear out the second chosen char
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
-addi.w #2, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-;; now clear out the third chosen char
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
-addi.w #4, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-;; and done, Rugal is all set
 bra skipChoosingChar
 
 skipChooseRugal:
@@ -236,22 +218,6 @@ adda.w D1, A3
 move.b (A3), D1 ; character Id from grid is now in D1
 
 bsr saveChar
-
-;;; now render the newly chosen character into chosen team area
-;; set up the sprite index based on character index
-move.w D0, D6  ; move num of chosen characters in
-subi.w #1, D6  ; but we already incremented, so it's one too big
-mulu.w #2, D6
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D7
-add.w D7, D6 ; add on the starting sprite index
-
-;; parameters
-;; D4.b - palette flag
-;; D6.w - sprite index
-;; D7.w - character id
-clr.w D7
-move.b D1, D7
-jsr $2RENDER_CHOSEN_AVATAR
 
 skipChoosingChar:
 
@@ -285,27 +251,29 @@ cmpi.w #21, D1 ; are they on the left random select space?
 beq doCharRandomSelect
 cmpi.w #23, D1 ; are they on the right random select space?
 beq doTeamRandomSelect
-bra doClearRandomSelect
+bra noRandomSelect
 
 doCharRandomSelect:
+move.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 jsr $2CHAR_RANDOM_SELECT
 bra doneRandomSelect
 
 doTeamRandomSelect:
+move.b #$RANDOM_SELECT_TYPE_TEAM, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 jsr $2TEAM_RANDOM_SELECT
 bra doneRandomSelect
 
-doClearRandomSelect:
-;; if they aren't on random select, then possibly they were before
-;; need to clean up the left behind random avatars
-bsr clearRandomSelect
+noRandomSelect:
+move.b #$RANDOM_SELECT_TYPE_NONE, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 
 doneRandomSelect:
+
 ;;;;;;;;;;;;;;;;;;; END RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
 done:
+jsr $2RND_CHSN_AVATARS
+;; render whatever choices the player has currently made down into the chosen area
+;; this accounts for all possibilities: normal, rugal, random, etc
 ; for the character currently under the cursor, show their name on the fix layer
 jsr $2RENDER_CUR_FOCUSED_CHAR_NAME
 
@@ -445,3 +413,4 @@ move.w #0, D1  ; x
 move.w #272, D2 ; set y to 224, moving cursor off screen
 jsr $2MOVE_SPRITE
 rts
+

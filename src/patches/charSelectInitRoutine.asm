@@ -386,6 +386,14 @@ bra setCpuAlreadyUsedIndex_done
 
 setCpuAlreadyUsedIndex_skipDemoModeClear:
 
+cmpi.b #3, $PLAY_MODE
+bne setCpuAlreadyUsedIndex_skipVersusModeClear
+;; this is versus mode. Same idea, just clear the byte out.
+clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
+bra setCpuAlreadyUsedIndex_done
+
+setCpuAlreadyUsedIndex_skipVersusModeClear:
+
 btst #0, $PLAY_MODE
 beq setCpuAlreadyUsedIndex_player2 ; player 1 is not playing, onto player 2
 

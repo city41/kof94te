@@ -14,10 +14,6 @@ bne charRandomSelect_done
 move.w #2, D4
 sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4 ; decrement D4 by number already chosen
 
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6 ; load si
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
-
 charRandomSelect_pickRandomChar:
 ;; get a random number between 0-23
 ;; the game's rng uses A0
@@ -57,25 +53,12 @@ adda.w D5, A2 ; add it twice since chosen chars are words
 adda.w D5, A2 ; add it twice since chosen chars are words
 move.b D0, (A2)
 
-clr.w D7
-move.b D0, D7 ; load up the random char id
-;; parameters
-;; D4.b - palette flag
-;; D6.w - sprite index
-;; D7.w - character id
-;; TODO: this really should use the alternate palette flag by looking at the
-;; other team, but punting on that for now
-; move.b #0, D4
-move.w D6, D3
-jsr $2RENDER_CHOSEN_AVATAR
-move.w D3, D6
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 ; don't play the sfx during slot machine, as kof94 can only play one sfx at a time
 bne charRandomSelect_skipSoundEffect ; don't play the sfx during slot machine
 move.b #$60, $320000  ; play the sound effect
 charRandomSelect_skipSoundEffect:
 
-addi.w #2, D6 ; move to next avatar
 dbra D4, charRandomSelect_pickRandomChar
 
 charRandomSelect_done:
