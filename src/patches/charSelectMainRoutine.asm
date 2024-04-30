@@ -173,10 +173,11 @@ move.w #$P2C1_SI, D6
 move.b $108431, D1
 lea $P1_CHOSEN_CHAR0, A2
 
+
+renderCpuChosenTeam_doRender:
 cmpi.b #8, D1 ; is this Rugal?
 beq renderCpuChosenTeam_rugal
 
-renderCpuChosenTeam_doRender:
 move.w #2, D3 ; get dba primed, 2 since it hinges on -1
 
 ;; ok, we have the cpu team id, but not the characters, we need to look them up
