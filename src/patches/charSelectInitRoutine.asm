@@ -194,6 +194,7 @@ p1_firstCharSelect:
 move.b #0, $P1_NUM_CHOSEN_CHARS
 move.b #0, $P1_RANDOM_SELECT_TYPE
 move.b #0, $P1_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
+move.b #0, $P1_RANDOM_SELECT_PALETTE_FLAG_CHOICE
 
 p1_pastReady:
 
@@ -223,6 +224,7 @@ p2_firstCharSelect:
 move.b #0, $P2_NUM_CHOSEN_CHARS
 move.b #0, $P2_RANDOM_SELECT_TYPE
 move.b #0, $P2_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
+move.b #0, $P2_RANDOM_SELECT_PALETTE_FLAG_CHOICE
 
 p2_pastReady:
 

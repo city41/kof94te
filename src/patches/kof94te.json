@@ -336,13 +336,6 @@
     },
     {
       "type": "prom",
-      "description": "render chosen avatars for a player",
-      "subroutine": true,
-      "symbol": "RND_CHSN_AVATARS",
-      "patchAsm": "renderChosenAvatars.asm"
-    },
-    {
-      "type": "prom",
       "description": "character random select routine",
       "subroutine": true,
       "symbol": "CHAR_RANDOM_SELECT",

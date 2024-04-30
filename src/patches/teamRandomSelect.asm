@@ -26,13 +26,13 @@ mulu.w #4, D0  ; multiply team id by 4, as there are 4 bytes per team (three cha
 adda.w D0, A3  ; move into the list to the correct team
 
 ;; now take the team and save them as the player's chosen characters (temporarily)
-;; and render the avatars
 
 lea $PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET(A0), A2
 move.w #2, D4 ; loop 3 times using dbra
 
 teamRandomSelect_saveTeamCharacter:
 move.b (A3), (A2) ; save the member of the team as chosen
+move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), $1(A2)
 
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 ; don't play the sfx during slot machine, as kof94 can only play one sfx at a time

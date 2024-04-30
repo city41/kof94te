@@ -271,7 +271,7 @@ doneRandomSelect:
 ;;;;;;;;;;;;;;;;;;; END RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 done:
-jsr $2RND_CHSN_AVATARS
+bsr renderChosenAvatars
 ;; render whatever choices the player has currently made down into the chosen area
 ;; this accounts for all possibilities: normal, rugal, random, etc
 ; for the character currently under the cursor, show their name on the fix layer
@@ -344,32 +344,6 @@ move.b D2, D4
 flipPaletteFlagIfNeeded_done:
 rts
 
-;; clearRandomSelect
-;; clears out any avatars in chosen area that are unchosen
-;; this cleans up the random avatars that randomSelect may have placed there
-clearRandomSelect:
-cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-beq clearRandomSelect_done ; chose three characters? don't clear then
-
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6 ; load si
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; move si forward to first unchosen character
-add.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D6 ; twice since avatars are 2 sprites each
-move.w #2, D4
-sub.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D4 ; decrement D4 by number already chosen
-
-clearRandomSelect_clearChar:
-;; parameters
-;; D6.w - sprite index
-move.w D6, D3
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w D3, D6
-
-addi.w #2, D6 ; move to next avatar
-dbra D4, clearRandomSelect_clearChar
-
-clearRandomSelect_done:
-rts
-
 ;; saveChar
 ;; saves the current character into the team
 ;;
@@ -414,3 +388,67 @@ move.w #272, D2 ; set y to 224, moving cursor off screen
 jsr $2MOVE_SPRITE
 rts
 
+; renderChosenAvatars
+; renders the chosen avatars for the player in A0
+; handles rugal and clearing avatars as needed
+renderChosenAvatars:
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+cmpi.b #$18, (A2) ; did they choose rugal?
+beq renderChosenAvatars_rugal
+cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq renderChosenAvatars_charRandomSelect
+cmpi.b #$RANDOM_SELECT_TYPE_TEAM, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq renderChosenAvatars_teamRandomSelect
+bra renderChosenAvatars_noRandomSelect
+
+renderChosenAvatars_rugal:
+move.b #1, D3 ; this is rugal, only one character
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+bra renderChosenAvatars_renderAvatars
+
+renderChosenAvatars_charRandomSelect:
+move.b #3, D3 ; this is random, so always render 3 avatars
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+bra renderChosenAvatars_renderAvatars
+
+renderChosenAvatars_teamRandomSelect:
+move.b #3, D3 ; this is random, so always render 3 avatars
+lea $PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET(A0), A2 ; draw from the temp chosen chars
+bra renderChosenAvatars_renderAvatars
+
+renderChosenAvatars_noRandomSelect:
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D3 ; this is not random, render the actual number chosen
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+bra renderChosenAvatars_renderAvatars
+
+renderChosenAvatars_renderAvatars:
+clr.b D5 ; loop counter
+move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
+
+renderChosenAvatars_renderOneAvatar:
+cmp.b D3, D5 ; see if we need to render or clear based on how many avatars to render
+bge renderChosenAvatar_clearOneAvatar
+
+clr.w D7
+move.b (A2), D7 ; load the char id
+move.b $1(A2), D4 ; palette flag
+move.b D7, D1 ; flipPaletteFlagIfNeede needs char id here
+bsr flipPaletteFlagIfNeeded
+jsr $2RENDER_CHOSEN_AVATAR
+bra renderChosenAvatar_doneRenderingOneAvatar
+
+renderChosenAvatar_clearOneAvatar:
+movem.w D6, $MOVEM_STORAGE
+jsr $2CLEAR_CHOSEN_AVATAR
+movem.w $MOVEM_STORAGE, D6
+
+renderChosenAvatar_doneRenderingOneAvatar:
+
+adda.w #2, A2 ; move to next character
+addi.w #2, D6 ; move to next sprite index
+addi.b #1, D5 ; increment the counter
+cmpi.b #3, D5 ; and loop if we've done less than 3 characters
+bne renderChosenAvatars_renderOneAvatar
+
+renderChosenAvatars_done:
+rts
