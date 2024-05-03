@@ -62,23 +62,36 @@
     "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
-    "IN_CHAR_SELECT_FLAG": "10f8e4",
-    "STORE_A0A1A2": "10f8e6",
-    "AFTER_SCREEN_ALREADY_SET_LEFT": "10f910",
-    "CHAR_SELECT_COUNTER": "10f911",
-    "AFTER_SCREEN_POSITION_TABLE": "10f912",
-    "MOVEM_STORAGE": "10fa10",
-    "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb00",
+    "READY_TO_EXIT_THANK_YOU_MESSAGE": "10f8e4",
+    "IN_CHAR_SELECT_FLAG": "10f8e5",
+    "IN_THANK_YOU_FLAG": "10f8e6",
+    "STORE_A0A1A2": "10f8e8",
+    "AFTER_SCREEN_ALREADY_SET_LEFT": "10f912",
+    "CHAR_SELECT_COUNTER": "10f913",
+    "AFTER_SCREEN_POSITION_TABLE": "10f914",
+    "MOVEM_STORAGE": "10fa12",
+    "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb02",
 
-    "PHASE_UNKNOWN": "0",
-    "PHASE_INIT": "1",
-    "PHASE_PLAYER_SELECT": "2",
-    "PHASE_CPU_SELECT": "3",
-    "PHASE_WRAP_UP": "4",
-    "PHASE_DONE": "5",
-    "HACK_PHASE": "10fb02",
+    "MAIN_PHASE_UNKNOWN": "0",
+    "MAIN_PHASE_INIT": "1",
+    "MAIN_PHASE_PLAYER_SELECT": "2",
+    "MAIN_PHASE_CPU_SELECT": "3",
+    "MAIN_PHASE_WRAP_UP": "4",
+    "MAIN_PHASE_DONE": "5",
+    "MAIN_HACK_PHASE": "10fb04",
 
-    "WRAP_UP_COUNTDOWN": "10fb04",
+    "WRAP_UP_COUNTDOWN": "10fb05",
+
+    "THANK_YOU_PHASE_UNKNOWN": "0",
+    "THANK_YOU_PHASE_FADEIN_BG": "1",
+    "THANK_YOU_PHASE_WAIT": "2",
+    "THANK_YOU_PHASE_REMOVE_DELAY": "3",
+    "THANK_YOU_PHASE_DONE": "4",
+    "THANK_YOU_HACK_PHASE": "10fb06",
+
+    "THANK_YOU_FADEIN_BG_COUNT": "10fb08",
+    "THANK_YOU_PRESS_A_COUNT": "10fb0a",
+    "STORE_ALL_REGISTERS": "10fb0c",
 
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
@@ -115,6 +128,12 @@
     "RANDOM_SELECT_TYPE_TEAM": "2"
   },
   "patches": [
+    {
+      "type": "prom",
+      "string": true,
+      "value": "press A to continue",
+      "symbol": "PRESS_A_TO_CONTINUE"
+    },
     {
       "type": "prom",
       "string": true,
@@ -501,37 +520,139 @@
       "patchAsm": ["nop"]
     },
     {
-      "skip": true,
       "type": "prom",
-      "description": "skip team select counter decrement",
-      "address": "13705a",
-      "patchAsm": ["subq.b #0, $655(a5)"]
+      "description": "thank you message table",
+      "subroutine": true,
+      "symbol": "THANK_YOU_MESSAGE_TABLE",
+      "patchAsm": "thankYouMessage.asm"
     },
     {
       "type": "prom",
-      "description": "Run char select soon after vblank ack",
+      "description": "put up thank you message over ending",
+      "subroutine": true,
+      "symbol": "PUT_THANK_YOU_UP",
+      "patchAsm": "putThankYouUp.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Take thank you back down",
+      "subroutine": true,
+      "symbol": "TAKE_THANK_YOU_DOWN",
+      "patchAsm": "takeThankYouDown.asm"
+    },
+    {
+      "type": "prom",
+      "description": "thank you fade in bg routine",
+      "subroutine": true,
+      "symbol": "THANK_YOU_FADEIN_BG_ROUTINE",
+      "patchAsm": "thankYouFadeInBg.asm"
+    },
+    {
+      "type": "prom",
+      "description": "thank you wait routine (press A)",
+      "subroutine": true,
+      "symbol": "THANK_YOU_WAIT_ROUTINE",
+      "patchAsm": "thankYouWait.asm"
+    },
+    {
+      "type": "prom",
+      "description": "thank you main",
+      "subroutine": true,
+      "symbol": "THANK_YOU_MAIN",
+      "patchAsm": "thankYouMain.asm"
+    },
+    {
+      "type": "prom",
+      "description": "hook to put up thank you as Rugal says IMPOSSIBLE",
+      "address": "106452",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "move.b $c6(A4), $c7(A4)",
+        "move.l A1, D7",
+        "cmpi.l #$5596a, D7",
+        "bne skipSetFlag",
+        "move.b #1, $IN_THANK_YOU_FLAG",
+        "move.b #$THANK_YOU_PHASE_FADEIN_BG, $THANK_YOU_HACK_PHASE",
+        "move.w #0, $THANK_YOU_FADEIN_BG_COUNT",
+        "skipSetFlag:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "hook to take down thank you if the player lets the ending elapse",
+      "address": "1443fc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "clr.l $104c(A5)",
+        "clr.l $1058(A5)",
+        "move.b #1, $READY_TO_EXIT_THANK_YOU_MESSAGE",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "144402",
+      "patchAsm": ["nop"]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "hook to exit thank you to credits",
+      "address": "13e630",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $READY_TO_EXIT_THANK_YOU_MESSAGE",
+        "bne skipExit",
+        "move.l #$443fc, (A4)",
+        "bra done",
+        "skipExit:",
+        ";; do what it normally does",
+        "move.l #$3e636, (A4)",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "credits init: skip clearing the fix layer",
+      "address": "14441a",
+      "patchAsm": ["nop", "nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "vblank hook",
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
-        "move.b $IN_CHAR_SELECT_FLAG, D5",
-        "cmpi.b #1, D5",
+        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne skipCharSelectMain",
 
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
         ";;; now put fix strings onto the screen",
-        "movem.l A5/A6,$STORE_A0A1A2",
         "lea $VSTRING_DATA, A6",
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "lea $FIX_STRING_DATA, A6",
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
         "lea $MORE_STRING_DATA, A6",
         "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
-        "movem.l $STORE_A0A1A2, A5/A6",
+        "bra done",
 
         "skipCharSelectMain:",
+        "cmpi.b #1, $IN_THANK_YOU_FLAG",
+        "bne skipThankYouMain",
+        "jsr $2THANK_YOU_MAIN",
+        "skipThankYouMain:",
+
+        "done:",
         ";;; restore what got clobbered",
         "jsr $6536",
         ";;; end replace",
+        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
         "rts"
       ]
     },

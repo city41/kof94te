@@ -19,8 +19,6 @@ beq stringDone ; hit the null byte? then we are done
 
 cmpi.w #1, D6 ; is the counter at 1? that means erase the string, at zero we won't come in here at all
 beq useEmptyTile
-; addi.w #$300, D7 ; jump forward in S1 rom to start of font plus character offset
-; ori.w #$2000, D7 ; apply the palett
 bra setTile
 useEmptyTile:
 move.w #$f20, D7

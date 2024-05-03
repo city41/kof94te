@@ -1,5 +1,3 @@
-movem.l A0-A2,$STORE_A0A1A2
-
 btst #3, $100000 ; is the Rugal debug dip turned on?
 beq takeRugalOffGrid
 jsr $2PUT_RUGAL_ON_GRID
@@ -30,16 +28,17 @@ move.b #1, $108231 ; set team 1 to this random id
 move.b #1, $108431 ; and team 2 too
 skipVersusRandomStage:
 
-cmpi.b #$PHASE_DONE, $HACK_PHASE
+cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 ;; once we hit done, the game comes in here many times
 ;; not we can do but wait for the game to move on
 beq done
-cmpi.b #$PHASE_PLAYER_SELECT, $HACK_PHASE
+cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
-cmpi.b #$PHASE_CPU_SELECT, $HACK_PHASE
+cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
-cmpi.b #$PHASE_WRAP_UP, $HACK_PHASE
+cmpi.b #$MAIN_PHASE_WRAP_UP, $MAIN_HACK_PHASE
 beq doCharSelectWrapUp
+bra done
 
 
 doPlayerSelect:
@@ -58,7 +57,6 @@ bsr checkIfWrapUpIsDone
 bra done
 
 done:
-movem.l $STORE_A0A1A2,A0-A2
 rts
 
 ;;;;;;;; SUBROUTINES ;;;;;;;;;;;;;;;;
@@ -100,13 +98,13 @@ bne checkIfPlayerSelectIsDone_done
 cmpi.b #3, $PLAY_MODE
 bne checkIfPlayerSelectIsDone_setCpuPhase
 ;; this is versus mode, char select is now done
-move.b #$PHASE_DONE, $HACK_PHASE
+move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 bra checkIfPlayerSelectIsDone_done
 
 checkIfPlayerSelectIsDone_setCpuPhase:
-move.b #$PHASE_CPU_SELECT, $HACK_PHASE
+move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 
@@ -159,7 +157,7 @@ beq checkIfCpuSelectIsDone_cpuIsDone
 checkIfCpuSelectIsDone_cpuIsDone:
 ;; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$PHASE_WRAP_UP, $HACK_PHASE
+move.b #$MAIN_PHASE_WRAP_UP, $MAIN_HACK_PHASE
 
 checkIfCpuSelectIsDone_done:
 rts
@@ -169,7 +167,7 @@ checkIfWrapUpIsDone:
 cmpi.b #$ff, $WRAP_UP_COUNTDOWN
 bne checkIfWrapUpIsDone_done
 ;;; wrap up has concluded, time to signal char select is done
-move.b #$PHASE_DONE, $HACK_PHASE
+move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 
 checkIfWrapUpIsDone_done:

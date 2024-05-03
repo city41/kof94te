@@ -5,7 +5,7 @@
       "type": "prom",
       "description": "go back to HTP",
       "address": "1370b4",
-      "patchAsm": ["move.l #$3b72c, $584(A5)"]
+      "patchAsm": ["move.l #$3bf62, $584(A5)"]
     }
   ]
 }

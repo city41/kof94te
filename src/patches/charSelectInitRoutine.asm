@@ -1,4 +1,4 @@
-move.b #$PHASE_INIT, $HACK_PHASE
+move.b #$MAIN_PHASE_INIT, $MAIN_HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 
 ;; decide how long wrap up should be
@@ -292,13 +292,13 @@ bne setCpuSelect
 bra setPlayerSelect
 
 setCpuSelect:
-move.b #$PHASE_CPU_SELECT, $HACK_PHASE
+move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
 move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 bra doneSettingPhase
 
 setPlayerSelect:
-move.b #$PHASE_PLAYER_SELECT, $HACK_PHASE
+move.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
 bra doneSettingPhase

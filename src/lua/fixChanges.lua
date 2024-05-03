@@ -82,7 +82,7 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteControlBlock() == "fix" and next_vram_index < 0x707d then
+		if getSpriteControlBlock() == "fix" and next_vram_index == 0x7004 then
 			print(string.format("fix location: %x, fix value: %x at PC:%s", next_vram_index, data, cpu.state["PC"]))
 		end
 
