@@ -23,7 +23,7 @@ rts
 secondCutscene:
 ;;;;;;;; Have the game use the chosen team ids instead of ones from a pre-formed team
 
-;; need to use winning team list as game wants bytes, not words",
+;; need to use winning team list as game wants bytes, not words
 lea $WINNING_TEAM_LIST, A0
 btst #0, $PLAY_MODE
 beq setupPlayer2
@@ -38,13 +38,11 @@ move.b $P2_CHOSEN_CHAR1, $1(A0)
 move.b $P2_CHOSEN_CHAR0, $2(A0)
 move.b #0, $108431
 done:
-;; set it up so the game pulls from our chosen team instead of a canned team
-suba.l D0, A0
 
 ;; need to create the dynamic XY table based on the characters that will be displayed
 lea $AFTER_SCREEN_POSITION_TABLE, A1 ; get our position table set up
 
-;; team member 1, on the right sideload the chosen team for sprites in the second cutscen
+;; team member 1, on the right side
 clr.w D6
 move.b (A0), D6 ; load the first team member id
 add.w D6, D6    ; quadruple it for offsetting into the table
@@ -82,4 +80,8 @@ addi.w #2, D6         ; move forward by two so we can get the y word
 move.w (A2, D6.w), D7 ; jump into the table and grab the y word
 move.w D7, (A1, D6.w) ; place the y word into our own dynamic table
 
+
+;; set it up so the game pulls from our chosen team instead of a canned team
+lea $WINNING_TEAM_LIST, A0
+suba.l D0, A0
 rts
