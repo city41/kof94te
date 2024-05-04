@@ -30,13 +30,13 @@ beq setupPlayer2
 move.b $P1_CHOSEN_CHAR0, (A0)
 move.b $P1_CHOSEN_CHAR1, $1(A0)
 move.b $P1_CHOSEN_CHAR2, $2(A0)
-move.b #0, $108231
+move.b #6, $108231 ; set the team to Mexico
 bra done
 setupPlayer2:
 move.b $P2_CHOSEN_CHAR2, (A0)
 move.b $P2_CHOSEN_CHAR1, $1(A0)
 move.b $P2_CHOSEN_CHAR0, $2(A0)
-move.b #0, $108431
+move.b #6, $108431 ; set the team to Mexico
 done:
 
 ;; need to create the dynamic XY table based on the characters that will be displayed
