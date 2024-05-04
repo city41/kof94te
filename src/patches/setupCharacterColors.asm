@@ -25,12 +25,14 @@ cmpi.l #$108100, D6 ; the team1 character that is about to fight
 beq team1Character
 cmpi.l #$108300, D6  ; the team2 character that is about to fight
 beq team2Character
-cmpi.l #$100500, D6  ; continue screen, char 1
-beq continueScreen
-cmpi.l #$100700, D6  ; continue screen, char 2
-beq continueScreen
-cmpi.l #$100900, D6  ; continue screen, char 3
-beq continueScreen
+cmpi.l #$100500, D6  ; continue screen or cutscene2, char 1
+beq continueScreenOrCutscene2
+cmpi.l #$100700, D6  ; continue screen or cutscene2, char 2
+beq continueScreenOrCutscene2
+cmpi.l #$100900, D6  ; continue screen or cutscene2, char 3
+beq continueScreenOrCutscene2
+cmpi.l #$100B00, D6  ; continue screen or cutscene2, char 3
+beq continueScreenOrCutscene2
 cmpi.l #$10907c, D6  ; win screen, char 1
 beq winScreen
 cmpi.l #$10917c, D6  ; win screen, char 2
@@ -48,7 +50,10 @@ bra defaultChoice ; something else like demo mode, how to play, etc. For now pun
 ;; btw the falling fighter char id is at 100971
 fallingFighter:
 ;; the same conditions for falling fighter work for continue screen too
-continueScreen:
+continueScreenOrCutscene2:
+cmpi.b #$ff, $DEFEATED_TEAMS
+beq winScreen ; if all teams are defeated, this is cutscene2, it's the same logic as winScreen
+;; not the cutscene, must be continuing
 cmpi.b #$80, $108238 ; did p1 lose?
 beq team1Character   ; yup, p1 lost, team1Character can handle it from here
 bra team2Character   ; p2 lost, team2Character can handle it from here
