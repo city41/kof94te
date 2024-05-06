@@ -18,12 +18,12 @@ replaceTakumaDialog:
 ;; since Takuma was char3 in the original team, we'll
 ;; use char3 of the custom team too
 clr.w D0
-btst #0, $PLAY_MODE
-beq loadPlayer2Char3
-move.b $P1_CHOSEN_CHAR2, D0
+btst #0, $PLAY_MODE ; is player 1 playing?
+beq loadPlayer2Char3; no? go do player 2
+move.b $P1_CHOSEN_CHAR2, D0 ; load p1 char id
 bra doneLoadChar3
 loadPlayer2Char3:
-move.b $P2_CHOSEN_CHAR0, D0
+move.b $P2_CHOSEN_CHAR0, D0 ; load p2 char id
 doneLoadChar3:
 lea $CUTSCENE2_STRING, A0
 bsr writeName ; write the name of the character
@@ -43,8 +43,8 @@ replaceRobertDialog:
 ;; use char2 of the custom team too
 ;; TODO: support p2
 clr.w D0
-btst #0, $PLAY_MODE
-beq loadPlayer2Char2
+btst #0, $PLAY_MODE ; is player 1 playing?
+beq loadPlayer2Char2; no? go do player 2
 move.b $P1_CHOSEN_CHAR1, D0
 bra doneLoadChar2
 loadPlayer2Char2:
@@ -68,8 +68,8 @@ replaceRyoDialog:
 ;; use char1 of the custom team too
 ;; TODO: support p2
 clr.w D0
-btst #0, $PLAY_MODE
-beq loadPlayer2Char1
+btst #0, $PLAY_MODE ; is player 1 playing?
+beq loadPlayer2Char1; no? go do player 2
 move.b $P1_CHOSEN_CHAR0, D0
 bra doneLoadChar1
 loadPlayer2Char1:
