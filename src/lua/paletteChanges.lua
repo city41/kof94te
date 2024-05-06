@@ -7,8 +7,7 @@ screen = manager.machine.screens[":screen"]
 PALETTE_SIZE = 32
 PALETTE_BASE_ADDRESS = 0x400000
 
--- the first palette used by chosen Athena avatar
-PALETTE_OF_INTEREST = 0x4d
+PALETTE_OF_INTEREST = 0x22
 PALETTE_ADDRESS_OF_INTEREST = PALETTE_BASE_ADDRESS + (PALETTE_SIZE * PALETTE_OF_INTEREST)
 
 function on_palette_write(offset, data, mask)

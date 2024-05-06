@@ -1,0 +1,67 @@
+This is Takuma's first dialog of cutscene2 decoded
+
+still need to figure out
+000D - new line
+0076 - question mark
+0077 - exclamation point
+FFFE - full clear
+0001 - period
+FFFF - end entire dialog
+
+
+06733E:  49A0 498D 4997 49A1 4999 498D 000D 0000  I.I.I.I.I.I.....
+         T    A    K    U    M    A    NL    _ 
+
+06734E:  49A3 4994 498D 49A0 0076 0000 499E 49A1  I.I.I.I..v..I.I.
+         W    H    A    T    ?    _    R    U
+
+06735E:  4993 498D 4998 0077 0076 000D 0000 49A3  I.I.I..w.v....I.
+         G    A    L    !    ?    ?    _    W
+
+06736E:  498D 4995 49A0 0077 0000 4995 0002 49A2  I.I.I..w..I...I.
+         A    I    T    !    _    I    '    V 
+
+06737E:  4991 FFFE 0000 4994 4991 498D 499E 4990  I.....I.I.I.I.I.
+         E    FC   _    H    E    A    R    D
+
+06738E:  0000 499B 4992 0000 49A5 499B 49A1 499E  ..I.I...I.I.I.I.
+         _    O    F    _    Y    O    U    R
+
+06739E:  000D 0000 499A 498D 4999 4991 0001 0001  ....I.I.I.I.....
+         ?    _    N    A    M    E    .    .
+
+0673AE:  0001 4995 0002 49A2 4991 000D 0000 4994  ..I...I.I.....I.
+         .    I    '    V    E    NL   _    H 
+
+0673BE:  4991 498D 499E 4990 0000 499E 49A1 4993  I.I.I.I...I.I.I.
+         E    A    R    D    _    R    U    G
+
+0673CE:  498D 4998 FFFE 0000 4995 499F 0000 49A0  I.I.....I.I...I.
+         A    L    FC   _    I    S    _    T
+
+0673DE:  4994 4991 0000 4999 4991 499E 498F 4994  I.I...I.I.I.I.I.
+         H    E    _    M    E    R    C    H
+
+0673EE:  498D 499A 49A0 000D 0000 499B 4992 0000  I.I.I.....I.I...
+         A    N    T    NL   _    O    F    _
+
+0673FE:  4990 4991 498D 49A0 4994 0000 49A3 4994  I.I.I.I.I...I.I.
+         D    E    A    T    H    _    W    H
+
+06740E:  499B 000D 0000 4990 499B 4999 4995 499A  I.....I.I.I.I.I.
+         O    NL   _    D    O    M    I    N
+
+06741E:  498D 49A0 4991 499F 0000 49A0 4994 4991  I.I.I.I...I.I.I.
+         A    T    E    S    _    T    H    E
+
+06742E:  FFFE 0000 498E 4998 498D 498F 4997 0000  ....I.I.I.I.I...
+         FC   _    B    L    A    C    K    _
+
+06743E:  4999 498D 499E 4997 4991 49A0 000D 0000  I.I.I.I.I.I.....
+         M    A    R    K    E    T    NL   _
+
+06744E:  499B 4992 0000 49A0 4994 4991 0000 49A3  I.I...I.I.I...I.
+         O    F    _    T    H    E    _    W
+
+06745E:  499B 499E 4998 4990 0001 0001 0001 FFFF  I.I.I.I.........
+         O    R    L    D    .    .    .    ED

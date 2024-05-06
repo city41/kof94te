@@ -1,0 +1,22 @@
+{
+  "description": "Attempt to swap in custom dialog for cutscene2, must be team Mexico",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "custom cutscene dialog hook",
+      "subroutine": true,
+      "address": "1443ea",
+      "patchAsm": "cutscene2Dialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "1443f0",
+      "patchAsm": ["nop"]
+    }
+  ]
+}

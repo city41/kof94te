@@ -1,0 +1,11 @@
+{
+  "description": "Changes the Mexico cutscene2 init function to write A (which is Brazil's value) instead of 39",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "write A",
+      "address": "1429f6",
+      "patchAsm": ["move.w #$a, $554a(A5)"]
+    }
+  ]
+}

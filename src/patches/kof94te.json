@@ -92,6 +92,7 @@
     "THANK_YOU_FADEIN_BG_COUNT": "10fb08",
     "THANK_YOU_PRESS_A_COUNT": "10fb0a",
     "STORE_ALL_REGISTERS": "10fb0c",
+    "CUTSCENE2_STRING": "10f400",
 
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
@@ -437,6 +438,7 @@
       "subroutine": true,
       "patchAsm": [
         "jsr $2CHAR_SELECT_INIT_ROUTINE",
+        "move.l #$3bf62, $108584",
         "move.l #$37046, $108584",
         "rts"
       ]
@@ -1018,6 +1020,27 @@
       "description": "Replace the team select background with the order select one",
       "address": "d8c00",
       "patchAsm": "orderSelectBgForTeamSelect.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Char ID -> crom name string table, usable in English and Spanish",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_ENES",
+      "patchAsm": "charIdToNameStringEnEs.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 2 custom dialog hook",
+      "subroutine": true,
+      "address": "1443ea",
+      "symbol": "CUTSCENE2_DIALOG",
+      "patchAsm": "cutscene2Dialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "1443f0",
+      "patchAsm": ["nop"]
     }
   ]
 }

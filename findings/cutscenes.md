@@ -467,3 +467,160 @@ team Mexico's text is generic and could be used as a template
 167798: LET'S.GO.TO
 1677b0: .THE.BATTLE
 1677c8: .STAGE
+
+
+## dialog rendering
+
+A dialog sequence is loaded into A1
+Then the routine at 639e puts it on screen
+
+A1 is loaded at 63ac, movea.l ($c0,A4), A1
+
+In the case of Rugal's first sentence in cutscene2
+
+It starts in ROM at 67292
+and that value is put into memory at 10913c
+
+67292 is put there at 43772
+move.l A0, ($c0,A4), where A0=67292
+
+This happens in subroutine 443d2
+
+0443D2: 7000                moveq   #$0, D0        ; clear D0
+0443D4: 102D 0836           move.b  ($836,A5), D0  ; D0 = *108836
+0443D8: D040                add.w   D0, D0         ; double D0
+0443DA: D040                add.w   D0, D0         ; quadruple D0
+0443DC: 41F9 0006 2864      lea     $62864.l, A0   ; load the first dialog text address
+0443E2: 2070 0000           movea.l (A0,D0.w), A0  ; jump forward based on team id?
+0443E6: 302D 554A           move.w  ($554a,A5), D0 ; D0 = *10d54a
+0443EA: D040                add.w   D0, D0         ; double D0
+0443EC: D040                add.w   D0, D0         ; quadruple D0
+0443EE: 2070 0000           movea.l (A0,D0.w), A0  ; move forward in A0 based on team id?
+0443F2: 4E75                rts
+
+tracing through cutscene2
+
+108836 is 1, so it's not a team id
+
+62864 is a table of dialog pointers
+
+it loads a word from 10d54a, 9, quadruples it to $24, and then goes even further into the table, arriving at 65172
+
+65172 is "CONGRATULATIONS ON YOUR VICTORY..." that Mature says
+
+hmmm, 108836 is only written to once very early and never again. 
+
+10d54a.w writes
+
+this is written to for all win quotes, so it seems this is the general "display this dialog" memory location.
+
+writes during cutscene2
+
+10D54A: 9 at 41E4C
+10D54A: 39 at 429FC
+10D54A: 3A at 42A2A
+10D54A: 3B at 42A58
+10D54A: 3C at 42A86
+10D54A: 3D at 42AB4
+10D54A: 3E at 42AE2
+10D54A: 3F at 42B10
+
+
+The write of 9 at 41E4C seems to be setting up the Mature scene, which is used for all teams
+
+For team Mexico at least, this routine is what writes 39
+
+and this routine is dynamically jumped to at 32b2e (jsr (A0))
+
+0429F0: 022D 00FE 0653      andi.b  #$fe, ($653,A5)
+0429F6: 3B7C 0039 554A      move.w  #$39, ($554a,A5)
+0429FC: 4EBA 042E           jsr     ($42e,PC) ; ($42e2c)
+042A00: 4E71                nop
+042A02: 2B7C 0004 2A0A 0584 move.l  #$42a0a, ($584,A5)
+042A0A: 082D 0000 0653      btst    #$0, ($653,A5)
+042A10: 6700 F06A           beq     $41a7c
+042A14: 2B7C 0004 2A1E 0584 move.l  #$42a1e, ($584,A5)
+042A1C: 4E75                rts
+
+$39 is almost certainly what sets up the Mexico dialog
+
+For Brazil
+
+042132: 022D 00FE 0653      andi.b  #$fe, ($653,A5)
+042138: 3B7C 000A 554A      move.w  #$a, ($554a,A5)
+04213E: 4EBA 0CEC           jsr     ($cec,PC) ; ($42e2c)
+042142: 4E71                nop
+042144: 2B7C 0004 214C 0584 move.l  #$4214c, ($584,A5)
+04214C: 082D 0000 0653      btst    #$0, ($653,A5)
+042152: 6700 F928           beq     $41a7c
+042156: 2B7C 0004 2160 0584 move.l  #$42160, ($584,A5)
+04215E: 4E75                rts
+
+So yeah, pretty sure these are the routines that setup the dialog of cutscene2 based on which team the the player is using
+
+mexicoToBrazilCutscene2.json has the Mexican init routine write A instead of 39, and it didn't seem to do anything.
+
+It actually did. It had Team Mexico use Brazil's Rugal's opening line. But for both teams they are the same.
+
+It loads up Takuma's line separately. It seems to be loading in chunks of lines.
+
+## Takuma's line
+
+starts at 6733e
+
+This pointer is at 62a8c, which stores pointers to the entire Mexico cutscene2 dialog
+
+The routine at 443d2 is reading these pointers, but what causes it to iterate through them?
+
+It pulls from 10d54a, whoever feeds that is probably running all of this
+
+So Rugal's first dialog is pushed there via the methods above (429f0 for Mexico)
+
+The routine at 42a1e is loading the next dialog
+
+This is called from 32b2e
+jsr (A0)
+
+It is just pulling from 108584
+
+The next dialog was moved into 108584 at 42a42, which is also dynamically jumped to
+
+These are all the writes to 108584 to drive cutscene2 for Mexico
+
+584: 41E6E at 41E6C
+584: 41E82 at 41E82
+584: 41E96 at 41E94
+584: 429F0 at 41EB2
+584: 42A0A at 42A0A
+584: 42A1E at 42A1C
+584: 42A38 at 42A38
+584: 42A4C at 42A4A
+584: 42A66 at 42A66
+584: 42A7A at 42A78
+584: 42A94 at 42A94
+584: 42AA8 at 42AA6
+584: 42AC2 at 42AC2
+584: 42AD6 at 42AD4
+584: 42AF0 at 42AF0
+584: 42B04 at 42B02
+584: 42B1E at 42B1E
+584: 42B32 at 42B30
+584: 41EB4 at 42B3A
+
+filter out the self refs
+
+584: 41E96 at 41E94 - pushes to 584
+
+584: 429F0 at 41EB2 - 39 -> 10d54a -> 67292 -> RUGAL WELCOME TO MY MUSEUM ...
+584: 42A1E at 42A1C - 3a -> 10d54a -> 6733e -> TAKUMA WHAT RUGAL WAIT I'VE ...
+584: 42A4C at 42A4A - 3b -> 10d54a -> 6746e -> RUGAL THAT IS CORRECT YOU ARE VERY ...
+584: 42A7A at 42A78 - 3c -> 10d54a -> 675b4 -> ROBERT WHAT COLLECTION 
+584: 42AA8 at 42AA6 - 3d -> 10d54a -> 675ea -> RUGAL LOAK AT THE STATUES AROUND YOU ...
+584: 42AD6 at 42AD4 - 3e -> 10d54a -> 67710 -> RYO YOU YOU ARE MAD ...
+584: 42B04 at 42B02 - 3f -> 10d54a -> 67742 -> RUGAL HA HA HA I'm PERFECTLY ...
+
+584: 42B32 at 42B30 - 40 -> 10d54a
+
+TAKUMA.WHAT.RUGAL.WAIT.I'VE.HEARD.OF.YOUR.NAME.I'VE.HEARD.RUGAL.IS.THE.MERCHANT.OF.DEATH.WHO.DOMINATES.THE.BLACK.MARKET.OF.THE.WORLD
+
+this string needs about 300 bytes of memory to be stored
