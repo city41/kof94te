@@ -162,7 +162,21 @@ rts
 ;; D0.w: char ID
 ;; A0: where to write the string
 writeName:
+cmpi.b #1, $LANGUAGE_ID
+beq writeName_loadEnglishNames
+cmpi.b #3, $LANGUAGE_ID
+beq writeName_loadSpanishNames
+bra writeName_loadJapaneseNames
+
+writeName_loadEnglishNames:
+writeName_loadSpanishNames:
 lea $2CHARID_TO_NAME_STRING_ENES, A1
+bra writeName_loadNamesDone
+
+writeName_loadJapaneseNames:
+lea $2CHARID_TO_NAME_STRING_JA, A1
+
+writeName_loadNamesDone:
 add.w D0, D0 ; double for offsetting
 add.w D0, D0 ; quadruple for offsetting
 movea.l (A1, D0.w), A1 ; offset into the table based on character id

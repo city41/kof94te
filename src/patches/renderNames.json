@@ -1,0 +1,137 @@
+{
+  "description": "Render out the names of characters in Japanese then English",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "symbols": {
+    "VRAMADDR": "3c0000",
+    "VRAMRW": "3c0002",
+    "VRAMMOD": "3c0004",
+    "IN_RENDER_NAMES_FLAG": "10f7c0",
+    "MOVEM_STORAGE": "10f7c2",
+    "BLACK_BG_SI": "153",
+    "NAMES_SI": "168"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "render static image routine",
+      "subroutine": true,
+      "symbol": "RENDER_STATIC_IMAGE",
+      "patchAsm": "renderStaticImage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "black bg image",
+      "subroutine": true,
+      "symbol": "BLACK_BG_IMG",
+      "patchAsm": "black_bg.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Char ID -> crom name string table, usable in English and Spanish",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_ENES",
+      "patchAsm": "charIdToNameStringEnEs.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Char ID -> crom name string table, usable in Japanese",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_JA",
+      "patchAsm": "charIdToNameStringJa.asm"
+    },
+    {
+        "type": "prom",
+        "description": "name rendering routine",
+        "subroutine": true,
+        "symbol": "RENDER_NAMES_ROUTINE",
+        "patchAsm": "renderNames.asm"
+    },
+    {
+      "type": "prom",
+      "descrition": "jump to init after team init is done",
+      "address": "13703c",
+      "subroutine": true,
+      "patchAsm": [
+        "move.b #1, $IN_RENDER_NAMES_FLAG",
+        "jsr $2RENDER_NAMES_ROUTINE",
+        "move.l #$37046, $108584",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "13369c",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $336a6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_RENDER_NAMES_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $337a6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1336a2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "1337cc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $337d6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_RENDER_NAMES_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $338d6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1337d2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a28",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $33a32, A0",
+        "adda.w D2, A0",
+        ";;; end restore what was clobbered",
+        "move.b $IN_RENDER_NAMES_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $33b32, A0 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "133a2e",
+      "patchAsm": ["nop"]
+    }
+  ]
+}

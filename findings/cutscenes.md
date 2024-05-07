@@ -665,11 +665,19 @@ You can also set it to Spanish on a Japanese region system using the soft dip
 ## team cutscenes
 They speak in this order during cutscene2. Using this to figure out the character names in Japanese
 
+Rugal: 001f 4565 0070 001f
+
 ### Brazil
+Mature
+Rugal
 Ralf
+Rugal
 Clark
+Rugal
 Ralf
 Heidern
+(but I think Ralf and Heidern are encased in the same script)
+Rugal
 
 ### China
 Chin
@@ -688,11 +696,29 @@ Benimaru
 Kyo
 (Goro doesn't talk)
 
+### Japan cutscene3/ending
+Rugal
+Benimaru
+Rugal
+Rugal
+Benimaru
+---
+Benimaru
+Kyo
+Daimon
+Kyo
+
+
 ### USA
 Brian
 Lucky
 Brian
 (Heavy doesn't talk)
+---- ending
+Lucky
+Brian
+Lucky
+Heavy D!
 
 ### Korea
 Kim
@@ -716,3 +742,12 @@ Yuri
 Mai
 Yuri
 King
+
+
+## Missing Japanese Names
+
+
+KYO - 0x4566,0x1c,0x4562
+DAIMON - 0x459E,0x4561,0x18,0x23
+HEIDERN - 0x7,0x4561,0x45b1,0x1f,0x23
+HEAVY -  0xf,0xb,0x4447,0x70,0x4990

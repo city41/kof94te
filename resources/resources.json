@@ -55,6 +55,10 @@
       {
         "template": "empty_chosen_avatar.asm.hbr",
         "dest": "../src/patches/empty_chosen_avatar.asm"
+      },
+      {
+        "template": "black_bg.asm.hbr",
+        "dest": "../src/patches/black_bg.asm"
       }
     ]
   },
@@ -128,6 +132,12 @@
     {
       "name": "empty_chosen_avatar",
       "imageFile": "./empty_chosen_avatar.png"
+    },
+    {
+      "name": "black_bg",
+      "imageFile": "./black_bg.png",
+        "x": 0,
+        "y": 0
     }
   ]
 }

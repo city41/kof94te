@@ -1031,6 +1031,13 @@
     },
     {
       "type": "prom",
+      "description": "Char ID -> crom name string table, usable in Japanese",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_JA",
+      "patchAsm": "charIdToNameStringJa.asm"
+    },
+    {
+      "type": "prom",
       "description": "cutscene 2 custom dialog hook",
       "subroutine": true,
       "address": "1443ea",
