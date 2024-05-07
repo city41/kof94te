@@ -648,19 +648,7 @@ It is doing all of the same writes to 108584 and 10d54a, I suspect the differenc
 584: 42AD6 at 42AD4 - 3e -> 10d54a -> 645FE -> RYO
 584: 42B04 at 42B02 - 3f -> 10d54a -> RUGAL
 
-## Languages
 
-108836 is the language ID
-0 - Japanese
-1 - English
-2 - Japanese again (not sure how...)
-3 - Spanish
-
-Japanese is only available if the region is Japanese
-
-English/Spanish are available in US/Euro regions, controlled by a soft dip. If Spanish is chosen, 105d93 will be 1.
-
-You can also set it to Spanish on a Japanese region system using the soft dip
 
 ## team cutscenes
 They speak in this order during cutscene2. Using this to figure out the character names in Japanese

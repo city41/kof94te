@@ -32,6 +32,8 @@ move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 ;; and now take Takuma's dialog and load it in
 cmpi.b #1, $LANGUAGE_ID
 beq loadTakumaEnglish
+cmpi.b #2, $LANGUAGE_ID
+beq loadTakumaEnglish
 cmpi.b #3, $LANGUAGE_ID
 beq loadTakumaSpanish
 bra loadTakumaJapanese
@@ -75,6 +77,8 @@ move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 ;; and now take Robert's dialog and load it in
 cmpi.b #1, $LANGUAGE_ID
 beq loadRobertEnglish
+cmpi.b #2, $LANGUAGE_ID
+beq loadRobertEnglish
 cmpi.b #3, $LANGUAGE_ID
 beq loadRobertSpanish
 bra loadRobertJapanese
@@ -117,6 +121,8 @@ move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Ryo's dialog and load it in
 cmpi.b #1, $LANGUAGE_ID
+beq loadRyoEnglish
+cmpi.b #2, $LANGUAGE_ID
 beq loadRyoEnglish
 cmpi.b #3, $LANGUAGE_ID
 beq loadRyoSpanish
@@ -163,6 +169,8 @@ rts
 ;; A0: where to write the string
 writeName:
 cmpi.b #1, $LANGUAGE_ID
+beq writeName_loadEnglishNames
+cmpi.b #2, $LANGUAGE_ID
 beq writeName_loadEnglishNames
 cmpi.b #3, $LANGUAGE_ID
 beq writeName_loadSpanishNames
