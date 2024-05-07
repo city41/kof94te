@@ -352,20 +352,9 @@ skipPlayer2Cursor:
 
 ;;;;;;;;;;; END LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; put the disclaimer string up
-;;; [w:fix layer location][l: string pointer][w: countdown]
-move.w #$7024, $FIX_STRING_DATA         ; set up the version string's fix write location
-move.l #$2HACK_ISNT_FINISHED_YET, $FIX_STRING_DATA + 2 ; set up the pointer to the version string
-move.w #300, $FIX_STRING_DATA + 6      ; countdown
-
-move.w #$7025, $MORE_STRING_DATA         ; set up the version string's fix write location
-move.l #$2MORE_INFO, $MORE_STRING_DATA + 2 ; set up the pointer to the version string
-move.w #300, $MORE_STRING_DATA + 6      ; countdown
-
-;;; put the version string up
-move.w #$7026, $VSTRING_DATA         ; set up the version string's fix write location
-move.l #$2VERSION, $VSTRING_DATA + 2 ; set up the pointer to the version string
-move.w #300, $VSTRING_DATA + 6      ; countdown
+;; get read to either show or hide the version string, based on if start is pressed during main
+move.w #$7057, $VSTRING_DATA ; load where in the fix layer it should go
+move.l #$2VERSION, $VSTRING_DATA + 2
 
 rts
 

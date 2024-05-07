@@ -207,7 +207,7 @@ function getVersionStringPatch(): StringPromPatch {
   return {
     type: "prom",
     string: true,
-    value: `     v${version}                           `,
+    value: `KOF94TE v${version} neorh.mattgreer.dev`,
     symbol: "VERSION",
   };
 }

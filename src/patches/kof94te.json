@@ -24,8 +24,6 @@
 
     "WINNING_TEAM_LIST": "10f7c0",
     "VSTRING_DATA": "10f7d0",
-    "FIX_STRING_DATA": "10f7e0",
-    "MORE_STRING_DATA": "10f7f0",
     "PLAY_MODE": "10f7fc",
     "P1_CUR_INPUT": "10f800",
     "P1_CURSOR_X": "10f802",
@@ -631,31 +629,26 @@
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
-        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne skipCharSelectMain",
 
+        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
-        ";;; now put fix strings onto the screen",
-        "lea $VSTRING_DATA, A6",
-        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
-        "lea $FIX_STRING_DATA, A6",
-        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
-        "lea $MORE_STRING_DATA, A6",
-        "jsr $2STRING_TO_FIX_LAYER_ROUTINE",
+        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
         "bra done",
 
         "skipCharSelectMain:",
         "cmpi.b #1, $IN_THANK_YOU_FLAG",
         "bne skipThankYouMain",
+        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
         "jsr $2THANK_YOU_MAIN",
+        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
         "skipThankYouMain:",
 
         "done:",
         ";;; restore what got clobbered",
         "jsr $6536",
         ";;; end replace",
-        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
         "rts"
       ]
     },

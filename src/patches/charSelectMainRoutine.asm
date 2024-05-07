@@ -1,3 +1,19 @@
+
+btst #0, $10fdac ; is p1 start down?
+bne renderVersionString
+bra clearVersionString
+
+renderVersionString:
+move.b #1, $VSTRING_DATA + 6
+bra doVersionString
+
+clearVersionString:
+move.b #0, $VSTRING_DATA + 6
+
+doVersionString:
+lea $VSTRING_DATA, A6
+jsr $2STRING_TO_FIX_LAYER_ROUTINE
+
 btst #3, $100000 ; is the Rugal debug dip turned on?
 beq takeRugalOffGrid
 jsr $2PUT_RUGAL_ON_GRID
