@@ -1,5 +1,5 @@
-;; charIdToNameStringEnEs.asm
-;; --------------------------
+;; charIdToNameStringJa.asm
+;; ------------------------
 ;; This is a table from character id to name as a crom string
 ;; this is used to form the dynamic dialog of cutscene 2.
 ;;
@@ -10,7 +10,7 @@
 ;;
 ;; used in cutscene2Dialog.asm
 ;;
-;; In this table the names are in English, used for both English and Spanish
+;; in this table the names are in Japanese
 
 dc.l $57c4c ; Heidern
 dc.l $652c6 ; Ralf

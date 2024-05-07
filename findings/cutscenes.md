@@ -638,15 +638,17 @@ It is doing all of the same writes to 108584 and 10d54a, I suspect the differenc
 584: 42AD6 at 42AD4 - 3e -> 10d54a -> 6AE06 -> RYO ESTA LOCO
 584: 42B04 at 42B02 - 3f -> 10d54a -> 6AE26 -> RUGAL JA JA JA SIEMPRE ESTOY NORMAL...
 
-0433E2: jsr     ($fee,PC) ; ($443d2)
-0443D2: moveq   #$0, D0
-0443D4: move.b  ($836,A5), D0 <---- this is probably the language ID
-0443D8: add.w   D0, D0
-0443DA: add.w   D0, D0
-0443DC: lea     $62864.l, A0
-0443E2: movea.l (A0,D0.w), A0
-0443E6: move.w  ($554a,A5), D0
-0443EA: add.w   D0, D0
+## In Japanese
+
+584: 429F0 at 41EB2 - 39 -> 10d54a -> RUGAL 
+584: 42A1E at 42A1C - 3a -> 10d54a -> 6440C -> TAKUMA
+584: 42A4C at 42A4A - 3b -> 10d54a -> RUGAL
+584: 42A7A at 42A78 - 3c -> 10d54a -> 64552 -> ROBERT
+584: 42AA8 at 42AA6 - 3d -> 10d54a -> RUGAL
+584: 42AD6 at 42AD4 - 3e -> 10d54a -> 645FE -> RYO
+584: 42B04 at 42B02 - 3f -> 10d54a -> RUGAL
+
+## Languages
 
 108836 is the language ID
 0 - Japanese
@@ -654,9 +656,63 @@ It is doing all of the same writes to 108584 and 10d54a, I suspect the differenc
 2 - Japanese again (not sure how...)
 3 - Spanish
 
-
-## Languages
-
 Japanese is only available if the region is Japanese
 
 English/Spanish are available in US/Euro regions, controlled by a soft dip. If Spanish is chosen, 105d93 will be 1.
+
+You can also set it to Spanish on a Japanese region system using the soft dip
+
+## team cutscenes
+They speak in this order during cutscene2. Using this to figure out the character names in Japanese
+
+### Brazil
+Ralf
+Clark
+Ralf
+Heidern
+
+### China
+Chin
+Kensou
+Athena
+
+### Japan
+(Saisu hunched over)
+Benimaru 
+Kyo ! --- Dad! You're my dad!!
+Father
+
+Rugal seated (regular cutscene)
+Benimaru
+Benimaru
+Kyo
+(Goro doesn't talk)
+
+### USA
+Brian
+Lucky
+Brian
+(Heavy doesn't talk)
+
+### Korea
+Kim
+Choi
+Chang
+Kim
+
+### Italy
+Andy
+Terry
+Joe
+
+### Mexico
+Takuma
+Robert
+Ryo
+
+### England
+Mai
+Yuri
+Mai
+Yuri
+King

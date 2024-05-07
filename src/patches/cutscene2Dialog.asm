@@ -45,7 +45,7 @@ lea $6aac8, A1
 bra loadTakumaDialog
 
 loadTakumaJapanese:
-lea $6734c, A1 ; TODO: actually load Japanese, this is English as a placeholder
+lea $64414, A1
 bra loadTakumaDialog
 
 loadTakumaDialog:
@@ -88,7 +88,7 @@ lea $6acfe, A1
 bra loadRobertDialog
 
 loadRobertJapanese:
-lea $675c2, A1 ; TODO: actually load Japanese, this is English as a placeholder
+lea $6455c, A1
 bra loadRobertDialog
 
 loadRobertDialog:
@@ -131,7 +131,7 @@ lea $6ae0e, A1
 bra loadRyoDialog
 
 loadRyoJapanese:
-lea $67718, A1 ; TODO: actually load Japanese, this is English as a placeholder
+lea $64606, A1
 bra loadRyoDialog
 
 loadRyoDialog:
