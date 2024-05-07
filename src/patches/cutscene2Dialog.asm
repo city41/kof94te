@@ -30,7 +30,25 @@ bsr writeName ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Takuma's dialog and load it in
+cmpi.b #1, $LANGUAGE_ID
+beq loadTakumaEnglish
+cmpi.b #3, $LANGUAGE_ID
+beq loadTakumaSpanish
+bra loadTakumaJapanese
+
+loadTakumaEnglish:
 lea $6734c, A1
+bra loadTakumaDialog
+
+loadTakumaSpanish:
+lea $6aac8, A1
+bra loadTakumaDialog
+
+loadTakumaJapanese:
+lea $6734c, A1 ; TODO: actually load Japanese, this is English as a placeholder
+bra loadTakumaDialog
+
+loadTakumaDialog:
 bsr writeDialog
 move.w #$ffff, (A0)+ ; end of dialog char
 
@@ -55,7 +73,25 @@ bsr writeName ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Robert's dialog and load it in
+cmpi.b #1, $LANGUAGE_ID
+beq loadRobertEnglish
+cmpi.b #3, $LANGUAGE_ID
+beq loadRobertSpanish
+bra loadRobertJapanese
+
+loadRobertEnglish:
 lea $675c2, A1
+bra loadRobertDialog
+
+loadRobertSpanish:
+lea $6acfe, A1
+bra loadRobertDialog
+
+loadRobertJapanese:
+lea $675c2, A1 ; TODO: actually load Japanese, this is English as a placeholder
+bra loadRobertDialog
+
+loadRobertDialog:
 bsr writeDialog
 move.w #$ffff, (A0)+ ; end of dialog char
 
@@ -80,7 +116,25 @@ bsr writeName ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Ryo's dialog and load it in
+cmpi.b #1, $LANGUAGE_ID
+beq loadRyoEnglish
+cmpi.b #3, $LANGUAGE_ID
+beq loadRyoSpanish
+bra loadRyoJapanese
+
+loadRyoEnglish:
 lea $67718, A1
+bra loadRyoDialog
+
+loadRyoSpanish:
+lea $6ae0e, A1
+bra loadRyoDialog
+
+loadRyoJapanese:
+lea $67718, A1 ; TODO: actually load Japanese, this is English as a placeholder
+bra loadRyoDialog
+
+loadRyoDialog:
 bsr writeDialog
 move.w #$ffff, (A0)+ ; end of dialog char
 

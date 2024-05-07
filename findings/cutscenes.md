@@ -585,7 +585,8 @@ It is just pulling from 108584
 
 The next dialog was moved into 108584 at 42a42, which is also dynamically jumped to
 
-These are all the writes to 108584 to drive cutscene2 for Mexico
+## In English
+These are all the writes to 108584 to drive cutscene2 for Mexico in English
 
 584: 41E6E at 41E6C
 584: 41E82 at 41E82
@@ -617,10 +618,45 @@ filter out the self refs
 584: 42A7A at 42A78 - 3c -> 10d54a -> 675b4 -> ROBERT WHAT COLLECTION 
 584: 42AA8 at 42AA6 - 3d -> 10d54a -> 675ea -> RUGAL LOAK AT THE STATUES AROUND YOU ...
 584: 42AD6 at 42AD4 - 3e -> 10d54a -> 67710 -> RYO YOU YOU ARE MAD ...
-584: 42B04 at 42B02 - 3f -> 10d54a -> 67742 -> RUGAL HA HA HA I'm PERFECTLY ...
+584: 42B04 at 42B02 - 3f -> 10d54a -> 67742 -> RUGAL HA HA HA I'M PERFECTLY ...
 
 584: 42B32 at 42B30 - 40 -> 10d54a
 
 TAKUMA.WHAT.RUGAL.WAIT.I'VE.HEARD.OF.YOUR.NAME.I'VE.HEARD.RUGAL.IS.THE.MERCHANT.OF.DEATH.WHO.DOMINATES.THE.BLACK.MARKET.OF.THE.WORLD
 
 this string needs about 300 bytes of memory to be stored
+
+### In Spanish
+
+It is doing all of the same writes to 108584 and 10d54a, I suspect the difference is a base address register
+
+584: 429F0 at 41EB2 - 39 -> 10d54a -> 6A9E0 -> RUGAL BIENVENIDA A MI MUSEO DE BELLAS...
+584: 42A1E at 42A1C - 3a -> 10d54a -> 6AABA -> TAKUMA ?QUE? ES RUGAL ME ACUERDO...
+584: 42A4C at 42A4A - 3b -> 10d54a -> 6ABD2 -> RUGAL ASI ES BUENO SABESU BIEN...
+584: 42A7A at 42A78 - 3c -> 10d54a -> 6ACF0 -> ROBERT ?QUE? ?COLECCION?
+584: 42AA8 at 42AA6 - 3d -> 10d54a -> 6AD26 -> RUGAL iVEAN LAS ESTATUES DE ALREDEDOR...
+584: 42AD6 at 42AD4 - 3e -> 10d54a -> 6AE06 -> RYO ESTA LOCO
+584: 42B04 at 42B02 - 3f -> 10d54a -> 6AE26 -> RUGAL JA JA JA SIEMPRE ESTOY NORMAL...
+
+0433E2: jsr     ($fee,PC) ; ($443d2)
+0443D2: moveq   #$0, D0
+0443D4: move.b  ($836,A5), D0 <---- this is probably the language ID
+0443D8: add.w   D0, D0
+0443DA: add.w   D0, D0
+0443DC: lea     $62864.l, A0
+0443E2: movea.l (A0,D0.w), A0
+0443E6: move.w  ($554a,A5), D0
+0443EA: add.w   D0, D0
+
+108836 is the language ID
+0 - Japanese
+1 - English
+2 - Japanese again (not sure how...)
+3 - Spanish
+
+
+## Languages
+
+Japanese is only available if the region is Japanese
+
+English/Spanish are available in US/Euro regions, controlled by a soft dip. If Spanish is chosen, 105d93 will be 1.
