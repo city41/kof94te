@@ -12,7 +12,10 @@ move.b #0, $VSTRING_DATA + 6
 
 doVersionString:
 lea $VSTRING_DATA, A6
+;; need to save A5 as the game's rng relies on it
+movem.l A5, $MOVEM_STORAGE
 jsr $2STRING_TO_FIX_LAYER_ROUTINE
+movem.l $MOVEM_STORAGE, A5
 
 btst #3, $100000 ; is the Rugal debug dip turned on?
 beq takeRugalOffGrid
