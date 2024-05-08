@@ -18,6 +18,9 @@ bra done
 
 doWait:
 jsr $2THANK_YOU_WAIT_ROUTINE
+subi.w #1, $THANK_YOU_TIMEOUT_COUNTDOWN
+cmpi.w #0, $THANK_YOU_TIMEOUT_COUNTDOWN
+beq exitWait
 
 ;; see if the player pressed A to go to credits
 cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
@@ -30,7 +33,8 @@ move.b $BIOS_P2CHANGE, D1
 checkForExit:
 btst #$4, D1
 beq done
-;; player pressed A to exit, we need to wait a bit before removing
+exitWait:
+;; player pressed A to exit (or it timed out), we need to wait a bit before removing
 ;; otherwise there will be a blip of the ending showing
 move.b #$THANK_YOU_PHASE_REMOVE_DELAY, $THANK_YOU_HACK_PHASE
 move.b #0, $CHAR_SELECT_COUNTER
@@ -55,6 +59,7 @@ cmpi.w #34, $THANK_YOU_FADEIN_BG_COUNT
 bne checkIfFadeInBgDone_done
 ;; the fade in is done, move on
 move.b #$THANK_YOU_PHASE_WAIT, $THANK_YOU_HACK_PHASE
+move.w #1400, $THANK_YOU_TIMEOUT_COUNTDOWN
 
 checkIfFadeInBgDone_done:
 rts
