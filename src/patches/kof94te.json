@@ -921,6 +921,7 @@
       "patchAsm": "setupCharacterColors.asm"
     },
     {
+      "skip": true,
       "type": "prom",
       "description": "Dont set character palettes during char select",
       "address": "1032e4",

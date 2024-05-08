@@ -157,7 +157,11 @@ the hack does the same writes
 4452C at 4452C actually at 44524
 4458E at 4458E actually at 44586
 // then fades away
+// these writes are after it is done fading
+// and showing the attract mode
 3256C at 32574
 388FE at 325C0
 38936 at 38906
 38A8C at 38A8C
+
+Using wildJumps to go straight to 443fc (start credits) does not cause a corrupted group.
