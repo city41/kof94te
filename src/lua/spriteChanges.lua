@@ -18,7 +18,7 @@ SCB3 = 0x8200
 SCB4 = 0x8400
 VRAM_SIZE = 0x8600
 
-SPRITE_INDEX = 362
+SPRITE_INDEX = 181
 
 function getSpriteControlBlock()
 	if next_vram_index < FIX_LAYER then
@@ -82,11 +82,8 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteControlBlock() == "scb1/even" and tag == "P1  TEAM" then
-			-- print(string.format("%s: value: %x at PC:%s", getSpriteControlBlock(), data, cpu.state["PC"]))
-			if getSpriteIndex() == 362 then
-				print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
-			end
+		if getSpriteControlBlock() == "scb1/even" and getSpriteIndex() == 181 and data == 0x3f90 then
+			print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
 		end
 
 		vram[next_vram_index] = data

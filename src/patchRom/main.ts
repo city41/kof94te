@@ -21,6 +21,7 @@ import {
 import { doPromPatch } from "./doPromPatch";
 import { injectCromTiles } from "./injectCromTiles";
 import { clearFixTiles } from "./clearFixTiles";
+import { injectTitleBadgeTiles } from "./injectTitleBadgeTiles";
 
 function usage() {
   console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
@@ -331,13 +332,23 @@ async function main(patchJsonPaths: string[]) {
     throw new Error("MAME_ROM_DIR env variable is not set");
   }
 
-  const cromBuffers = await injectCromTiles();
-  const fixBuffer = await clearFixTiles();
+  try {
+    const cromBuffers = await injectCromTiles();
+    const finalCromBuffers = await injectTitleBadgeTiles(cromBuffers);
+    const fixBuffer = await clearFixTiles();
 
-  const writePath = path.resolve(mameDir, "kof94.zip");
-  await writePatchedZip(flippedBackPatch, cromBuffers, fixBuffer, writePath);
+    const writePath = path.resolve(mameDir, "kof94.zip");
+    await writePatchedZip(
+      flippedBackPatch,
+      finalCromBuffers,
+      fixBuffer,
+      writePath
+    );
 
-  console.log("wrote patched rom to", writePath);
+    console.log("wrote patched rom to", writePath);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 const patchJsonInputPaths = process.argv.slice(2);

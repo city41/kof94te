@@ -136,8 +136,8 @@
     {
       "name": "black_bg",
       "imageFile": "./black_bg.png",
-        "x": 0,
-        "y": 0
+      "x": 0,
+      "y": 0
     }
   ]
 }
