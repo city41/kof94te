@@ -29,17 +29,20 @@ async function main(pRomPath: string): Promise<void> {
 
   let collected = [];
 
-  for (let i = 0; i < data.length; i += 2) {
+  for (let i = 0x155956; i < 0x15a85e; i += 2) {
     const word = (data[i] << 8) | data[i + 1];
+    const cchar = cromChars[word] ?? "u";
 
-    if (cromChars[word] !== undefined) {
-      collected.push(cromChars[word]);
+    if (cchar.toUpperCase() === cchar && cchar !== "\n") {
+      collected.push(cchar);
     } else {
       if (collected.length > 0) {
         const address = i - collected.length * 2;
         console.log(`${address.toString(16)}: ${collected.join("")}`);
+        collected = [];
       }
-      collected = [];
+
+      console.log(`${i.toString(16)}: ${cchar === "\n" ? "<nl>" : cchar}`);
     }
   }
 }

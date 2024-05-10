@@ -25,7 +25,6 @@
     "WINNING_TEAM_LIST": "10f7c0",
     "VSTRING_DATA": "10f7d0",
     "PLAY_MODE": "10f7fc",
-    "THANK_YOU_TIMEOUT_COUNTDOWN": "10f7fe",
     "P1_CUR_INPUT": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",
@@ -62,9 +61,7 @@
     "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
-    "READY_TO_EXIT_THANK_YOU_MESSAGE": "10f8e4",
     "IN_CHAR_SELECT_FLAG": "10f8e5",
-    "IN_THANK_YOU_FLAG": "10f8e6",
     "STORE_A0A1A2": "10f8e8",
     "AFTER_SCREEN_ALREADY_SET_LEFT": "10f912",
     "CHAR_SELECT_COUNTER": "10f913",
@@ -82,15 +79,6 @@
 
     "WRAP_UP_COUNTDOWN": "10fb05",
 
-    "THANK_YOU_PHASE_UNKNOWN": "0",
-    "THANK_YOU_PHASE_FADEIN_BG": "1",
-    "THANK_YOU_PHASE_WAIT": "2",
-    "THANK_YOU_PHASE_REMOVE_DELAY": "3",
-    "THANK_YOU_PHASE_DONE": "4",
-    "THANK_YOU_HACK_PHASE": "10fb06",
-
-    "THANK_YOU_FADEIN_BG_COUNT": "10fb08",
-    "THANK_YOU_PRESS_A_COUNT": "10fb0a",
     "STORE_ALL_REGISTERS": "10fb0c",
     "CUTSCENE2_STRING": "10f400",
 
@@ -523,127 +511,17 @@
     },
     {
       "type": "prom",
-      "description": "thank you message table",
-      "subroutine": true,
-      "symbol": "THANK_YOU_MESSAGE_TABLE",
-      "patchAsm": "thankYouMessage.asm"
-    },
-    {
-      "type": "prom",
-      "description": "Take thank you back down",
-      "subroutine": true,
-      "symbol": "TAKE_THANK_YOU_DOWN",
-      "patchAsm": "takeThankYouDown.asm"
-    },
-    {
-      "type": "prom",
-      "description": "thank you fade in bg routine",
-      "subroutine": true,
-      "symbol": "THANK_YOU_FADEIN_BG_ROUTINE",
-      "patchAsm": "thankYouFadeInBg.asm"
-    },
-    {
-      "type": "prom",
-      "description": "thank you wait routine (press A)",
-      "subroutine": true,
-      "symbol": "THANK_YOU_WAIT_ROUTINE",
-      "patchAsm": "thankYouWait.asm"
-    },
-    {
-      "type": "prom",
-      "description": "thank you main",
-      "subroutine": true,
-      "symbol": "THANK_YOU_MAIN",
-      "patchAsm": "thankYouMain.asm"
-    },
-    {
-      "type": "prom",
-      "description": "hook to put up thank you as Rugal says IMPOSSIBLE",
-      "address": "106452",
-      "subroutine": true,
-      "patchAsm": [
-        ";;; restore what was clobbered",
-        "move.b $c6(A4), $c7(A4)",
-        "move.l A1, D7",
-        "cmpi.l #$5596a, D7 ; English",
-        "beq setFlag",
-        "cmpi.l #$57be8, D7 ; Spanish",
-        "beq setFlag",
-        "cmpi.l #$544c8, D7 ; Japanese",
-        "beq setFlag",
-        "bra skipSetFlag",
-        "setFlag:",
-        "move.b #1, $IN_THANK_YOU_FLAG",
-        "move.b #$THANK_YOU_PHASE_FADEIN_BG, $THANK_YOU_HACK_PHASE",
-        "move.w #0, $THANK_YOU_FADEIN_BG_COUNT",
-        "skipSetFlag:",
-        "rts"
-      ]
-    },
-    {
-      "type": "prom",
-      "description": "hook to take down thank you if the player lets the ending elapse",
-      "address": "1443fc",
-      "subroutine": true,
-      "patchAsm": [
-        ";;; restore what was clobbered",
-        "clr.l $104c(A5)",
-        "clr.l $1058(A5)",
-        "move.b #1, $READY_TO_EXIT_THANK_YOU_MESSAGE",
-        "rts"
-      ]
-    },
-    {
-      "type": "prom",
-      "description": "clean up straggling word",
-      "address": "144402",
-      "patchAsm": ["nop"]
-    },
-    {
-      "skip": true,
-      "type": "prom",
-      "description": "hook to exit thank you to credits",
-      "address": "13e630",
-      "subroutine": true,
-      "patchAsm": [
-        "cmpi.b #1, $READY_TO_EXIT_THANK_YOU_MESSAGE",
-        "bne skipExit",
-        "move.l #$443fc, (A4)",
-        "bra done",
-        "skipExit:",
-        ";; do what it normally does",
-        "move.l #$3e636, (A4)",
-        "done:",
-        "rts"
-      ]
-    },
-    {
-      "type": "prom",
-      "description": "credits init: skip clearing the fix layer",
-      "address": "14441a",
-      "patchAsm": ["nop", "nop", "nop"]
-    },
-    {
-      "type": "prom",
       "description": "vblank hook",
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
-        "bne skipCharSelectMain",
+        "bne done",
 
         "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
         "jsr $2CHAR_SELECT_MAIN_ROUTINE",
         "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
         "bra done",
-
-        "skipCharSelectMain:",
-        "cmpi.b #1, $IN_THANK_YOU_FLAG",
-        "bne skipThankYouMain",
-        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
-        "jsr $2THANK_YOU_MAIN",
-        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
-        "skipThankYouMain:",
 
         "done:",
         ";;; restore what got clobbered",
@@ -1043,6 +921,84 @@
       "description": "clean up straggling word",
       "address": "1443f0",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 1, en",
+      "address": "1565da",
+      "patchAsm": "USAendingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, en",
+      "address": "15689a",
+      "patchAsm": "USAendingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, en",
+      "address": "156930",
+      "patchAsm": "USAendingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, en",
+      "address": "156238",
+      "patchAsm": "JapanEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, en",
+      "address": "156378",
+      "patchAsm": "JapanEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, en",
+      "address": "156412",
+      "patchAsm": "JapanEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 1, en",
+      "address": "1574be",
+      "patchAsm": "MexicoEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, en",
+      "address": "1575ba",
+      "patchAsm": "MexicoEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, en",
+      "address": "1576a2",
+      "patchAsm": "MexicoEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, en",
+      "address": "157726",
+      "patchAsm": "MexicoEndingDialog_part4_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, en",
+      "address": "1579f0",
+      "patchAsm": "EnglandEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, en",
+      "address": "157aea",
+      "patchAsm": "EnglandEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, en",
+      "address": "157bc4",
+      "patchAsm": "EnglandEndingDialog_part3_en.asm"
     }
   ]
 }

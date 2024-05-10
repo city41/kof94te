@@ -1,3 +1,15 @@
+move.l A1, D7
+;; A1 is only this at the start of cutscene 3,
+;; it should be a reliable hook
+cmpi.l #$10b9e3, D7
+bne skipCutscene3
+;; this is cutscene 3, switch teams to USA
+move.b #3, $108231
+move.b #3, $108431
+rts
+
+skipCutscene3:
+
 ;; first, which cutscene is this? let's count the number of defeated teams to determine that
 jsr $350f8 ; the built in "count defeated teams" subroutine
 

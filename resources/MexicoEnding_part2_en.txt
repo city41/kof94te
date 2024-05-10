@@ -1,0 +1,10 @@
+# Robert and Ryo crouch on the boat, talking
+# quietly to each other
+ROBERTn
+ UH OH.c
+RYOn
+ HE'S UP TOn
+ SOMETHING.c
+RYOn
+ LET'S GET OUTn
+ OF HERE!e

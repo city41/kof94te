@@ -1,7 +1,15 @@
 export const cromChars: Record<number, string> = {
-  0: ".",
+  0: " ",
+  1: ".",
   2: "'",
+  [0xfffe]: "\n",
+  [0xd]: "\n",
   [0x71]: "-",
+  [0x72]: "·",
+  [0x74]: "c",
+  [0x76]: "?",
+  [0x77]: "!",
+  [0xffff]: "e",
   [0x4983]: "0",
   [0x4984]: "1",
   [0x4985]: "2",
@@ -50,3 +58,10 @@ export const cromChars: Record<number, string> = {
   [0x49e0]: "i",
   [0x49e1]: "u",
 };
+
+export const charsCrom: Record<string, number> = Object.entries(
+  cromChars
+).reduce<Record<string, number>>((accum, e) => {
+  accum[e[1]] = parseInt(e[0]);
+  return accum;
+}, {});
