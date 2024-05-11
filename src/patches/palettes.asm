@@ -149,9 +149,9 @@ dc.w $9731
 dc.w $aa01
 dc.w $ab53
 dc.w $c451
-dc.w $e445
 dc.w $f000
 dc.w $f222
+dc.w $8000
 ;;;;; palette 9 (9) ;;;;;
 dc.w $5f0f
 dc.w $3

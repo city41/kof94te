@@ -90,6 +90,7 @@
     "P1_CURSOR_RIGHT_SI": "178",
     "P2_CURSOR_LEFT_SI": "179",
     "P2_CURSOR_RIGHT_SI": "17a",
+    "QR_SI": "17b",
 
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
@@ -180,6 +181,13 @@
       "subroutine": true,
       "symbol": "TEAM_TO_GREY_OUT_TABLE",
       "patchAsm": "team_to_grey_out_table.asm"
+    },
+    {
+      "type": "prom",
+      "description": "qr image",
+      "subroutine": true,
+      "symbol": "QR_IMAGE",
+      "patchAsm": "qr.asm"
     },
     {
       "type": "prom",

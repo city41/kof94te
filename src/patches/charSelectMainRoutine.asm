@@ -1,14 +1,24 @@
 
 btst #0, $10fdac ; is p1 start down?
-bne renderVersionString
-bra clearVersionString
+bne renderVersion
+bra clearVersion
 
-renderVersionString:
+renderVersion:
 move.b #1, $VSTRING_DATA + 6
+;;; now show the qr image
+move.w #0, D5 ; image data offset
+move.w #$QR_SI, D6
+lea $2QR_IMAGE, A6
+jsr $2RENDER_STATIC_IMAGE
 bra doVersionString
 
-clearVersionString:
+clearVersion:
 move.b #0, $VSTRING_DATA + 6
+;;; now clear the qr image
+move.w #$QR_SI, D6
+move.w #2, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
 
 doVersionString:
 lea $VSTRING_DATA, A6

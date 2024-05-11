@@ -1,6 +1,6 @@
 ; given a range of sprites, sets all their heights to zero
-; D6: starting sprite index (si)
-; D7: how many sprites to truncate (sc)
+; D6.w: starting sprite index (si)
+; D7.w: how many sprites to truncate (sc)
 
 move.w #1, $3c0004 ; VRAMMOD=1
 

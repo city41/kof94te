@@ -3,9 +3,9 @@
 ;
 ; inputs
 ; ------
-; D5: offset into the data to render one image out of a list
-; D6: starting sprite index (si)
-; A6: address of static image (sa)
+; D5.w: offset into the data to render one image out of a list
+; D6.w: starting sprite index (si)
+; A6.l: address of static image (sa)
 
 ;;;;;;; SCB1: load sprite tiles
 lea $3c0002, A1    ; VRAMRW
