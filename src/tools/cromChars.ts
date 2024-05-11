@@ -6,7 +6,7 @@ export const cromChars: Record<number, string> = {
   [0xd]: "\n",
   [0x71]: "-",
   [0x72]: "·",
-  [0x74]: "c",
+  [0x74]: ",",
   [0x76]: "?",
   [0x77]: "!",
   [0xffff]: "e",
@@ -55,7 +55,7 @@ export const cromChars: Record<number, string> = {
   [0x49dd]: "Ñ",
   [0x49de]: "+",
   [0x49df]: "¿",
-  [0x49e0]: "i",
+  [0x49e0]: "¡",
   [0x49e1]: "u",
 };
 

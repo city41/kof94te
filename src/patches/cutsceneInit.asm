@@ -4,8 +4,8 @@ move.l A1, D7
 cmpi.l #$10b9e3, D7
 bne skipCutscene3
 ;; this is cutscene 3, switch teams to USA
-move.b #3, $108231
-move.b #3, $108431
+move.b #2, $108231
+move.b #2, $108431
 rts
 
 skipCutscene3:

@@ -2,7 +2,7 @@
 ;;; source
 ; # King, Yuri and Mai watch the carrier blow up
 ; # 250 bytes of space
-; KINGn
+; MAIn
 ;  WHAT THE HECK?c
 ; YURIn
 ;  THAT WAS THEn
@@ -13,10 +13,9 @@
 ;  WOW!e
 
 ;;; crom result
-dc.w $4997 ; K
+dc.w $4999 ; M
+dc.w $498d ; A
 dc.w $4995 ; I
-dc.w $499a ; N
-dc.w $4993 ; G
 dc.w $d ; 
 
 dc.w $0 ;  

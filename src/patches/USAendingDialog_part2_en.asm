@@ -1,7 +1,7 @@
 ;;; crom string
 ;;; source
 ; BRIANn
-;  YEAH! ANYWAY...n
+;  YEAH! ANYWAY···n
 ;  LET'S GO GET Ac
 ;  BEER.e
 
@@ -26,9 +26,9 @@ dc.w $49a5 ; Y
 dc.w $49a3 ; W
 dc.w $498d ; A
 dc.w $49a5 ; Y
-dc.w $1 ; .
-dc.w $1 ; .
-dc.w $1 ; .
+dc.w $72 ; ·
+dc.w $72 ; ·
+dc.w $72 ; ·
 dc.w $d ; 
 
 dc.w $0 ;  

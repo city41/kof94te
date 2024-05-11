@@ -1,7 +1,7 @@
 ;;; crom string
 ;;; source
 ; # Robert and Ryo run away from Takuma
-;  GIVE US A BREAK!c
+;  GIVE US A BREAK!e
 
 ;;; crom result
 dc.w $0 ;  
@@ -21,5 +21,4 @@ dc.w $4991 ; E
 dc.w $498d ; A
 dc.w $4997 ; K
 dc.w $77 ; !
-dc.w $fffe ; 
-
+dc.w $ffff ; e

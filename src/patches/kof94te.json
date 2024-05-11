@@ -942,6 +942,24 @@
     },
     {
       "type": "prom",
+      "description": "New USA ending, part 1, es",
+      "address": "15881e",
+      "patchAsm": "USAendingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, es",
+      "address": "158aaa",
+      "patchAsm": "USAendingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, es",
+      "address": "158b36",
+      "patchAsm": "USAendingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
       "description": "New Japan ending, part 1, en",
       "address": "156238",
       "patchAsm": "JapanEndingDialog_part1_en.asm"
@@ -957,6 +975,24 @@
       "description": "New Japan ending, part 3, en",
       "address": "156412",
       "patchAsm": "JapanEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, es",
+      "address": "15845e",
+      "patchAsm": "JapanEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, es",
+      "address": "158588",
+      "patchAsm": "JapanEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, es",
+      "address": "158656",
+      "patchAsm": "JapanEndingDialog_part3_es.asm"
     },
     {
       "type": "prom",
@@ -984,6 +1020,30 @@
     },
     {
       "type": "prom",
+      "description": "New Mexico ending, part 1, es",
+      "address": "159652",
+      "patchAsm": "MexicoEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, es",
+      "address": "15974c",
+      "patchAsm": "MexicoEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, es",
+      "address": "1597fc",
+      "patchAsm": "MexicoEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, es",
+      "address": "15987e",
+      "patchAsm": "MexicoEndingDialog_part4_es.asm"
+    },
+    {
+      "type": "prom",
       "description": "New England ending, part 1, en",
       "address": "1579f0",
       "patchAsm": "EnglandEndingDialog_part1_en.asm"
@@ -999,6 +1059,24 @@
       "description": "New England ending, part 3, en",
       "address": "157bc4",
       "patchAsm": "EnglandEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, es",
+      "address": "159bae",
+      "patchAsm": "EnglandEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, es",
+      "address": "159cb2",
+      "patchAsm": "EnglandEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, es",
+      "address": "159d6e",
+      "patchAsm": "EnglandEndingDialog_part3_es.asm"
     }
   ]
 }
