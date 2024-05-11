@@ -3,9 +3,20 @@ move.l A1, D7
 ;; it should be a reliable hook
 cmpi.l #$10b9e3, D7
 bne skipCutscene3
-;; this is cutscene 3, switch teams to USA
-move.b #2, $108231
-move.b #2, $108431
+btst #0, $PLAY_MODE
+beq cutscene3_skipPlayer1
+lea $P1_CHOSEN_CHAR0, A0
+bra doChooseEndingTeam
+
+cutscene3_skipPlayer1:
+lea $P2_CHOSEN_CHAR2, A0
+
+doChooseEndingTeam:
+bsr chooseEndingTeam ; the ending team is left in D0
+;; only the playing player needs this done
+;; but just do both for simplicity
+move.b D0, $108231
+move.b D0, $108431
 rts
 
 skipCutscene3:
@@ -97,3 +108,105 @@ move.w D7, (A1, D6.w) ; place the y word into our own dynamic table
 lea $WINNING_TEAM_LIST, A0
 suba.l D0, A0
 rts
+
+;;;;;; SUBROUTINES
+
+;;; chooseEndingTeam
+;;; chooses from England (7), Mexico (6), USA (3) or Japan (2) for the ending
+;;; depending on which teams *don't* have members that the player
+;;; chose
+;;;
+;;; parameters
+;;; ----
+;;; A0: pointer to chosen team list for the player (word sized entries)
+;;;
+;;; return
+;;; ----
+;;; D0.b: the chosen ending team id
+chooseEndingTeam:
+
+;;; first get a random byte
+clr.w D0
+movem.l A0, $MOVEM_STORAGE ; game's rng uses A0
+jsr $2582 ; call the game's rng, it leaves a random byte in D0
+movem.l $MOVEM_STORAGE, A0
+andi.b #3, D0 ; chop the chosen byte down to 0-3
+
+
+chooseEndingTeam_testTeam:
+lea $2ENDING_TEAM_ID_TO_MEMBERS, A1
+move.w D0, D1
+add.w D1, D1 ; quadruple it for long offsetting
+add.w D1, D1 ; quadruple it for long offsetting
+adda.w D1, A1 ; offset to the current team we are examining
+move.l (A1), D1
+movea.l D1, A1
+
+;; player's member 1
+move.b (A0), D1
+;; versus team member 1
+cmp.b (A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 1
+;; versus team member 2
+cmp.b $1(A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 1
+;; versus team member 3
+cmp.b $2(A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 2
+move.b $2(A0), D1
+;; versus team member 1
+cmp.b (A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 2
+;; versus team member 2
+cmp.b $1(A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 2
+;; versus team member 3
+cmp.b $2(A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 3
+move.b $4(A0), D1
+;; versus team member 1
+cmp.b (A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 3
+;; versus team member 2
+cmp.b $1(A1), D1
+beq chooseEndingTeam_tryNextTeam
+
+;; player's member 3
+;; versus team member 3
+cmp.b $2(A1), D1
+beq chooseEndingTeam_tryNextTeam
+bra chooseEndingTeam_returnTeam
+
+chooseEndingTeam_tryNextTeam:
+addi.w #1, D0
+cmpi.w #4, D0
+bne chooseEndingTeam_tryNextTeam_skipWrap
+move.w #0, D0 ; need to wrap back around
+chooseEndingTeam_tryNextTeam_skipWrap:
+bra chooseEndingTeam_testTeam ; and try again with the next team
+
+chooseEndingTeam_returnTeam:
+;;; if we got here, we found a team that will work
+lea $2ENDING_TEAM_INDEX_TO_ID, A0
+adda.w D0, A0 ; offset to the chosen team
+move.b (A0), D0
+rts
+
+
+
+
+

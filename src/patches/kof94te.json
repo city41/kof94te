@@ -884,6 +884,28 @@
     },
     {
       "type": "prom",
+      "subroutine": true,
+      "symbol": "ENDING_TEAM_INDEX_TO_ID",
+      "patchAsm": [
+        "dc.b 7 ; England",
+        "dc.b 6 ; Mexico",
+        "dc.b 3 ; USA",
+        "dc.b 2 ; Japan"
+      ]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "ENDING_TEAM_ID_TO_MEMBERS",
+      "patchAsm": [
+        "dc.l $534dc + (7 * 4)  ; England",
+        "dc.l $534dc + (6 * 4)  ; Mexico",
+        "dc.l $534dc + (3 * 4)  ; USA",
+        "dc.l $534dc + (2 * 4)  ; Japan"
+      ]
+    },
+    {
+      "type": "prom",
       "description": "Inits cutscene 1 and 2 (and 3?)",
       "address": "13511e",
       "subroutine": true,
