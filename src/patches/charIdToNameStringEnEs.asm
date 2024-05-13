@@ -8,7 +8,7 @@
 ;; each name ends with a new line character, so that can be used
 ;; to account for each name being a different length
 ;;
-;; used in cutscene2Dialog.asm
+;; used in cutscene2Dialog.asm and cutscene3Dialog.asm
 ;;
 ;; In this table the names are in English, used for both English and Spanish
 
@@ -18,9 +18,9 @@ dc.l $65442 ; Clark
 dc.l $55db0 ; Athena
 dc.l $55d60 ; Kensou
 dc.l $55dfe ; Chin
-dc.l $5626a ; Kyo
-dc.l $56378 ; Benimaru
-dc.l $562d8 ; Daimon
+dc.l $56412 ; Kyo
+dc.l $560ea ; Benimaru
+dc.l $56334 ; Daimon
 dc.l $5678e ; Heavy D
 dc.l $56818 ; Lucky
 dc.l $5689a ; Brian

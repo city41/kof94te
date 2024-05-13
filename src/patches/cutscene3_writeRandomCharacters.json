@@ -1,0 +1,42 @@
+{
+  "description": "Have cutscene 3 write out Joe, Yuri and Heavy, this depends on chosing team USA",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "write the character ids",
+      "address": "13c1a2",
+      "subroutine": true,
+      "patchAsm": [
+        "movem.l D6, $10fa12",
+        "move.l A6, D6",
+        "cmpi.l #$3e7a2, D6",
+        "bne checkCharacterTwo",
+        "move.w #$11, $70(A1)",
+        "bra done",
+        "checkCharacterTwo:",
+        "cmpi.l #$3e7aa, D6",
+        "bne doCharacterThree",
+        "move.w #$15, $70(A1)",
+        "bra done",
+        "doCharacterThree:",
+        "move.w #$9, $70(A1)",
+        "done:",
+        ";;;; restore what was clobbered",
+        "adda.w #2, A6",
+        "move.w (A6)+, $18(A1)",
+        "movem.l $10fa12, D6",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13c1a8",
+      "patchAsm": ["nop"]
+    }
+  ]
+}

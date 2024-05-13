@@ -8,7 +8,7 @@
 ;; each name ends with a new line character, so that can be used
 ;; to account for each name being a different length
 ;;
-;; used in cutscene2Dialog.asm
+;; used in cutscene2Dialog.asm and cutscene3Dialog.asm
 ;;
 ;; in this table the names are in Japanese
 
@@ -20,7 +20,7 @@ dc.l $6362c; Kensou
 dc.l $63546; Chin
 dc.l $54a18; Kyo
 dc.l $63764; Benimaru
-dc.l $54a56; Daimon -- not found yet, setting to NL so it remains empty
+dc.l $54a56; Daimon
 dc.l $54dd0; Heavy D
 dc.l $63cae; Lucky
 dc.l $63bb4; Brian

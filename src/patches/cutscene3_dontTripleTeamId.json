@@ -1,0 +1,11 @@
+{
+  "description": "exploratory hack trying to figure out cutscene 3",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "nop out tripling of the team id",
+      "address": "13c180",
+      "patchAsm": ["nop", "nop", "nop"]
+    }
+  ]
+}

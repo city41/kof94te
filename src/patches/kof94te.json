@@ -80,7 +80,7 @@
     "WRAP_UP_COUNTDOWN": "10fb05",
 
     "STORE_ALL_REGISTERS": "10fb0c",
-    "CUTSCENE2_STRING": "10f400",
+    "CUTSCENE23_STRING": "10f400",
 
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
@@ -940,6 +940,20 @@
     },
     {
       "type": "prom",
+      "description": "Write a character name for cutscene dialogs",
+      "subroutine": true,
+      "symbol": "WRITE_NAME_ROUTINE",
+      "patchAsm": "writeName.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Write a line from dialog data for cutscene dialogs",
+      "subroutine": true,
+      "symbol": "WRITE_DIALOG_ROUTINE",
+      "patchAsm": "writeDialog.asm"
+    },
+    {
+      "type": "prom",
       "description": "cutscene 2 custom dialog hook",
       "subroutine": true,
       "address": "1443ea",
@@ -951,6 +965,14 @@
       "description": "clean up straggling word",
       "address": "1443f0",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 3 custom dialog hook",
+      "subroutine": true,
+      "address": "13ea8e",
+      "symbol": "CUTSCENE3_DIALOG",
+      "patchAsm": "cutscene3Dialog.asm"
     },
     {
       "type": "prom",
@@ -1107,6 +1129,39 @@
       "description": "New England ending, part 3, es",
       "address": "159d6e",
       "patchAsm": "EnglandEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 3: make Joe, Yuri and Heavy the three characters. Assumes team USA is the set team ID",
+      "address": "13c1a2",
+      "subroutine": true,
+      "patchAsm": [
+        "movem.l D6, $10fa12",
+        "move.l A6, D6",
+        "cmpi.l #$3e7a2, D6",
+        "bne checkCharacterTwo",
+        "move.w #$11, $70(A1)",
+        "bra done",
+        "checkCharacterTwo:",
+        "cmpi.l #$3e7aa, D6",
+        "bne doCharacterThree",
+        "move.w #$15, $70(A1)",
+        "bra done",
+        "doCharacterThree:",
+        "move.w #$9, $70(A1)",
+        "done:",
+        ";;;; restore what was clobbered",
+        "adda.w #2, A6",
+        "move.w (A6)+, $18(A1)",
+        "movem.l $10fa12, D6",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13c1a8",
+      "patchAsm": ["nop"]
     }
   ]
 }

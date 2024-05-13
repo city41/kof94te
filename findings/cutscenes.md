@@ -468,7 +468,6 @@ team Mexico's text is generic and could be used as a template
 1677b0: .THE.BATTLE
 1677c8: .STAGE
 
-
 ## dialog rendering
 
 A dialog sequence is loaded into A1
@@ -486,17 +485,17 @@ move.l A0, ($c0,A4), where A0=67292
 
 This happens in subroutine 443d2
 
-0443D2: 7000                moveq   #$0, D0        ; clear D0
-0443D4: 102D 0836           move.b  ($836,A5), D0  ; D0 = *108836
-0443D8: D040                add.w   D0, D0         ; double D0
-0443DA: D040                add.w   D0, D0         ; quadruple D0
-0443DC: 41F9 0006 2864      lea     $62864.l, A0   ; load the first dialog text address
-0443E2: 2070 0000           movea.l (A0,D0.w), A0  ; jump forward based on team id?
-0443E6: 302D 554A           move.w  ($554a,A5), D0 ; D0 = *10d54a
-0443EA: D040                add.w   D0, D0         ; double D0
-0443EC: D040                add.w   D0, D0         ; quadruple D0
-0443EE: 2070 0000           movea.l (A0,D0.w), A0  ; move forward in A0 based on team id?
-0443F2: 4E75                rts
+0443D2: 7000 moveq #$0, D0 ; clear D0
+0443D4: 102D 0836 move.b ($836,A5), D0 ; D0 = *108836
+0443D8: D040 add.w D0, D0 ; double D0
+0443DA: D040 add.w D0, D0 ; quadruple D0
+0443DC: 41F9 0006 2864 lea $62864.l, A0 ; load the first dialog text address
+0443E2: 2070 0000 movea.l (A0,D0.w), A0 ; jump forward based on team id?
+0443E6: 302D 554A move.w ($554a,A5), D0 ; D0 = *10d54a
+0443EA: D040 add.w D0, D0 ; double D0
+0443EC: D040 add.w D0, D0 ; quadruple D0
+0443EE: 2070 0000 movea.l (A0,D0.w), A0 ; move forward in A0 based on team id?
+0443F2: 4E75 rts
 
 tracing through cutscene2
 
@@ -508,7 +507,7 @@ it loads a word from 10d54a, 9, quadruples it to $24, and then goes even further
 
 65172 is "CONGRATULATIONS ON YOUR VICTORY..." that Mature says
 
-hmmm, 108836 is only written to once very early and never again. 
+hmmm, 108836 is only written to once very early and never again.
 
 10d54a.w writes
 
@@ -525,36 +524,35 @@ writes during cutscene2
 10D54A: 3E at 42AE2
 10D54A: 3F at 42B10
 
-
 The write of 9 at 41E4C seems to be setting up the Mature scene, which is used for all teams
 
 For team Mexico at least, this routine is what writes 39
 
 and this routine is dynamically jumped to at 32b2e (jsr (A0))
 
-0429F0: 022D 00FE 0653      andi.b  #$fe, ($653,A5)
-0429F6: 3B7C 0039 554A      move.w  #$39, ($554a,A5)
-0429FC: 4EBA 042E           jsr     ($42e,PC) ; ($42e2c)
-042A00: 4E71                nop
-042A02: 2B7C 0004 2A0A 0584 move.l  #$42a0a, ($584,A5)
-042A0A: 082D 0000 0653      btst    #$0, ($653,A5)
-042A10: 6700 F06A           beq     $41a7c
-042A14: 2B7C 0004 2A1E 0584 move.l  #$42a1e, ($584,A5)
-042A1C: 4E75                rts
+0429F0: 022D 00FE 0653 andi.b #$fe, ($653,A5)
+0429F6: 3B7C 0039 554A move.w #$39, ($554a,A5)
+0429FC: 4EBA 042E jsr ($42e,PC) ; ($42e2c)
+042A00: 4E71 nop
+042A02: 2B7C 0004 2A0A 0584 move.l #$42a0a, ($584,A5)
+042A0A: 082D 0000 0653 btst #$0, ($653,A5)
+042A10: 6700 F06A beq $41a7c
+042A14: 2B7C 0004 2A1E 0584 move.l #$42a1e, ($584,A5)
+042A1C: 4E75 rts
 
 $39 is almost certainly what sets up the Mexico dialog
 
 For Brazil
 
-042132: 022D 00FE 0653      andi.b  #$fe, ($653,A5)
+042132: 022D 00FE 0653 andi.b #$fe, ($653,A5)
 042138: 3B7C 000A 554A      move.w  #$a, ($554a,A5)
 04213E: 4EBA 0CEC           jsr     ($cec,PC) ; ($42e2c)
-042142: 4E71                nop
-042144: 2B7C 0004 214C 0584 move.l  #$4214c, ($584,A5)
-04214C: 082D 0000 0653      btst    #$0, ($653,A5)
-042152: 6700 F928           beq     $41a7c
-042156: 2B7C 0004 2160 0584 move.l  #$42160, ($584,A5)
-04215E: 4E75                rts
+042142: 4E71 nop
+042144: 2B7C 0004 214C 0584 move.l #$4214c, ($584,A5)
+04214C: 082D 0000 0653 btst #$0, ($653,A5)
+042152: 6700 F928 beq $41a7c
+042156: 2B7C 0004 2160 0584 move.l #$42160, ($584,A5)
+04215E: 4E75 rts
 
 So yeah, pretty sure these are the routines that setup the dialog of cutscene2 based on which team the the player is using
 
@@ -586,6 +584,7 @@ It is just pulling from 108584
 The next dialog was moved into 108584 at 42a42, which is also dynamically jumped to
 
 ## In English
+
 These are all the writes to 108584 to drive cutscene2 for Mexico in English
 
 584: 41E6E at 41E6C
@@ -615,7 +614,7 @@ filter out the self refs
 584: 429F0 at 41EB2 - 39 -> 10d54a -> 67292 -> RUGAL WELCOME TO MY MUSEUM ...
 584: 42A1E at 42A1C - 3a -> 10d54a -> 6733e -> TAKUMA WHAT RUGAL WAIT I'VE ...
 584: 42A4C at 42A4A - 3b -> 10d54a -> 6746e -> RUGAL THAT IS CORRECT YOU ARE VERY ...
-584: 42A7A at 42A78 - 3c -> 10d54a -> 675b4 -> ROBERT WHAT COLLECTION 
+584: 42A7A at 42A78 - 3c -> 10d54a -> 675b4 -> ROBERT WHAT COLLECTION
 584: 42AA8 at 42AA6 - 3d -> 10d54a -> 675ea -> RUGAL LOAK AT THE STATUES AROUND YOU ...
 584: 42AD6 at 42AD4 - 3e -> 10d54a -> 67710 -> RYO YOU YOU ARE MAD ...
 584: 42B04 at 42B02 - 3f -> 10d54a -> 67742 -> RUGAL HA HA HA I'M PERFECTLY ...
@@ -640,7 +639,7 @@ It is doing all of the same writes to 108584 and 10d54a, I suspect the differenc
 
 ## In Japanese
 
-584: 429F0 at 41EB2 - 39 -> 10d54a -> RUGAL 
+584: 429F0 at 41EB2 - 39 -> 10d54a -> RUGAL
 584: 42A1E at 42A1C - 3a -> 10d54a -> 6440C -> TAKUMA
 584: 42A4C at 42A4A - 3b -> 10d54a -> RUGAL
 584: 42A7A at 42A78 - 3c -> 10d54a -> 64552 -> ROBERT
@@ -648,14 +647,14 @@ It is doing all of the same writes to 108584 and 10d54a, I suspect the differenc
 584: 42AD6 at 42AD4 - 3e -> 10d54a -> 645FE -> RYO
 584: 42B04 at 42B02 - 3f -> 10d54a -> RUGAL
 
-
-
 ## team cutscenes
+
 They speak in this order during cutscene2. Using this to figure out the character names in Japanese
 
 Rugal: 001f 4565 0070 001f
 
 ### Brazil
+
 Mature
 Rugal
 Ralf
@@ -668,13 +667,15 @@ Heidern
 Rugal
 
 ### China
+
 Chin
 Kensou
 Athena
 
 ### Japan
+
 (Saisu hunched over)
-Benimaru 
+Benimaru
 Kyo ! --- Dad! You're my dad!!
 Father
 
@@ -685,19 +686,22 @@ Kyo
 (Goro doesn't talk)
 
 ### Japan cutscene3/ending
+
 Rugal
 Benimaru
 Rugal
 Rugal
 Benimaru
+
 ---
+
 Benimaru
 Kyo
 Daimon
 Kyo
 
-
 ### USA
+
 Brian
 Lucky
 Brian
@@ -709,33 +713,35 @@ Lucky
 Heavy D!
 
 ### Korea
+
 Kim
 Choi
 Chang
 Kim
 
 ### Italy
+
 Andy
 Terry
 Joe
 
 ### Mexico
+
 Takuma
 Robert
 Ryo
 
 ### England
+
 Mai
 Yuri
 Mai
 Yuri
 King
 
-
 ## Missing Japanese Names
-
 
 KYO - 0x4566,0x1c,0x4562
 DAIMON - 0x459E,0x4561,0x18,0x23
 HEIDERN - 0x7,0x4561,0x45b1,0x1f,0x23
-HEAVY -  0xf,0xb,0x4447,0x70,0x4990
+HEAVY - 0xf,0xb,0x4447,0x70,0x4990

@@ -25,8 +25,8 @@ bra doneLoadChar3
 loadPlayer2Char3:
 move.b $P2_CHOSEN_CHAR0, D0 ; load p2 char id
 doneLoadChar3:
-lea $CUTSCENE2_STRING, A0
-bsr writeName ; write the name of the character
+lea $CUTSCENE23_STRING, A0
+jsr $2WRITE_NAME_ROUTINE ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Takuma's dialog and load it in
@@ -51,10 +51,10 @@ lea $64414, A1
 bra loadTakumaDialog
 
 loadTakumaDialog:
-bsr writeDialog
+jsr $2WRITE_DIALOG_ROUTINE
 move.w #$ffff, (A0)+ ; end of dialog char
 
-lea $CUTSCENE2_STRING, A0 ; rewind back to the correct address
+lea $CUTSCENE23_STRING, A0 ; rewind back to the correct address
 movem.l $MOVEM_STORAGE, D0/D1/A1
 rts
 
@@ -70,8 +70,8 @@ bra doneLoadChar2
 loadPlayer2Char2:
 move.b $P2_CHOSEN_CHAR1, D0
 doneLoadChar2:
-lea $CUTSCENE2_STRING, A0
-bsr writeName ; write the name of the character
+lea $CUTSCENE23_STRING, A0
+jsr $2WRITE_NAME_ROUTINE ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Robert's dialog and load it in
@@ -96,10 +96,10 @@ lea $6455c, A1
 bra loadRobertDialog
 
 loadRobertDialog:
-bsr writeDialog
+jsr $2WRITE_DIALOG_ROUTINE
 move.w #$ffff, (A0)+ ; end of dialog char
 
-lea $CUTSCENE2_STRING, A0 ; rewind back to the correct address
+lea $CUTSCENE23_STRING, A0 ; rewind back to the correct address
 movem.l $MOVEM_STORAGE, D0/D1/A1
 rts
 
@@ -115,8 +115,8 @@ bra doneLoadChar1
 loadPlayer2Char1:
 move.b $P2_CHOSEN_CHAR2, D0
 doneLoadChar1:
-lea $CUTSCENE2_STRING, A0
-bsr writeName ; write the name of the character
+lea $CUTSCENE23_STRING, A0
+jsr $2WRITE_NAME_ROUTINE ; write the name of the character
 move.w #$000d, (A0)+ ; NL (writeName does not write the NL)
 
 ;; and now take Ryo's dialog and load it in
@@ -141,10 +141,10 @@ lea $64606, A1
 bra loadRyoDialog
 
 loadRyoDialog:
-bsr writeDialog
+jsr $2WRITE_DIALOG_ROUTINE
 move.w #$ffff, (A0)+ ; end of dialog char
 
-lea $CUTSCENE2_STRING, A0 ; rewind back to the correct address
+lea $CUTSCENE23_STRING, A0 ; rewind back to the correct address
 movem.l $MOVEM_STORAGE, D0/D1/A1
 rts
 
@@ -157,64 +157,3 @@ add.w D0, D0
 movea.l (A0,D0.w), A0
 rts
 
-
-;;; SUBROUTINES
-
-;; writeName
-;; writes the name for the given char id to the given location
-;; does not write the new line character
-;; 
-;; parameters
-;; D0.w: char ID
-;; A0: where to write the string
-writeName:
-cmpi.b #1, $LANGUAGE_ID
-beq writeName_loadEnglishNames
-cmpi.b #2, $LANGUAGE_ID
-beq writeName_loadEnglishNames
-cmpi.b #3, $LANGUAGE_ID
-beq writeName_loadSpanishNames
-bra writeName_loadJapaneseNames
-
-writeName_loadEnglishNames:
-writeName_loadSpanishNames:
-lea $2CHARID_TO_NAME_STRING_ENES, A1
-bra writeName_loadNamesDone
-
-writeName_loadJapaneseNames:
-lea $2CHARID_TO_NAME_STRING_JA, A1
-
-writeName_loadNamesDone:
-add.w D0, D0 ; double for offsetting
-add.w D0, D0 ; quadruple for offsetting
-movea.l (A1, D0.w), A1 ; offset into the table based on character id
-
-writeName_copyChar:
-move.w (A1)+, D0      ; load one crom character
-cmpi.w #$d, D0        ; is this the new line char?
-beq writeName_done    ; it is, we have written the entire name
-move.w D0, (A0)+      ; it is not the new line, so copy the char over
-bra writeName_copyChar; and keep going
-
-writeName_done:
-rts
-
-
-;; writeDialog
-;; writes the dialog at the given address into the given address
-;; stops when it hits the end dialog word ($ffff), but does not write it
-;;
-;; parameters
-;; A0: where to write the string
-;; A1: where to write from
-;; uses
-;; D0
-writeDialog:
-move.w (A1)+, D0        ; load one crom character
-cmpi.w #$ffff, D0       ; is this the end of dialog char?
-beq writeDialog_done    ; it is, we have written the entire dialog
-move.w D0, (A0)+        ; it is not the end of dialog, so copy the char over
-bra writeDialog         ; and keep going
-
-writeDialog_done:
-rts

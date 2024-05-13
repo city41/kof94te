@@ -1,0 +1,32 @@
+{
+  "description": "exploratory hack trying to figure out cutscene 3",
+  "patches": [
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "nop out the first byte write",
+      "address": "13c1a2",
+      "patchAsm": ["nop", "nop"]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "nop out the second byte write",
+      "address": "13c1a6",
+      "patchAsm": ["nop", "nop"]
+    },
+    {
+      "skip": true,
+      "type": "prom",
+      "description": "nop out the third byte write",
+      "address": "13c1aa",
+      "patchAsm": ["nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "nop out the fourth byte write",
+      "address": "13c1ae",
+      "patchAsm": ["nop", "nop"]
+    }
+  ]
+}
