@@ -15,8 +15,10 @@ doChooseEndingTeam:
 bsr chooseEndingTeam ; the ending team is left in D0
 ;; only the playing player needs this done
 ;; but just do both for simplicity
-move.b D0, $108231
-move.b D0, $108431
+; move.b D0, $108231
+; move.b D0, $108431
+move.b #2, $108231
+move.b #2, $108431
 rts
 
 skipCutscene3:

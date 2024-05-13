@@ -155,7 +155,7 @@ doFourthLine:
 ;; team member line
 clr.w D0
 btst #0, $PLAY_MODE ; is player 1 playing?
-beq loadPlayer2Char1; no? go do player 2
+beq loadPlayer2Char3; no? go do player 2
 move.b $P1_CHOSEN_CHAR2, D0 ; load p1 char id
 bra doneLoadChar3
 loadPlayer2Char3:
