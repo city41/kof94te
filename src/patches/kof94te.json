@@ -523,6 +523,8 @@
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
+        ";; set the auto animation speed for the cursors",
+        "move.w #$200, $3C0006",
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne done",
 

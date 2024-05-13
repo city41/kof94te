@@ -36,9 +36,6 @@ move.b #0, $P2_NUM_CHOSEN_CHARS
 
 jsr $2LOAD_P_A_L_E_T_T_E_S
 
-;; set the auto animation speed for the cursors
-move.w #$200, $3C0006
-
 ; load the character grid image onto the screen
 move.w #$GRID_IMAGE_SI, D6 ; set sprite index
 move.w #0, D5              ; offset into tile data
