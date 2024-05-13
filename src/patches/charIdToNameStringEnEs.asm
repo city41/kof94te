@@ -20,7 +20,7 @@ dc.l $55d60 ; Kensou
 dc.l $55dfe ; Chin
 dc.l $56412 ; Kyo
 dc.l $560ea ; Benimaru
-dc.l $56334 ; Daimon
+dc.l $563cc ; Daimon
 dc.l $5678e ; Heavy D
 dc.l $56818 ; Lucky
 dc.l $5689a ; Brian

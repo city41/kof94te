@@ -968,166 +968,184 @@
     },
     {
       "type": "prom",
-      "description": "cutscene 3 custom dialog hook",
-      "subroutine": true,
-      "address": "13ea8e",
-      "symbol": "CUTSCENE3_DIALOG",
-      "patchAsm": "cutscene3Dialog.asm"
-    },
-    {
-      "type": "prom",
       "description": "New USA ending, part 1, en",
-      "address": "1565da",
+      "symbol": "USA_ENDING_PART1_EN",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part1_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 2, en",
-      "address": "15689a",
+      "symbol": "USA_ENDING_PART2_EN",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part2_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 3, en",
-      "address": "156930",
+      "symbol": "USA_ENDING_PART3_EN",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part3_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 1, es",
-      "address": "15881e",
+      "symbol": "USA_ENDING_PART1_ES",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part1_es.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 2, es",
-      "address": "158aaa",
+      "symbol": "USA_ENDING_PART2_ES",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part2_es.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 3, es",
-      "address": "158b36",
+      "symbol": "USA_ENDING_PART3_ES",
+      "subroutine": true,
       "patchAsm": "USAendingDialog_part3_es.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 1, en",
-      "address": "156238",
+      "symbol": "JPN_ENDING_PART1_EN",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part1_en.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 2, en",
-      "address": "156378",
+      "symbol": "JPN_ENDING_PART2_EN",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part2_en.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 3, en",
-      "address": "156412",
+      "symbol": "JPN_ENDING_PART3_EN",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part3_en.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 1, es",
-      "address": "15845e",
+      "symbol": "JPN_ENDING_PART1_ES",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part1_es.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 2, es",
-      "address": "158588",
+      "symbol": "JPN_ENDING_PART2_ES",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part2_es.asm"
     },
     {
       "type": "prom",
       "description": "New Japan ending, part 3, es",
-      "address": "158656",
+      "symbol": "JPN_ENDING_PART3_ES",
+      "subroutine": true,
       "patchAsm": "JapanEndingDialog_part3_es.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 1, en",
-      "address": "1574be",
+      "symbol": "MEX_ENDING_PART1_EN",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part1_en.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 2, en",
-      "address": "1575ba",
+      "symbol": "MEX_ENDING_PART2_EN",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part2_en.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 3, en",
-      "address": "1576a2",
+      "symbol": "MEX_ENDING_PART3_EN",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part3_en.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 4, en",
-      "address": "157726",
+      "symbol": "MEX_ENDING_PART4_EN",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part4_en.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 1, es",
-      "address": "159652",
+      "symbol": "MEX_ENDING_PART1_ES",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part1_es.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 2, es",
-      "address": "15974c",
+      "symbol": "MEX_ENDING_PART2_ES",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part2_es.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 3, es",
-      "address": "1597fc",
+      "symbol": "MEX_ENDING_PART3_ES",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part3_es.asm"
     },
     {
       "type": "prom",
       "description": "New Mexico ending, part 4, es",
-      "address": "15987e",
+      "symbol": "MEX_ENDING_PART4_ES",
+      "subroutine": true,
       "patchAsm": "MexicoEndingDialog_part4_es.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 1, en",
-      "address": "1579f0",
+      "symbol": "ENG_ENDING_PART1_EN",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part1_en.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 2, en",
-      "address": "157aea",
+      "symbol": "ENG_ENDING_PART2_EN",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part2_en.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 3, en",
-      "address": "157bc4",
+      "symbol": "ENG_ENDING_PART3_EN",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part3_en.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 1, es",
-      "address": "159bae",
+      "symbol": "ENG_ENDING_PART1_ES",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part1_es.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 2, es",
-      "address": "159cb2",
+      "symbol": "ENG_ENDING_PART2_ES",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part2_es.asm"
     },
     {
       "type": "prom",
       "description": "New England ending, part 3, es",
-      "address": "159d6e",
+      "symbol": "ENG_ENDING_PART3_ES",
+      "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part3_es.asm"
     },
     {
@@ -1143,6 +1161,14 @@
       "description": "clean up straggling word",
       "address": "13c1a8",
       "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 3 custom dialog hook",
+      "subroutine": true,
+      "address": "13ea8e",
+      "symbol": "CUTSCENE3_ENDING_DIALOG",
+      "patchAsm": "cutscene3EndingDialog.asm"
     }
   ]
 }

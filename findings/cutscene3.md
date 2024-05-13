@@ -399,6 +399,11 @@ there it is! it writes to these four bytes three times!
 
 The game hits the routine at 3ea8e to load the next chunk of dialog.
 
+a0: 54306, d0: 0
+a0: 54306, d0: 1A
+a0: 54306, d0: 1C
+a0: 54306, d0: 1E
+a0: 54306, d0: 20
 bp 3ea8e,, { printf "a0: %x, d0: %x",a0,d0; g }
 
 d0 is offset by words, so to get the pointer it's A0 + (D0 \* 2)
@@ -411,12 +416,20 @@ a0: 54306, d0: 2A -> 564a8 = RUGAL Y...YES YOU ARE...
 a0: 54306, d0: 2C -> 56528 = RUGAL A WATERY GRAVE AWAITS...
 a0: 54306, d0: 2E -> 56586 = LUCKY LOOK OUT!...
 
+a0: 54306, d0: 30
+a0: 54306, d0: 32
+a0: 54306, d0: 34
+
 England
 a0: 54306, d0: 0 -> 55956 = RUGAL I...IMPOSSIBLE!...
 a0: 54306, d0: 62 -> 5777e = MAI LOOK! THIS IS THE DOOM...
 a0: 54306, d0: 64 -> 57854 = RUGAL HA HA HA HA!...
 a0: 54306, d0: 66 -> 57960 = RUGAL DIE WITH ME!...
 a0: 54306, d0: 68 -> 5799e = KING OH NO! LET'S GET AWAY
+
+a0: 54306, d0: 6A
+a0: 54306, d0: 6C
+a0: 54306, d0: 6E
 
 Mexico
 a0: 54306, d0: 0 -> 55956 = RUGAL I...IMPOSSIBLE!...
@@ -425,9 +438,18 @@ a0: 54306, d0: 54 -> 57320 = RUGAL TCH.... KYOKU...
 a0: 54306, d0: 56 -> 57410 = RUGAL A WATER GRAVE AWAITS YOU...
 a0: 54306, d0: 58 -> 5746c = RYO WATCH OUT!...
 
+a0: 54306, d0: 5A
+a0: 54306, d0: 5C
+a0: 54306, d0: 5E
+a0: 54306, d0: 60
+
 Japan
 a0: 54306, d0: 0 -> 55956 = RUGAL I...IMPOSSIBLE!...
 a0: 54306, d0: 1A -> 560ea = BENIMARU WE ARE NO. 1!...
 a0: 54306, d0: 1C -> 56130 = RUGAL Y...YES
 a0: 54306, d0: 1E -> 561ae = RUGAL A WATER GRAVE AWAITS YOU
 a0: 54306, d0: 20 -> 561f4 = BENIMARU JESUS! LET'S GET AWAY!
+
+a0: 54306, d0: 22
+a0: 54306, d0: 24
+a0: 54306, d0: 26

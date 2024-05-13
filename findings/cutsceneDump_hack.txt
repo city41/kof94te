@@ -192,43 +192,43 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 156214: <nl>
 156216:  LET'S GET AWAY!
 156236: e
-156238: KYO
-15623e: <nl>
-156240:  THIS TOURNAMENT
-156260: <nl>
-156262:  WAS AN ILLEGAL
-156280: <nl>
-156282:  SCAM.
-15628e: <nl>
-156290: BENIMARU
-1562a0: <nl>
-1562a2:  WHAT DO YOU
-1562ba: <nl>
-1562bc:  MEAN?
-1562c8: <nl>
-1562ca: KYO
-1562d0: <nl>
-1562d2:  IT WAS SETUP BY
-1562f2: <nl>
-1562f4:  RUGAL TO CAPTURE
-156316: <nl>
-156318:  THE WINNERS!
+156238: BENIMARU
+156248: <nl>
+15624a:  ARE YOU GOING?
+156268: <nl>
+15626a: KYO
+156270: <nl>
+156272:  YEAH.
+15627e: <nl>
+156280:  THERE IS STILL
+15629e: <nl>
+1562a0:  A LONG LONG WAY
+1562c0: <nl>
+1562c2:  TO GO····
+1562d6: <nl>
+1562d8: DAIMON
+1562e4: <nl>
+1562e6:  HMM···
+1562f4: <nl>
+1562f6:  THE ROAD IS
+15630e: <nl>
+156310:  ROCKY AHEAD!
+15632a: <nl>
+15632c: KYO
 156332: <nl>
-156334: DAIMON
+156334:  WELL,
 156340: <nl>
-156342:  REALLY? THAT'S
+156342:  I'LL GO AS FAR
 156360: <nl>
-156362:  CRAZY!
-156370: e
-156372: N!
+156362:  AS I CAN!
 156376: e
-156378: BENIMARU·DAIMON
-156396: <nl>
-156398:  SO WHERE ARE
-1563b2: <nl>
-1563b4:  WE HEADED NOW?
-1563d2: e
-1563d4: ON
+156378: BENIMARU
+156388: <nl>
+15638a:  NEXT TIME, I'LL
+1563aa: <nl>
+1563ac:  BE THE WINNER!
+1563ca: <nl>
+1563cc: DAIMON
 1563d8: <nl>
 1563da:  YES! YOU MUST
 1563f6: <nl>
@@ -236,13 +236,15 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 156410: e
 156412: KYO
 156418: <nl>
-15641a:  TO THE NEXT
-156432: <nl>
-156434:  TOURNAMENT!
-15644c: <nl>
-15644e:   COME ON!
-156462: e
-156464: ARE THE
+15641a:  YOU, TOO.
+15642e: <nl>
+156430:  BYE····!
+156442: e
+156444: BRIAN
+15644e: <nl>
+156450:  SEE?
+15645a: <nl>
+15645c:  WE ARE THE
 156472: <nl>
 156474:  STRONGEST
 156488: <nl>
@@ -278,33 +280,35 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1565d8: e
 1565da: LUCKY
 1565e4: <nl>
-1565e6:  DID YOU HEAR?
-156602: <nl>
-156604:  THE TOURNAMENT
-156622: <nl>
-156624:  WAS SETUP BY
-15663e: <nl>
-156640:  SOMEONE NAMED
-15665c: <nl>
-15665e:  RUGAL TO TURN
+1565e6:  WELL···
+1565f6: <nl>
+1565f8:  WHAT SHALL WE
+156614: <nl>
+156616:  DO FROM NOW?
+156630: <nl>
+156632: BRIAN
+15663c: <nl>
+15663e:  I'LL GO HOME
+156658: <nl>
+15665a:  AND CONCENTRATE
 15667a: <nl>
-15667c:  THE WINNERS
-156694: <nl>
-156696:  INTO STATUES!
-1566b2: <nl>
-1566b4: BRIAN
-1566be: <nl>
-1566c0:  WHAT?? STATUES??
-1566e2: <nl>
-1566e4:  HOLY COW!
-1566f8: <nl>
-1566fa: HEAVY D!
-15670a: <nl>
-15670c:  WOW. GOOD THING
-15672c: <nl>
-15672e:  WE LOST THEN.
-15674a: e
-15674c: HAT ARE YOU
+15667c:  ON FOOTBALL.
+156696: <nl>
+156698:  I'VE GOT LOTS
+1566b4: <nl>
+1566b6:  OF FANS. I'M A
+1566d4: <nl>
+1566d6:  STAR ATHLETE!
+1566f2: <nl>
+1566f4: LUCKY
+1566fe: <nl>
+156700:  I'LL CONTINUE
+15671c: <nl>
+15671e:  STREET FIGHT-
+15673a: <nl>
+15673c:  ING.
+156746: <nl>
+156748:  WHAT ARE YOU
 156762: <nl>
 156764:  GONNA DO,
 156778: <nl>
@@ -336,19 +340,19 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 156898: e
 15689a: BRIAN
 1568a4: <nl>
-1568a6:  YEAH! ANYWAY···
-1568c6: <nl>
-1568c8:  LET'S GO GET A
-1568e6: <nl>
-1568e8:  BEER.
-1568f4: e
-1568f6: AVE AN INTER-
+1568a6:  OKAY. DONE!
+1568be: <nl>
+1568c0:  CALL ME IF
+1568d6: <nl>
+1568d8:  YOU PLAN TO
+1568f0: <nl>
+1568f2:  HAVE AN INTER-
 156910: <nl>
 156912:  ESTING FIGHT.
 15692e: e
-156930:   SOUNDS GREAT!
-15694e: e
-156950: YEAH. SEE YA!
+156930: LUCKY·HEAVY D!
+15694c: <nl>
+15694e:  YEAH. SEE YA!
 15696a: e
 15696c: KIM
 156972: <nl>
@@ -600,13 +604,11 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1574bc: e
 1574be: TAKUMA
 1574ca: <nl>
-1574cc:  WE LOST!
+1574cc:  UMMM····
 1574de: <nl>
-1574e0:  HOW COULD WE
-1574fa: <nl>
-1574fc:  LOSE?
-157508: e
-15750a: Y STRONG
+1574e0:  THERE ARE STILL
+157500: <nl>
+157502:  MANY STRONG
 15751a: <nl>
 15751c:  FIGHTERS
 15752e: <nl>
@@ -620,21 +622,17 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1575b8: e
 1575ba: ROBERT
 1575c6: <nl>
-1575c8:  UH OH.
-1575d6: <nl>
-1575d8: RYO
-1575de: <nl>
-1575e0:  HE'S UP TO
-1575f6: <nl>
-1575f8:  SOMETHING.
-15760e: <nl>
-157610: ROBERT
-15761c: <nl>
-15761e:  LET'S GET OUT
-15763a: <nl>
-15763c:  OF HERE!
-15764e: e
-157650: NDEED.
+1575c8:  HEY, RYO!
+1575dc: <nl>
+1575de:  DON'T YOU FEEL
+1575fc: <nl>
+1575fe:  SOMETHING NASTY
+15761e: <nl>
+157620:  IN THE AIR?
+157638: <nl>
+15763a: RYO
+157640: <nl>
+157642:  YES, INDEED.
 15765c: <nl>
 15765e:  WE'D BETTER GET
 15767e: <nl>
@@ -642,19 +640,19 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1576a0: e
 1576a2: TAKUMA
 1576ae: <nl>
-1576b0:  WE NEED TO
-1576c6: <nl>
-1576c8:  TRAIN MORE!
-1576e0: e
-1576e2: 'S GO HOME
+1576b0:  OKAY.
+1576bc: <nl>
+1576be:  RYO, ROBERT,
+1576d8: <nl>
+1576da:  LET'S GO HOME
 1576f6: <nl>
 1576f8:  AND TRAIN SOME
 157716: <nl>
 157718:  MORE!
 157724: e
-157726:  GIVE US A BREAK!
-157748: e
-15774a: E
+157726: RYO·ROBERT
+15773a: <nl>
+15773c:  GIVE ME
 15774c: <nl>
 15774e:  A BREAK!
 157760: <nl>
@@ -710,25 +708,23 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1579d6: <nl>
 1579d8:  FROM HERE!
 1579ee: e
-1579f0: MAI
-1579f6: <nl>
-1579f8:  WHAT THE HECK?
-157a16: <nl>
-157a18: YURI
-157a20: <nl>
-157a22:  THAT WAS THE
+1579f0: KING
+1579f8: <nl>
+1579fa:  WHEW!
+157a06: <nl>
+157a08:  WE MANAGED
+157a1e: <nl>
+157a20:  TO SURVIVE···
 157a3c: <nl>
-157a3e:  TOURNAMENT
-157a54: <nl>
-157a56:  ORGANIZER'S
-157a6e: <nl>
-157a70:  CARRIER!
+157a3e: YURI
+157a46: <nl>
+157a48:  DO YOU THINK
+157a62: <nl>
+157a64:  HE'S DEAD?
+157a7a: <nl>
+157a7c: MAI
 157a82: <nl>
-157a84: KING
-157a8c: <nl>
-157a8e:  WOW!
-157a98: e
-157a9a: ···
+157a84:  WHO CARES····
 157aa0: <nl>
 157aa2:  WE'VE GOT WHAT
 157ac0: <nl>
@@ -738,31 +734,29 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 157ae8: e
 157aea: MAI
 157af0: <nl>
-157af2:  ANYWAY···
-157b06: <nl>
-157b08:  I CAN'T BELIEVE
-157b28: <nl>
-157b2a:  WE FOUND THIS
-157b46: <nl>
-157b48:  SCUBA DIVING!
-157b64: <nl>
-157b66: YURI
-157b6e: <nl>
-157b70:  HOW MUCH DO
-157b88: <nl>
-157b8a:  YOU THINK IT'S
-157ba8: <nl>
-157baa:  WORTH?
-157bb8: e
-157bba: EED!
+157af2:  YEAH,
+157afe: <nl>
+157b00:  THIS IS IT!
+157b18: <nl>
+157b1a: KING
+157b22: <nl>
+157b24:  YEAH, ANYWAY
+157b3e: <nl>
+157b40:  IT WAS WORTH
+157b5a: <nl>
+157b5c:  TAKING PART IN
+157b7a: <nl>
+157b7c:  THE TOURNAMENT.
+157b9c: <nl>
+157b9e: YURI
+157ba6: <nl>
+157ba8:  YES, INDEED!
 157bc2: e
-157bc4: KING
-157bcc: <nl>
-157bce:  A LOT!
-157bdc: <nl>
-157bde:  WE'RE RICH!
-157bf6: e
-157bf8: NO PUEDE
+157bc4: HOO HO HO HO···!
+157be4: e
+157be6: RUGAL
+157bf0: <nl>
+157bf2:  ¡ NO PUEDE
 157c08: <nl>
 157c0a:  SER.!
 157c16: <nl>
@@ -948,47 +942,41 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 158440: <nl>
 158442:  ESCAPAREMOS!
 15845c: e
-15845e: KYO
-158464: <nl>
-158466:  ESTE TORNEO
-15847e: <nl>
-158480:  FUE UN
-15848e: <nl>
-158490:  ESTAFA ILEGAL
-1584ac: <nl>
-1584ae: BENIMARU
-1584be: <nl>
-1584c0:  ¿A QUÉ TE
+15845e: BENIMARU
+15846e: <nl>
+158470:  ¿TE VAS?
+158482: <nl>
+158484: KYO
+15848a: <nl>
+15848c:  SÍ,EL GOL
+1584a0: <nl>
+1584a2:  TODAVÍA ESTÁ
+1584bc: <nl>
+1584be:  MUY LEJOS.
 1584d4: <nl>
-1584d6:  REFIERES?
-1584ea: <nl>
-1584ec: KYO
-1584f2: <nl>
-1584f4:  FUE CREADO
-15850a: <nl>
-15850c:  POR RUGAL
-158520: <nl>
-158522:  PARA CAPTURAR
-15853e: <nl>
-158540:  A LOS
-15854c: <nl>
-15854e:  GANADORES
-158562: <nl>
-158564: DAIMON
-158570: <nl>
-158572:  ¡GUAU!
-158580: e
-158582: R.
+1584d6: DAIMON
+1584e2: <nl>
+1584e4:  PERO EL CAMINO
+158502: <nl>
+158504:  ES MUY DURO.
+15851e: <nl>
+158520:  ¿EH?
+15852a: <nl>
+15852c: KYO
+158532: <nl>
+158534:  BUENO,LLEGRÉ
+15854e: <nl>
+158550:  HASTA DONDE
+158568: <nl>
+15856a:  PUEDA LLEGAR.
 158586: e
-158588: BENIMARU·DAIMON
-1585a6: <nl>
-1585a8:  ENTONCES,
-1585bc: <nl>
-1585be:  ¿A DÓNDE
-1585d0: <nl>
-1585d2:  VAMOS AHORA?
-1585ec: e
-1585ee: XIMA
+158588: BENIMARU
+158598: <nl>
+15859a:  YO VOY A MATAR
+1585b8: <nl>
+1585ba:  A LOS RIVALES
+1585d6: <nl>
+1585d8:  POR LA PRÓXIMA
 1585f6: <nl>
 1585f8:  VEZ.
 158602: <nl>
@@ -1002,13 +990,11 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 158654: e
 158656: KYO
 15865c: <nl>
-15865e:  ¡AL PRÓXIMO
-158676: <nl>
-158678:  TORNEO!
-158688: <nl>
-15868a:  ¡VAMOS!
-15869a: e
-15869c: ÓS!
+15865e:  SÍ,USTEDES
+158674: <nl>
+158676:  TAMBIEN ¿NO?
+158690: <nl>
+158692:  ¡ADIÓS!
 1586a2: e
 1586a4: BRIAN
 1586ae: <nl>
@@ -1046,37 +1032,35 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 15881c: e
 15881e: LUCKY
 158828: <nl>
-15882a:  ¿HAS OIDO?
-158840: <nl>
-158842:  EL TORNEO FUE
-15885e: <nl>
-158860:  CREADO POR
-158876: <nl>
-158878:  RUGAL PARA
-15888e: <nl>
-158890:  CONVERTIR
-1588a4: <nl>
-1588a6:  A LOS
-1588b2: <nl>
-1588b4:  GANADORES
-1588c8: <nl>
-1588ca:  EN ESTATUEAS!
-1588e6: <nl>
-1588e8: BRIAN
-1588f2: <nl>
-1588f4:  ¿QUÉ?ESTATUAS?
-158912: <nl>
-158914:  SANTA VACA!
-15892c: <nl>
-15892e: HEAVY D!
-15893e: <nl>
-158940:  GUAU. QUÉ
-158954: <nl>
-158956:  BUENO QUE
-15896a: <nl>
-15896c:  PERDIMOS.
-158980: e
-158982: QUÉ VAS A
+15882a:  Y AHORA ¿QUÉ
+158844: <nl>
+158846:  VAMOS A HACER?
+158864: <nl>
+158866: BRIAN
+158870: <nl>
+158872:  YO VOY A
+158884: <nl>
+158886:  REGRESAR Y ME
+1588a2: <nl>
+1588a4:  DEDICARÉ A
+1588ba: <nl>
+1588bc:  FOTBÓL
+1588ca: <nl>
+1588cc:  AMERICANOPORQUE
+1588ec: <nl>
+1588ee:  SOY JUGADOR
+158906: <nl>
+158908:  POPULAR.
+15891a: <nl>
+15891c: LUCKY
+158926: <nl>
+158928:  YO SIGO SIENDO
+158946: <nl>
+158948:  EL LUCHADOR DE
+158966: <nl>
+158968:  LA CALLE.
+15897c: <nl>
+15897e:  ¡QUÉ VAS A
 158994: <nl>
 158996:  HACER TÚ,
 1589aa: <nl>
@@ -1106,18 +1090,17 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 158aa8: e
 158aaa: BRIAN
 158ab4: <nl>
-158ab6:  ¡SÍ! EN FIN···
-158ad4: <nl>
-158ad6:  VAMOS A TOMAR
-158af2: <nl>
-158af4:  UNA CERVEZA.
-158b0e: e
-158b10: ISÉNME POR
+158ab6:  ASÍ ES.CUANDO
+158ad2: <nl>
+158ad4:  TENGAN ALGO
+158aec: <nl>
+158aee:  INTERESANTE,
+158b08: <nl>
+158b0a:  AVISÉNME POR
 158b24: <nl>
 158b26:  FAVOR.
 158b34: e
-158b36:  ¡SUENA BIEN!
-158b50: e
+158b36: LUCKY·HEAVY D!
 158b52: <nl>
 158b54:  DE ACUERDO.
 158b6c: e
@@ -1365,15 +1348,13 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 159650: e
 159652: TAKUMA
 15965e: <nl>
-159660:  ¡PERDIMOS!
-159676: <nl>
-159678:  ¿CÓMO
-159684: <nl>
-159686:  PODRÍAMOS
-15969a: <nl>
-15969c:  PERDER?
-1596ac: e
-1596ae: UERTES EN EL
+159660:  TODAVÍA EXISTEN
+159680: <nl>
+159682:  MUCHOS
+159690: <nl>
+159692:  LUCHADORES
+1596a8: <nl>
+1596aa:  FUERTES EN EL
 1596c6: <nl>
 1596c8:  MUNDO,TENGO QUE
 1596e8: <nl>
@@ -1385,20 +1366,15 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 15974a: e
 15974c: ROBERT
 159758: <nl>
-15975a:  UH OH.
-159768: <nl>
-15976a: RYO
-159770: <nl>
-159772:  EL ESTA
-159782: <nl>
-159784:  TRAS ALGO.
+15975a:  OYE,RYO,SIENTO
+159778: <nl>
+15977a:  ALGO PELIGROSO.
 15979a: <nl>
-15979c: ROBERT
-1597a8: <nl>
-1597aa:  ¡SALGAMOS
-1597be: <nl>
-1597c0:  DE AQUÍ!
-1597d2: e
+15979c: RYO
+1597a2: <nl>
+1597a4:  SÍ,ES CIERTO.
+1597c0: <nl>
+1597c2:  ES MEJOR
 1597d4: <nl>
 1597d6:  ESCAPARNOS,
 1597ee: <nl>
@@ -1406,19 +1382,17 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1597fa: e
 1597fc: TAKUMA
 159808: <nl>
-15980a:  ¡NECESITAMOS
-159824: <nl>
-159826:  ENTRENAR MÁS!
-159842: e
-159844:  REGRESAR PARA
+15980a:  BUENO,RYO Y
+159822: <nl>
+159824:  ROBERT,VAMOS
+15983e: <nl>
+159840:  A REGRESAR PARA
 159860: <nl>
 159862:  ENTRENARNOS.
 15987c: e
-15987e:  ¡DANOS UN
+15987e: RYO·ROBERT
 159892: <nl>
-159894:   DESCANSO!
-1598aa: e
-1598ac: S!
+159894:  ¡NO ME DIGAS!
 1598b0: <nl>
 1598b2:  ¡DEJANOS
 1598c4: <nl>
@@ -1488,25 +1462,23 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 159b92: <nl>
 159b94:  ¡NOS VAMOS!
 159bac: e
-159bae: MAI
-159bb4: <nl>
-159bb6:  ¿QUE DEMONIOS?
-159bd4: <nl>
-159bd6: YURI
-159bde: <nl>
-159be0:  ESE ERA EL
-159bf6: <nl>
-159bf8:  PORTAAVIONES
-159c12: <nl>
-159c14:  DEL ANFITRIÓN
-159c30: <nl>
-159c32:  DEL TORNEO
-159c48: <nl>
-159c4a: KING
-159c52: <nl>
-159c54:  ¡GUAU!
-159c62: e
-159c64:  YA HEMOS
+159bae: KING
+159bb6: <nl>
+159bb8:  APENAS NOS
+159bce: <nl>
+159bd0:  ESCAPAMOS.
+159be6: <nl>
+159be8: YURI
+159bf0: <nl>
+159bf2:  ¿EL SE MURIÓ?
+159c0e: <nl>
+159c10: MAI
+159c16: <nl>
+159c18:  ¿QUIEN SABE?
+159c32: <nl>
+159c34:  PERO ESTÁ BIEN,
+159c54: <nl>
+159c56:  PORQUE YA HEMOS
 159c76: <nl>
 159c78:  LOGRAMOS LO QUE
 159c98: <nl>
@@ -1514,27 +1486,27 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 159cb0: e
 159cb2: MAI
 159cb8: <nl>
-159cba:  NO PUEDO CREER
+159cba:  ¡ES ESTO!
+159cce: <nl>
+159cd0: KING
 159cd8: <nl>
-159cda:  QUE
-159ce2: <nl>
-159ce4:  ENCONTRÁRAMOS
-159d00: <nl>
-159d02:  ESTO MIENTRAS
-159d1e: <nl>
-159d20:  BUCEÁBAMOS.
-159d38: <nl>
-159d3a: YURI
-159d42: <nl>
-159d44:  ¿CUÁNTO VALE?
-159d60: e
-159d62: O ES.
+159cda:  SÍ,SÍ YA VALE
+159cf6: <nl>
+159cf8:  LA PENA DE
+159d0e: <nl>
+159d10:  PARTICIPAR A
+159d2a: <nl>
+159d2c:  ESTE
+159d36: <nl>
+159d38:  CAMPEONATO.
+159d50: <nl>
+159d52: YURI
+159d5a: <nl>
+159d5c:  ESO ES.
 159d6c: e
-159d6e:  ¡MUCHO!
-159d7e: <nl>
-159d80:  ¡ERAN RICOS!
-159d9a: e
-159d9c: ,JO.
+159d6e: YURI·MAI·KING
+159d88: <nl>
+159d8a:  JO,JO,JO,JO.
 159da4: e
 159da6: u
 159da8: u
@@ -14559,4 +14531,4 @@ $ /home/matt/dev/kof94te/node_modules/.bin/ts-node src/tools/dumpCutsceneText.ts
 1654ce:  WHAT I MEAN!
 1654e8: <nl>
 done
-Done in 1.05s.
+Done in 1.03s.

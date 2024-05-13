@@ -26,4 +26,4 @@ bp 44c1e,, { trace traces/continueSfx.txt,,, { tracelog "D0=%x D1=%x D2=%x D3=%x
 bp 2bcbca,(d0 & ff) == 3c, { trace off }
 
 
-bp 2bba44,, { printf "a6: %x",a6; g }
+bp 3ea8e,, { printf "a6: %x",a6; g }

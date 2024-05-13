@@ -1,11 +1,11 @@
 ;;; crom string
 ;;; source
 ; # King, Yuri and Mai hold up jewelry
-; # 250 bytes of space
 ; MAIn
 ;  ANYWAY···n
 ;  I CAN'T BELIEVEc
 ;  WE FOUND THISn
+;  WHILEn
 ;  SCUBA DIVING!c
 ; YURIn
 ;  HOW MUCH DOn
@@ -62,6 +62,14 @@ dc.w $49a0 ; T
 dc.w $4994 ; H
 dc.w $4995 ; I
 dc.w $499f ; S
+dc.w $d ; 
+
+dc.w $0 ;  
+dc.w $49a3 ; W
+dc.w $4994 ; H
+dc.w $4995 ; I
+dc.w $4998 ; L
+dc.w $4991 ; E
 dc.w $d ; 
 
 dc.w $0 ;  
