@@ -124,6 +124,21 @@ slotMachine_doCharRandomSelect:
 jsr $2CHAR_RANDOM_SELECT
 
 slotMachine_done:
+;; HACK ALERT: this is doing the cursor stuff again
+;; TODO: clean this up
+btst #7, $PLAY_MODE
+bne slotMachine_donePlayerCursor ; if past first fight, never show the player's cursor
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
+cmpi.b #3, D0
+beq slotMachine_doHidePlayerCursor ; all three chosen? no need for a cursor anymore
+
+jsr $2MOVE_CURSOR
+bra slotMachine_donePlayerCursor
+
+slotMachine_doHidePlayerCursor:
+bsr hidePlayerCursor
+
+slotMachine_donePlayerCursor:
 bra done
 ;;;;;;;;;;;;;;;;;;; END SLOT MACHINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 skipSlotMachine:
