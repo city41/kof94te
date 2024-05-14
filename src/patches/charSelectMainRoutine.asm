@@ -50,10 +50,8 @@ cmpi.b #3, $PLAY_MODE
 bne skipVersusRandomStage ; nope not versus
 ;; this is versus mode, randomize the team ids to get a random stage
 andi.b #$7, D6 ; only keep the bottom three bits, that is our team id
-; move.b D6, $108231 ; set team 1 to this random id
-; move.b D6, $108431 ; and team 2 too
-move.b #1, $108231 ; set team 1 to this random id
-move.b #1, $108431 ; and team 2 too
+move.b D6, $108231 ; set team 1 to this random id
+move.b D6, $108431 ; and team 2 too
 skipVersusRandomStage:
 
 cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
