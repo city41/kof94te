@@ -1,0 +1,23 @@
+{
+  "description": "Change the bytes that determine who is where in attract mode portraits",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "Leaders - Athena,Heidern,Heavy,Kim,Yuri",
+      "address": "139d80",
+      "patchAsm": ["dc.b $3", "dc.b $0", "dc.b $9", "dc.b $c", "dc.b $15"]
+    },
+    {
+      "type": "prom",
+      "description": "Seconds - Lucky,Sie,Ralf,Mai,Chang",
+      "address": "139d86",
+      "patchAsm": ["dc.b $a", "dc.b $4", "dc.b $1", "dc.b $16", "dc.b $d"]
+    },
+    {
+      "type": "prom",
+      "description": "thirds - Clark,Choi,King,Brian,Chin",
+      "address": "139d8c",
+      "patchAsm": ["dc.b $2", "dc.b $e", "dc.b $17", "dc.b $b", "dc.b $5"]
+    }
+  ]
+}
