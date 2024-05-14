@@ -34,16 +34,17 @@ teamRandomSelect_saveTeamCharacter:
 move.b (A3), (A2) ; save the member of the team as chosen
 move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), $1(A2)
 
-tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
-; don't play the sfx during slot machine, as kof94 can only play one sfx at a time
-bne teamRandomSelect_skipSoundEffect ; don't play the sfx during slot machine
-move.b #$60, $320000  ; play the sound effect
-teamRandomSelect_skipSoundEffect:
 
 adda.w #1, A3 ; move to the next character
 adda.w #2, A2 ; move to the next save slot
 
 dbra D4, teamRandomSelect_saveTeamCharacter
+
+tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+; don't play the sfx during slot machine, as kof94 can only play one sfx at a time
+bne teamRandomSelect_skipSoundEffect ; don't play the sfx during slot machine
+move.b #$60, $320000  ; play the sound effect
+teamRandomSelect_skipSoundEffect:
 
 
 teamRandomSelect_done:

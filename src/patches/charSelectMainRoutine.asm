@@ -1,4 +1,3 @@
-
 btst #0, $10fdac ; is p1 start down?
 bne renderVersion
 bra clearVersion

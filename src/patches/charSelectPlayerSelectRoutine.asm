@@ -108,6 +108,15 @@ adda.w D0, A2   ; move forward based on how many characters are chosen
 move.b (A2), D1 ; pull the chosen char back out
 ;; saveChar will take D1 (charId) and D4 (palette flag)
 ;; and do everything needed to save the character
+cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+beq slotMachine_turnOnChoiceSoundEffect
+cmpi.b #0, D3 ; this is team select, have we chosen the whole team?
+beq slotMachine_turnOnChoiceSoundEffect ; we have? do sfx
+move.b #$ff, D6 ; this is team select, but whole team has not been chosen, dont do the sound effect yet
+bra slotMachine_doneChoiceSoundEffect
+slotMachine_turnOnChoiceSoundEffect:
+move.b #$0, D6 ; this is char select, or final team select, do sound effect
+slotMachine_doneChoiceSoundEffect:
 bsr saveChar
 dbra D3, slotMachine_chooseChar ; is this team select? go back and keep saving chars then
 
@@ -220,10 +229,13 @@ bne skipChooseRugal
 ;; they chose Rugal
 move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; first reset back to an unchosen team
 move.b #$18, D1
+move.b #$0, D6 ; do the sfx
 bsr saveChar ; save the first Rugal
 move.b #$19, D1
+move.b #$ff, D6 ; skip the sfx
 bsr saveChar ; save the second Rugal
 move.b #$19, D1
+move.b #$ff, D6 ; skip the sfx
 bsr saveChar ; save the third Rugal
 bra skipChoosingChar
 
@@ -366,6 +378,7 @@ rts
 ;; A0: player base data
 ;; D1: chosen char id to save
 ;; D4: chosen palette flag to save
+;; D5: skip sound effect if ff
 saveChar:
 ; now set the chosen char id
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
@@ -384,7 +397,10 @@ move.b D4, (A2) ; set the palette flag (either 0 for reg, or 1 for alt)
 lsr.b #1, D0 ; and de-double it, as we need to store how many chars are selected
 addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
+cmpi.b #$ff, D5
+beq saveChar_skipSoundEffect
 move.b #$61, $320000  ; play the sound effect
+saveChar_skipSoundEffect:
 
 rts
 
