@@ -61,14 +61,14 @@ beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_LEFT_SI, D6
-lea $2CPU_CURSOR_LEFT_IMAGE, A6
+lea $2CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_RIGHT_SI, D6
-lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+lea $2CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 ;;;;;;;;;;;;;;;; END INIT PLAYER 1 ;;;;;;;;;;;;;;
@@ -94,14 +94,14 @@ beq skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_LEFT_SI, D6
-lea $2CPU_CURSOR_LEFT_IMAGE, A6
+lea $2CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_RIGHT_SI, D6
-lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+lea $2CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 ;;;;;;;;;;;;;;;; END INIT PLAYER 2 ;;;;;;;;;;;;;;
@@ -116,27 +116,27 @@ bne skipDemoMode
 
 ;; p1 side cpu cursor, left half
 move.w #$P1_CURSOR_LEFT_SI, D6
-lea $2CPU_CURSOR_LEFT_IMAGE, A6
+lea $2CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
 move.w #$P1_CURSOR_RIGHT_SI, D6
-lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+lea $2CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ;; p1 side cpu cursor, left half
 move.w #$P2_CURSOR_LEFT_SI, D6
-lea $2CPU_CURSOR_LEFT_IMAGE, A6
+lea $2CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
 move.w #$P2_CURSOR_RIGHT_SI, D6
-lea $2CPU_CURSOR_RIGHT_IMAGE, A6
+lea $2CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
@@ -313,14 +313,14 @@ btst #7, $PLAY_MODE ; is this a subsequent single player match? this covers re-r
 bne skipPlayer1Cursor ; yes ? no need for their cursor
 
 move.w #$P1_CURSOR_LEFT_SI, D6
-lea $2P1_CURSOR_LEFT_IMAGE, A6
+lea $2P1_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the p1 cursor, right
 ; it loads into the correct spot, no need to move it
 move.w #$P1_CURSOR_RIGHT_SI, D6
-lea $2P1_CURSOR_RIGHT_IMAGE, A6
+lea $2P1_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
@@ -334,14 +334,14 @@ bne skipPlayer2Cursor ; yes ? no need for their cursor
 ; load the p2 cursor, left
 ; it loads into the correct spot, no need to move it
 move.w #$P2_CURSOR_LEFT_SI, D6
-lea $2P2_CURSOR_LEFT_IMAGE, A6
+lea $2P2_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the p2 cursor, right
 ; it loads into the correct spot, no need to move it
 move.w #$P2_CURSOR_RIGHT_SI, D6
-lea $2P2_CURSOR_RIGHT_IMAGE, A6
+lea $2P2_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 

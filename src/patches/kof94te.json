@@ -219,10 +219,31 @@
     },
     {
       "type": "prom",
-      "description": "p1 cursor, left image",
+      "description": "p1 cursor, left image, white",
       "subroutine": true,
-      "symbol": "P1_CURSOR_LEFT_IMAGE",
-      "patchAsm": "p1_cursor_left.asm"
+      "symbol": "P1_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "p1_cursor_left_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, left image, black",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "p1_cursor_left_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, right image, white",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "p1_cursor_right_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, right image, black",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "p1_cursor_right_black.asm"
     },
     {
       "type": "prom",
@@ -233,31 +254,59 @@
     },
     {
       "type": "prom",
-      "description": "p2 cursor, left image",
+      "description": "p2 cursor, left image, white",
       "subroutine": true,
-      "symbol": "P2_CURSOR_LEFT_IMAGE",
-      "patchAsm": "p2_cursor_left.asm"
+      "symbol": "P2_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "p2_cursor_left_white.asm"
     },
     {
       "type": "prom",
-      "description": "p2 cursor, right image",
+      "description": "p2 cursor, left image, black",
       "subroutine": true,
-      "symbol": "P2_CURSOR_RIGHT_IMAGE",
-      "patchAsm": "p2_cursor_right.asm"
+      "symbol": "P2_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "p2_cursor_left_black.asm"
     },
     {
       "type": "prom",
-      "description": "cpu cursor, left, image",
+      "description": "p2 cursor, right image, white",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_LEFT_IMAGE",
-      "patchAsm": "cpu_cursor_left.asm"
+      "symbol": "P2_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "p2_cursor_right_white.asm"
     },
     {
       "type": "prom",
-      "description": "cpu cursor, right, image",
+      "description": "p2 cursor, right image, black",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_RIGHT_IMAGE",
-      "patchAsm": "cpu_cursor_right.asm"
+      "symbol": "P2_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "p2_cursor_right_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, left, image, white",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "cpu_cursor_left_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, left, image, black",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "cpu_cursor_left_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, right, image, white",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "cpu_cursor_right_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, right, image, black",
+      "subroutine": true,
+      "symbol": "CPU_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "cpu_cursor_right_black.asm"
     },
     {
       "type": "prom",
@@ -401,6 +450,13 @@
     },
     {
       "type": "prom",
+      "description": "flash cursors routine",
+      "subroutine": true,
+      "symbol": "FLASH_CURSORS",
+      "patchAsm": "flashCursors.asm"
+    },
+    {
+      "type": "prom",
       "description": "main routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",
@@ -523,8 +579,6 @@
       "address": "132be4",
       "subroutine": true,
       "patchAsm": [
-        ";; set the auto animation speed for the cursors",
-        "move.w #$200, $3C0006",
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne done",
 

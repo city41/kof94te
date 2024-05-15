@@ -1,4 +1,4 @@
-;;;;; start p1_cursor_right static sprite data ;;;;;
+;;;;; start cpu_cursor_left_black static sprite data ;;;;;
 dc.w 1 ; width in tiles
 dc.w 3 ; height in tiles
 
@@ -6,17 +6,17 @@ dc.w 3 ; height in tiles
 ;;; column 0
 
 ;; SCB1 word pairs
-dc.w $aa8
-dc.w $1204
-dc.w $aac
-dc.w $1504
-dc.w $ab0
-dc.w $1504
+dc.w $ff40
+dc.w $1710
+dc.w $ff41
+dc.w $1710
+dc.w $ff42
+dc.w $1710
 
 ;; SCB3 vertical position|sticky|size
-dc.w $dc03
+dc.w $7003
 
 ;; SCB4 horizontal position
-dc.w $1100
+dc.w $0
 
 ;; end tiles
