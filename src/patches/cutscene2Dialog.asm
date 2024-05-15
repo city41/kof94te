@@ -4,6 +4,23 @@ jsr $350f8 ; the built in "count defeated teams" subroutine
 
 cmpi.w #8, D0 ; 8 defeated teams?
 bne doVanilla ; no? must be first cutscene then
+
+;; did the player pick an original 8 team?
+btst #0, $PLAY_MODE
+beq checkOriginal8Player2
+cmpi.b #$ff, $P1_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P1_ORIGINAL_TEAM_ID, $108231 ; set the team id again just incase
+bra doVanilla ; and have original cutscene run
+
+checkOriginal8Player2:
+cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P2_ORIGINAL_TEAM_ID, $108431 ; set the team id again just incase
+bra doVanilla ; and have original cutscene run
+
+notAnOriginalTeam:
+
 movem.l $MOVEM_STORAGE, D0/D1/A1 ; we need the original D0 back to see what dialog this is
 cmpi.w #$3a, D0 ; is this Takuma's dialog?
 beq replaceTakumaDialog

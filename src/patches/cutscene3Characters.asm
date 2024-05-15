@@ -1,11 +1,32 @@
-;;; cutscene 3: make Joe, Yuri and Heavy the three characters.
-
-;; Assumes team USA is the set team ID, but it could also be Japan (2), Mexico (6) or England (7)
-;; the assumption is in the cmpi.l's, they are checking for USA specific pointers
-;;
-;; the character Id needs to get written as a word to $70(A1)
+; first, did the player choose an original 8 team?
+; if so, make sure that is the team id that is set then bail
+; let the original cutscenes run
 
 movem.l D6, $MOVEM_STORAGE
+
+btst #0, $PLAY_MODE
+beq checkOriginal8Player2
+cmpi.b #$ff, $P1_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P1_ORIGINAL_TEAM_ID, $108231
+bra doVanilla
+
+checkOriginal8Player2:
+cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P2_ORIGINAL_TEAM_ID, $108431
+bra doVanilla
+
+doVanilla:
+;; do what the original game does
+;; except dont increment, as done will do that
+move.w (A6), $70(A1)
+bra done
+
+
+notAnOriginalTeam:
+;; the character Id needs to get written as a word to $70(A1)
+
 move.l A6, D6
 cmpi.l #$3e7a2, D6 ; USA, character 1
 beq doCharOne 

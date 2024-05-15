@@ -1,3 +1,30 @@
+; first, did the player choose an original 8 team?
+; if so, make sure that is the team id that is set then bail
+; let the original cutscenes run
+
+btst #0, $PLAY_MODE
+beq checkOriginal8Player2
+cmpi.b #$ff, $P1_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P1_ORIGINAL_TEAM_ID, $108231
+bra originalTeamDone
+
+checkOriginal8Player2:
+cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P2_ORIGINAL_TEAM_ID, $108431
+
+originalTeamDone:
+;; HACK alert: this whole routine is a mess of three cutscenes and shoudl be cleaned up
+;; instead for now, just jumping to cutscene 2 if appropriate
+jsr $350f8 ; the built in "count defeated teams" subroutine
+
+cmpi.w #8, D0 ; 8 defeated teams?
+beq secondCutscene ; yes? then on to cutscene 2 
+rts ; no? then bail
+
+notAnOriginalTeam:
+
 move.l A1, D7
 ;; A1 is only this at the start of cutscene 3,
 ;; it should be a reliable hook
@@ -15,10 +42,8 @@ doChooseEndingTeam:
 bsr chooseEndingTeam ; the ending team is left in D0
 ;; only the playing player needs this done
 ;; but just do both for simplicity
-; move.b D0, $108231
-; move.b D0, $108431
-move.b #2, $108231
-move.b #2, $108431
+move.b D0, $108231
+move.b D0, $108431
 rts
 
 skipCutscene3:
@@ -55,13 +80,17 @@ beq setupPlayer2
 move.b $P1_CHOSEN_CHAR0, (A0)
 move.b $P1_CHOSEN_CHAR1, $1(A0)
 move.b $P1_CHOSEN_CHAR2, $2(A0)
-move.b #6, $108231 ; set the team to Mexico
+cmpi.b #$ff, $P1_ORIGINAL_TEAM_ID
+bne done ; this is an original team, don't clobber it
+move.b #6, $108231 ; this is not an origianl team, so set the team to Mexico
 bra done
 setupPlayer2:
 move.b $P2_CHOSEN_CHAR2, (A0)
 move.b $P2_CHOSEN_CHAR1, $1(A0)
 move.b $P2_CHOSEN_CHAR0, $2(A0)
-move.b #6, $108431 ; set the team to Mexico
+cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
+bne done ; this is an original team, don't clobber it
+move.b #6, $108431 ; this is not an origianl team, so set the team to Mexico
 done:
 
 ;; need to create the dynamic XY table based on the characters that will be displayed

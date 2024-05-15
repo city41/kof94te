@@ -10,6 +10,25 @@
 
 movem.l D0/D1/A1, $MOVEM_STORAGE
 
+; first, did the player choose an original 8 team?
+; if so, make sure that is the team id that is set then bail
+; let the original cutscenes run
+
+btst #0, $PLAY_MODE
+beq checkOriginal8Player2
+cmpi.b #$ff, $P1_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P1_ORIGINAL_TEAM_ID, $108231
+bra doVanilla
+
+checkOriginal8Player2:
+cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
+beq notAnOriginalTeam
+move.b $P2_ORIGINAL_TEAM_ID, $108431
+bra doVanilla
+
+notAnOriginalTeam:
+
 ;; cutscene3: first line
 cmpi.b #$28, D0 ; USA
 beq doFirstLine
@@ -87,6 +106,7 @@ beq doMexicoEighthLine
 
 ;; if we got here, it's not a line we need to make dynamic
 ;; that should just be Rugal's first line
+;; or if this is an original 8 team
 
 doVanilla:
 add.w D0, D0

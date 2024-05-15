@@ -7,7 +7,7 @@ lea $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, A4
 btst #0, $PLAY_MODE ; is p1 playing?
 beq player1IsCpu ; oh p1 is cpu, jump ahead
 
-; they are playing, move their choses where the game expects them 
+; they are playing, move their choices where the game expects them 
 move.b $P1_CHOSEN_CHAR0, D7
 move.b D7, (A4)
 
@@ -16,6 +16,12 @@ move.b D7, $1(A4)
 
 move.b $P1_CHOSEN_CHAR2, D7
 move.b D7, $2(A4)
+
+lea $P1_CUR_INPUT, A0
+;; if they chose an original team, we will
+;; figure it out and store which team it was
+jsr $2SET_ORIGINAL_TEAM_ID
+
 bra player1Done
 
 player1IsCpu:
@@ -45,6 +51,12 @@ move.b D7, $1(A4)
 
 move.b $P2_CHOSEN_CHAR2, D7
 move.b D7, $2(A4)
+
+lea $P2_CUR_INPUT, A0
+;; if they chose an original team, we will
+;; figure it out and store which team it was
+jsr $2SET_ORIGINAL_TEAM_ID
+
 bra player2Done
 
 player2IsCpu:

@@ -42,6 +42,7 @@
     "P1_NUM_NON_RANDOM_CHARS": "10f81b",
     "P1_STARTING_CHOSE_CHAR_ADDRESS": "10f81c",
     "P1_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f820",
+    "P1_ORIGINAL_TEAM_ID": "10f830",
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
@@ -59,6 +60,7 @@
     "P2_NUM_NON_RANDOM_CHARS": "10f8bb",
     "P2_STARTING_CHOSE_CHAR_ADDRESS": "10f8bc",
     "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
+    "P2_ORIGINAL_TEAM_ID": "10f8d0",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
     "IN_CHAR_SELECT_FLAG": "10f8e5",
@@ -109,6 +111,7 @@
     "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
     "PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET": "1c",
     "PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET": "20",
+    "PX_ORIGINAL_TEAM_ID": "30",
 
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
     "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7296",
@@ -377,6 +380,13 @@
       "subroutine": true,
       "symbol": "CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE",
       "patchAsm": "clearFocusedNamesFromFix.asm"
+    },
+    {
+      "type": "prom",
+      "description": "checks if team is one of the original 8",
+      "subroutine": true,
+      "symbol": "SET_ORIGINAL_TEAM_ID",
+      "patchAsm": "setOriginalTeamId.asm"
     },
     {
       "type": "prom",
