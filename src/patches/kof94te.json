@@ -1010,6 +1010,20 @@
     },
     {
       "type": "prom",
+      "description": "cutscene 2 Rugal dialog that is female targeted in Spanish",
+      "symbol": "RUGAL_LINE_FEMALE_TARGETED_ES",
+      "subroutine": true,
+      "patchAsm": "cutscene2RugalLineFemaleTargeted_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 2 Rugal dialog that is male targeted in Spanish",
+      "symbol": "RUGAL_LINE_MALE_TARGETED_ES",
+      "subroutine": true,
+      "patchAsm": "cutscene2RugalLineMaleTargeted_es.asm"
+    },
+    {
+      "type": "prom",
       "description": "cutscene 2 custom dialog hook",
       "subroutine": true,
       "address": "1443ea",

@@ -1,7 +1,6 @@
 ;;; crom string
 ;;; source
 ; # King, Yuri and Mai watch the carrier blow up
-; # 250 bytes of space
 ; MAIn
 ;  WHAT THE HECK?c
 ; YURIn

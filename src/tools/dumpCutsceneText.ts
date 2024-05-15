@@ -29,7 +29,7 @@ async function main(pRomPath: string): Promise<void> {
 
   let collected = [];
 
-  for (let i = 0x155956; i < 0x165500; i += 2) {
+  for (let i = 0x155956; i < 0x16c000; i += 2) {
     const word = (data[i] << 8) | data[i + 1];
     const cchar = cromChars[word] ?? "u";
 

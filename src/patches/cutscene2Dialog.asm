@@ -7,11 +7,49 @@ bne doVanilla ; no? must be first cutscene then
 movem.l $MOVEM_STORAGE, D0/D1/A1 ; we need the original D0 back to see what dialog this is
 cmpi.w #$3a, D0 ; is this Takuma's dialog?
 beq replaceTakumaDialog
+cmpi.w #$3b, D0 ; is this Rugal's line that needs help in Spanish?
+beq rugalSpanish
 cmpi.w #$3c, D0 ; is this Robert's dialog?
 beq replaceRobertDialog
 cmpi.w #$3e, D0 ; is this Ryo's dialog?
 beq replaceRyoDialog
 bra doVanilla ; no? just do the regular routine then
+
+rugalSpanish:
+cmpi.b #3, $LANGUAGE_ID
+bne doVanilla ; this isn't Spanish, nothing extra needed
+;; this is Spanish, need to make the line female or male targeted
+btst #0, $PLAY_MODE ; is player 1 playing?
+beq rugalSpanish_loadPlayer2Char3; no? go do player 2
+move.b $P1_CHOSEN_CHAR2, D0 ; load p1 char id
+bra rugalSpanish_doneLoadChar3
+rugalSpanish_loadPlayer2Char3:
+move.b $P2_CHOSEN_CHAR0, D0 ; load p2 char id
+rugalSpanish_doneLoadChar3:
+cmpi.b #$3, D0 ; is this Athena?
+beq rugalSpanish_loadFemaleLine
+cmpi.b #$15, D0 ; is this Yuri?
+beq rugalSpanish_loadFemaleLine
+cmpi.b #$16, D0 ; is this Mai?
+beq rugalSpanish_loadFemaleLine
+cmpi.b #$17, D0 ; is this King?
+beq rugalSpanish_loadFemaleLine
+
+;; Rugal is speaking to a male
+lea $2RUGAL_LINE_MALE_TARGETED_ES, A1
+bra rugalSpanish_loadLineDone
+
+rugalSpanish_loadFemaleLine:
+lea $2RUGAL_LINE_FEMALE_TARGETED_ES, A1
+
+rugalSpanish_loadLineDone:
+lea $CUTSCENE23_STRING, A0
+jsr $2WRITE_DIALOG_ROUTINE
+move.w #$ffff, (A0)+ ; end of dialog char
+
+lea $CUTSCENE23_STRING, A0 ; rewind back to the correct address
+movem.l $MOVEM_STORAGE, D0/D1/A1
+rts
 
 
 replaceTakumaDialog:

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+yarn ts-node src/tools/convertToCromText.ts resources/cutscene2RugalLineFemaleTargeted_es.txt src/patches/cutscene2RugalLineFemaleTargeted_es.asm
+yarn ts-node src/tools/convertToCromText.ts resources/cutscene2RugalLineMaleTargeted_es.txt src/patches/cutscene2RugalLineMaleTargeted_es.asm
+
 yarn ts-node src/tools/convertToCromText.ts resources/EnglandEnding_part1_en.txt src/patches/EnglandEndingDialog_part1_en.asm
 yarn ts-node src/tools/convertToCromText.ts resources/EnglandEnding_part2_en.txt src/patches/EnglandEndingDialog_part2_en.asm
 yarn ts-node src/tools/convertToCromText.ts resources/EnglandEnding_part3_en.txt src/patches/EnglandEndingDialog_part3_en.asm
