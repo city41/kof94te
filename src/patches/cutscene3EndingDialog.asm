@@ -62,7 +62,7 @@ beq doThirdLine
 ;; cutscene3: fourth line
 cmpi.b #$2e, D0 ; USA
 beq doFourthLine
-cmpi.b #68, D0 ; England
+cmpi.b #$68, D0 ; England
 beq doFourthLine
 cmpi.b #$58, D0 ; Mexico
 beq doFourthLine
