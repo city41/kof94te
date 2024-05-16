@@ -22,6 +22,11 @@ lea $P1_CUR_INPUT, A0
 ;; figure it out and store which team it was
 jsr $2SET_ORIGINAL_TEAM_ID
 
+cmpi.b #$18, $P1_CHOSEN_CHAR0
+bne player1Done
+;; they chose Rugal, make sure their team is Rugal too
+move.b #8, $108231
+
 bra player1Done
 
 player1IsCpu:
@@ -56,6 +61,11 @@ lea $P2_CUR_INPUT, A0
 ;; if they chose an original team, we will
 ;; figure it out and store which team it was
 jsr $2SET_ORIGINAL_TEAM_ID
+
+cmpi.b #$18, $P2_CHOSEN_CHAR2
+bne player2Done
+;; they chose Rugal, make sure their team is Rugal too
+move.b #8, $108431
 
 bra player2Done
 

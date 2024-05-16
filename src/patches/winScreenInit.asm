@@ -88,7 +88,6 @@ playerOneLost:
 onlyPlayerTwoIsHuman:
 lea $P2_CHOSEN_CHAR2, A6 ; player 2 won, get their characters ready
 
-
 setupChars:
 
 move.b #0, $AFTER_SCREEN_ALREADY_SET_LEFT
@@ -113,6 +112,20 @@ loadCharactersLoop:
 clr.w D6
 lea $2WIN_SCREEN_TABLES, A2 ; load the x/y table starting addresses
 move.b (A6), D6 ; get the character id into d6
+
+;; if Rugal won the match, force the winning ID (either regular or second form Rugal)
+;; to be the entire team.
+cmpi.b #$18, D0
+beq forceRugal
+cmpi.b #$19, D0
+beq forceRugal
+bra skipForceRugal
+forceRugal:
+move.b D0, D6
+move.b D0, (A4)
+move.b D0, $1(A4)
+move.b D0, $2(A4)
+skipForceRugal:
 ;; the winner of the match is in D0, a gift to us from the game
 cmp.b D0, D6 ; did this character win the match?
 beq setWinner
@@ -121,12 +134,12 @@ beq setRight
 
 ;;; ok this will be the left character
 move.b #1, $AFTER_SCREEN_ALREADY_SET_LEFT
-adda.w #96, A2 ; move forward to the left table
+adda.w #104, A2 ; move forward to the left table
 move.b D6, $1(A4) ; stick it second in the winning list
 bra finishSettingUpChar
 
 setRight:
-adda.w #192, A2 ; move forward to the right table
+adda.w #208, A2 ; move forward to the right table
 move.b D6, $2(A4) ; stick it third in the winning list
 bra finishSettingUpChar
 

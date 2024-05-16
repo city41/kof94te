@@ -163,9 +163,10 @@ beq checkIfCpuSelectIsDone_cpuIsDone
 ;; when returning to single player, it will randomly pick a new team
 ;; instead of refighting the one you were interrupted on
 btst #7, $PLAY_MODE
-beq checkIfCpuSelectIsDone_skipPlayer1
+beq checkIfCpuSelectIsDone_done
 cmpi.b #$12, $108654
 beq checkIfCpuSelectIsDone_cpuIsDone
+bra checkIfCpuSelectIsDone_done
 
 checkIfCpuSelectIsDone_skipPlayer1:
 ;; now check player 2, either player 1 isn't playing
@@ -174,13 +175,13 @@ cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P2
 beq checkIfCpuSelectIsDone_cpuIsDone
 cmpi.b #8, $108231 ; is the next fight rugal?
 beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_done
 
 ;; see hack alert above
 btst #7, $PLAY_MODE
 beq checkIfCpuSelectIsDone_done
 cmpi.b #$12, $108654
 beq checkIfCpuSelectIsDone_cpuIsDone
+bra checkIfCpuSelectIsDone_done
 
 checkIfCpuSelectIsDone_cpuIsDone:
 ;; cpu is done, show their team in the chosen section

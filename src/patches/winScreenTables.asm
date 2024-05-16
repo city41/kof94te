@@ -96,6 +96,14 @@ dc.b $ff ; King x hb
 dc.b $cf ; King x lb
 dc.b $ff ; King y hb
 dc.b $f7 ; King y lb
+dc.b $ff ; Rugal x hb
+dc.b $df ; Rugal x lb
+dc.b $ff ; Rugal y hb
+dc.b $ef ; Rugal y lb
+dc.b $ff ; Rugal - second form x hb
+dc.b $df ; Rugal - second form x lb
+dc.b $ff ; Rugal - second form y hb
+dc.b $ef ; Rugal - second form y lb
 ;;; left table: places all characters to left side
 dc.b $0 ; Heidern x hb
 dc.b $38 ; Heidern x lb
@@ -193,6 +201,14 @@ dc.b $0 ; King x hb
 dc.b $40 ; King x lb
 dc.b $ff ; King y hb
 dc.b $ef ; King y lb
+dc.b $0 ; Rugal x hb
+dc.b $38 ; Rugal x lb
+dc.b $ff ; Rugal y hb
+dc.b $ef ; Rugal y lb
+dc.b $0 ; Rugal - second form x hb
+dc.b $38 ; Rugal - second form x lb
+dc.b $ff ; Rugal - second form y hb
+dc.b $ef ; Rugal - second form y lb
 ;;; right table: places all characters to right side
 dc.b $ff ; Heidern x hb
 dc.b $8f ; Heidern x lb
@@ -290,3 +306,11 @@ dc.b $ff ; King x hb
 dc.b $87 ; King x lb
 dc.b $ff ; King y hb
 dc.b $ef ; King y lb
+dc.b $ff ; Rugal x hb
+dc.b $8f ; Rugal x lb
+dc.b $ff ; Rugal y hb
+dc.b $ef ; Rugal y lb
+dc.b $ff ; Rugal - second form x hb
+dc.b $8f ; Rugal - second form x lb
+dc.b $ff ; Rugal - second form y hb
+dc.b $ef ; Rugal - second form y lb

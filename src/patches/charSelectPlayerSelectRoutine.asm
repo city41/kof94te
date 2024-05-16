@@ -237,6 +237,7 @@ bsr saveChar ; save the second Rugal
 move.b #$19, D1
 move.b #$ff, D6 ; skip the sfx
 bsr saveChar ; save the third Rugal
+
 bra skipChoosingChar
 
 skipChooseRugal:
