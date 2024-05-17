@@ -37,14 +37,23 @@ cmpi.l #$10907c, D6  ; win screen, char 1
 beq winScreen
 cmpi.l #$10917c, D6  ; win screen, char 2
 beq winScreen
-cmpi.l #$10927c, D6  ; win screen, char 3
-beq winScreen
+cmpi.l #$10927c, D6  ; win screen, char 3, or Rugal's transformation cutscene
+beq winScreenOrRugalBetweenRounds
 move.l $84(A4), D6
 cmpi.l #$108100, D6 ; a team1 character on the sidelines, or a character in order select
 beq team1Character
 cmpi.l #$108300, D6 ; a team2 character on the sidelines, or a character in order select
 beq team2Character
 bra defaultChoice ; something else like demo mode, how to play, etc. For now punting
+
+winScreenOrRugalBetweenRounds:
+cmpi.b #3, $PLAY_MODE
+beq winScreen ; versus mode? def not Rugal then
+cmpi.b #$ff, $DEFEATED_TEAMS
+bne winScreen ; haven't beaten 8 teams? Must be a win screen
+;; this is the between round cutscene for Rugal, it should be zero
+move.b #0, D1
+bra done
 
 ;; this is the fighter that just lost and is falling
 ;; btw the falling fighter char id is at 100971
