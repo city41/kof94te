@@ -21,7 +21,7 @@ import {
 import { doPromPatch } from "./doPromPatch";
 import { injectCromTiles } from "./injectCromTiles";
 import { clearFixTiles } from "./clearFixTiles";
-import { injectTitleBadgeTiles } from "./injectTitleBadgeTiles";
+import { injectStampTiles } from "./injectStampTiles";
 
 function usage() {
   console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
@@ -334,7 +334,7 @@ async function main(patchJsonPaths: string[]) {
 
   try {
     const cromBuffers = await injectCromTiles();
-    const finalCromBuffers = await injectTitleBadgeTiles(cromBuffers);
+    const finalCromBuffers = await injectStampTiles(cromBuffers);
     const fixBuffer = await clearFixTiles();
 
     const writePath = path.resolve(mameDir, "kof94.zip");

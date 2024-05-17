@@ -9,6 +9,8 @@ export const cromChars: Record<number, string> = {
   [0x74]: ",",
   [0x76]: "?",
   [0x77]: "!",
+  [0x7b]: "[",
+  [0x7c]: "]",
   [0xffff]: "e",
   [0x4983]: "0",
   [0x4984]: "1",

@@ -1,0 +1,11 @@
+{
+  "description": "Change what the intro opening says for the trailer",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "new text",
+      "address": "153896",
+      "patchAsm": "trailerOpening.asm"
+    }
+  ]
+}
