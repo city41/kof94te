@@ -1,0 +1,29 @@
+{
+  "description": "Places Robert and Joe on team Japan during the intro",
+  "patches": [
+    {
+      "type": "prom",
+      "description": "Italy: Put in Goro for Joe",
+      "address": "13998a",
+      "patchAsm": ["move.l #$78010101, $c0(A1)"]
+    },
+    {
+      "type": "prom",
+      "description": "Mexico: Put in Benimaru for Takuma",
+      "address": "1399b6",
+      "patchAsm": ["move.l #$77010101, $c0(A1)"]
+    },
+    {
+      "type": "prom",
+      "description": "Japan: Put in Robert for Beni",
+      "address": "139f92",
+      "patchAsm": ["move.l #$75010101, $c0(A1)"]
+    },
+    {
+      "type": "prom",
+      "description": "Japan: Put in Joe for Goro",
+      "address": "139fd2",
+      "patchAsm": ["move.l #$74010101, $c0(A1)"]
+    }
+  ]
+}
