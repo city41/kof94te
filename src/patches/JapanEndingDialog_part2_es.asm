@@ -1,8 +1,8 @@
 ;;; crom string
 ;;; source
+; # part 2
 ; BENIMARU·DAIMONn
-;  ENTONCES,n
-;  ¿A DÓNDEc
+;  ¿ENTONCES A DÓNDEn
 ;  VAMOS AHORA?e
 
 ;;; crom result
@@ -24,6 +24,7 @@ dc.w $499a ; N
 dc.w $d ; 
 
 dc.w $0 ;  
+dc.w $49df ; ¿
 dc.w $4991 ; E
 dc.w $499a ; N
 dc.w $49a0 ; T
@@ -32,11 +33,7 @@ dc.w $499a ; N
 dc.w $498f ; C
 dc.w $4991 ; E
 dc.w $499f ; S
-dc.w $74 ; ,
-dc.w $d ; 
-
 dc.w $0 ;  
-dc.w $49df ; ¿
 dc.w $498d ; A
 dc.w $0 ;  
 dc.w $4990 ; D
@@ -44,7 +41,7 @@ dc.w $49dc ; Ó
 dc.w $499a ; N
 dc.w $4990 ; D
 dc.w $4991 ; E
-dc.w $fffe ; 
+dc.w $d ; 
 
 dc.w $0 ;  
 dc.w $49a2 ; V

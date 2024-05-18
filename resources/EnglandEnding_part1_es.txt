@@ -1,11 +1,10 @@
-# King, Yuri and Mai watch the carrier blow up
-# 258 bytes of space
+# part 1: King, Yuri and Mai watch the carrier blow up
 MAIn
- ¿QUE DEMONIOS?c
+ ¿QUÉ DEMONIOS?c
 YURIn
- ESE ERA ELn
+ ¡ESO ERA ELn
  PORTAAVIONESc
- DEL ANFITRIÓNn
- DEL TORNEOc
+ DEL ORGANIZADORn
+ DEL TORNEO!c
 KINGn
  ¡GUAU!e

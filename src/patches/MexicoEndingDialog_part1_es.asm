@@ -1,9 +1,9 @@
 ;;; crom string
 ;;; source
+; # part 1: Takuma stands proudly looking up at the sky
 ; TAKUMAn
-;  ¡PERDIMOS!n
-;  ¿CÓMOc
-;  PODRÍAMOSn
+;  ¡HEMOS PERDIDO!n
+;  ¿CÓMO PUDIMOSc
 ;  PERDER?e
 
 ;;; crom result
@@ -17,14 +17,19 @@ dc.w $d ;
 
 dc.w $0 ;  
 dc.w $49e0 ; ¡
+dc.w $4994 ; H
+dc.w $4991 ; E
+dc.w $4999 ; M
+dc.w $499b ; O
+dc.w $499f ; S
+dc.w $0 ;  
 dc.w $499c ; P
 dc.w $4991 ; E
 dc.w $499e ; R
 dc.w $4990 ; D
 dc.w $4995 ; I
-dc.w $4999 ; M
+dc.w $4990 ; D
 dc.w $499b ; O
-dc.w $499f ; S
 dc.w $77 ; !
 dc.w $d ; 
 
@@ -34,19 +39,15 @@ dc.w $498f ; C
 dc.w $49dc ; Ó
 dc.w $4999 ; M
 dc.w $499b ; O
-dc.w $fffe ; 
-
 dc.w $0 ;  
 dc.w $499c ; P
-dc.w $499b ; O
+dc.w $49a1 ; U
 dc.w $4990 ; D
-dc.w $499e ; R
-dc.w $49da ; Í
-dc.w $498d ; A
+dc.w $4995 ; I
 dc.w $4999 ; M
 dc.w $499b ; O
 dc.w $499f ; S
-dc.w $d ; 
+dc.w $fffe ; 
 
 dc.w $0 ;  
 dc.w $499c ; P

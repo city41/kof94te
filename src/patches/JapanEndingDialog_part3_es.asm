@@ -1,6 +1,7 @@
 ;;; crom string
 ;;; source
-; KYOn
+; # part 3: Kyo holds his bandana in his hand and looks excited
+; KYO
 ;  ¡AL PRÓXIMOn
 ;  TORNEO!c
 ;  ¡VAMOS!e
@@ -9,8 +10,6 @@
 dc.w $4997 ; K
 dc.w $49a5 ; Y
 dc.w $499b ; O
-dc.w $d ; 
-
 dc.w $0 ;  
 dc.w $49e0 ; ¡
 dc.w $498d ; A

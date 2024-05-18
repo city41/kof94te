@@ -1,0 +1,28 @@
+# part 1: King, Yuri and Mai watch the carrier blow up
+MAIn
+ ¿QUÉ DEMONIOS?c
+YURIn
+ ¡ESO ERA ELn
+ PORTAAVIONESc
+ DEL ORGANIZADORn
+ DEL TORNEO!c
+KINGn
+ ¡GUAU!e
+
+ # part 2: King, Yuri and Mai hold up jewelry
+MAIn
+ DE CUALQUIERn
+ FORMA...c
+ ¡NO ME PUEDOn
+ CREER QUEn
+ ENCONTRÁRAMOSc
+ ESTO MIENTRASn
+ BUCEÁBAMOS!c
+YURIn
+ ¿CUÁNTO CREESn
+ QUE VALE?e
+ 
+ # part 3: camera pans up and then goes to credits
+KINGn
+ ¡MUCHÍSIMO!n
+ ¡SOMOS RICAS!e

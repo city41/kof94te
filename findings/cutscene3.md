@@ -163,8 +163,6 @@ which might be x/y pair?
 
 cutscene 3's first line is 56444 for team USA
 
-note that the hack overwrites this text due to the Japan ending being too long.
-
 156444: BRIAN
 15644e: <nl>
 156450: SEE?

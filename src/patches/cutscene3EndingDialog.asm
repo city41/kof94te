@@ -2,11 +2,29 @@
 ; the game will call this looking to load a pointer to the next
 ; dialog run.
 ;
-; A0: the pointer to the start of the dialog data, depending on
+; A0: the pointer to the start of the dialog data pointer list, depending on
 ; which language the game is running in
 ; 54306 = English
+; 543e6 = Spanish
+; 
 ;
-; D0: a word offset into the dialog data 
+; D0: a word offset into the dialog data  pointers
+;
+; normally the game indexes into the pointer list to get a pointer to the start
+; of the dialog it wants to display
+; add.w D0, D0
+; add.w D0, D0
+; movea.l (A0, D0.w), A0
+;
+; this routine is confusing because
+; Rugal's first line "IMPOSSIBLE HOW COULD I LOSE..." is common to all teams and
+; only in the ROM once. For english this is when A0=54306 and D0=0, the pointer
+; it resolves to is 55956. D0=0 for all languages in this case
+;
+; The game sets itself to one of the ending teams: USA (3), England (7), Mexico (6) or Japan (2),
+; this way that team's ending cinema can play. But then this routine will use Brazil's dialog for cutscene3,
+; and brand new dialog for the endings.
+
 
 movem.l D0/D1/A1, $MOVEM_STORAGE
 
@@ -141,7 +159,7 @@ lea $559da, A1
 bra loadFirstLineDialog
 
 loadFirstLineSpanish:
-lea $559da, A1 ; TODO, English is a placeholder
+lea $57c5c, A1
 bra loadFirstLineDialog
 
 loadFirstLineJapanese:
@@ -172,7 +190,7 @@ lea $55a2e, A0
 bra done
 
 loadSecondLineSpanish:
-lea $55a2e, A0 ; TODO, English is a placeholder
+lea $57c98, A0 
 bra done
 
 loadSecondLineJapanese:
@@ -197,7 +215,7 @@ lea $55a9a, A0
 bra done
 
 loadThirdLineSpanish:
-lea $55a9a, A0 ; TODO, English is a placeholder
+lea $57cf0, A0
 bra done
 
 loadThirdLineJapanese:
@@ -234,7 +252,7 @@ lea $55b34, A1
 bra loadFourthLineDialog
 
 loadFourthLineSpanish:
-lea $55b34, A1 ; TODO, English is a placeholder
+lea $57d46, A1 
 bra loadFourthLineDialog
 
 loadFourthLineJapanese:

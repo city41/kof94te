@@ -29,10 +29,10 @@ yarn ts-node src/tools/convertToCromText.ts resources/JapanEnding_part1_es.txt s
 yarn ts-node src/tools/convertToCromText.ts resources/JapanEnding_part2_es.txt src/patches/JapanEndingDialog_part2_es.asm
 yarn ts-node src/tools/convertToCromText.ts resources/JapanEnding_part3_es.txt src/patches/JapanEndingDialog_part3_es.asm
 
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part1_en.txt src/patches/USAendingDialog_part1_en.asm
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part2_en.txt src/patches/USAendingDialog_part2_en.asm
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part3_en.txt src/patches/USAendingDialog_part3_en.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part1_en.txt src/patches/USAendingDialog_part1_en.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part2_en.txt src/patches/USAendingDialog_part2_en.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part3_en.txt src/patches/USAendingDialog_part3_en.asm
 
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part1_es.txt src/patches/USAendingDialog_part1_es.asm
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part2_es.txt src/patches/USAendingDialog_part2_es.asm
-yarn ts-node src/tools/convertToCromText.ts resources/USAending_part3_es.txt src/patches/USAendingDialog_part3_es.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part1_es.txt src/patches/USAendingDialog_part1_es.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part2_es.txt src/patches/USAendingDialog_part2_es.asm
+yarn ts-node src/tools/convertToCromText.ts resources/USAEnding_part3_es.txt src/patches/USAendingDialog_part3_es.asm

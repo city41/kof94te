@@ -1,3 +1,4 @@
-# 54 bytes of space
- ¡MUCHO!n
- ¡ERAN RICOS!e
+# part 3: camera pans up and then goes to credits
+KINGn
+ ¡MUCHÍSIMO!n
+ ¡SOMOS RICAS!e

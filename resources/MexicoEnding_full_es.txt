@@ -1,0 +1,24 @@
+# part 1: Takuma stands proudly looking up at the sky
+TAKUMAn
+ ¡HEMOS PERDIDO!n
+ ¿CÓMO PUDIMOSc
+ PERDER?e
+
+# part 2: Robert and Ryo crouch on the boat, talking quietly to each other
+ROBERTn
+ OH OH.c
+RYOn
+ ESTÁ TRAMANDOn
+ ALGO.c
+ROBERTn
+ ¡LARGUÉMONOSn
+ DE AQUÍ!e
+
+# part 3: Takuma is exuberant with a red background
+TAKUMAn
+ ¡TENEMOS QUEn
+ ENTRENAR MÁS!e
+
+# part 4: Robert and Ryo run away from Takuma
+ ¡DANOS UNn
+ RESPIRO!e

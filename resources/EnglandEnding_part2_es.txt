@@ -1,10 +1,12 @@
-# King, Yuri and Mai hold up jewelry
-# 188 bytes of space
+# part 2: King, Yuri and Mai hold up jewelry
 MAIn
- NO PUEDO CREERn
- QUEc
- ENCONTRÁRAMOSn
+ DE CUALQUIERn
+ FORMA...c
+ ¡NO ME PUEDOn
+ CREER QUEn
+ ENCONTRÁRAMOSc
  ESTO MIENTRASn
- BUCEÁBAMOS.c
+ BUCEÁBAMOS!c
 YURIn
- ¿CUÁNTO VALE?e
+ ¿CUÁNTO CREESn
+ QUE VALE?e

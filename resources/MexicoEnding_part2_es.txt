@@ -1,8 +1,9 @@
+# part 2: Robert and Ryo crouch on the boat, talking quietly to each other
 ROBERTn
- UH OH.c
+ OH OH.c
 RYOn
- EL ESTAn
- TRAS ALGO.c
+ ESTÁ TRAMANDOn
+ ALGO.c
 ROBERTn
- ¡SALGAMOSn
+ ¡LARGUÉMONOSn
  DE AQUÍ!e

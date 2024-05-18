@@ -1,0 +1,28 @@
+# part 1: Kyo, Beni and Daimon are talking together
+KYOn
+ ESTE TORNEOn
+ HA SIDO UNAc
+ ESTAFA.c
+BENIMARUn
+ ¿QUÉ QUIERESn
+ DECIR?c
+KYOn
+ ¡FUE ORGANIZADOn
+ POR RUGAL PARAc
+ CAPTURAR A LOSn
+ GANADORES!c
+DAIMONn
+ ¿EN SERIO?n
+ ¡MENUDA LOCURA!e
+
+# part 2
+BENIMARU·DAIMONn
+ ¿ENTONCES An
+ DÓNDEn VAMOSc
+ AHORA?e
+
+ # part 3: Kyo holds his bandana in his hand and looks excited
+KYO
+ ¡AL PRÓXIMOn
+ TORNEO!c
+ ¡VAMOS!e
