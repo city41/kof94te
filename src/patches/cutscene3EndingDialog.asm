@@ -4,6 +4,7 @@
 ;
 ; A0: the pointer to the start of the dialog data pointer list, depending on
 ; which language the game is running in
+; 54226 = Japanese
 ; 54306 = English
 ; 543e6 = Spanish
 ; 
@@ -163,7 +164,7 @@ lea $57c5c, A1
 bra loadFirstLineDialog
 
 loadFirstLineJapanese:
-lea $559da, A1 ; TODO, English is a placeholder
+lea $5450e, A1
 bra loadFirstLineDialog
 
 loadFirstLineDialog:
@@ -194,7 +195,7 @@ lea $57c98, A0
 bra done
 
 loadSecondLineJapanese:
-lea $55a2e, A0 ; TODO, English is a placeholder
+lea $5453e, A0
 bra done
 
 
@@ -219,7 +220,7 @@ lea $57cf0, A0
 bra done
 
 loadThirdLineJapanese:
-lea $55a9a, A0 ; TODO, English is a placeholder
+lea $5459c, A0
 bra done
 
 
@@ -256,7 +257,7 @@ lea $57d46, A1
 bra loadFourthLineDialog
 
 loadFourthLineJapanese:
-lea $55b34, A1 ; TODO, English is a placeholder
+lea $545d4, A1
 bra loadFourthLineDialog
 
 loadFourthLineDialog:
