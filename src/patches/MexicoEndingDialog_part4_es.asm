@@ -2,7 +2,7 @@
 ;;; source
 ; # part 4: Robert and Ryo run away from Takuma
 ;  ¡DANOS UNn
-;  RESPIRO!e
+;   RESPIRO!e
 
 ;;; crom result
 dc.w $0 ;  
@@ -17,6 +17,7 @@ dc.w $49a1 ; U
 dc.w $499a ; N
 dc.w $d ; 
 
+dc.w $0 ;  
 dc.w $0 ;  
 dc.w $499e ; R
 dc.w $4991 ; E

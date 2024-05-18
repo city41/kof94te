@@ -17,7 +17,7 @@
 ; LUCKYn
 ;  KINDA MAKES MEn
 ;  NOT WANT TO GOc
-;  NEXT YEARe
+;  NEXT YEAR.e
 
 ;;; crom result
 dc.w $4998 ; L
@@ -270,4 +270,5 @@ dc.w $49a5 ; Y
 dc.w $4991 ; E
 dc.w $498d ; A
 dc.w $499e ; R
+dc.w $1 ; .
 dc.w $ffff ; e
