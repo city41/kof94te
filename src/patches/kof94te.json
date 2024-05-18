@@ -43,6 +43,7 @@
     "P1_STARTING_CHOSE_CHAR_ADDRESS": "10f81c",
     "P1_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f820",
     "P1_ORIGINAL_TEAM_ID": "10f830",
+    "P1_IS_READY": "10f832",
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
@@ -61,6 +62,7 @@
     "P2_STARTING_CHOSE_CHAR_ADDRESS": "10f8bc",
     "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
     "P2_ORIGINAL_TEAM_ID": "10f8d0",
+    "P2_IS_READY": "10f8d2",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
     "IN_CHAR_SELECT_FLAG": "10f8e5",
@@ -111,7 +113,8 @@
     "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
     "PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET": "1c",
     "PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET": "20",
-    "PX_ORIGINAL_TEAM_ID": "30",
+    "PX_ORIGINAL_TEAM_ID_OFFSET": "30",
+    "PX_IS_READY_OFFSET": "32",
 
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
     "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7296",
@@ -366,6 +369,13 @@
       "subroutine": true,
       "symbol": "RENDER_CUR_FOCUSED_CHAR_NAME",
       "patchAsm": "renderCurFocusedCharName.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear sprite routine",
+      "subroutine": true,
+      "symbol": "CLEAR_SPRITE",
+      "patchAsm": "clearSprite.asm"
     },
     {
       "type": "prom",

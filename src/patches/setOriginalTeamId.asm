@@ -65,11 +65,11 @@ bne notAnOriginalTeam
 ;; this is an original team, write the team ID out
 ;; from team leader id to team id is just division by 3
 divu.w #3, D0
-move.b D0, $PX_ORIGINAL_TEAM_ID(A0)
+move.b D0, $PX_ORIGINAL_TEAM_ID_OFFSET(A0)
 bra done
 
 notAnOriginalTeam:
-move.b #$ff, $PX_ORIGINAL_TEAM_ID(A0)
+move.b #$ff, $PX_ORIGINAL_TEAM_ID_OFFSET(A0)
 
 
 done:

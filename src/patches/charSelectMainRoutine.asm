@@ -58,7 +58,7 @@ skipVersusRandomStage:
 
 cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 ;; once we hit done, the game comes in here many times
-;; not we can do but wait for the game to move on
+;; nothing we can do but wait for the game to move on
 beq done
 cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
@@ -93,34 +93,30 @@ rts
 ;;; looks to see if all human players (1 or 2 of them),
 ;;; have chosen their entire team. If so, sets phase to CPU_SELECT
 checkIfPlayerSelectIsDone:
-move.b #0, D3 ; D3 will hold the number of needed chosen chars: either 3 or 6 (versus mode)
+move.b #0, D2 ; D2 will hold the number of needed ready flags: either 1 or 2 (versus mode)
 
 clr.b D1
-clr.b D2
 
 btst #0, $PLAY_MODE ; is p1 playing?
 beq checkIfPlayerSelectIsDone_skipPlayer1
-move.b $P1_NUM_CHOSEN_CHARS, D1
-addi.b #3, D3
+add.b $P1_IS_READY, D1
+addi.b #1, D2
 
 checkIfPlayerSelectIsDone_skipPlayer1:
 
 btst #1, $PLAY_MODE ; is p2 playing?
 beq checkIfPlayerSelectIsDone_skipPlayer2
-move.b $P2_NUM_CHOSEN_CHARS, D2
-addi.b #3, D3
+add.b $P2_IS_READY, D1
+addi.b #1, D2
 
 checkIfPlayerSelectIsDone_skipPlayer2:
 
-;; now add p1 and p2 chosen chars
-add.b D1, D2
-cmp.b D2, d3
+cmp.b D1, D2
 
-;; nope, more characters need to be selected, try again next frame
+;; nope, someone is not ready yet
 bne checkIfPlayerSelectIsDone_done
 
-; the number of needed chosen characters matches how many are 
-; actually chosen, we are done with player select
+; all players are ready, we are done with player select
 
 ; is this versus mode? then we are totally done
 cmpi.b #3, $PLAY_MODE

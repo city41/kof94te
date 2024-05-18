@@ -40,7 +40,13 @@ doSinglePlayer:
 ; don't let them choose more than 3
 
 cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-beq skipChoosingChar ; if three have been chosen, don't choose more
+bne threeCharsNotChosen ; if three have been chosen, don't choose more
+bsr hidePlayerCursor
+move.b #1, $PX_IS_READY_OFFSET(A0) ; let main know we are ready to move forward
+bra skipChoosingChar
+
+threeCharsNotChosen:
+move.b #0, $PX_IS_READY_OFFSET(A0) ; play it safe and clear the flag
 
 ; is this a single player game, they chose randomize when choosing their characters
 ; and now it's a subsequent fight? then randomize again
@@ -133,22 +139,7 @@ slotMachine_doCharRandomSelect:
 jsr $2CHAR_RANDOM_SELECT
 
 slotMachine_done:
-;; HACK ALERT: this is doing the cursor stuff again
-;; TODO: clean this up
-btst #7, $PLAY_MODE
-bne slotMachine_donePlayerCursor ; if past first fight, never show the player's cursor
-move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
-cmpi.b #3, D0
-beq slotMachine_doHidePlayerCursor ; all three chosen? no need for a cursor anymore
-
-jsr $2MOVE_CURSOR
-bra slotMachine_donePlayerCursor
-
-slotMachine_doHidePlayerCursor:
-bsr hidePlayerCursor
-
-slotMachine_donePlayerCursor:
-bra done
+bra doPlayerCursor
 ;;;;;;;;;;;;;;;;;;; END SLOT MACHINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 skipSlotMachine:
 
@@ -249,22 +240,6 @@ bsr saveChar
 
 skipChoosingChar:
 
-;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
-
-btst #7, $PLAY_MODE
-bne skipCursor ; if past first fight, never show the player's cursor
-move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
-cmpi.b #3, D0
-beq doHidePlayerCursor ; all three chosen? no need for a cursor anymore
-
-jsr $2MOVE_CURSOR
-bra donePlayerCursor
-
-doHidePlayerCursor:
-bsr hidePlayerCursor
-
-skipCursor:
-donePlayerCursor:
 
 ;;;;;;;;;;;;;;;;;;; RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; are they currently hovering on a random select space?
@@ -297,6 +272,18 @@ move.b #$RANDOM_SELECT_TYPE_NONE, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 doneRandomSelect:
 
 ;;;;;;;;;;;;;;;;;;; END RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;; PLAYER CURSOR ;;;;;;;;;;;;;;;;;;;;
+
+doPlayerCursor:
+
+btst #7, $PLAY_MODE
+bne skipCursor ; if past first fight, never show the player's cursor
+cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+beq skipCursor ; all three chosen? no need for a cursor anymore
+
+jsr $2MOVE_CURSOR
+skipCursor:
 
 done:
 bsr renderChosenAvatars
