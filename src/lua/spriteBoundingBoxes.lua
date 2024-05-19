@@ -170,45 +170,47 @@ colors = { RED, ORANGE, PURPLE, WHITE }
 
 function visualize_boundingBoxes()
 	for i = 0, 380 do
-		local ht = getSpriteHeight(i, vram)
-		local hpx = ht * 16
-		local x = dewrap(getSpriteX(i, vram), 320)
-		local y = dewrap(getSpriteY(i, vram), 224)
+		if i ~= 129 then
+			local ht = getSpriteHeight(i, vram)
+			local hpx = ht * 16
+			local x = dewrap(getSpriteX(i, vram), 320)
+			local y = dewrap(getSpriteY(i, vram), 224)
 
-		local left = x
-		local top = y
-		-- TODO: support sprite scaling
-		local right = dewrap(x + 16, 320)
-		-- TODO: support sprite scaling
-		local bottom = y + hpx
+			local left = x
+			local top = y
+			-- TODO: support sprite scaling
+			local right = dewrap(x + 16, 320)
+			-- TODO: support sprite scaling
+			local bottom = y + hpx
 
-		if bottom > 512 then
-			-- sprite has wrapped back around to the top
-			-- its visible portion starts at the top of the screen
-			top = 0
-			-- and this is the amount that has wrapped and become visible
-			bottom = hpx - (512 - 224)
-		end
+			if bottom > 512 then
+				-- sprite has wrapped back around to the top
+				-- its visible portion starts at the top of the screen
+				top = 0
+				-- and this is the amount that has wrapped and become visible
+				bottom = hpx - (512 - 224)
+			end
 
-		if right > 512 then
-			-- sprite has wrapped back around to the left side
-			-- its visible portion starts at the left of the screen
-			left = 0
-			-- and this is the amount that has wrapped and become visible
-			right = 16 - (512 - 320)
-		end
+			if right > 512 then
+				-- sprite has wrapped back around to the left side
+				-- its visible portion starts at the left of the screen
+				left = 0
+				-- and this is the amount that has wrapped and become visible
+				right = 16 - (512 - 320)
+			end
 
-		if isOnScreen(left, top, right, bottom) then
-			screen:draw_box(
-				clamp(left, 0, 320),
-				clamp(top, 0, 224),
-				clamp(right, 0, 320),
-				clamp(bottom, 0, 224),
-				colors[i % 4],
-				0
-			)
+			if isOnScreen(left, top, right, bottom) then
+				screen:draw_box(
+					clamp(left, 0, 320),
+					clamp(top, 0, 224),
+					clamp(right, 0, 320),
+					clamp(bottom, 0, 224),
+					colors[i % 4],
+					0
+				)
 
-			screen:draw_text(clamp(left, 0, 320), clamp(top, 0, 224), tostring(i), 0xffffffff, 0xff000000)
+				screen:draw_text(clamp(left, 0, 320), clamp(top, 0, 224), tostring(i), 0xffffffff, 0xff000000)
+			end
 		end
 	end
 end

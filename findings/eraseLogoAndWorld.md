@@ -1,0 +1,23 @@
+# erase logo and world
+
+# oceans sprites/tiles
+
+| sprite                                       | tiles                                                                         | palettes |
+| -------------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+| 99                                           | 0, 4293,4102,410a,4112,4118,4122,412a,4132,413a,4182,418a,4190,4136,4160,41a8 |
+| b0,b0,b0,b0,b0,b0,b8,b8,b9,b0,b0,b2,b0,b0,b2 |
+
+This column starts at 2c8c80, but this is specifically the order select version.
+
+The team select one is at 2d8c80
+
+# logo/countries sprites/tiles
+
+This is specifically the countries (in green) overlaid
+on top of the oceans, due to color limitations
+
+| sprite | tiles                                    |
+| ------ | ---------------------------------------- |
+| 129    | 0,0,0,0,0,4213,4220,422b,0,0,0,0,0,0,0,0 |
+
+the tilemap looks to start at 2c9400

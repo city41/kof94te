@@ -353,6 +353,10 @@ skipPlayer2Cursor:
 move.w #$7057, $VSTRING_DATA ; load where in the fix layer it should go
 move.l #$2VERSION, $VSTRING_DATA + 2
 
+move.w #129, D6
+move.w #1, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
 rts
 
 
