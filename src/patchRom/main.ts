@@ -22,6 +22,7 @@ import { doPromPatch } from "./doPromPatch";
 import { injectCromTiles } from "./injectCromTiles";
 import { clearFixTiles } from "./clearFixTiles";
 import { injectTitleBadgeTiles } from "./injectTitleBadgeTiles";
+import { clearOutCountryFlagTiles } from "./clearOutCountryFlagTiles";
 
 function usage() {
   console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
@@ -334,7 +335,12 @@ async function main(patchJsonPaths: string[]) {
 
   try {
     const cromBuffers = await injectCromTiles();
-    const finalCromBuffers = await injectTitleBadgeTiles(cromBuffers);
+    const cromBuffersWithTitleBadgeTiles = await injectTitleBadgeTiles(
+      cromBuffers
+    );
+    const finalCromBuffers = clearOutCountryFlagTiles(
+      cromBuffersWithTitleBadgeTiles
+    );
     const fixBuffer = await clearFixTiles();
 
     const writePath = path.resolve(mameDir, "kof94.zip");

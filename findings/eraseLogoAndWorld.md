@@ -59,3 +59,16 @@ palettes
 92
 92
 0
+
+# Order select country flags
+
+| sprite | tile  | country |
+| ------ | ----- | ------- |
+| 161    | 1dca4 |         |
+| 162    | 1dcaa |         |
+| 163    | 1dca5 |         |
+| 164    | 1dca8 |         |
+| 165    | 1dca6 |         |
+| 166    | 1dca7 |         |
+| 167    | 1dcab |         |
+| 168    | 1dca9 |         |

@@ -44,10 +44,7 @@ async function writeTilemapToAsm(
         y < 12
           ? getTileWord(x, y, htpTilemap)
           : getTileWord(x, y, orderSelectTilemap);
-      const paletteWord =
-        x < 10
-          ? getPaletteWord(0, y, orderSelectTilemap)
-          : getPaletteWord(19, 6, orderSelectTilemap);
+      const paletteWord = getPaletteWord(0, 0, htpTilemap);
 
       const longVal = (tileWord << 16) | paletteWord;
       tilemapDcs.push(`dc.l $${longVal.toString(16)}`);
