@@ -12,7 +12,7 @@ dc.w $b15
 dc.w $3100
 
 ;; SCB3 vertical position|sticky|size
-dc.w $a802
+dc.w $ba82
 
 ;; SCB4 horizontal position
 dc.w $4800
@@ -26,7 +26,7 @@ dc.w $b16
 dc.w $3100
 
 ;; SCB3 vertical position|sticky|size
-dc.w $a842
+dc.w $bac2
 
 ;; SCB4 horizontal position
 dc.w $5000
