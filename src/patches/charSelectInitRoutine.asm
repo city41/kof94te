@@ -187,7 +187,16 @@ bra p1_pastReady
 p1_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P2_CHOSEN_CHAR2
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1, $P2_CHOSEN_CHAR1
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P2_CHOSEN_CHAR0
+move.b #3, $P2_NUM_CHOSEN_CHARS
+bra p1_skipClearP2NumChosen
+
 p1_firstCharSelect: 
+move.b #0, $P2_NUM_CHOSEN_CHARS
+
+p1_skipClearP2NumChosen:
 move.b #0, $P1_NUM_CHOSEN_CHARS
 move.b #0, $P1_RANDOM_SELECT_TYPE
 move.b #0, $P1_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
@@ -217,7 +226,16 @@ bra p2_pastReady
 p2_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
+move.b $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P1_CHOSEN_CHAR0
+move.b $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1, $P1_CHOSEN_CHAR1
+move.b $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P1_CHOSEN_CHAR2
+move.b #3, $P1_NUM_CHOSEN_CHARS
+bra p2_skipClearP2NumChosen
+
 p2_firstCharSelect: 
+move.b #0, $P1_NUM_CHOSEN_CHARS
+
+p2_skipClearP2NumChosen:
 move.b #0, $P2_NUM_CHOSEN_CHARS
 move.b #0, $P2_RANDOM_SELECT_TYPE
 move.b #0, $P2_SLOT_MACHINE_COUNTDOWN ; make sure slot machne does not run
@@ -231,8 +249,6 @@ move.w #$P1_FOCUSED_NAME_FIX_ADDRESS_VALUE, $P1_FOCUSED_CHAR_NAME_FIX_ADDRESS
 move.l #$2P1_CHAR_NAME_TABLE, $P1_CHAR_NAME_TABLE_ADDRESS
 move.w #$P2_FOCUSED_NAME_FIX_ADDRESS_VALUE, $P2_FOCUSED_CHAR_NAME_FIX_ADDRESS
 move.l #$2P2_CHAR_NAME_TABLE, $P2_CHAR_NAME_TABLE_ADDRESS
-
-bsr renderChosenAvatars
 
 ;; is this a single player game, past the first round, and they 
 ;; chose random select? If so, have char select re randomize
@@ -354,6 +370,7 @@ move.w #$7057, $VSTRING_DATA ; load where in the fix layer it should go
 move.l #$2VERSION, $VSTRING_DATA + 2
 
 
+bsr renderChosenAvatars
 
 rts
 
