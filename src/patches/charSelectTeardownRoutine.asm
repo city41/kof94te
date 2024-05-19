@@ -1,3 +1,11 @@
+;; move the logo/countries back on screen where they used to be
+;; this enables order select to be just like in the original game,
+;; while char select is clean
+move.w #129, D0
+move.w #32, D1
+move.w #496, D2 ; y = 0
+jsr $2MOVE_SPRITE
+
 movem.l A4, $MOVEM_STORAGE
 move.b #0, $IN_CHAR_SELECT_FLAG
 

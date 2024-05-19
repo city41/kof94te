@@ -116,8 +116,8 @@
     "PX_ORIGINAL_TEAM_ID_OFFSET": "30",
     "PX_IS_READY_OFFSET": "32",
 
-    "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7056",
-    "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7296",
+    "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7052",
+    "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7292",
 
     "RANDOM_SELECT_TYPE_NONE": "0",
     "RANDOM_SELECT_TYPE_CHAR": "1",
@@ -510,7 +510,6 @@
       "subroutine": true,
       "patchAsm": [
         "jsr $2CHAR_SELECT_INIT_ROUTINE",
-        "move.l #$3bf62, $108584",
         "move.l #$37046, $108584",
         "rts"
       ]
@@ -883,29 +882,6 @@
       "patchAsm": "setupCharacterColors.asm"
     },
     {
-      "skip": true,
-      "type": "prom",
-      "description": "Dont set character palettes during char select",
-      "address": "1032e4",
-      "subroutine": true,
-      "patchAsm": [
-        "move.b $IN_CHAR_SELECT_FLAG, D5",
-        "cmpi.b #1, D5",
-        "beq inCharSelect",
-        "; not in char select, set up D3 for looping as before",
-        "moveq #$d, D3",
-        "bra done",
-        "inCharSelect:",
-        "; in char select, set D3 to 1 so only one loop happens, less cpu usage",
-        "move.w #1, D3",
-        "lea $401900, A2 ; have it write to palette #200, which we don't care about",
-        "done:",
-        ";;; restore what was clobbered",
-        "move.w $70(A4), D0",
-        "rts"
-      ]
-    },
-    {
       "type": "prom",
       "description": "Choose the next cpu team in single player mode",
       "address": "1375fc",
@@ -993,12 +969,6 @@
       "description": "Have game use our dynamic x/y position table for cutscene2 instead of the canned rom one. This fits because the rom has a nop right after",
       "address": "143cb0",
       "patchAsm": ["lea $AFTER_SCREEN_POSITION_TABLE, A0"]
-    },
-    {
-      "type": "prom",
-      "description": "Replace the team select background with the order select one",
-      "address": "d8c00",
-      "patchAsm": "orderSelectBgForTeamSelect.asm"
     },
     {
       "type": "prom",
@@ -1259,6 +1229,12 @@
       "address": "13ea8e",
       "symbol": "CUTSCENE3_ENDING_DIALOG",
       "patchAsm": "cutscene3EndingDialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Replace the team select background with one that has no globe",
+      "address": "d8c00",
+      "patchAsm": "cleanTeamSelectBgTilemap.asm"
     }
   ]
 }

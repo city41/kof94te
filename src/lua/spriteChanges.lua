@@ -82,8 +82,11 @@ function on_vram_write(offset, data)
 	end
 
 	if offset == REG_VRAMRW then
-		if getSpriteControlBlock() == "scb1/even" and getSpriteIndex() == 181 and data == 0x3f90 then
-			print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
+		-- if getSpriteControlBlock() == "scb1/even" and getSpriteIndex() == 181 and data == 0x3f90 then
+		-- 	print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
+		-- end
+		if getSpriteIndex() == 130 then
+			print(string.format("update for 135 at %s", cpu.state["PC"]))
 		end
 
 		vram[next_vram_index] = data

@@ -26,7 +26,7 @@ FIX_LAYER = 0x7000
 
 -- toggle sprites/fix on/off
 SHOW_SPRITES = true
-SHOW_FIX_LAYER = true
+SHOW_FIX_LAYER = false
 
 -- "emulate" vram to grab the data writes and store them in the vram table
 function on_vram_write(offset, data)

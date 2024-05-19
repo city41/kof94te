@@ -1,3 +1,11 @@
+
+;; move the logo and countries off screen, this combined
+;; with changing the bg tilemap is what accomplishes the clean look
+move.w #129, D0
+move.w #32, D1
+move.w #272, D2 ; y = 224
+jsr $2MOVE_SPRITE
+
 jsr $2FLASH_CURSORS
 
 btst #0, $10fdac ; is p1 start down?
