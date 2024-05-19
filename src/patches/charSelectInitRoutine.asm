@@ -187,9 +187,9 @@ bra p1_pastReady
 p1_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
-move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P2_CHOSEN_CHAR2
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P2_CHOSEN_CHAR0
 move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1, $P2_CHOSEN_CHAR1
-move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P2_CHOSEN_CHAR0
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P2_CHOSEN_CHAR2
 move.b #3, $P2_NUM_CHOSEN_CHARS
 bra p1_skipClearP2NumChosen
 
@@ -514,6 +514,11 @@ clr.w D7
 move.b $P1_CHOSEN_CHAR0, D7
 move.b $P1_CHOSEN_CHAR0 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
+
+; if they chose Rugal, we are done
+cmpi.b #$18, $P1_CHOSEN_CHAR0
+beq renderChosenAvatar_skipPlayer1
+
 move.w #$P1C1_SI + 2, D6
 clr.w D7
 move.b $P1_CHOSEN_CHAR1, D7
@@ -535,6 +540,11 @@ clr.w D7
 move.b $P2_CHOSEN_CHAR2, D7
 move.b $P2_CHOSEN_CHAR2 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
+
+; if they chose Rugal, we are done
+cmpi.b #$18, $P2_CHOSEN_CHAR2
+beq renderChosenAvatar_skipPlayer2
+
 move.w #$P2C1_SI + 2, D6
 clr.w D7
 move.b $P2_CHOSEN_CHAR1, D7
