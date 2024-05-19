@@ -43,7 +43,7 @@ ${tilemapDcs.join("\n")}
 
 // this is the physical address inside a resting ROM file
 // when mapped into the 68k memory space, add 0x200000
-const orderSelectBgTilemapStartingAddress = 0xc8c00;
+const orderSelectBgTilemapStartingAddress = 0xc9800;
 // 20 bg sprites, each with 64 bytes worth of tile data
 const TILEMAP_SIZE = 20 * 64;
 

@@ -21,3 +21,41 @@ on top of the oceans, due to color limitations
 | 129    | 0,0,0,0,0,4213,4220,422b,0,0,0,0,0,0,0,0 |
 
 the tilemap looks to start at 2c9400
+
+# HTP's background
+
+Sprite: 1 at (0,496,0), 16 tiles tall
+tiles
+4293
+4100
+4108
+4110
+4118
+4120
+4128
+4130
+4138
+4180
+4188
+4190
+4198
+41a0
+41a8
+0
+palettes
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+92
+0
