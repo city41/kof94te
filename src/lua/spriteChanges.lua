@@ -85,8 +85,8 @@ function on_vram_write(offset, data)
 		-- if getSpriteControlBlock() == "scb1/even" and getSpriteIndex() == 181 and data == 0x3f90 then
 		-- 	print(string.format("write at %s for si %d", cpu.state["PC"], getSpriteIndex()))
 		-- end
-		if getSpriteIndex() == 130 then
-			print(string.format("update for 135 at %s", cpu.state["PC"]))
+		if getSpriteControlBlock() == "fix" and (data & 0xfff) == 0xaa0 then
+			print(string.format("fix layer write: %x at %x, PC: %s", data, next_vram_index, cpu.state["PC"]))
 		end
 
 		vram[next_vram_index] = data

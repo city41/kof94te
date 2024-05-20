@@ -66,6 +66,7 @@
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
     "IN_CHAR_SELECT_FLAG": "10f8e5",
+    "PLAY_HERE_COMES_CHALLENGER_CHIME": "10f8e6",
     "STORE_A0A1A2": "10f8e8",
     "AFTER_SCREEN_ALREADY_SET_LEFT": "10f912",
     "CHAR_SELECT_COUNTER": "10f913",
@@ -921,7 +922,11 @@
         "bne play ; not in char select, let the sound play",
         "cmpi.b #$61, D0 ; in char select, is the sound the chose team sound effect?",
         "bne play ; some other sound, let it play",
+        "cmpi.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME ; but is it actually the here comes challenge chime (same sfx)?",
+        "beq playHCC ; it is? then let it play",
         "bra done",
+        "playHCC:",
+        "move.b #0, $PLAY_HERE_COMES_CHALLENGER_CHIME ; turn off the flag, we have consumed it",
         "play:",
         "move.b D0, $320000",
         "done:",
@@ -1235,6 +1240,33 @@
       "description": "Replace the team select background with one that has no globe",
       "address": "d8c00",
       "patchAsm": "cleanTeamSelectBgTilemap.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Shift 'Here Comes' up one row",
+      "address": "133e04",
+      "patchAsm": ["move.w #$a, D1"]
+    },
+    {
+      "type": "prom",
+      "description": "Shift 'Challenger' up one row",
+      "address": "133e20",
+      "patchAsm": ["move.w #$e, D1"]
+    },
+    {
+      "type": "prom",
+      "description": "signal to play here comes challenger chime when in char select",
+      "address": "133e08",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne skipSignalSound",
+        "move.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME  ; signal to play the sound effect",
+        "skipSignalSound:",
+        ";;; restore what was clobbered",
+        "movea.l #$530ee, A0",
+        "rts"
+      ]
     }
   ]
 }

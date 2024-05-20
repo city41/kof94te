@@ -1,4 +1,3 @@
-
 ;; move the logo and countries off screen, this combined
 ;; with changing the bg tilemap is what accomplishes the clean look
 move.w #129, D0
