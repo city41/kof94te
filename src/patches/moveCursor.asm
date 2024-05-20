@@ -16,6 +16,7 @@ checkInput:
 
 btst #$3, D0 ; is Right pressed?
 beq skipIncCursorX ; it's not? skip the increment
+move.b #$60, $320000  ; play the sound effect
 addi.w #1, D1
 cmpi.w #8, D1
 ble.s skipUpperXWrap
@@ -25,6 +26,7 @@ skipIncCursorX:
 
 btst #$2, D0 ; is Left pressed?
 beq skipDecCursorX ; it's not? skip the decrement
+move.b #$60, $320000  ; play the sound effect
 subi.w #1, D1
 cmpi.w #$ffff, D1
 bne skipLowerXWrap
