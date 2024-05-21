@@ -48,6 +48,10 @@ bra skipChoosingChar
 threeCharsNotChosen:
 move.b #0, $PX_IS_READY_OFFSET(A0) ; play it safe and clear the flag
 
+;; don't allow player selection during HERE COMES CHALLENGER
+cmpi.b #1, $IN_HERE_COMES_CHALLENGER
+beq skipChoosingChar
+
 ; is this a single player game, they chose randomize when choosing their characters
 ; and now it's a subsequent fight? then randomize again
 btst #5, $PLAY_MODE
