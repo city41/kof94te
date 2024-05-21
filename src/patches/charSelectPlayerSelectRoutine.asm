@@ -315,17 +315,16 @@ rts
 
 flipPaletteFlagIfNeeded:
 ;; first see if this is versus mode
-btst #0, $PLAY_MODE
-beq flipPaletteFlagIfNeeded_done ; p1 is not playing, not versus mode
-btst #1, $PLAY_MODE
-beq flipPaletteFlagIfNeeded_done ; p2 is not playing, not versus mode
-;; this is versus mode
+cmpi.b #3, $PLAY_MODE
+bne flipPaletteFlagIfNeeded_done ; not versus mode
 cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
 beq flipPaletteFlagIfNeeded_done ; other player has not chosen any chars yet, no need to flip
 
 ;; is their first character what we just chose?
 flipPaletteFlagIfNeeded_checkFirstChar:
-lea $PX_CHOSEN_CHAR0_OFFSET(A1), A6
+cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
+beq flipPaletteFlagIfNeeded_done ; other player has not chosen any characters, so no flipping needed
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkSecondChar ; first character is someone else, move on
 adda.w #1, A6 ; move forward to the palette flag
@@ -334,7 +333,10 @@ bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff pale
 bra doFlip ; both teams chose same char, same palette, need to flip
 
 flipPaletteFlagIfNeeded_checkSecondChar:
-lea $PX_CHOSEN_CHAR1_OFFSET(A1), A6
+cmpi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
+ble flipPaletteFlagIfNeeded_done ; other player has not chosen two characters, so no flipping needed
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
+adda.w #2, A6 ; move to their second character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkThirdChar ; second character is someone else, move on
 adda.w #1, A6 ; move forward to the palette flag
@@ -343,7 +345,10 @@ bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff pale
 bra doFlip ; both teams chose same char, same palette, need to flip
 
 flipPaletteFlagIfNeeded_checkThirdChar:
-lea $PX_CHOSEN_CHAR2_OFFSET(A1), A6
+cmpi.b #2, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
+ble flipPaletteFlagIfNeeded_done ; other player has not chosen three characters, so no flipping needed
+movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
+adda.w #4, A6 ; move to their third character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_done ; third character is someone else, we are good
 adda.w #1, A6 ; move forward to the palette flag

@@ -5,6 +5,7 @@
 ;; A0: base pointer to for p1 or p2 data
 ;; it is assumed the y index is 2 bytes after x
 
+;; don't move the cursor if doing the slot machine
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bne done
 
@@ -83,9 +84,9 @@ beq moveCursor ; none chosen? then no need to check if cursor is on a chosen cha
 move.w D2, D3 ;; copy Y to D3 as we are about to clobber it with multiply
 mulu.w #9, D3 ; multiply the Y copy by 9
 add.w D1, D3  ; then add X to get the index into the grid
-lea $2GRID_TO_CHARACTER_ID, A1
-adda.w D3, A1 ; add on the current index to the address to offset into it
-move.b (A1), D3 ; character Id from grid is now in D3
+lea $2GRID_TO_CHARACTER_ID, A2
+adda.w D3, A2 ; add on the current index to the address to offset into it
+move.b (A2), D3 ; character Id from grid is now in D3
 
 move.b $PX_CHOSEN_CHAR0_OFFSET(A0), D5
 cmp.b D3, D5 ; are they over their first chosen char?
