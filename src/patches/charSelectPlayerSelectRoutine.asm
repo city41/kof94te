@@ -1,6 +1,10 @@
 ;; charSelectPlayerSelectRoutine
 ;; handles everything related to a human selecting their characters
 
+;; don't allow players to do anything during HERE COMES CHALLENGER
+cmpi.b #1, $IN_HERE_COMES_CHALLENGER
+beq skipPlayer2
+
 btst #0, $PLAY_MODE ; is p1 playing?
 beq skipPlayer1
 
@@ -48,9 +52,6 @@ bra skipChoosingChar
 threeCharsNotChosen:
 move.b #0, $PX_IS_READY_OFFSET(A0) ; play it safe and clear the flag
 
-;; don't allow player selection during HERE COMES CHALLENGER
-cmpi.b #1, $IN_HERE_COMES_CHALLENGER
-beq skipChoosingChar
 
 ; is this a single player game, they chose randomize when choosing their characters
 ; and now it's a subsequent fight? then randomize again
