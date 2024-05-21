@@ -1,3 +1,7 @@
+;; just in case we got here through HERE COMES CHALLENGER
+;; clear out the flag
+move.b #0, $IN_HERE_COMES_CHALLENGER
+
 move.b #$MAIN_PHASE_INIT, $MAIN_HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 

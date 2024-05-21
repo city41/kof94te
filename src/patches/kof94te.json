@@ -67,6 +67,7 @@
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
     "IN_CHAR_SELECT_FLAG": "10f8e5",
     "PLAY_HERE_COMES_CHALLENGER_CHIME": "10f8e6",
+    "IN_HERE_COMES_CHALLENGER": "10f8e7",
     "STORE_A0A1A2": "10f8e8",
     "AFTER_SCREEN_ALREADY_SET_LEFT": "10f912",
     "CHAR_SELECT_COUNTER": "10f913",
@@ -1265,6 +1266,7 @@
       "patchAsm": [
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne skipSignalSound",
+        "move.b #1, $IN_HERE_COMES_CHALLENGER  ; signal we are in HERE COMES CHALLENGE mode",
         "move.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME  ; signal to play the sound effect",
         "skipSignalSound:",
         ";;; restore what was clobbered",

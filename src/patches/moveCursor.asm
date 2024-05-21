@@ -5,6 +5,10 @@
 ;; A0: base pointer to for p1 or p2 data
 ;; it is assumed the y index is 2 bytes after x
 
+;; don't move cursor if in HERE COMES CHALLENGE
+cmpi.b #1, $IN_HERE_COMES_CHALLENGER
+beq done
+
 ;; don't move the cursor if doing the slot machine
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bne done
