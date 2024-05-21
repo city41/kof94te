@@ -14,7 +14,7 @@ dc.w $ff32
 dc.w $1510
 
 ;; SCB3 vertical position|sticky|size
-dc.w $dc03
+dc.w $ee03
 
 ;; SCB4 horizontal position
 dc.w $1100
