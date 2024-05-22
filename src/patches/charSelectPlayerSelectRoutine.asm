@@ -248,6 +248,9 @@ skipChoosingChar:
 
 ;;;;;;;;;;;;;;;;;;; RANDOM SELECT ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; are they currently hovering on a random select space?
+btst #7, $PLAY_MODE
+bne doneRandomSelect ; no need to deal with random select on subsequent fights
+
 move.w $PX_CURSOR_X_OFFSET(A0), D0
 move.w $PX_CURSOR_Y_OFFSET(A0), D1
 

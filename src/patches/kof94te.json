@@ -371,13 +371,6 @@
     },
     {
       "type": "prom",
-      "description": "clear sprite routine",
-      "subroutine": true,
-      "symbol": "CLEAR_SPRITE",
-      "patchAsm": "clearSprite.asm"
-    },
-    {
-      "type": "prom",
       "description": "truncate sprites routine",
       "subroutine": true,
       "symbol": "TRUNCATE_SPRITES_ROUTINE",
