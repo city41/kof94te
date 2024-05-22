@@ -213,6 +213,7 @@ clr.w D1
 btst #0, $PLAY_MODE ; is p1 playing?
 bne renderCpuChosenTeam_checkP2 ; player 1 is playing, go check p2
 ;; p1 is not playing, so p1 is a cpu 
+move.b #0, D4
 move.w #$P1C1_SI, D6
 move.b $108231, D1
 lea $P2_CHOSEN_CHAR2, A2
@@ -222,6 +223,7 @@ renderCpuChosenTeam_checkP2:
 btst #1, $PLAY_MODE ; is p2 playing?
 bne renderCpuChosenTeam_done ; they are playing, nothing to do
 ;; p2 is not playing, so p2 is a cpu 
+move.b #1, D4
 move.w #$P2C1_SI, D6
 move.b $108431, D1
 lea $P1_CHOSEN_CHAR0, A2
@@ -233,7 +235,13 @@ rts
 
 
 ;;; making this its own subroutine as it needs to get called
-;;; several times depending on single player versus demo mode
+;;; multiple times depending on single player versus demo mode
+;;;
+;;; parameters
+;;; D4 0 for p1 or 1 for p2
+;;; D6.w sprite index
+;;; D1.b chosen team id
+;;; A2 other team's chosen characters list
 renderCpuChosenTeam_doRender:
 cmpi.b #8, D1 ; is this Rugal?
 beq renderCpuChosenTeam_rugal
@@ -250,6 +258,8 @@ renderCpuChosenTeam_renderChar:
 clr.w D7
 move.b (A0), D7 ; load character id
 
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
+beq renderCpuChosenTeam_doRender_renderChosenAvatar ; then palette flag is already in D4
 ;;; get the cpu palette flag
 ;;; params
 ;;; D7: char id
@@ -258,6 +268,7 @@ movem.w D3, $MOVEM_STORAGE
 jsr $2DETERMINE_CPU_CHAR_PALETTE_FLAG
 movem.w $MOVEM_STORAGE, D3
 
+renderCpuChosenTeam_doRender_renderChosenAvatar:
 jsr $2RENDER_CHOSEN_AVATAR
 adda.w #1, A0 ; move to next character
 addi.w #2, D6 ; move to next sprite index
