@@ -19,14 +19,22 @@ cp $MAME_ROM_DIR/$GAME.zip ipsBinaries/hacked/
 (cd ipsBinaries/original/ && unzip $GAME.zip)
 (cd ipsBinaries/hacked/ && unzip $GAME.zip)
 
-# PROM='055-p1.p1'
-# SROM='055-s1.s1'
-# CROM1='055-c1.c1'
-# CROM2='055-c2.c2'
-
 for f in `ls ipsBinaries/original/ -I kof94.zip`; do
     bf=`basename $f`
-    yarn ts-node src/tools/makeIpsPatch.ts ipsBinaries/original/$bf ipsBinaries/hacked/$bf ipsPatches/$GAME.$bf.ips
+
+    originalFile="ipsBinaries/original/$bf"
+    hackedFile="ipsBinaries/hacked/$bf"
+
+    originalSha=$(sha256sum "$originalFile" | awk '{ print $1 }' )
+    hackedSha=$(sha256sum "$hackedFile" | awk '{ print $1 }' )
+
+    echo "$bf originalSha: $originalSha"
+    echo "$bf hackedSha: $hackedSha"
+
+    if [ "$originalSha" != "$hackedSha" ]; then
+        echo "Creating ips for $bf"
+        yarn ts-node src/tools/makeIpsPatch.ts ipsBinaries/original/$bf ipsBinaries/hacked/$bf ipsPatches/$GAME.$bf.ips
+    fi
 done
 
 (cd ipsPatches && zip kof94teIpsPatches.zip *.ips)
