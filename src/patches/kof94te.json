@@ -921,6 +921,8 @@
       "patchAsm": [
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne play ; not in char select, let the sound play",
+        "cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE ; is this cpu select?",
+        "beq play ; then play the sound",
         "cmpi.b #$61, D0 ; in char select, is the sound the chose team sound effect?",
         "bne checkForMovementSfx ; some other sound, keep going",
         "cmpi.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME ; but is it actually the here comes challenge chime (same sfx)?",
