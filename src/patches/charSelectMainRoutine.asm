@@ -211,20 +211,29 @@ rts
 renderCpuChosenTeam:
 clr.w D1
 btst #0, $PLAY_MODE ; is p1 playing?
-bne renderCpuChosenTeam_renderCpuOnP2Side
-;; p1 is not playing, so cpu is p1
+bne renderCpuChosenTeam_checkP2 ; player 1 is playing, go check p2
+;; p1 is not playing, so p1 is a cpu 
 move.w #$P1C1_SI, D6
 move.b $108231, D1
 lea $P2_CHOSEN_CHAR2, A2
-bra renderCpuChosenTeam_doRender
+bsr renderCpuChosenTeam_doRender
 
-renderCpuChosenTeam_renderCpuOnP2Side:
-;; p1 is playing, so cpu is p2
+renderCpuChosenTeam_checkP2:
+btst #1, $PLAY_MODE ; is p2 playing?
+bne renderCpuChosenTeam_done ; they are playing, nothing to do
+;; p2 is not playing, so p2 is a cpu 
 move.w #$P2C1_SI, D6
 move.b $108431, D1
 lea $P1_CHOSEN_CHAR0, A2
+bsr renderCpuChosenTeam_doRender
+
+renderCpuChosenTeam_done:
+rts
 
 
+
+;;; making this its own subroutine as it needs to get called
+;;; several times depending on single player versus demo mode
 renderCpuChosenTeam_doRender:
 cmpi.b #8, D1 ; is this Rugal?
 beq renderCpuChosenTeam_rugal
@@ -253,12 +262,13 @@ jsr $2RENDER_CHOSEN_AVATAR
 adda.w #1, A0 ; move to next character
 addi.w #2, D6 ; move to next sprite index
 dbra D3, renderCpuChosenTeam_renderChar
-bra renderCpuChosenTeam_done
+bra renderCpuChosenTeam_doRender_done
 
 renderCpuChosenTeam_rugal:
 move.w #$18, D7 ; ensure Rugal's id is loaded
 move.b #0, D4   ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
-renderCpuChosenTeam_done:
+renderCpuChosenTeam_doRender_done:
+
 rts
