@@ -79,11 +79,8 @@
     "MAIN_PHASE_INIT": "1",
     "MAIN_PHASE_PLAYER_SELECT": "2",
     "MAIN_PHASE_CPU_SELECT": "3",
-    "MAIN_PHASE_WRAP_UP": "4",
-    "MAIN_PHASE_DONE": "5",
+    "MAIN_PHASE_DONE": "4",
     "MAIN_HACK_PHASE": "10fb04",
-
-    "WRAP_UP_COUNTDOWN": "10fb05",
 
     "STORE_ALL_REGISTERS": "10fb0c",
     "CUTSCENE23_STRING": "10f400",
@@ -448,13 +445,6 @@
       "subroutine": true,
       "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
       "patchAsm": "charSelectCpuSelectRoutine.asm"
-    },
-    {
-      "type": "prom",
-      "description": "char select wrap up routine",
-      "subroutine": true,
-      "symbol": "CHAR_SELECT_WRAP_UP_ROUTINE",
-      "patchAsm": "charSelectWrapUpRoutine.asm"
     },
     {
       "type": "prom",

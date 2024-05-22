@@ -5,10 +5,6 @@ move.b #0, $IN_HERE_COMES_CHALLENGER
 move.b #$MAIN_PHASE_INIT, $MAIN_HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 
-;; decide how long wrap up should be
-;; note: this should correspond to the length of the animations
-move.b #3, $WRAP_UP_COUNTDOWN
-
 ;; reset the player mode, we'll figure it out through the course of init
 ;; 
 ;; PLAY_MODE values:

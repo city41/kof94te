@@ -71,8 +71,6 @@ cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
 cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
-cmpi.b #$MAIN_PHASE_WRAP_UP, $MAIN_HACK_PHASE
-beq doCharSelectWrapUp
 bra done
 
 
@@ -84,11 +82,6 @@ bra done
 doCpuSelect:
 jsr $2CHAR_SELECT_CPU_SELECT_ROUTINE
 bsr checkIfCpuSelectIsDone
-bra done
-
-doCharSelectWrapUp:
-jsr $2CHAR_SELECT_WRAP_UP_ROUTINE
-bsr checkIfWrapUpIsDone
 bra done
 
 done:
@@ -189,21 +182,12 @@ bra checkIfCpuSelectIsDone_done
 checkIfCpuSelectIsDone_cpuIsDone:
 ;; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$MAIN_PHASE_WRAP_UP, $MAIN_HACK_PHASE
+move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
 
 checkIfCpuSelectIsDone_done:
 rts
 
-;;; checkIfWrapUpIsDone
-checkIfWrapUpIsDone:
-cmpi.b #$ff, $WRAP_UP_COUNTDOWN
-bne checkIfWrapUpIsDone_done
-;;; wrap up has concluded, time to signal char select is done
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-
-checkIfWrapUpIsDone_done:
-rts
 
 ;;; renderCpuChosenTeam
 ;;; takes the cpu's chosen team and renders it into the chosen avatar area
