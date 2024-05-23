@@ -1,23 +1,25 @@
 import path from "path";
 import fsp from "fs/promises";
 import { createCanvas, Canvas } from "canvas";
-import { charsCrom } from "./cromChars";
-import { calcDestIndex, japaneseEndingsCromSpans } from "src/cromSpans";
+import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
 
 let fill = "green";
 
-type ExistingTileOutput = {
-  existingTile: " " | "c" | "n" | "e";
+type ControlChar = " " | "c" | "n" | "e";
+
+type ControlTileOutput = {
+  control: ControlChar;
 };
 
 type NewTileOuput = {
+  char: string;
   newTile: Canvas;
 };
 
-type TileOutput = ExistingTileOutput | NewTileOuput;
+type TileOutput = ControlTileOutput | NewTileOuput;
 
-function isExistingTileOutput(tile: TileOutput): tile is ExistingTileOutput {
-  return "existingTile" in tile;
+function isControlTileOutput(tile: TileOutput): tile is ControlTileOutput {
+  return "control" in tile;
 }
 
 function createTile(char: string): Canvas {
@@ -47,6 +49,13 @@ function createTile(char: string): Canvas {
   return c16;
 }
 
+const controlWords: Record<ControlChar, number> = {
+  " ": 0,
+  n: 0xd,
+  c: 0xfffe,
+  e: 0xffff,
+};
+
 function generateAssembly(tiles: TileOutput[]): string {
   let newIndex = 0;
 
@@ -54,16 +63,18 @@ function generateAssembly(tiles: TileOutput[]): string {
 
   for (let i = 0; i < tiles.length; ++i) {
     const tile = tiles[i];
-    if (isExistingTileOutput(tile)) {
-      const word = charsCrom[tile.existingTile];
-      asm.push(`dc.w $${word.toString(16)}`);
+    if (isControlTileOutput(tile)) {
+      const word = controlWords[tile.control];
+      asm.push(`dc.w $${word.toString(16)} ; ${tile.control}`);
     } else {
       const destIndexResult = calcDestIndex(
         newIndex,
         true,
         japaneseEndingsCromSpans
       );
-      asm.push(`dc.w $${destIndexResult.destIndex.toString(16)}`);
+      asm.push(
+        `dc.w $${destIndexResult.destIndex.toString(16)} ; ${tile.char}`
+      );
       newIndex += 1;
     }
   }
@@ -88,11 +99,11 @@ async function main(inputFilePath: string, outputDir: string) {
         case "c":
         case "n":
         case "e":
-          tileOutput.push({ existingTile: char });
+          tileOutput.push({ control: char });
           break;
         default: {
           const tile = createTile(char);
-          tileOutput.push({ newTile: tile });
+          tileOutput.push({ newTile: tile, char });
         }
       }
     }
