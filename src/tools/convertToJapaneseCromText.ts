@@ -1,9 +1,10 @@
 import path from "path";
 import fsp from "fs/promises";
-import { createCanvas, Canvas } from "canvas";
+import { createCanvas, Canvas, CanvasRenderingContext2D } from "canvas";
 import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
-
-let fill = "green";
+// @ts-ignore
+import { getCanvasContextFromImagePath } from "@city41/sromcrom/lib/api/canvas/getCanvasContextFromImagePath";
+import { createCromBytesFromCanvasContext } from "../patchRom/createCromBytes";
 
 type ControlChar = " " | "c" | "n" | "e";
 
@@ -26,13 +27,7 @@ function createTile(char: string): Canvas {
   const largeC = createCanvas(160, 160);
   const lctx = largeC.getContext("2d");
 
-  lctx.fillStyle = fill;
-
-  if (fill === "green") {
-    fill = "red";
-  } else {
-    fill = "green";
-  }
+  lctx.fillStyle = "rgb(255, 0, 255)";
 
   lctx.fillRect(0, 0, largeC.width, largeC.height);
   lctx.font = "160px JF Dot jiskan16";
@@ -82,17 +77,38 @@ function generateAssembly(tiles: TileOutput[]): string {
   return asm.join("\n");
 }
 
-function generateCromTiles(tiles: TileOutput[]): {
+function generateCromTiles(
+  tiles: TileOutput[],
+  paletteCanvasContext: CanvasRenderingContext2D
+): {
   oddData: number[];
   evenData: number[];
 } {
-  return {
-    oddData: [],
-    evenData: [],
-  };
+  const oddData: number[] = [];
+  const evenData: number[] = [];
+
+  for (let i = 0; i < tiles.length; ++i) {
+    const tile = tiles[i];
+    if (isControlTileOutput(tile)) {
+      continue;
+    }
+    const cromByteResult = createCromBytesFromCanvasContext(
+      tile.newTile.getContext("2d"),
+      paletteCanvasContext
+    );
+    oddData.push(...cromByteResult.oddCromBytes);
+    evenData.push(...cromByteResult.evenCromBytes);
+  }
+
+  return { oddData, evenData };
 }
 
-async function main(inputFilePath: string, outputDir: string) {
+async function main(
+  inputFilePath: string,
+  palettePath: string,
+  outputDir: string
+) {
+  const paletteCanvasContext = getCanvasContextFromImagePath(palettePath);
   const rawText = (await fsp.readFile(inputFilePath)).toString();
   const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
@@ -124,7 +140,7 @@ async function main(inputFilePath: string, outputDir: string) {
     path.resolve(outputDir, `${path.basename(inputFilePath)}.asm`),
     assembly
   );
-  const cromTiles = generateCromTiles(tileOutput);
+  const cromTiles = generateCromTiles(tileOutput, paletteCanvasContext);
   fsp.writeFile(
     path.resolve(outputDir, `${path.basename(inputFilePath)}.c1`),
     new Uint8Array(cromTiles.oddData)
@@ -135,16 +151,25 @@ async function main(inputFilePath: string, outputDir: string) {
   );
 }
 
-const [_tsnode, _convertToJapaneseCromText, inputFilePath, outputDir] =
-  process.argv;
+const [
+  _tsnode,
+  _convertToJapaneseCromText,
+  inputFilePath,
+  palettePath,
+  outputDir,
+] = process.argv;
 
-if (!inputFilePath || !outputDir) {
+if (!inputFilePath || !palettePath || !outputDir) {
   console.error(
-    "usage: ts-node convertToJapaneseCromText.ts <input-file-path> <output-dir-path>"
+    "usage: ts-node convertToJapaneseCromText.ts <input-file-path> <palette-path> <output-dir-path>"
   );
   process.exit(1);
 }
 
-main(path.resolve(inputFilePath), path.resolve(outputDir))
+main(
+  path.resolve(inputFilePath),
+  path.resolve(palettePath),
+  path.resolve(outputDir)
+)
   .then(() => console.log("done"))
   .catch((e) => console.error(e));
