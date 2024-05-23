@@ -1,4 +1,3 @@
-import path from "path";
 import fsp from "fs/promises";
 import { createCanvas, Canvas, CanvasRenderingContext2D } from "canvas";
 import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
@@ -18,6 +17,18 @@ type NewTileOuput = {
 };
 
 type TileOutput = ControlTileOutput | NewTileOuput;
+
+const inputSpec = {
+  destAsmDir: "src/patches",
+  destCromRootPath: "resources/japanese-tiles",
+  inputs: [
+    {
+      inputTxt: "resources/EnglandEnding_part1_ja.txt",
+      destAsm: "src/patches/EnglandEndingDialog_part1_ja.asm",
+    },
+  ],
+  palette: "resources/japanese.palette.png",
+};
 
 function isControlTileOutput(tile: TileOutput): tile is ControlTileOutput {
   return "control" in tile;
@@ -103,13 +114,11 @@ function generateCromTiles(
   return { oddData, evenData };
 }
 
-async function main(
-  inputFilePath: string,
-  palettePath: string,
-  outputDir: string
-) {
-  const paletteCanvasContext = getCanvasContextFromImagePath(palettePath);
-  const rawText = (await fsp.readFile(inputFilePath)).toString();
+async function main() {
+  const input = inputSpec.inputs[0];
+
+  const paletteCanvasContext = getCanvasContextFromImagePath(inputSpec.palette);
+  const rawText = (await fsp.readFile(input.inputTxt)).toString();
   const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
   const tileOutput: TileOutput[] = [];
@@ -136,40 +145,18 @@ async function main(
   }
 
   const assembly = generateAssembly(tileOutput);
-  fsp.writeFile(
-    path.resolve(outputDir, `${path.basename(inputFilePath)}.asm`),
-    assembly
-  );
+  fsp.writeFile(input.destAsm, assembly);
   const cromTiles = generateCromTiles(tileOutput, paletteCanvasContext);
   fsp.writeFile(
-    path.resolve(outputDir, `${path.basename(inputFilePath)}.c1`),
+    `${inputSpec.destCromRootPath}.c1`,
     new Uint8Array(cromTiles.oddData)
   );
   fsp.writeFile(
-    path.resolve(outputDir, `${path.basename(inputFilePath)}.c2`),
+    `${inputSpec.destCromRootPath}.c2`,
     new Uint8Array(cromTiles.evenData)
   );
 }
 
-const [
-  _tsnode,
-  _convertToJapaneseCromText,
-  inputFilePath,
-  palettePath,
-  outputDir,
-] = process.argv;
-
-if (!inputFilePath || !palettePath || !outputDir) {
-  console.error(
-    "usage: ts-node convertToJapaneseCromText.ts <input-file-path> <palette-path> <output-dir-path>"
-  );
-  process.exit(1);
-}
-
-main(
-  path.resolve(inputFilePath),
-  path.resolve(palettePath),
-  path.resolve(outputDir)
-)
+main()
   .then(() => console.log("done"))
   .catch((e) => console.error(e));

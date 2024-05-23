@@ -307,7 +307,7 @@ lea $2ENG_ENDING_PART1_ES, A0
 bra done
 
 loadEnglandFifthLineJapanese:
-lea $2ENG_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2ENG_ENDING_PART1_JA, A0
 bra done
 
 doMexicoFifthLine:
