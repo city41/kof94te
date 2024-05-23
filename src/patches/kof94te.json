@@ -1184,6 +1184,34 @@
     },
     {
       "type": "prom",
+      "description": "New Mexico ending, part 1, ja",
+      "symbol": "MEX_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, ja",
+      "symbol": "MEX_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, ja",
+      "symbol": "MEX_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, ja",
+      "symbol": "MEX_ENDING_PART4_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part4_ja.asm"
+    },
+    {
+      "type": "prom",
       "description": "New England ending, part 1, en",
       "symbol": "ENG_ENDING_PART1_EN",
       "subroutine": true,

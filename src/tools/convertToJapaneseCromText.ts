@@ -46,6 +46,22 @@ const inputSpec = {
       inputTxt: "resources/USAEnding_part3_ja.txt",
       destAsm: "src/patches/USAEndingDialog_part3_ja.asm",
     },
+    {
+      inputTxt: "resources/MexicoEnding_part1_ja.txt",
+      destAsm: "src/patches/MexicoEndingDialog_part1_ja.asm",
+    },
+    {
+      inputTxt: "resources/MexicoEnding_part2_ja.txt",
+      destAsm: "src/patches/MexicoEndingDialog_part2_ja.asm",
+    },
+    {
+      inputTxt: "resources/MexicoEnding_part3_ja.txt",
+      destAsm: "src/patches/MexicoEndingDialog_part3_ja.asm",
+    },
+    {
+      inputTxt: "resources/MexicoEnding_part4_ja.txt",
+      destAsm: "src/patches/MexicoEndingDialog_part4_ja.asm",
+    },
   ],
   palette: "resources/japanese.palette.png",
 };
