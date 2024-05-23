@@ -11,12 +11,12 @@ type ControlTileOutput = {
   control: ControlChar;
 };
 
-type NewTileOuput = {
+type NewTileOutput = {
   char: string;
   newTile: Canvas;
 };
 
-type TileOutput = ControlTileOutput | NewTileOuput;
+type TileOutput = ControlTileOutput | NewTileOutput;
 
 const inputSpec = {
   destAsmDir: "src/patches",
@@ -25,6 +25,14 @@ const inputSpec = {
     {
       inputTxt: "resources/EnglandEnding_part1_ja.txt",
       destAsm: "src/patches/EnglandEndingDialog_part1_ja.asm",
+    },
+    {
+      inputTxt: "resources/EnglandEnding_part2_ja.txt",
+      destAsm: "src/patches/EnglandEndingDialog_part2_ja.asm",
+    },
+    {
+      inputTxt: "resources/EnglandEnding_part3_ja.txt",
+      destAsm: "src/patches/EnglandEndingDialog_part3_ja.asm",
     },
   ],
   palette: "resources/japanese.palette.png",
@@ -65,8 +73,8 @@ const controlWords: Record<ControlChar, number> = {
   e: 0xffff,
 };
 
-function generateAssembly(tiles: TileOutput[]): string {
-  let newIndex = 0;
+function generateAssembly(tiles: TileOutput[], startingIndex: number): string {
+  let newIndex = startingIndex;
 
   const asm: string[] = [];
 
@@ -82,7 +90,9 @@ function generateAssembly(tiles: TileOutput[]): string {
         japaneseEndingsCromSpans
       );
       asm.push(
-        `dc.w $${destIndexResult.destIndex.toString(16)} ; ${tile.char}`
+        `dc.w $${destIndexResult.destIndex.toString(16)} ; ${tile.char} -- ${
+          destIndexResult.destIndex
+        }`
       );
       newIndex += 1;
     }
@@ -118,38 +128,51 @@ function generateCromTiles(
 }
 
 async function main() {
-  const input = inputSpec.inputs[0];
-
   const paletteCanvasContext = getCanvasContextFromImagePath(inputSpec.palette);
-  const rawText = (await fsp.readFile(input.inputTxt)).toString();
-  const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
-  const tileOutput: TileOutput[] = [];
+  const totalTileOutput: NewTileOutput[] = [];
 
-  for (let i = 0; i < lines.length; ++i) {
-    const line = lines[i];
+  for (const input of inputSpec.inputs) {
+    const rawText = (await fsp.readFile(input.inputTxt)).toString();
+    const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
-    for (let c = 0; c < line.length; ++c) {
-      const char = line[c];
+    const currentPartTileOutput: TileOutput[] = [];
 
-      switch (char) {
-        case " ":
-        case "c":
-        case "n":
-        case "e":
-          tileOutput.push({ control: char });
-          break;
-        default: {
-          const tile = createTile(char);
-          tileOutput.push({ newTile: tile, char });
+    for (let i = 0; i < lines.length; ++i) {
+      const line = lines[i];
+
+      for (let c = 0; c < line.length; ++c) {
+        const char = line[c];
+
+        switch (char) {
+          case " ":
+          case "c":
+          case "n":
+          case "e":
+            currentPartTileOutput.push({ control: char });
+            break;
+          default: {
+            const tile = createTile(char);
+            currentPartTileOutput.push({ newTile: tile, char });
+          }
         }
       }
     }
+
+    const assembly = generateAssembly(
+      currentPartTileOutput,
+      totalTileOutput.length
+    );
+    fsp.writeFile(input.destAsm, assembly);
+
+    totalTileOutput.push(
+      ...(currentPartTileOutput.filter(
+        (c) => !isControlTileOutput(c)
+      ) as NewTileOutput[])
+    );
   }
 
-  const assembly = generateAssembly(tileOutput);
-  fsp.writeFile(input.destAsm, assembly);
-  const cromTiles = generateCromTiles(tileOutput, paletteCanvasContext);
+  const cromTiles = generateCromTiles(totalTileOutput, paletteCanvasContext);
   fsp.writeFile(
     `${inputSpec.destCromRootPath}.c1`,
     new Uint8Array(cromTiles.oddData)
