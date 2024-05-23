@@ -42,9 +42,12 @@ function createTile(char: string): Canvas {
 
   lctx.fillRect(0, 0, largeC.width, largeC.height);
   lctx.font = "160px JF Dot jiskan16";
-  lctx.fillStyle = "white";
 
+  lctx.fillStyle = "rgb(128,128,128)";
   lctx.fillText(char, 0, 140);
+
+  lctx.fillStyle = "white";
+  lctx.fillText(char, 0, 130);
 
   const c16 = createCanvas(16, 16);
   const c16ctx = c16.getContext("2d");
