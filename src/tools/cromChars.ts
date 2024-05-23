@@ -57,6 +57,15 @@ export const cromChars: Record<number, string> = {
   [0x49df]: "¿",
   [0x49e0]: "¡",
   [0x49e1]: "u",
+
+  [153]: "何",
+  [17765]: "が",
+  // []: "起",
+  // []: "き"
+  [71]: "て",
+  [39]: "い",
+  [104]: "る",
+  [79]: "の",
 };
 
 export const charsCrom: Record<string, number> = Object.entries(
