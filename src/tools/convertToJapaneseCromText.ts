@@ -82,6 +82,16 @@ function generateAssembly(tiles: TileOutput[]): string {
   return asm.join("\n");
 }
 
+function generateCromTiles(tiles: TileOutput[]): {
+  oddData: number[];
+  evenData: number[];
+} {
+  return {
+    oddData: [],
+    evenData: [],
+  };
+}
+
 async function main(inputFilePath: string, outputDir: string) {
   const rawText = (await fsp.readFile(inputFilePath)).toString();
   const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
@@ -114,15 +124,15 @@ async function main(inputFilePath: string, outputDir: string) {
     path.resolve(outputDir, `${path.basename(inputFilePath)}.asm`),
     assembly
   );
-  // const cromTiles = generateCromTiles(tileOutput);
-  // fsp.writeFile(
-  //   path.resolve(outputDir, `${path.basename(inputFilePath)}.c1`),
-  //   cromTiles.c1
-  // );
-  // fsp.writeFile(
-  //   path.resolve(outputDir, `${path.basename(inputFilePath)}.c2`),
-  //   cromTiles.c2
-  // );
+  const cromTiles = generateCromTiles(tileOutput);
+  fsp.writeFile(
+    path.resolve(outputDir, `${path.basename(inputFilePath)}.c1`),
+    new Uint8Array(cromTiles.oddData)
+  );
+  fsp.writeFile(
+    path.resolve(outputDir, `${path.basename(inputFilePath)}.c2`),
+    new Uint8Array(cromTiles.evenData)
+  );
 }
 
 const [_tsnode, _convertToJapaneseCromText, inputFilePath, outputDir] =
