@@ -19,6 +19,9 @@ export const cromSpans = [
     end: 32766,
     pair: "c7/c8",
   },
+];
+
+export const japaneseEndingsCromSpans = [
   {
     // 115 tiles
     globalOffset: TILES_PER_PAIR * 0,
@@ -57,15 +60,16 @@ export const cromSpans = [
 // and sromCromPreEmit uses this so the assembly data has the matching indexes
 export function calcDestIndex(
   logicalIndex: number,
-  includeGlobalOffset: boolean
+  includeGlobalOffset: boolean,
+  spans = cromSpans
 ): {
   destIndex: number;
   destCromPair: string;
 } {
   const originalLogicalIndex = logicalIndex;
 
-  for (let cs = 0; cs < cromSpans.length; ++cs) {
-    const cromSpan = cromSpans[cs];
+  for (let cs = 0; cs < spans.length; ++cs) {
+    const cromSpan = spans[cs];
     const curSpanSize = cromSpan.end - cromSpan.start + 1;
 
     if (logicalIndex < curSpanSize) {

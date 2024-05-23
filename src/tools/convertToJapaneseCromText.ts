@@ -1,8 +1,24 @@
 import path from "path";
 import fsp from "fs/promises";
 import { createCanvas, Canvas } from "canvas";
+import { charsCrom } from "./cromChars";
+import { calcDestIndex, japaneseEndingsCromSpans } from "src/cromSpans";
 
 let fill = "green";
+
+type ExistingTileOutput = {
+  existingTile: " " | "c" | "n" | "e";
+};
+
+type NewTileOuput = {
+  newTile: Canvas;
+};
+
+type TileOutput = ExistingTileOutput | NewTileOuput;
+
+function isExistingTileOutput(tile: TileOutput): tile is ExistingTileOutput {
+  return "existingTile" in tile;
+}
 
 function createTile(char: string): Canvas {
   const largeC = createCanvas(160, 160);
@@ -31,29 +47,83 @@ function createTile(char: string): Canvas {
   return c16;
 }
 
-async function main() {
-  const text = "何が起きているの？";
+function generateAssembly(tiles: TileOutput[]): string {
+  let newIndex = 0;
 
-  const c = createCanvas(16 * text.length, 16);
-  const ctx = c.getContext("2d");
+  const asm: string[] = [];
 
-  for (let i = 0; i < text.length; ++i) {
-    const tile = createTile(text[i]);
-
-    ctx.drawImage(tile, i * 16, 0);
+  for (let i = 0; i < tiles.length; ++i) {
+    const tile = tiles[i];
+    if (isExistingTileOutput(tile)) {
+      const word = charsCrom[tile.existingTile];
+      asm.push(`dc.w $${word.toString(16)}`);
+    } else {
+      const destIndexResult = calcDestIndex(
+        newIndex,
+        true,
+        japaneseEndingsCromSpans
+      );
+      asm.push(`dc.w $${destIndexResult.destIndex.toString(16)}`);
+      newIndex += 1;
+    }
   }
 
-  const buffer = c.toBuffer();
-  await fsp.writeFile(path.resolve("./text.png"), buffer);
+  return asm.join("\n");
 }
 
-// const [_tsnode, _convertToJapaneseCromText, inputFilePath] = process.argv;
+async function main(inputFilePath: string, outputDir: string) {
+  const rawText = (await fsp.readFile(inputFilePath)).toString();
+  const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
-// if (!inputFilePath) {
-//   console.error("usage: ts-node convertToJapaneseCromText.ts");
-//   process.exit(1);
-// }
+  const tileOutput: TileOutput[] = [];
 
-main()
+  for (let i = 0; i < lines.length; ++i) {
+    const line = lines[i];
+
+    for (let c = 0; c < line.length; ++c) {
+      const char = line[c];
+
+      switch (char) {
+        case " ":
+        case "c":
+        case "n":
+        case "e":
+          tileOutput.push({ existingTile: char });
+          break;
+        default: {
+          const tile = createTile(char);
+          tileOutput.push({ newTile: tile });
+        }
+      }
+    }
+  }
+
+  const assembly = generateAssembly(tileOutput);
+  fsp.writeFile(
+    path.resolve(outputDir, `${path.basename(inputFilePath)}.asm`),
+    assembly
+  );
+  // const cromTiles = generateCromTiles(tileOutput);
+  // fsp.writeFile(
+  //   path.resolve(outputDir, `${path.basename(inputFilePath)}.c1`),
+  //   cromTiles.c1
+  // );
+  // fsp.writeFile(
+  //   path.resolve(outputDir, `${path.basename(inputFilePath)}.c2`),
+  //   cromTiles.c2
+  // );
+}
+
+const [_tsnode, _convertToJapaneseCromText, inputFilePath, outputDir] =
+  process.argv;
+
+if (!inputFilePath || !outputDir) {
+  console.error(
+    "usage: ts-node convertToJapaneseCromText.ts <input-file-path> <output-dir-path>"
+  );
+  process.exit(1);
+}
+
+main(path.resolve(inputFilePath), path.resolve(outputDir))
   .then(() => console.log("done"))
   .catch((e) => console.error(e));
