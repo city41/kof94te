@@ -34,6 +34,18 @@ const inputSpec = {
       inputTxt: "resources/EnglandEnding_part3_ja.txt",
       destAsm: "src/patches/EnglandEndingDialog_part3_ja.asm",
     },
+    {
+      inputTxt: "resources/USAEnding_part1_ja.txt",
+      destAsm: "src/patches/USAEndingDialog_part1_ja.asm",
+    },
+    {
+      inputTxt: "resources/USAEnding_part2_ja.txt",
+      destAsm: "src/patches/USAEndingDialog_part2_ja.asm",
+    },
+    {
+      inputTxt: "resources/USAEnding_part3_ja.txt",
+      destAsm: "src/patches/USAEndingDialog_part3_ja.asm",
+    },
   ],
   palette: "resources/japanese.palette.png",
 };

@@ -1,0 +1,18 @@
+# part 1: Lucky, Heavy and Brian are talking
+# LUCKY: DID YOU HEAR?
+ラッキーn
+ 聞いたか？n
+ この大会がルガールというc
+ 人物に優勝者を石像に変えn
+ るための罠だったそうだ！c
+# BRIAN: WHAT?? STATUES??
+ブライアンn
+ 何だって？石像に？n
+ 何てこった！c
+# HEAVY D!: WOW. GOOD THING
+ヘビィーD!n
+ やれやれだぜ。n
+ 大会に負けて良かったことだ。c
+# LUCKY: KINDA MAKES ME NOT
+ラッキーn
+ 来年の大会に出るをやめようぜ！e

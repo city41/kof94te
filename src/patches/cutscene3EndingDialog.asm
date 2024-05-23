@@ -286,7 +286,7 @@ lea $2USA_ENDING_PART1_ES, A0
 bra done
 
 loadUSAFifthLineJapanese:
-lea $2USA_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART1_JA, A0
 bra done
 
 doEnglandFifthLine:
@@ -370,7 +370,7 @@ lea $2USA_ENDING_PART2_ES, A0
 bra done
 
 loadUSASixthLineJapanese:
-lea $2USA_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART2_JA, A0
 bra done
 
 doEnglandSixthLine:
@@ -454,7 +454,7 @@ lea $2USA_ENDING_PART3_ES, A0
 bra done
 
 loadUSASeventhLineJapanese:
-lea $2USA_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART3_JA, A0
 bra done
 
 doEnglandSeventhLine:
