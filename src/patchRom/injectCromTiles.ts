@@ -1,7 +1,7 @@
 import path from "node:path";
 import fsp from "node:fs/promises";
 import { getRom } from "./getRom";
-import { calcDestIndex } from "../cromSpans";
+import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
 import { RomFileBuffer } from "./types";
 
 // todo: can this be calculated?
@@ -44,13 +44,29 @@ async function injectCromTiles(): Promise<RomFileBuffer[]> {
       path.resolve(__dirname, "../../resources/newtiles-c2.c2")
     )
   );
+  const japaneseEndingTilesC1Buffer = Array.from(
+    await fsp.readFile(
+      path.resolve(__dirname, "../../resources/japanese-tiles.c1")
+    )
+  );
+  const japaneseEndingTilesC2Buffer = Array.from(
+    await fsp.readFile(
+      path.resolve(__dirname, "../../resources/japanese-tiles.c2")
+    )
+  );
 
-  function replaceTile(srcIndex: number, destIndex: number, destPair: string) {
-    const oddData = newTilesC1Buffer.slice(
+  function replaceTile(
+    srcIndex: number,
+    destIndex: number,
+    destPair: string,
+    srcC1Buffer: number[],
+    srcC2Buffer: number[]
+  ) {
+    const oddData = srcC1Buffer.slice(
       srcIndex * CROM_TILE_SIZE_PER_ROM,
       (srcIndex + 1) * CROM_TILE_SIZE_PER_ROM
     );
-    const evenData = newTilesC2Buffer.slice(
+    const evenData = srcC2Buffer.slice(
       srcIndex * CROM_TILE_SIZE_PER_ROM,
       (srcIndex + 1) * CROM_TILE_SIZE_PER_ROM
     );
@@ -73,7 +89,32 @@ async function injectCromTiles(): Promise<RomFileBuffer[]> {
     const srcIndex = i + NEW_TILES_FIRST_INDEX;
     const { destIndex, destCromPair } = calcDestIndex(i, false);
 
-    replaceTile(srcIndex, destIndex, destCromPair);
+    replaceTile(
+      srcIndex,
+      destIndex,
+      destCromPair,
+      newTilesC1Buffer,
+      newTilesC2Buffer
+    );
+  }
+
+  const totalJATiles =
+    japaneseEndingTilesC1Buffer.length / CROM_TILE_SIZE_PER_ROM;
+
+  for (let i = 0; i < totalJATiles; ++i) {
+    const { destIndex, destCromPair } = calcDestIndex(
+      i,
+      false,
+      japaneseEndingsCromSpans
+    );
+
+    replaceTile(
+      i,
+      destIndex,
+      destCromPair,
+      japaneseEndingTilesC1Buffer,
+      japaneseEndingTilesC2Buffer
+    );
   }
 
   return Object.values(cromBuffers).flat(1);
