@@ -1,18 +1,51 @@
 // kof94's crom pairs are 4 megabytes
 const TILES_PER_PAIR = 32768;
+
+// 1.1.9 uses 387 tiles
+
 // tiles in the croms that are empty or unused
 export const cromSpans = [
   {
+    // 348 tiles
     globalOffset: TILES_PER_PAIR * 0,
     start: 2728,
     end: 3071,
     pair: "c1/c2",
   },
   {
+    // 219
     globalOffset: TILES_PER_PAIR * 3,
     start: 32547,
     end: 32766,
     pair: "c7/c8",
+  },
+  {
+    // 115 tiles
+    globalOffset: TILES_PER_PAIR * 0,
+    start: 9973,
+    end: 10087,
+    pair: "c1/c2",
+  },
+  {
+    // 48 tiles
+    globalOffset: TILES_PER_PAIR * 0,
+    start: 11728,
+    end: 11775,
+    pair: "c1/c2",
+  },
+  {
+    // 257 tiles
+    globalOffset: TILES_PER_PAIR * 0,
+    start: 11880,
+    end: 12031,
+    pair: "c1/c2",
+  },
+  {
+    // 403 tiles
+    globalOffset: TILES_PER_PAIR * 0,
+    start: 13419,
+    end: 13821,
+    pair: "c1/c2",
   },
 ];
 
