@@ -1,0 +1,17 @@
+# part 1: Kyo, Beni and Goro are talking
+# KYO: THIS TOURNAMENT...
+キヨウn
+ この大会は結局たたの茶番劇だn
+ ったな.c
+# BENI: WHAT DO YOU MEAN?
+ベニマルn
+ どういう意味？c
+# KYO: IT WAS SETUP...
+キヨウn
+ それはルガールがこの大会の優n
+ 勝者を捕獲して石像に変えるたc
+ めの罠だった！c
+# DAIMON: REALLY?...
+ダイモソn
+ まさか！？本当に正気を失っn
+ た主催者だ！e

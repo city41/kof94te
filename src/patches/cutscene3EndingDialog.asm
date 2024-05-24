@@ -286,7 +286,7 @@ lea $2USA_ENDING_PART1_ES, A0
 bra done
 
 loadUSAFifthLineJapanese:
-lea $2USA_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART1_JA, A0
 bra done
 
 doEnglandFifthLine:
@@ -307,7 +307,7 @@ lea $2ENG_ENDING_PART1_ES, A0
 bra done
 
 loadEnglandFifthLineJapanese:
-lea $2ENG_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2ENG_ENDING_PART1_JA, A0
 bra done
 
 doMexicoFifthLine:
@@ -328,7 +328,7 @@ lea $2MEX_ENDING_PART1_ES, A0
 bra done
 
 loadMexicoFifthLineJapanese:
-lea $2MEX_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2MEX_ENDING_PART1_JA, A0
 bra done
 
 doJapanFifthLine:
@@ -349,7 +349,7 @@ lea $2JPN_ENDING_PART1_ES, A0
 bra done
 
 loadJapanFifthLineJapanese:
-lea $2JPN_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART1_JA, A0 
 bra done
 
 doUSASixthLine:
@@ -370,7 +370,7 @@ lea $2USA_ENDING_PART2_ES, A0
 bra done
 
 loadUSASixthLineJapanese:
-lea $2USA_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART2_JA, A0
 bra done
 
 doEnglandSixthLine:
@@ -391,7 +391,7 @@ lea $2ENG_ENDING_PART2_ES, A0
 bra done
 
 loadEnglandSixthLineJapanese:
-lea $2ENG_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2ENG_ENDING_PART2_JA, A0
 bra done
 
 doMexicoSixthLine:
@@ -412,7 +412,7 @@ lea $2MEX_ENDING_PART2_ES, A0
 bra done
 
 loadMexicoSixthLineJapanese:
-lea $2MEX_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2MEX_ENDING_PART2_JA, A0
 bra done
 
 doJapanSixthLine:
@@ -433,7 +433,7 @@ lea $2JPN_ENDING_PART2_ES, A0
 bra done
 
 loadJapanSixthLineJapanese:
-lea $2JPN_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART2_JA, A0
 bra done
 
 doUSASeventhLine:
@@ -454,7 +454,7 @@ lea $2USA_ENDING_PART3_ES, A0
 bra done
 
 loadUSASeventhLineJapanese:
-lea $2USA_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2USA_ENDING_PART3_JA, A0
 bra done
 
 doEnglandSeventhLine:
@@ -475,7 +475,7 @@ lea $2ENG_ENDING_PART3_ES, A0
 bra done
 
 loadEnglandSeventhLineJapanese:
-lea $2ENG_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2ENG_ENDING_PART3_JA, A0
 bra done
 
 doMexicoSeventhLine:
@@ -496,7 +496,7 @@ lea $2MEX_ENDING_PART3_ES, A0
 bra done
 
 loadMexicoSeventhLineJapanese:
-lea $2MEX_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2MEX_ENDING_PART3_JA, A0
 bra done
 
 doJapanSeventhLine:
@@ -517,7 +517,7 @@ lea $2JPN_ENDING_PART3_ES, A0
 bra done
 
 loadJapanSeventhLineJapanese:
-lea $2JPN_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART3_JA, A0
 bra done
 
 doMexicoEighthLine:
@@ -538,7 +538,7 @@ lea $2MEX_ENDING_PART4_ES, A0
 bra done
 
 loadMexicoEigthLineJapanese:
-lea $2MEX_ENDING_PART4_EN, A0 ; TODO, English is a placeholder
+lea $2MEX_ENDING_PART4_JA, A0
 
 done:
 movem.l $MOVEM_STORAGE, D0/D1/A1

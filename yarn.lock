@@ -81,6 +81,11 @@
   resolved "https://registry.yarnpkg.com/@types/color-diff/-/color-diff-1.2.5.tgz#497a8ff063cdd724a2d82082379b51b680a99e34"
   integrity sha512-O+poH2XxhkQg8yGA5c4ejheHLpFcZaE33BG6rLp1eJq2W39iij9+9kGldqsoLq5BQuNt1FjsKwmdDitniK/Qtw==
 
+"@types/lodash@^4.17.4":
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.4.tgz#0303b64958ee070059e3a7184048a55159fe20b7"
+  integrity sha512-wYCP26ZLxaT3R39kiN2+HcJ4kTd3U1waI/cY7ivWYqFP6pW3ZNpvi6Wd6PHZx7T/t8z0vlkXMg3QYLa7DZ/IJQ==
+
 "@types/mkdirp@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-2.0.0.tgz#d14f087a889c3744e7cc41e82ad762b047ebc636"

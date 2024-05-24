@@ -1026,42 +1026,63 @@
       "description": "New USA ending, part 1, en",
       "symbol": "USA_ENDING_PART1_EN",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part1_en.asm"
+      "patchAsm": "USAEndingDialog_part1_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 2, en",
       "symbol": "USA_ENDING_PART2_EN",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part2_en.asm"
+      "patchAsm": "USAEndingDialog_part2_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 3, en",
       "symbol": "USA_ENDING_PART3_EN",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part3_en.asm"
+      "patchAsm": "USAEndingDialog_part3_en.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 1, es",
       "symbol": "USA_ENDING_PART1_ES",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part1_es.asm"
+      "patchAsm": "USAEndingDialog_part1_es.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 2, es",
       "symbol": "USA_ENDING_PART2_ES",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part2_es.asm"
+      "patchAsm": "USAEndingDialog_part2_es.asm"
     },
     {
       "type": "prom",
       "description": "New USA ending, part 3, es",
       "symbol": "USA_ENDING_PART3_ES",
       "subroutine": true,
-      "patchAsm": "USAendingDialog_part3_es.asm"
+      "patchAsm": "USAEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 1, ja",
+      "symbol": "USA_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, ja",
+      "symbol": "USA_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, ja",
+      "symbol": "USA_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part3_ja.asm"
     },
     {
       "type": "prom",
@@ -1104,6 +1125,27 @@
       "symbol": "JPN_ENDING_PART3_ES",
       "subroutine": true,
       "patchAsm": "JapanEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, ja",
+      "symbol": "JPN_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, ja",
+      "symbol": "JPN_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, ja",
+      "symbol": "JPN_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part3_ja.asm"
     },
     {
       "type": "prom",
@@ -1163,6 +1205,34 @@
     },
     {
       "type": "prom",
+      "description": "New Mexico ending, part 1, ja",
+      "symbol": "MEX_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, ja",
+      "symbol": "MEX_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, ja",
+      "symbol": "MEX_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, ja",
+      "symbol": "MEX_ENDING_PART4_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part4_ja.asm"
+    },
+    {
+      "type": "prom",
       "description": "New England ending, part 1, en",
       "symbol": "ENG_ENDING_PART1_EN",
       "subroutine": true,
@@ -1202,6 +1272,27 @@
       "symbol": "ENG_ENDING_PART3_ES",
       "subroutine": true,
       "patchAsm": "EnglandEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, ja",
+      "symbol": "ENG_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, ja",
+      "symbol": "ENG_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, ja",
+      "symbol": "ENG_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part3_ja.asm"
     },
     {
       "type": "prom",
