@@ -8,11 +8,11 @@ jsr $2MOVE_SPRITE
 jsr $2FLASH_CURSORS
 
 btst #0, $BIOS_STATCURNT ; is p1 start pressed?
-bne renderVersion_checkDToo
+bne renderVersion_checkP2Start
 bra clearVersion
 
-renderVersion_checkDToo:
-btst #0, $BIOS_P1CURRENT ; and p1 down is pressed too?
+renderVersion_checkP2Start:
+btst #2, $BIOS_STATCURNT ; and p2 start pressed too?
 bne renderVersion ; then show the version
 bra clearVersion ; else, don't show it
 

@@ -366,7 +366,7 @@ skipPlayer2Cursor:
 ;;;;;;;;;;; END LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; get read to either show or hide the version string, based on if start is pressed during main
-move.w #$7057, $VSTRING_DATA ; load where in the fix layer it should go
+move.w #$7077, $VSTRING_DATA ; load where in the fix layer it should go
 move.l #$2VERSION, $VSTRING_DATA + 2
 
 
