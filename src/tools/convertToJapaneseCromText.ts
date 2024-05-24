@@ -5,7 +5,17 @@ import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
 import { getCanvasContextFromImagePath } from "@city41/sromcrom/lib/api/canvas/getCanvasContextFromImagePath";
 import { createCromBytesFromCanvasContext } from "../patchRom/createCromBytes";
 
-type ExistingChar = " " | "c" | "n" | "e" | "D" | "?" | "!";
+type ExistingChar =
+  | " "
+  | "c"
+  | "n"
+  | "e"
+  | "D"
+  | "?"
+  | "？"
+  | "!"
+  | "！"
+  | "。";
 
 type ExistingTileOutput = {
   control: ExistingChar;
@@ -113,7 +123,10 @@ const existingTileWords: Record<ExistingChar, number> = {
   e: 0xffff,
   D: 0x4990,
   "?": 0x76,
+  "？": 0x76,
   "!": 0x77,
+  "！": 0x77,
+  "。": 0x72,
 };
 
 function generateAssembly(tiles: TileOutput[], startingIndex: number): string {
@@ -176,6 +189,7 @@ async function main() {
   const totalTileOutput: NewTileOutput[] = [];
 
   for (const input of inputSpec.inputs) {
+    // replace unicode punctuation for standard ascii
     const rawText = (await fsp.readFile(input.inputTxt)).toString();
     const lines = rawText.split("\n").filter((l) => !l.startsWith("#"));
 
@@ -194,7 +208,10 @@ async function main() {
           case "e":
           case "D":
           case "?":
+          case "？":
           case "!":
+          case "！":
+          case "。":
             currentPartTileOutput.push({ control: char });
             break;
           default: {
