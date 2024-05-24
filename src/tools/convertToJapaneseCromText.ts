@@ -5,10 +5,10 @@ import { calcDestIndex, japaneseEndingsCromSpans } from "../cromSpans";
 import { getCanvasContextFromImagePath } from "@city41/sromcrom/lib/api/canvas/getCanvasContextFromImagePath";
 import { createCromBytesFromCanvasContext } from "../patchRom/createCromBytes";
 
-type ControlChar = " " | "c" | "n" | "e";
+type ExistingChar = " " | "c" | "n" | "e" | "D" | "?" | "!";
 
-type ControlTileOutput = {
-  control: ControlChar;
+type ExistingTileOutput = {
+  control: ExistingChar;
 };
 
 type NewTileOutput = {
@@ -16,7 +16,7 @@ type NewTileOutput = {
   newTile: Canvas;
 };
 
-type TileOutput = ControlTileOutput | NewTileOutput;
+type TileOutput = ExistingTileOutput | NewTileOutput;
 
 const inputSpec = {
   destAsmDir: "src/patches",
@@ -78,7 +78,7 @@ const inputSpec = {
   palette: "resources/japanese.palette.png",
 };
 
-function isControlTileOutput(tile: TileOutput): tile is ControlTileOutput {
+function isControlTileOutput(tile: TileOutput): tile is ExistingTileOutput {
   return "control" in tile;
 }
 
@@ -106,11 +106,14 @@ function createTile(char: string): Canvas {
   return c16;
 }
 
-const controlWords: Record<ControlChar, number> = {
+const existingTileWords: Record<ExistingChar, number> = {
   " ": 0,
   n: 0xd,
   c: 0xfffe,
   e: 0xffff,
+  D: 0x4990,
+  "?": 0x76,
+  "!": 0x77,
 };
 
 function generateAssembly(tiles: TileOutput[], startingIndex: number): string {
@@ -121,7 +124,7 @@ function generateAssembly(tiles: TileOutput[], startingIndex: number): string {
   for (let i = 0; i < tiles.length; ++i) {
     const tile = tiles[i];
     if (isControlTileOutput(tile)) {
-      const word = controlWords[tile.control];
+      const word = existingTileWords[tile.control];
       asm.push(`dc.w $${word.toString(16)} ; ${tile.control}`);
     } else {
       const destIndexResult = calcDestIndex(
@@ -189,6 +192,9 @@ async function main() {
           case "c":
           case "n":
           case "e":
+          case "D":
+          case "?":
+          case "!":
             currentPartTileOutput.push({ control: char });
             break;
           default: {
