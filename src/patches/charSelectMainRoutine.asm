@@ -7,9 +7,14 @@ jsr $2MOVE_SPRITE
 
 jsr $2FLASH_CURSORS
 
-btst #0, $10fdac ; is p1 start down?
-bne renderVersion
+btst #0, $BIOS_STATCURNT ; is p1 start pressed?
+bne renderVersion_checkDToo
 bra clearVersion
+
+renderVersion_checkDToo:
+btst #0, $BIOS_P1CURRENT ; and p1 down is pressed too?
+bne renderVersion ; then show the version
+bra clearVersion ; else, don't show it
 
 renderVersion:
 move.b #1, $VSTRING_DATA + 6
