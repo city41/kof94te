@@ -1128,6 +1128,27 @@
     },
     {
       "type": "prom",
+      "description": "New Japan ending, part 1, ja",
+      "symbol": "JPN_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, ja",
+      "symbol": "JPN_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, ja",
+      "symbol": "JPN_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
       "description": "New Mexico ending, part 1, en",
       "symbol": "MEX_ENDING_PART1_EN",
       "subroutine": true,

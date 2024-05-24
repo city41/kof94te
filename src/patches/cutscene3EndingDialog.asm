@@ -349,7 +349,7 @@ lea $2JPN_ENDING_PART1_ES, A0
 bra done
 
 loadJapanFifthLineJapanese:
-lea $2JPN_ENDING_PART1_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART1_JA, A0 
 bra done
 
 doUSASixthLine:
@@ -433,7 +433,7 @@ lea $2JPN_ENDING_PART2_ES, A0
 bra done
 
 loadJapanSixthLineJapanese:
-lea $2JPN_ENDING_PART2_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART2_JA, A0
 bra done
 
 doUSASeventhLine:
@@ -517,7 +517,7 @@ lea $2JPN_ENDING_PART3_ES, A0
 bra done
 
 loadJapanSeventhLineJapanese:
-lea $2JPN_ENDING_PART3_EN, A0 ; TODO, English is a placeholder
+lea $2JPN_ENDING_PART3_JA, A0
 bra done
 
 doMexicoEighthLine:
