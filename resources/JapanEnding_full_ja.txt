@@ -1,0 +1,23 @@
+# part 1: Kyo, Beni and Goro are talking
+キヨウn
+ この大会は結局たたの茶番劇だn
+ ったな.c
+ベニマルn
+ どういう意味？c
+キヨウn
+ それはルガールがこの大会の優n
+ 勝者を捕獲して石像に変えるたc
+ めの罠だった！c
+ダイモソn
+ まさか！？本当に正気を失っn
+ た主催者だ！e
+
+# part 2: Beni and Goro on screen
+ベニマル・ダイモソn
+ それでは、これからどこへ向n
+ かうか？e
+ 
+# part 3: Kyo is holding his bandana
+キヨウn
+ 次の大会へ！n
+ 行くぜ！e

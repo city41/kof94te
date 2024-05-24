@@ -1,0 +1,20 @@
+# part 1: Takuma stands proudly looking up at the sky
+タクマn
+ 負けたよ！n
+ 一体何故負けたんだ？e
+
+# Part 2: Robert and Ryo crouch on the boat, talking
+# quietly to each other
+ロバートn
+ おもろい。。。c
+リョウn
+ 彼は今何かを企んでいるだろう.c
+ロバートn
+ ここから出るんやな！e
+ 
+# part 3: Takuma is exuberant with a red background
+タクマn
+ もっと練習しようじゃないか！e
+
+# part 4: Robert and Ryo run away from Takuma
+ 勘弁してくれ！e
