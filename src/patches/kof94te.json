@@ -1326,18 +1326,6 @@
     },
     {
       "type": "prom",
-      "description": "Shift 'Here Comes' up one row",
-      "address": "133e04",
-      "patchAsm": ["move.w #$a, D1"]
-    },
-    {
-      "type": "prom",
-      "description": "Shift 'Challenger' up one row",
-      "address": "133e20",
-      "patchAsm": ["move.w #$e, D1"]
-    },
-    {
-      "type": "prom",
       "description": "signal to play here comes challenger chime when in char select",
       "address": "133e08",
       "subroutine": true,
