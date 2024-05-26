@@ -83,10 +83,6 @@
       {
         "template": "black_bg.asm.hbr",
         "dest": "../src/patches/black_bg.asm"
-      },
-      {
-        "template": "qr.asm.hbr",
-        "dest": "../src/patches/qr.asm"
       }
     ]
   },
@@ -196,12 +192,6 @@
       "imageFile": "./black_bg.png",
       "x": 0,
       "y": 0
-    },
-    {
-      "name": "qr",
-      "imageFile": "./qr.png",
-      "x": 144,
-      "y": 178
     }
   ]
 }

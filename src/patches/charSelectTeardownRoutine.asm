@@ -101,10 +101,5 @@ movem.l A5, $MOVEM_STORAGE
 jsr $2STRING_TO_FIX_LAYER_ROUTINE
 movem.l $MOVEM_STORAGE, A5
 
-;; and clear out the qr code, just in case
-move.w #$QR_SI, D6
-move.w #2, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
-
 movem.l $MOVEM_STORAGE, A4
 rts
