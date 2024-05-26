@@ -49,9 +49,9 @@ move.b (A4), D2 ; go from char id to team id
 move.b D2, $108431 ; set P1's team to match the falling character
 
 cpuWon_done:
-movem.l $MOVEM_STORAGE, A4/D2
-jsr $3fd58
-rts
+; movem.l $MOVEM_STORAGE, A4/D2
+; jsr $3fd58
+; rts
 
 humanWon:
 movem.l A4/A5, $MOVEM_STORAGE
@@ -75,8 +75,8 @@ bsr fudgeTeams
 
 doneAlteringTeams:
 ;; second, who won? p1 or p2? need to consider versus mode
-btst #0, $PLAY_MODE ; is p1 playing?
-beq onlyPlayerTwoIsHuman
+; btst #0, $PLAY_MODE ; is p1 playing?
+; beq onlyPlayerTwoIsHuman
 cmpi.b #$80, $108238 ; player 1 is human, did they lose?
 beq playerOneLost
 lea $P1_CHOSEN_CHAR0, A6 ; player 1 won, get their characters ready

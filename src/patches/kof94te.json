@@ -771,7 +771,7 @@
         "cpuWon:",
         ";; load the original static table",
         "move.l #$626ee, $506a(A5)",
-        "bra done",
+        ";bra done",
 
         "humanWon:",
         "move.l #$AFTER_SCREEN_POSITION_TABLE, $506a(A5)",
