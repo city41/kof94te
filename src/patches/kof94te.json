@@ -159,13 +159,13 @@
     {
       "type": "prom",
       "string": true,
-      "value": "HEIDERN           RALF              CLARK             ATHENA ASAMIYA    SIE KENSOU        CHIN GENTSAI      KYO KUSANAGI      BENIMARU N.       GORO DAIMON       HEAVY D!          LUCKY GLAUBER     BRIAN BATTLER     KIM KAPHWAN       CHANG KOEHAN      CHOI BOUNGE       TERRY BOGARD      ANDY BOGARD       JOE HIGASHI       RYO SAKAZKI       ROBERT GARCIA     TAKUMA SAKAZAKI   YURI SAKAZAKI     MAI SHIRANUI      KING              DEBUG RUGAL                         CHARACTER ROULETTETEAM ROULETTE     ",
+      "value": "HEIDERN           RALF              CLARK             ATHENA ASAMIYA    SIE KENSOU        CHIN GENTSAI      KYO KUSANAGI      BENIMARU N.       GORO DAIMON       HEAVY D!          LUCKY GLAUBER     BRIAN BATTLER     KIM KAPHWAN       CHANG KOEHAN      CHOI BOUNGE       TERRY BOGARD      ANDY BOGARD       JOE HIGASHI       RYO SAKAZAKI      ROBERT GARCIA     TAKUMA SAKAZAKI   YURI SAKAZAKI     MAI SHIRANUI      KING              DEBUG RUGAL                         CHARACTER ROULETTETEAM ROULETTE     ",
       "symbol": "P1_CHAR_NAME_TABLE"
     },
     {
       "type": "prom",
       "string": true,
-      "value": "           HEIDERN              RALF             CLARK    ATHENA ASAMIYA        SIE KENSOU      CHIN GENTSAI      KYO KUSANAGI       BENIMARU N.       GORO DAIMON          HEAVY D!     LUCKY GLAUBER     BRIAN BATTLER       KIM KAPHWAN      CHANG KOEHAN       CHOI BOUNGE      TERRY BOGARD       ANDY BOGARD       JOE HIGASHI       RYO SAKAZKI     ROBERT GARCIA   TAKUMA SAKAZAKI     YURI SAKAZAKI      MAI SHIRANUI              KING       DEBUG RUGAL                  CHARACTER ROULETTE     TEAM ROULETTE",
+      "value": "           HEIDERN              RALF             CLARK    ATHENA ASAMIYA        SIE KENSOU      CHIN GENTSAI      KYO KUSANAGI       BENIMARU N.       GORO DAIMON          HEAVY D!     LUCKY GLAUBER     BRIAN BATTLER       KIM KAPHWAN      CHANG KOEHAN       CHOI BOUNGE      TERRY BOGARD       ANDY BOGARD       JOE HIGASHI      RYO SAKAZAKI     ROBERT GARCIA   TAKUMA SAKAZAKI     YURI SAKAZAKI      MAI SHIRANUI              KING       DEBUG RUGAL                  CHARACTER ROULETTE     TEAM ROULETTE",
       "symbol": "P2_CHAR_NAME_TABLE"
     },
     {

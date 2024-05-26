@@ -17,7 +17,7 @@ const characters = [
   "Terry Bogard",
   "Andy Bogard",
   "Joe Higashi",
-  "Ryo Sakazki",
+  "Ryo Sakazaki",
   "Robert Garcia",
   "Takuma Sakazaki",
   "Yuri Sakazaki",
