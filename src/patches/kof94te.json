@@ -90,11 +90,14 @@
     "GRID_IMAGE_SI": "153",
     "P1C1_SI": "169",
     "P2C1_SI": "16f",
-    "RUGAL_SI": "175",
-    "P1_CURSOR_LEFT_SI": "177",
-    "P1_CURSOR_RIGHT_SI": "178",
-    "P2_CURSOR_LEFT_SI": "179",
-    "P2_CURSOR_RIGHT_SI": "17a",
+    "P1_CURSOR_LEFT_SI": "175",
+    "P1_CURSOR_RIGHT_SI": "176",
+    "P2_CURSOR_LEFT_SI": "177",
+    "P2_CURSOR_RIGHT_SI": "178",
+    "CPU_C2_LEFT_SI": "179",
+    "CPU_C2_RIGHT_SI": "17a",
+    "CPU_C3_LEFT_SI": "17b",
+    "CPU_C3_RIGHT_SI": "17c",
 
     "PX_CUR_INPUT_OFFSET": "0",
     "PX_CURSOR_X_OFFSET": "2",
@@ -179,10 +182,17 @@
     },
     {
       "type": "prom",
-      "description": "rugal_character_grid image",
+      "description": "rugal character grid inject data",
       "subroutine": true,
-      "symbol": "RUGAL_CG_IMG",
-      "patchAsm": "rugal_character_grid.asm"
+      "symbol": "RUGAL_CG_INJECT_DATA",
+      "patchAsm": "rugal_character_grid_inject_data.asm"
+    },
+    {
+      "type": "prom",
+      "description": "rugal character grid clear data",
+      "subroutine": true,
+      "symbol": "RUGAL_CG_CLEAR_DATA",
+      "patchAsm": "rugal_character_grid_clear_data.asm"
     },
     {
       "type": "prom",
@@ -421,6 +431,13 @@
       "subroutine": true,
       "symbol": "PUT_RUGAL_ON_GRID",
       "patchAsm": "putRugalOnGrid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "removes Rugal from the char select grid for the boss fight",
+      "subroutine": true,
+      "symbol": "TAKE_RUGAL_OFF_GRID",
+      "patchAsm": "takeRugalOffGrid.asm"
     },
     {
       "type": "prom",

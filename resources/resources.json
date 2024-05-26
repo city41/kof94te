@@ -17,8 +17,12 @@
         "dest": "../src/patches/team_to_grey_out_table.asm"
       },
       {
-        "template": "rugal_character_grid.asm.hbr",
-        "dest": "../src/patches/rugal_character_grid.asm"
+        "template": "rugal_character_grid_inject_data.asm.hbr",
+        "dest": "../src/patches/rugal_character_grid_inject_data.asm"
+      },
+      {
+        "template": "rugal_character_grid_clear_data.asm.hbr",
+        "dest": "../src/patches/rugal_character_grid_clear_data.asm"
       },
       {
         "template": "avatars.asm.hbr",

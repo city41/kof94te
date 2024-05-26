@@ -10,14 +10,6 @@
 
 movem.l A1/A6/D5/D6, $MOVEM_STORAGE
 
-cmpi.w #$18, D7 ; is this Rugal?
-bne setupForRegularCharacter
-;; this is Rugal
-lea $2RUGAL_CG_IMG, A6
-lea $4(A6), A6 ; move forward past the width and height words
-bra renderCharacter
-
-setupForRegularCharacter:
 cmpi.b #0, D4
 bne setAltAvatarImg
 ;; set up A6 to point to the avatar data

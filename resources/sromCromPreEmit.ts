@@ -224,6 +224,68 @@ function createGreyCharacterGridEmit(greyCromImage: AsmCromImage) {
   });
 }
 
+function createRugalInjectData(rugalImage: AsmCromImage): number[] {
+  const words: number[] = [];
+
+  // grid first si is 0x153, Rugal's first column is 8 over, and 6 tiles down
+  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 6 * 2;
+
+  words.push(firstColumnSCB1StartingAddress);
+  words.push(rugalImage.columns[0].scb1[0].evenWord);
+  words.push(firstColumnSCB1StartingAddress + 1);
+  words.push(rugalImage.columns[0].scb1[0].oddWord);
+  words.push(firstColumnSCB1StartingAddress + 2);
+  words.push(rugalImage.columns[0].scb1[1].evenWord);
+  words.push(firstColumnSCB1StartingAddress + 3);
+  words.push(rugalImage.columns[0].scb1[1].oddWord);
+
+  // grid first si is 0x153, Rugal's second column is 9 over, and 6 tiles down
+
+  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 6 * 2;
+
+  words.push(secondColumnSCB1StartingAddress);
+  words.push(rugalImage.columns[1].scb1[0].evenWord);
+  words.push(secondColumnSCB1StartingAddress + 1);
+  words.push(rugalImage.columns[1].scb1[0].oddWord);
+  words.push(secondColumnSCB1StartingAddress + 2);
+  words.push(rugalImage.columns[1].scb1[1].evenWord);
+  words.push(secondColumnSCB1StartingAddress + 3);
+  words.push(rugalImage.columns[1].scb1[1].oddWord);
+
+  return words;
+}
+
+function createRugalClearData() {
+  const words: number[] = [];
+
+  // grid first si is 0x153, Rugal's first column is 8 over, and 6 tiles down
+  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 6 * 2;
+
+  words.push(firstColumnSCB1StartingAddress);
+  words.push(0);
+  words.push(firstColumnSCB1StartingAddress + 1);
+  words.push(0);
+  words.push(firstColumnSCB1StartingAddress + 2);
+  words.push(0);
+  words.push(firstColumnSCB1StartingAddress + 3);
+  words.push(0);
+
+  // grid first si is 0x153, Rugal's second column is 9 over, and 6 tiles down
+
+  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 6 * 2;
+
+  words.push(secondColumnSCB1StartingAddress);
+  words.push(0);
+  words.push(secondColumnSCB1StartingAddress + 1);
+  words.push(0);
+  words.push(secondColumnSCB1StartingAddress + 2);
+  words.push(0);
+  words.push(secondColumnSCB1StartingAddress + 3);
+  words.push(0);
+
+  return words;
+}
+
 export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
   const startingPaletteIndex = 16;
   console.log({ startingPaletteIndex });
@@ -241,6 +303,8 @@ export default function sromCromPreEmit(_rootDir: string, codeEmitData: any) {
     greyCharacterGrid: createGreyCharacterGridEmit(
       cromImages.character_grid_grey
     ),
+    rugalInjectData: createRugalInjectData(cromImages.rugal_character_grid),
+    rugalClearData: createRugalClearData(),
   };
 
   return finalCodeEmitData;

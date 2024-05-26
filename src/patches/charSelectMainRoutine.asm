@@ -38,8 +38,7 @@ bra doneRugalOnGrid
 takeRugalOffGrid:
 cmpi.b #$ff, $DEFEATED_TEAMS
 beq doneRugalOnGrid ; don't remove him if this is the Rugal fight
-move.w #$RUGAL_SI, D6
-jsr $2CLEAR_CHOSEN_AVATAR
+jsr $2TAKE_RUGAL_OFF_GRID
 
 doneRugalOnGrid:
 
