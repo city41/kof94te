@@ -1,0 +1,22 @@
+;;;;; start cpu_p1_cursor_right_white static sprite data ;;;;;
+dc.w {{cromImages.cpu_p2_cursor_right_white.width}} ; width in tiles
+dc.w {{cromImages.cpu_p2_cursor_right_white.height}} ; height in tiles
+
+;; start sprite tiles
+{{#each cromImages.cpu_p2_cursor_right_white.columns}}
+;;; column {{@index}}
+
+;; SCB1 word pairs
+{{#each scb1}}
+dc.w ${{hex evenWord}}
+dc.w ${{hex oddWord}}
+{{/each}}
+
+;; SCB3 vertical position|sticky|size
+dc.w ${{hex scb3}}
+
+;; SCB4 horizontal position
+dc.w ${{hex scb4}}
+
+{{/each}}
+;; end tiles

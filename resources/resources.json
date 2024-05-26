@@ -65,20 +65,36 @@
         "dest": "../src/patches/p2_cursor_right_black.asm"
       },
       {
-        "template": "cpu_cursor_left_white.asm.hbr",
-        "dest": "../src/patches/cpu_cursor_left_white.asm"
+        "template": "cpu_p1_cursor_left_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_left_white.asm"
       },
       {
-        "template": "cpu_cursor_left_black.asm.hbr",
-        "dest": "../src/patches/cpu_cursor_left_black.asm"
+        "template": "cpu_p1_cursor_left_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_left_black.asm"
       },
       {
-        "template": "cpu_cursor_right_white.asm.hbr",
-        "dest": "../src/patches/cpu_cursor_right_white.asm"
+        "template": "cpu_p1_cursor_right_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_right_white.asm"
       },
       {
-        "template": "cpu_cursor_right_black.asm.hbr",
-        "dest": "../src/patches/cpu_cursor_right_black.asm"
+        "template": "cpu_p1_cursor_right_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_right_black.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_left_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_left_white.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_left_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_left_black.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_right_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_right_white.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_right_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_right_black.asm"
       },
       {
         "template": "empty_chosen_avatar.asm.hbr",
@@ -164,26 +180,50 @@
       "y": 20
     },
     {
-      "name": "cpu_cursor_left_white",
-      "imageFile": "./cpu_cursor_left_white.png",
+      "name": "cpu_p1_cursor_left_white",
+      "imageFile": "./cpu_p1_cursor_left_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_cursor_left_black",
-      "imageFile": "./cpu_cursor_left_black.png",
+      "name": "cpu_p1_cursor_left_black",
+      "imageFile": "./cpu_p1_cursor_left_black.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_cursor_right_white",
-      "imageFile": "./cpu_cursor_right_white.png",
+      "name": "cpu_p1_cursor_right_white",
+      "imageFile": "./cpu_p1_cursor_right_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_cursor_right_black",
-      "imageFile": "./cpu_cursor_right_black.png",
+      "name": "cpu_p1_cursor_right_black",
+      "imageFile": "./cpu_p1_cursor_right_black.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_left_white",
+      "imageFile": "./cpu_p2_cursor_left_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_left_black",
+      "imageFile": "./cpu_p2_cursor_left_black.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_right_white",
+      "imageFile": "./cpu_p2_cursor_right_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_right_black",
+      "imageFile": "./cpu_p2_cursor_right_black.png",
       "x": 0,
       "y": 272
     },

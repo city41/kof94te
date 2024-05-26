@@ -273,31 +273,59 @@
     },
     {
       "type": "prom",
-      "description": "cpu cursor, left, image, white",
+      "description": "cpu cursor, p1, left, image, white",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_LEFT_WHITE_IMAGE",
-      "patchAsm": "cpu_cursor_left_white.asm"
+      "symbol": "P1_CPU_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "cpu_p1_cursor_left_white.asm"
     },
     {
       "type": "prom",
-      "description": "cpu cursor, left, image, black",
+      "description": "cpu cursor, p1, left, image, black",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_LEFT_BLACK_IMAGE",
-      "patchAsm": "cpu_cursor_left_black.asm"
+      "symbol": "P1_CPU_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "cpu_p1_cursor_left_black.asm"
     },
     {
       "type": "prom",
-      "description": "cpu cursor, right, image, white",
+      "description": "cpu cursor, p1, right, image, white",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_RIGHT_WHITE_IMAGE",
-      "patchAsm": "cpu_cursor_right_white.asm"
+      "symbol": "P1_CPU_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "cpu_p1_cursor_right_white.asm"
     },
     {
       "type": "prom",
-      "description": "cpu cursor, right, image, black",
+      "description": "cpu cursor, p1, right, image, black",
       "subroutine": true,
-      "symbol": "CPU_CURSOR_RIGHT_BLACK_IMAGE",
-      "patchAsm": "cpu_cursor_right_black.asm"
+      "symbol": "P1_CPU_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "cpu_p1_cursor_right_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, left, image, white",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "cpu_p2_cursor_left_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, left, image, black",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "cpu_p2_cursor_left_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, right, image, white",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "cpu_p2_cursor_right_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, right, image, black",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "cpu_p2_cursor_right_black.asm"
     },
     {
       "type": "prom",
