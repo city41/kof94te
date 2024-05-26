@@ -127,24 +127,6 @@
   "patches": [
     {
       "type": "prom",
-      "string": true,
-      "value": "press A to continue",
-      "symbol": "PRESS_A_TO_CONTINUE"
-    },
-    {
-      "type": "prom",
-      "string": true,
-      "value": "     Hack isn't finished yet          ",
-      "symbol": "HACK_ISNT_FINISHED_YET"
-    },
-    {
-      "type": "prom",
-      "string": true,
-      "value": "     More info: neorh.mattgreer.dev   ",
-      "symbol": "MORE_INFO"
-    },
-    {
-      "type": "prom",
       "description": "general string to fix layer routine",
       "subroutine": true,
       "symbol": "STRING_TO_FIX_LAYER_ROUTINE",
