@@ -218,7 +218,7 @@ rts
 ;;; multiple times depending on single player versus demo mode
 ;;;
 ;;; parameters
-;;; D4b: 0 for p1 or 1 for p2
+;;; D4.b: 0 for p1 or 1 for p2
 ;;; D6.w: avatar index
 ;;; D1.b: chosen team id
 ;;; A1: this team's chosen character list 
