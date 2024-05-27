@@ -98,7 +98,7 @@ team1ChosenChar0:
 move.b #0, D5
 move.b #0, D6
 lea $P1_CHOSEN_CHAR0, A5
-lea $P2_CHOSEN_CHAR2, A6
+lea $P2_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done
 
@@ -106,7 +106,7 @@ team1ChosenChar1:
 move.b #0, D5
 move.b #1, D6
 lea $P1_CHOSEN_CHAR0, A5
-lea $P2_CHOSEN_CHAR2, A6
+lea $P2_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done
 
@@ -114,7 +114,7 @@ team1ChosenChar2:
 move.b #0, D5
 move.b #2, D6
 lea $P1_CHOSEN_CHAR0, A5
-lea $P2_CHOSEN_CHAR2, A6
+lea $P2_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done
 
@@ -132,7 +132,7 @@ team2SkipDemoMode:
 clr.w D6
 move.b D0, D6 ; copy the quadrupled charid into d7
 lsr.b #2, D6 ; un-quadruple it
-cmp.b $P2_CHOSEN_CHAR2, D6
+cmp.b $P2_CHOSEN_CHAR0, D6
 beq team2ChosenChar0
 cmp.b $P2_CHOSEN_CHAR1, D6
 beq team2ChosenChar1
@@ -141,7 +141,7 @@ bra team2ChosenChar2
 team2ChosenChar0:
 move.b #1, D5
 move.b #0, D6
-lea $P2_CHOSEN_CHAR2, A5
+lea $P2_CHOSEN_CHAR0, A5
 lea $P1_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done
@@ -149,7 +149,7 @@ bra done
 team2ChosenChar1:
 move.b #1, D5
 move.b #1, D6
-lea $P2_CHOSEN_CHAR2, A5
+lea $P2_CHOSEN_CHAR0, A5
 lea $P1_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done
@@ -157,7 +157,7 @@ bra done
 team2ChosenChar2:
 move.b #1, D5
 move.b #2, D6
-lea $P2_CHOSEN_CHAR2, A5
+lea $P2_CHOSEN_CHAR0, A5
 lea $P1_CHOSEN_CHAR0, A6
 bsr figureOutCharPalette
 bra done

@@ -28,7 +28,7 @@ cmpi.b #0, D4
 bne charRandomSelect_checkFirst
 ;; this means D0 is destined for the third character
 ;; let's make sure char 0 and 1 aren't already this character
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 cmp.b (A2), D0
 beq charRandomSelect_pickRandomChar ; they already have this character, choose again
 adda.w #1, A2
@@ -39,14 +39,14 @@ cmpi.b #1, D4
 bne charRandomSelect_saveChar ; if D4 is 2, then this is the very first character, no checks needed
 ;; this makes D0 is destined for the second characterG
 ;; let's make sure char 0 isn't already this character
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 cmp.b (A2), D0
 beq charRandomSelect_pickRandomChar ; they already have this character, choose again
 
 
 charRandomSelect_saveChar:
 ;; save the chosen id into CHOSEN_CHAR
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 move.w #2, D5
 sub.w D4, D5
 adda.w D5, A2 

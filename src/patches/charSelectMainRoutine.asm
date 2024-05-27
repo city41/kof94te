@@ -195,7 +195,7 @@ move.b #0, D4
 move.w #1, D6 ; avatar index 1
 move.b $108231, D1 ; load the chosen team ID
 lea $P1_CHOSEN_CHAR0, A1
-lea $P2_CHOSEN_CHAR2, A2
+lea $P2_CHOSEN_CHAR0, A2
 bsr renderCpuChosenTeam_doRender
 
 renderCpuChosenTeam_checkP2:
@@ -205,7 +205,7 @@ bne renderCpuChosenTeam_done ; they are playing, nothing to do
 move.b #1, D4
 move.w #4, D6 ; avatar index 4
 move.b $108431, D1 ; load the chosen team ID
-lea $P2_CHOSEN_CHAR2, A1
+lea $P2_CHOSEN_CHAR0, A1
 lea $P1_CHOSEN_CHAR0, A2
 bsr renderCpuChosenTeam_doRender
 

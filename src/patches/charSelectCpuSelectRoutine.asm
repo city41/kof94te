@@ -22,7 +22,7 @@ move.b #0, $P2_NUM_CHOSEN_CHARS
 lea $P2_CUR_INPUT, A0
 
 bsr getRandomCharacterId
-move.b D0, $P2_CHOSEN_CHAR2
+move.b D0, $P2_CHOSEN_CHAR0
 addi.b #1, $P2_NUM_CHOSEN_CHARS
 
 bsr getRandomCharacterId
@@ -30,10 +30,10 @@ move.b D0, $P2_CHOSEN_CHAR1
 addi.b #1, $P2_NUM_CHOSEN_CHARS
 
 bsr getRandomCharacterId
-move.b D0, $P2_CHOSEN_CHAR0
+move.b D0, $P2_CHOSEN_CHAR2
 addi.b #1, $P2_NUM_CHOSEN_CHARS
 
-lea $P2_CHOSEN_CHAR2, A0
+lea $P2_CHOSEN_CHAR0, A0
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
 jsr $2MOVE_CPU_CUSTOM_CURSOR
 bra done
@@ -92,7 +92,7 @@ cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; have they not chosen any characters
 beq getRandomCharacterId_done              ; then we are good
 
 ;; ok now let's check their first character
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 cmp.b (A2), D0 ; did we just pick the first character again?
 beq getRandomCharacterId_pickRandomChar ; yes? choose again
 

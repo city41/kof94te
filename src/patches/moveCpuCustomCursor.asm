@@ -2,7 +2,7 @@
 ;; moves the cpu cursors according to the custom team the cpu has chosen
 ;;
 ;; parameters
-;; A0: pointer to PX_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING
+;; A0: pointer to a team character id list
 ;; D0.w: starting sprite index
 
 

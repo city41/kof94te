@@ -57,7 +57,7 @@ beq doCharOnePlayer2
 move.b $P1_CHOSEN_CHAR0, D6
 bra charDone
 doCharOnePlayer2:
-move.b $P2_CHOSEN_CHAR2, D6
+move.b $P2_CHOSEN_CHAR0, D6
 bra charDone
 
 doCharTwo:
@@ -77,7 +77,7 @@ beq doCharThreePlayer2
 move.b $P1_CHOSEN_CHAR2, D6
 bra charDone
 doCharThreePlayer2:
-move.b $P2_CHOSEN_CHAR0, D6
+move.b $P2_CHOSEN_CHAR2, D6
 
 charDone:
 move.w D6, $70(A1)

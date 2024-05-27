@@ -28,10 +28,6 @@ move.w #$P1_CURSOR_LEFT_SI, $P1_CURSOR_SPRITEINDEX
 move.w #$P2_CURSOR_LEFT_SI, $P2_CURSOR_SPRITEINDEX
 move.w #1, $P1_CHOSEN_TEAM_AVATARINDEX
 move.w #4, $P2_CHOSEN_TEAM_AVATARINDEX
-;; to help account for the fact the chosen characters are
-;; backwards on the p2 side
-move.l #$P1_CHOSEN_CHAR0, $P1_STARTING_CHOSE_CHAR_ADDRESS
-move.l #$P2_CHOSEN_CHAR2, $P2_STARTING_CHOSE_CHAR_ADDRESS
 
 
 ;; reset these back to zero, we'll set them to 3 down below if needed
@@ -634,12 +630,12 @@ beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
 ;; if we get here, we know all three have been chosen
 move.w #4, D6 ; first avatar of p2 team 
 clr.w D7
-move.b $P2_CHOSEN_CHAR2, D7
-move.b $P2_CHOSEN_CHAR2 + 3, D4 ; palette flag
+move.b $P2_CHOSEN_CHAR0, D7
+move.b $P2_CHOSEN_CHAR0 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 ; if they chose Rugal, we are done
-cmpi.b #$18, $P2_CHOSEN_CHAR2
+cmpi.b #$18, $P2_CHOSEN_CHAR0
 beq renderChosenAvatar_skipPlayer2
 
 move.w #5, D6 ; second avatar of p2 team
@@ -649,8 +645,8 @@ move.b $P2_CHOSEN_CHAR1 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #6, D6 ; third avatar of p2 team
 clr.w D7
-move.b $P2_CHOSEN_CHAR0, D7
-move.b $P2_CHOSEN_CHAR0 + 3, D4 ; palette flag
+move.b $P2_CHOSEN_CHAR2, D7
+move.b $P2_CHOSEN_CHAR2 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer2:

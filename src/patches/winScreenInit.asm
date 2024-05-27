@@ -86,7 +86,7 @@ playerOneLost:
 ; this branches here too because if only p2 is playing, they beat the cpu
 ; if the cpu won, we would have bailed up above
 onlyPlayerTwoIsHuman:
-lea $P2_CHOSEN_CHAR2, A6 ; player 2 won, get their characters ready
+lea $P2_CHOSEN_CHAR0, A6 ; player 2 won, get their characters ready
 
 setupChars:
 

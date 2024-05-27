@@ -11,7 +11,7 @@ move.b $108171, D0 ; load the p1 character who lost
 bra doneChoosingPlayer
 setForPlayerTwo:
 ;; CHAR2 since p2 characters are mapped in memory backwards
-lea $P2_CHOSEN_CHAR2, A2 ; set it up to use p2 characters
+lea $P2_CHOSEN_CHAR0, A2 ; set it up to use p2 characters
 move.b $108371, D0 ; load the p2 character who lost
 doneChoosingPlayer:
 

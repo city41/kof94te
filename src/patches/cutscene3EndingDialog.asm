@@ -140,7 +140,7 @@ beq loadPlayer2Char1; no? go do player 2
 move.b $P1_CHOSEN_CHAR0, D0 ; load p1 char id
 bra doneLoadChar1
 loadPlayer2Char1:
-move.b $P2_CHOSEN_CHAR2, D0 ; load p2 char id
+move.b $P2_CHOSEN_CHAR0, D0 ; load p2 char id
 doneLoadChar1:
 lea $CUTSCENE23_STRING, A0
 jsr $2WRITE_NAME_ROUTINE ; write the name of the character

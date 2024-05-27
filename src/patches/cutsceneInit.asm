@@ -36,7 +36,7 @@ lea $P1_CHOSEN_CHAR0, A0
 bra doChooseEndingTeam
 
 cutscene3_skipPlayer1:
-lea $P2_CHOSEN_CHAR2, A0
+lea $P2_CHOSEN_CHAR0, A0
 
 doChooseEndingTeam:
 bsr chooseEndingTeam ; the ending team is left in D0
@@ -85,9 +85,9 @@ bne done ; this is an original team, don't clobber it
 move.b #6, $108231 ; this is not an origianl team, so set the team to Mexico
 bra done
 setupPlayer2:
-move.b $P2_CHOSEN_CHAR2, (A0)
+move.b $P2_CHOSEN_CHAR0, (A0)
 move.b $P2_CHOSEN_CHAR1, $1(A0)
-move.b $P2_CHOSEN_CHAR0, $2(A0)
+move.b $P2_CHOSEN_CHAR2, $2(A0)
 cmpi.b #$ff, $P2_ORIGINAL_TEAM_ID
 bne done ; this is an original team, don't clobber it
 move.b #6, $108431 ; this is not an origianl team, so set the team to Mexico

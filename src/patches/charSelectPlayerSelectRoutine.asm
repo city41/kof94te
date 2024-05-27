@@ -109,7 +109,7 @@ bra slotMachine_doneLoadStartingAddress
 
 slotMachine_loadStartingAddressChar:
 ;; this is char random, use the real chose char ids
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 
 slotMachine_doneLoadStartingAddress:
 clr.w D0
@@ -331,7 +331,7 @@ beq flipPaletteFlagIfNeeded_done ; other player has not chosen any chars yet, no
 flipPaletteFlagIfNeeded_checkFirstChar:
 cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
 beq flipPaletteFlagIfNeeded_done ; other player has not chosen any characters, so no flipping needed
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
+lea $PX_CHOSEN_CHAR0_OFFSET(A1), A6
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkSecondChar ; first character is someone else, move on
 adda.w #3, A6 ; move forward to the palette flag
@@ -342,8 +342,8 @@ bra doFlip ; both teams chose same char, same palette, need to flip
 flipPaletteFlagIfNeeded_checkSecondChar:
 cmpi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
 ble flipPaletteFlagIfNeeded_done ; other player has not chosen two characters, so no flipping needed
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
-adda.w #2, A6 ; move to their second character
+lea $PX_CHOSEN_CHAR0_OFFSET(A1), A6
+adda.w #1, A6 ; move to their second character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkThirdChar ; second character is someone else, move on
 adda.w #3, A6 ; move forward to the palette flag
@@ -354,8 +354,8 @@ bra doFlip ; both teams chose same char, same palette, need to flip
 flipPaletteFlagIfNeeded_checkThirdChar:
 cmpi.b #2, $PX_NUM_CHOSEN_CHARS_OFFSET(A1)
 ble flipPaletteFlagIfNeeded_done ; other player has not chosen three characters, so no flipping needed
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
-adda.w #4, A6 ; move to their third character
+lea $PX_CHOSEN_CHAR0_OFFSET(A1), A6
+adda.w #2, A6 ; move to their third character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_done ; third character is someone else, we are good
 adda.w #3, A6 ; move forward to the palette flag
@@ -381,7 +381,7 @@ rts
 ;; D5: skip sound effect if ff
 saveChar:
 ; now set the chosen char id
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
 adda.w D0, A2   ; move forward based on how many characters are chosen
@@ -421,7 +421,7 @@ rts
 ; renders the chosen avatars for the player in A0
 ; handles rugal and clearing avatars as needed
 renderChosenAvatars:
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 cmpi.b #$18, (A2) ; did they choose rugal?
 beq renderChosenAvatars_rugal
 cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
@@ -432,12 +432,12 @@ bra renderChosenAvatars_noRandomSelect
 
 renderChosenAvatars_rugal:
 move.b #1, D3 ; this is rugal, only one character
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2 ; draw from real chosen chars
 bra renderChosenAvatars_renderAvatars
 
 renderChosenAvatars_charRandomSelect:
 move.b #3, D3 ; this is random, so always render 3 avatars
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2 ; draw from real chosen chars
 bra renderChosenAvatars_renderAvatars
 
 renderChosenAvatars_teamRandomSelect:
@@ -447,7 +447,7 @@ bra renderChosenAvatars_renderAvatars
 
 renderChosenAvatars_noRandomSelect:
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D3 ; this is not random, render the actual number chosen
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2 ; draw from real chosen chars
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2 ; draw from real chosen chars
 bra renderChosenAvatars_renderAvatars
 
 renderChosenAvatars_renderAvatars:

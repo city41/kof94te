@@ -8,7 +8,7 @@
 ;; parameters
 ;; A0: base pointer for p1 or p2 data
 movem.l D0-D3/A2, $MOVEM_STORAGE
-movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
+lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2
 
 ; pull the team's character ids into registers
 clr.l D0
