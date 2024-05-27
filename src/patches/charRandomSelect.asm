@@ -31,7 +31,7 @@ bne charRandomSelect_checkFirst
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 cmp.b (A2), D0
 beq charRandomSelect_pickRandomChar ; they already have this character, choose again
-adda.w #2, A2
+adda.w #1, A2
 cmp.b (A2), D0
 beq charRandomSelect_pickRandomChar ; they already have this character, choose again
 charRandomSelect_checkFirst:
@@ -49,8 +49,7 @@ charRandomSelect_saveChar:
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 move.w #2, D5
 sub.w D4, D5
-adda.w D5, A2 ; add it twice since chosen chars are words
-adda.w D5, A2 ; add it twice since chosen chars are words
+adda.w D5, A2 
 move.b D0, (A2)
 
 tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)

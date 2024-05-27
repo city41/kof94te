@@ -190,7 +190,7 @@ cmp.b $2(A1), D1
 beq chooseEndingTeam_tryNextTeam
 
 ;; player's member 2
-move.b $2(A0), D1
+move.b $1(A0), D1
 ;; versus team member 1
 cmp.b (A1), D1
 beq chooseEndingTeam_tryNextTeam
@@ -206,7 +206,7 @@ cmp.b $2(A1), D1
 beq chooseEndingTeam_tryNextTeam
 
 ;; player's member 3
-move.b $4(A0), D1
+move.b $2(A0), D1
 ;; versus team member 1
 cmp.b (A1), D1
 beq chooseEndingTeam_tryNextTeam

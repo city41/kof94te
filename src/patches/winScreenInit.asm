@@ -148,7 +148,7 @@ move.b D6, (A4) ; stick it first into the winning list
 bra finishSettingUpChar
 
 finishSettingUpChar:
-adda.w #2, A6   ; move the pointer to the next character
+adda.w #1, A6   ; move the pointer to the next character
 add.w D6, D6    ; quadruple it as we are about to index into a table of double words 
 add.w D6, D6    ; quadruple it as we are about to index into a table of double words
 move.w (A2, D6.w), D7 ; jump into the table and grab the x word

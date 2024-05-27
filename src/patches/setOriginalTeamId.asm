@@ -13,8 +13,8 @@ movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 ; pull the team's character ids into registers
 clr.l D0
 move.b (A2), D0
-move.b $2(A2), D1
-move.b $4(A2), D2
+move.b $1(A2), D1
+move.b $2(A2), D2
 
 cmp.b D0, D1
 bge check2

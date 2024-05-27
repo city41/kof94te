@@ -114,7 +114,6 @@ movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 slotMachine_doneLoadStartingAddress:
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
-lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
 adda.w D0, A2   ; move forward based on how many characters are chosen
 move.b (A2), D1 ; pull the chosen char back out
 ;; saveChar will take D1 (charId) and D4 (palette flag)
@@ -335,7 +334,7 @@ beq flipPaletteFlagIfNeeded_done ; other player has not chosen any characters, s
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkSecondChar ; first character is someone else, move on
-adda.w #1, A6 ; move forward to the palette flag
+adda.w #3, A6 ; move forward to the palette flag
 cmp.b (A6), D4 ; are the palettes the same?
 bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
 bra doFlip ; both teams chose same char, same palette, need to flip
@@ -347,7 +346,7 @@ movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
 adda.w #2, A6 ; move to their second character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_checkThirdChar ; second character is someone else, move on
-adda.w #1, A6 ; move forward to the palette flag
+adda.w #3, A6 ; move forward to the palette flag
 cmp.b (A6), D4 ; are the palettes the same?
 bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
 bra doFlip ; both teams chose same char, same palette, need to flip
@@ -359,7 +358,7 @@ movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A1), A6
 adda.w #4, A6 ; move to their third character
 cmp.b (A6), D1
 bne flipPaletteFlagIfNeeded_done ; third character is someone else, we are good
-adda.w #1, A6 ; move forward to the palette flag
+adda.w #3, A6 ; move forward to the palette flag
 cmp.b (A6), D4 ; are the palettes the same?
 bne flipPaletteFlagIfNeeded_done ; both teams chose the same char, but diff palettes, we are good
 bra doFlip ; both teams chose same char, same palette, need to flip
@@ -385,17 +384,15 @@ saveChar:
 movea.l $PX_STARTING_CHOSE_CHAR_ADDRESS_OFFSET(A0), A2
 clr.w D0
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D0
-lsl.b #1, D0 ; need to double it, as each character is a word: [char id]|[palette flag]
 adda.w D0, A2   ; move forward based on how many characters are chosen
 move.b D1, (A2) ; set the chosen character
 
 ; then set their palette flag
 bsr flipPaletteFlagIfNeeded
-adda.w #1, A2 ; move forward one byte to the palette flag
+adda.w #3, A2 ; move forward three bytes to the palette flag
 move.b D4, (A2) ; set the palette flag (either 0 for reg, or 1 for alt)
 
 ; now store how many characters have been chosen
-lsr.b #1, D0 ; and de-double it, as we need to store how many chars are selected
 addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
 cmpi.b #$ff, D5
@@ -463,7 +460,7 @@ bge renderChosenAvatar_clearOneAvatar
 
 clr.w D7
 move.b (A2), D7 ; load the char id
-move.b $1(A2), D4 ; palette flag
+move.b $3(A2), D4 ; palette flag
 move.b D7, D1 ; flipPaletteFlagIfNeeded needs char id here
 bsr flipPaletteFlagIfNeeded
 jsr $2RENDER_CHOSEN_AVATAR
@@ -474,7 +471,7 @@ jsr $2CLEAR_CHOSEN_AVATAR
 
 renderChosenAvatar_doneRenderingOneAvatar:
 
-adda.w #2, A2 ; move to next character
+adda.w #1, A2 ; move to next character
 addi.w #1, D6 ; move to next avatar index
 addi.b #1, D5 ; increment the counter
 cmpi.b #3, D5 ; and loop if we've done less than 3 characters

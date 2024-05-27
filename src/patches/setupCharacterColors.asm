@@ -196,8 +196,7 @@ btst D5, $PLAY_MODE
 beq figureOutCharPalette_cpu ; jump ahead, this is a cpu player
 movea.l A5, A4 ; copy the base address into A4, as we need to manipulate it
 adda.w D6, A4 ;; add char index to offset into chosen characters list
-adda.w D6, A4 ;; add it twice since each character is a word
-adda.w #1, A4 ;; add one more to get to the palette flag for that character
+adda.w #3, A4 ;; now jump to the palette flag list
 move.b (A4), D1 ; load the palette flag from when the player chose it
 bra figureOutCharPalette_done
 
@@ -208,24 +207,11 @@ figureOutCharPalette_cpu:
 ;; first, get the character on cpu team we are comparing
 movea.l A5, A4 ; copy this team's base address into A4, as we need to manipulate it
 adda.w D6, A4 ;; add char index to offset into chosen characters list
-adda.w D6, A4 ;; add it twice since each character is a word
 move.b (A4), D1 ;; load the character id
 
 move.b (A6), D2 ; load the other team's first character
 cmp.b D1, D2 ; does the other team's first character match the cpu character we are focused on?
 bne figureOutCharPalette_cpu_checkChar1
-;; the cpu chose a character that the human chose, take the human's palette
-;; flag and flip it
-move.b $1(A6), D3 ; get the other team's character's palette flag
-move.b #1, D2
-sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
-move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
-bra figureOutCharPalette_done
-
-figureOutCharPalette_cpu_checkChar1:
-move.b $2(A6), D2 ; load the other team's second character
-cmp.b D1, D2
-bne figureOutCharPalette_cpu_checkChar2
 ;; the cpu chose a character that the human chose, take the human's palette
 ;; flag and flip it
 move.b $3(A6), D3 ; get the other team's character's palette flag
@@ -234,8 +220,20 @@ sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
 move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
 bra figureOutCharPalette_done
 
+figureOutCharPalette_cpu_checkChar1:
+move.b $1(A6), D2 ; load the other team's second character
+cmp.b D1, D2
+bne figureOutCharPalette_cpu_checkChar2
+;; the cpu chose a character that the human chose, take the human's palette
+;; flag and flip it
+move.b $4(A6), D3 ; get the other team's character's palette flag
+move.b #1, D2
+sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+move.b D2, D1 ; move the final answer into D1, where ultimately the game wants it
+bra figureOutCharPalette_done
+
 figureOutCharPalette_cpu_checkChar2:
-move.b $4(A6), D2 ; load the other team's third character
+move.b $2(A6), D2 ; load the other team's third character
 cmp.b D1, D2
 bne figureOutCharPalette_defaultChoice ; chose a character the human didn't choose? just go with reg palette
 ;; the cpu chose a character that the human chose, take the human's palette

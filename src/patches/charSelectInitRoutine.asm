@@ -609,7 +609,7 @@ beq renderChosenAvatar_skipPlayer1 ; none chosen? nothing to do
 move.w #1, D6 ; first avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR0, D7
-move.b $P1_CHOSEN_CHAR0 + 1, D4 ; palette flag
+move.b $P1_CHOSEN_CHAR0 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 ; if they chose Rugal, we are done
@@ -619,12 +619,12 @@ beq renderChosenAvatar_skipPlayer1
 move.w #2, D6 ; second avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR1, D7
-move.b $P1_CHOSEN_CHAR1 + 1, D4 ; palette flag
+move.b $P1_CHOSEN_CHAR1 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #3, D6 ; third avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR2, D7
-move.b $P1_CHOSEN_CHAR2 + 1, D4 ; palette flag
+move.b $P1_CHOSEN_CHAR2 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer1:
@@ -635,7 +635,7 @@ beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
 move.w #4, D6 ; first avatar of p2 team 
 clr.w D7
 move.b $P2_CHOSEN_CHAR2, D7
-move.b $P2_CHOSEN_CHAR2 + 1, D4 ; palette flag
+move.b $P2_CHOSEN_CHAR2 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 ; if they chose Rugal, we are done
@@ -645,12 +645,12 @@ beq renderChosenAvatar_skipPlayer2
 move.w #5, D6 ; second avatar of p2 team
 clr.w D7
 move.b $P2_CHOSEN_CHAR1, D7
-move.b $P2_CHOSEN_CHAR1 + 1, D4 ; palette flag
+move.b $P2_CHOSEN_CHAR1 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 move.w #6, D6 ; third avatar of p2 team
 clr.w D7
 move.b $P2_CHOSEN_CHAR0, D7
-move.b $P2_CHOSEN_CHAR0 + 1, D4 ; palette flag
+move.b $P2_CHOSEN_CHAR0 + 3, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
 
 renderChosenAvatar_skipPlayer2:

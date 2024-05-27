@@ -36,7 +36,7 @@ move.b $PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET(A0), $1(A2)
 
 
 adda.w #1, A3 ; move to the next character
-adda.w #2, A2 ; move to the next save slot
+adda.w #1, A2 ; move to the next save slot
 
 dbra D4, teamRandomSelect_saveTeamCharacter
 

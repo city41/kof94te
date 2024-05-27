@@ -17,10 +17,9 @@ doneChoosingPlayer:
 
 
 ;; load the character ids from the team where the game will look for them
-;; note the incrememt is by two as characters are words [char id]|[palete flag]
 move.b (A2), $5552(A5)
-move.b $2(A2), $5553(A5)
-move.b $4(A2), $5554(A5)
+move.b $1(A2), $5553(A5)
+move.b $2(A2), $5554(A5)
 
 lea $AFTER_SCREEN_POSITION_TABLE, A0 ; get our position table set up
 lea $ROM_CONTINUE_POSITION_TABLE, A1 ; get our position table set up
@@ -60,7 +59,7 @@ lsl.l #8, D5 ; shift X into the upper word, 8 bits at a time
 lsl.l #8, D5 ; shift X into the upper word, 8 bits at a time
 or.l D5, D7 ; replace the x word with our new one and leave the y word alone 
 move.l D7, (A0, D6.w) ; and stick it in place so the game can read it
-adda.w #2, A2 ; move to next character on team
+adda.w #1, A2 ; move to next character on team
 dbra D4, loadCharactersLoop
 
 rts
