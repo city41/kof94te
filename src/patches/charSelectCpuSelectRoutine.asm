@@ -7,7 +7,7 @@
 cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
 bne doOriginal8
 cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
-beq doOriginal8 ; if so, doOriginal8 can handle Rugal
+beq customTeams_rugal ; if so, Rugal needs to handled separately
 
 ;; throttle back the speed of cpu random select
 move.b $CHAR_SELECT_COUNTER, D4
@@ -54,6 +54,26 @@ move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 customCpu_doneLoadSi:
 jsr $2MOVE_CPU_CUSTOM_CURSOR
 bra done
+
+customTeams_rugal:
+btst #0, $PLAY_MODE ; is player one playing?
+beq customCpu_rugal_loadPlayerDataSkipPlayer1
+;; player 1 is human, load p2 for cpu
+lea $P2_CUR_INPUT, A0
+move.b #8, $108431 ; make sure team 2 is Rugal
+bra customCpu_rugal_doneLoadingPlayerData
+
+customCpu_rugal_loadPlayerDataSkipPlayer1:
+;; player 2 is human, load p1 for cpu
+lea $P1_CUR_INPUT, A0
+move.b #8, $108231 ; make sure team 1 is Rugal
+
+customCpu_rugal_doneLoadingPlayerData:
+move.b #$18, $PX_CHOSEN_CHAR0_OFFSET(A0)
+move.b #$19, $PX_CHOSEN_CHAR1_OFFSET(A0)
+move.b #$19, $PX_CHOSEN_CHAR2_OFFSET(A0)
+
+;; from here falling into regular cpu is the right move
 
 doOriginal8:
 
