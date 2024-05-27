@@ -36,21 +36,65 @@ doP1AsCpu:
 btst #1, $CHAR_SELECT_COUNTER
 beq p1CpuCopyBlack
 
-move.w #$P1_CURSOR_LEFT_SI, D0
+;; cursor 1, left
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 bsr copyTiles
 
-move.w #$P1_CURSOR_RIGHT_SI, D0
+;; cursor 1, right
+move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D0
+lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, left
+move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, right
+move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D0
+lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, left
+move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, right
+move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D0
 lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 bsr copyTiles
 bra p1CpuDoneCopy
 
 p1CpuCopyBlack:
-move.w #$P1_CURSOR_LEFT_SI, D0
+;; cursor 1, left
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
 bsr copyTiles
 
-move.w #$P1_CURSOR_RIGHT_SI, D0
+;; cursor 1, right
+move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D0
+lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, left
+move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, right
+move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D0
+lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, left
+move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, right
+move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D0
 lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
 bsr copyTiles
 
@@ -94,21 +138,65 @@ doP2AsCpu:
 btst #1, $CHAR_SELECT_COUNTER
 beq p2CpuCopyBlack
 
-move.w #$P2_CURSOR_LEFT_SI, D0
+;; cursor 1, left
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
 lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 bsr copyTiles
 
-move.w #$P2_CURSOR_RIGHT_SI, D0
+;; cursor 1, right
+move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D0
+lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, left
+move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, right
+move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D0
+lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, left
+move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, right
+move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D0
 lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 bsr copyTiles
 bra p2CpuDoneCopy
 
 p2CpuCopyBlack:
-move.w #$P2_CURSOR_LEFT_SI, D0
+;; cursor 1, left
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
 lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
 bsr copyTiles
 
-move.w #$P2_CURSOR_RIGHT_SI, D0
+;; cursor 1, right
+move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D0
+lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, left
+move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 2, right
+move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D0
+lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, left
+move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+bsr copyTiles
+
+;; cursor 3, right
+move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D0
 lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
 bsr copyTiles
 
