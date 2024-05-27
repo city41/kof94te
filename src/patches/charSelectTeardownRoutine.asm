@@ -38,7 +38,15 @@ move.b #8, $108231
 bra player1Done
 
 player1IsCpu:
-;; TODO: we need to set the chosen teams for custom cpu teams, see player2IsCpu
+cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
+bne player1IsCpu_skipSetCpuCustomTeam
+;; we are using cpu custom teams, so the random team was
+;; saved into P2_CHOSEN_CHARX, move it to where the game expects it
+move.b $P1_CHOSEN_CHAR0, (A4)
+move.b $P1_CHOSEN_CHAR1, $1(A4)
+move.b $P1_CHOSEN_CHAR2, $2(A4)
+
+player1IsCpu_skipSetCpuCustomTeam:
 
 ;; we still want to get the character ids into P1_CHOSEN_CHARX, as it
 ;; makes setupCharacterColors much easier
@@ -82,23 +90,22 @@ move.b #8, $108431
 bra player2Done
 
 player2IsCpu:
+cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
+bne player2IsCpu_skipSetCpuCustomTeam
+;; we are using cpu custom teams, so the random team was
+;; saved into P2_CHOSEN_CHARX, move it to where the game expects it
+move.b $P2_CHOSEN_CHAR2, (A4)
+move.b $P2_CHOSEN_CHAR1, $1(A4)
+move.b $P2_CHOSEN_CHAR0, $2(A4)
 
-;; TODO: this is needed for player1IsCpu too
-;; TODO: DON'T do this if cpu is using original 8 teams
-move.b $P2_CHOSEN_CHAR2, D7
-move.b D7, (A4)
-
-move.b $P2_CHOSEN_CHAR1, D7
-move.b D7, $1(A4)
-
-move.b $P2_CHOSEN_CHAR0, D7
-move.b D7, $2(A4)
+player2IsCpu_skipSetCpuCustomTeam:
 
 ;; we still want to get the character ids into P2_CHOSEN_CHARX, as it
 ;; makes setupCharacterColors much easier
-move.b (A4), $P2_CHOSEN_CHAR0
+move.b (A4), $P2_CHOSEN_CHAR2
 move.b $1(A4), $P2_CHOSEN_CHAR1
-move.b $2(A4), $P2_CHOSEN_CHAR2
+move.b $2(A4), $P2_CHOSEN_CHAR0
+
 ;; store the team id to enable continuing
 move.b $108431, $1087e0
 

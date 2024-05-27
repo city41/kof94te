@@ -276,6 +276,8 @@ bne p1_firstCharSelect ; if player 2 hasn't lost, then this is the first char se
 bset #7, $PLAY_MODE
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P1_NUM_CHOSEN_CHARS
+lea $P2_CHOSEN_CHAR0, A0 ; take the CPU's last team
+bsr setDefeatedCharBytes ; and mark all of its characters as defeated
 bra p1_pastReady
 p1_continued:
 ;; set the continue flag so char select knows to show the cpu team
@@ -288,6 +290,7 @@ bra p1_skipClearP2NumChosen
 
 p1_firstCharSelect: 
 move.b #0, $P2_NUM_CHOSEN_CHARS
+bsr clearDefeatedCharBytes
 
 p1_skipClearP2NumChosen:
 move.b #0, $P1_NUM_CHOSEN_CHARS
@@ -315,6 +318,8 @@ bne p2_firstCharSelect ; if player 1 hasn't lost, then this is the first char se
 bset #7, $PLAY_MODE
 ;; by setting to 3 chars, cpu randomization happens
 move.b #3, $P2_NUM_CHOSEN_CHARS
+lea $P1_CHOSEN_CHAR0, A0 ; take the CPU's last team
+bsr setDefeatedCharBytes ; and mark all of its characters as defeated
 bra p2_pastReady
 p2_continued:
 ;; set the continue flag so char select knows to show the cpu team
@@ -327,6 +332,7 @@ bra p2_skipClearP2NumChosen
 
 p2_firstCharSelect: 
 move.b #0, $P1_NUM_CHOSEN_CHARS
+bsr clearDefeatedCharBytes
 
 p2_skipClearP2NumChosen:
 move.b #0, $P2_NUM_CHOSEN_CHARS
@@ -468,6 +474,31 @@ bsr renderChosenAvatars
 rts
 
 
+;;;;;;;;; SUBROUTINES ;;;;;;;;;;;;;;
+
+;; clearDefeatedCharBytes
+;; sets the defeated char bits all to zero for a fresh start
+clearDefeatedCharBytes:
+move.l #0, $CPU_DEFEATED_CHARACTERS
+rts
+
+
+;; setDefeatedCharBytes
+;; flips bits based on the cpu team that just lost
+;; so the player doesn't fight these characters again in one playthrough
+;;
+;; parameters
+;; A0: The cpu team list
+setDefeatedCharBytes:
+move.l $CPU_DEFEATED_CHARACTERS, D2
+move.b (A0), D1
+bset.l D1, D2
+move.b $1(A0), D1
+bset.l D1, D2
+move.b $2(A0), D1
+bset.l D1, D2
+move.l D2, $CPU_DEFEATED_CHARACTERS
+rts
 
 
 ;; consults the team defeat byte and sets

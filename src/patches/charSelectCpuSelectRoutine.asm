@@ -90,7 +90,8 @@ rts
 
 ;; getRandomCharacterId
 ;; gets a random character Id and places it in D0
-;; does not choose a character if it is already on the team
+;; does not choose a character if it is already on the team,
+;; or if that character has already been defeated
 ;;
 ;; parameters
 ;; A0: pointer to player's base data
@@ -103,6 +104,11 @@ movem.l $MOVEM_STORAGE, A0
 andi.b #$1f, D0 ; chop the random byte down to 5 bits -> 0 through 31
 cmpi.b #24, D0
 bge getRandomCharacterId_pickRandomChar ;; it was too big, try again
+
+;; first, has this character been defeated before?
+move.l $CPU_DEFEATED_CHARACTERS, D1
+btst.l D0, D1
+bne getRandomCharacterId_pickRandomChar ; this character has already been defeated, try again
 
 ;; ok we got a character, but are they already on the team?
 cmpi.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; have they not chosen any characters yet?
