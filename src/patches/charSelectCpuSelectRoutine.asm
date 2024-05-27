@@ -7,10 +7,10 @@ cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
 ;; first, cpu 1
-move.w #$P1_CURSOR_LEFT_SI, D7 ; use player one's cursor sprites
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D7 
 lea $1081c0, A0           ; point to where the cpu index is for p1
 jsr $2MOVE_CPU_CURSOR
-move.w #$P2_CURSOR_LEFT_SI, D7 ; use player two's cursor sprites
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D7 ; use player two's cursor sprites
 lea $1083c0, A0           ; point to where the cpu index is for p2
 jsr $2MOVE_CPU_CURSOR
 bra done
@@ -18,12 +18,12 @@ bra done
 prepCpuCursorForSinglePlayerMode:
 btst #0, $PLAY_MODE ; is p1 playing?
 beq cpuCursor_skipPlayer1
-move.w #$P2_CURSOR_LEFT_SI, D7 ; use player two's cursor sprites
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D7 ; use player two's cursor sprites
 lea $1083c0, A0           ; point to where the cpu index is for p1
 bra doCpuCursor
 
 cpuCursor_skipPlayer1:
-move.w #$P1_CURSOR_LEFT_SI, D7 ; use player one's cursor sprites
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D7 ; use player one's cursor sprites
 lea $1081c0, A0           ; point to where the cpu index is for p2
 
 doCpuCursor:

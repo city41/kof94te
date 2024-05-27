@@ -1,6 +1,6 @@
 ;;;;; start character_grid static sprite data ;;;;;
 dc.w 18 ; width in tiles
-dc.w 8 ; height in tiles
+dc.w 11 ; height in tiles
 
 ;; start sprite tiles
 ;;; column 0
@@ -22,9 +22,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $ea88
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $800
@@ -48,9 +54,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $1000
@@ -74,9 +86,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $1800
@@ -100,9 +118,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $2000
@@ -126,9 +150,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $2800
@@ -152,9 +182,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $3000
@@ -178,9 +214,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $3800
@@ -204,9 +246,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $4000
@@ -230,9 +278,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $4800
@@ -256,9 +310,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $5000
@@ -282,9 +342,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $5800
@@ -308,9 +374,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $6000
@@ -334,9 +406,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $6800
@@ -360,9 +438,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $7000
@@ -386,9 +470,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $7800
@@ -412,9 +502,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $8000
@@ -438,9 +534,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $8800
@@ -464,9 +566,15 @@ dc.w $af9
 dc.w $1200
 dc.w $af9
 dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
+dc.w $af9
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eac8
+dc.w $eacb
 
 ;; SCB4 horizontal position
 dc.w $9000

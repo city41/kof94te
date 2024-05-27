@@ -26,8 +26,8 @@ move.b #0, $PLAY_MODE
 
 move.w #$P1_CURSOR_LEFT_SI, $P1_CURSOR_SPRITEINDEX
 move.w #$P2_CURSOR_LEFT_SI, $P2_CURSOR_SPRITEINDEX
-move.w #$P1C1_SI, $P1_CHOSEN_TEAM_SPRITEINDEX
-move.w #$P2C1_SI, $P2_CHOSEN_TEAM_SPRITEINDEX
+move.w #1, $P1_CHOSEN_TEAM_AVATARINDEX
+move.w #4, $P2_CHOSEN_TEAM_AVATARINDEX
 ;; to help account for the fact the chosen characters are
 ;; backwards on the p2 side
 move.l #$P1_CHOSEN_CHAR0, $P1_STARTING_CHOSE_CHAR_ADDRESS
@@ -64,14 +64,14 @@ cmpi.b #1, $BIOS_PLAYER_MOD2 ;; is player 2 playing?
 beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_LEFT_SI, D6
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_RIGHT_SI, D6
+move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D6
 lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
@@ -97,14 +97,14 @@ cmpi.b #1, D6 ;; look specifically for 1: playing
 beq skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
 ; load the cpu cursor, left side
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_LEFT_SI, D6
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
 lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; load the cpu cursor, right side
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_RIGHT_SI, D6
+move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D6
 lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
@@ -119,27 +119,27 @@ bne skipDemoMode
 ;; this is demo mode, we need to do both cpu cursors
 
 ;; p1 side cpu cursor, left half
-move.w #$P1_CURSOR_LEFT_SI, D6
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
 lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
-move.w #$P1_CURSOR_RIGHT_SI, D6
+move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D6
 lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ;; p1 side cpu cursor, left half
-move.w #$P2_CURSOR_LEFT_SI, D6
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
 
 ; p1 side cpu cursor, right half
 ; it loads itself off screen, no need to move it
-move.w #$P2_CURSOR_RIGHT_SI, D6
+move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D6
 lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
 move.w #0, D5              ; offset into tile data
 jsr $2RENDER_STATIC_IMAGE
@@ -163,8 +163,6 @@ cmpi.b #3, $PLAY_MODE
 beq skipGreyOut ; don't grey out in versus mode
 jsr $2GREY_OUT_TEAMS
 skipGreyOut:
-
-jsr $2INIT_EMPTY_AVATARS
 
 bsr setCpuAlreadyUsedIndex
 
@@ -513,7 +511,7 @@ renderChosenAvatars:
 tst.b $P1_NUM_CHOSEN_CHARS
 beq renderChosenAvatar_skipPlayer1 ; none chosen? nothing to do
 ;; if we get here, we know all three have been chosen
-move.w #$P1C1_SI, D6
+move.w #1, D6 ; first avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR0, D7
 move.b $P1_CHOSEN_CHAR0 + 1, D4 ; palette flag
@@ -523,12 +521,12 @@ jsr $2RENDER_CHOSEN_AVATAR
 cmpi.b #$18, $P1_CHOSEN_CHAR0
 beq renderChosenAvatar_skipPlayer1
 
-move.w #$P1C1_SI + 2, D6
+move.w #2, D6 ; second avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR1, D7
 move.b $P1_CHOSEN_CHAR1 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
-move.w #$P1C1_SI + 4, D6
+move.w #3, D6 ; third avatar of p1 team
 clr.w D7
 move.b $P1_CHOSEN_CHAR2, D7
 move.b $P1_CHOSEN_CHAR2 + 1, D4 ; palette flag
@@ -539,7 +537,7 @@ renderChosenAvatar_skipPlayer1:
 tst.b $P2_NUM_CHOSEN_CHARS
 beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
 ;; if we get here, we know all three have been chosen
-move.w #$P2C1_SI, D6
+move.w #4, D6 ; first avatar of p2 team 
 clr.w D7
 move.b $P2_CHOSEN_CHAR2, D7
 move.b $P2_CHOSEN_CHAR2 + 1, D4 ; palette flag
@@ -549,12 +547,12 @@ jsr $2RENDER_CHOSEN_AVATAR
 cmpi.b #$18, $P2_CHOSEN_CHAR2
 beq renderChosenAvatar_skipPlayer2
 
-move.w #$P2C1_SI + 2, D6
+move.w #5, D6 ; second avatar of p2 team
 clr.w D7
 move.b $P2_CHOSEN_CHAR1, D7
 move.b $P2_CHOSEN_CHAR1 + 1, D4 ; palette flag
 jsr $2RENDER_CHOSEN_AVATAR
-move.w #$P2C1_SI + 4, D6
+move.w #6, D6 ; third avatar of p2 team
 clr.w D7
 move.b $P2_CHOSEN_CHAR0, D7
 move.b $P2_CHOSEN_CHAR0 + 1, D4 ; palette flag

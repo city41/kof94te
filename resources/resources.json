@@ -97,10 +97,6 @@
         "dest": "../src/patches/cpu_p2_cursor_right_black.asm"
       },
       {
-        "template": "empty_chosen_avatar.asm.hbr",
-        "dest": "../src/patches/empty_chosen_avatar.asm"
-      },
-      {
         "template": "black_bg.asm.hbr",
         "dest": "../src/patches/black_bg.asm"
       }
@@ -226,10 +222,6 @@
       "imageFile": "./cpu_p2_cursor_right_black.png",
       "x": 0,
       "y": 272
-    },
-    {
-      "name": "empty_chosen_avatar",
-      "imageFile": "./empty_chosen_avatar.png"
     },
     {
       "name": "black_bg",

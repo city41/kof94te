@@ -455,7 +455,7 @@ bra renderChosenAvatars_renderAvatars
 
 renderChosenAvatars_renderAvatars:
 clr.b D5 ; loop counter
-move.w $PX_CHOSEN_TEAM_SPRITEINDEX_OFFSET(A0), D6
+move.w $PX_CHOSEN_TEAM_AVATARINDEX_OFFSET(A0), D6 ; load the player's starting avatar index (1 or 4)
 
 renderChosenAvatars_renderOneAvatar:
 cmp.b D3, D5 ; see if we need to render or clear based on how many avatars to render
@@ -464,20 +464,18 @@ bge renderChosenAvatar_clearOneAvatar
 clr.w D7
 move.b (A2), D7 ; load the char id
 move.b $1(A2), D4 ; palette flag
-move.b D7, D1 ; flipPaletteFlagIfNeede needs char id here
+move.b D7, D1 ; flipPaletteFlagIfNeeded needs char id here
 bsr flipPaletteFlagIfNeeded
 jsr $2RENDER_CHOSEN_AVATAR
 bra renderChosenAvatar_doneRenderingOneAvatar
 
 renderChosenAvatar_clearOneAvatar:
-movem.w D6, $MOVEM_STORAGE
 jsr $2CLEAR_CHOSEN_AVATAR
-movem.w $MOVEM_STORAGE, D6
 
 renderChosenAvatar_doneRenderingOneAvatar:
 
 adda.w #2, A2 ; move to next character
-addi.w #2, D6 ; move to next sprite index
+addi.w #1, D6 ; move to next avatar index
 addi.b #1, D5 ; increment the counter
 cmpi.b #3, D5 ; and loop if we've done less than 3 characters
 bne renderChosenAvatars_renderOneAvatar
