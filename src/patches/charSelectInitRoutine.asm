@@ -1,6 +1,6 @@
 ;; for now, just always have cpu custom teams
 ;; TODO: set this flag based on what is going on
-move.b #1, $CPU_CUSTOM_TEAMS_FLAG
+move.b #0, $CPU_CUSTOM_TEAMS_FLAG
 
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag

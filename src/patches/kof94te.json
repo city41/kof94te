@@ -364,6 +364,13 @@
     },
     {
       "type": "prom",
+      "description": "move cpu cursor routine for custom teams",
+      "subroutine": true,
+      "symbol": "MOVE_CPU_CUSTOM_CURSOR",
+      "patchAsm": "moveCpuCustomCursor.asm"
+    },
+    {
+      "type": "prom",
       "description": "move cpu cursor routine",
       "subroutine": true,
       "symbol": "MOVE_CPU_CURSOR",

@@ -80,10 +80,6 @@ move.b #8, $108431
 bra player2Done
 
 player2IsCpu:
-;; test, give the cpu random chars
-move.b #$f, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING
-move.b #$1, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1
-move.b #$5, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2
 
 ;; we still want to get the character ids into P2_CHOSEN_CHARX, as it
 ;; makes setupCharacterColors much easier
