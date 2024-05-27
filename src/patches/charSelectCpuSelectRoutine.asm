@@ -18,23 +18,40 @@ bne done
 ;; TODO: this only works with human on p1 (ie cpu is p2)
 
 ;; reset back to zero characters
-move.b #0, $P2_NUM_CHOSEN_CHARS
+btst #0, $PLAY_MODE ; is player one playing?
+beq customCpu_loadPlayerDataSkipPlayer1
+;; player 1 is human, load p2 for cpu
 lea $P2_CUR_INPUT, A0
+bra customCpu_doneLoadingPlayerData
+customCpu_loadPlayerDataSkipPlayer1:
+;; player 2 is human, load p1 for cpu
+lea $P1_CUR_INPUT, A0
+
+customCpu_doneLoadingPlayerData:
+
+move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
 bsr getRandomCharacterId
-move.b D0, $P2_CHOSEN_CHAR0
-addi.b #1, $P2_NUM_CHOSEN_CHARS
+move.b D0, $PX_CHOSEN_CHAR0_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
 bsr getRandomCharacterId
-move.b D0, $P2_CHOSEN_CHAR1
-addi.b #1, $P2_NUM_CHOSEN_CHARS
+move.b D0, $PX_CHOSEN_CHAR1_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
 bsr getRandomCharacterId
-move.b D0, $P2_CHOSEN_CHAR2
-addi.b #1, $P2_NUM_CHOSEN_CHARS
+move.b D0, $PX_CHOSEN_CHAR2_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
-lea $P2_CHOSEN_CHAR0, A0
+btst #0, $PLAY_MODE
+beq customCpu_loadSiSkipPlayer1
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
+bra customCpu_doneLoadSi
+
+customCpu_loadSiSkipPlayer1:
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
+
+customCpu_doneLoadSi:
 jsr $2MOVE_CPU_CUSTOM_CURSOR
 bra done
 
