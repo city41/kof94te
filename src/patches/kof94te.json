@@ -363,10 +363,17 @@
     },
     {
       "type": "prom",
-      "description": "map from team index on OG team select to XY for cpu cursor",
+      "description": "character id to X on the grid. Used by moveCpuCustomCursor",
       "subroutine": true,
-      "symbol": "TEAM_INDEX_TO_XY",
-      "patchAsm": "teamSelectIndexToXY.asm"
+      "symbol": "CHARID_TO_GRID_X",
+      "patchAsm": "charIdToGridX.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character id to Y on the grid. Used by moveCpuCustomCursor",
+      "subroutine": true,
+      "symbol": "CHARID_TO_GRID_Y",
+      "patchAsm": "charIdToGridY.asm"
     },
     {
       "type": "prom",
@@ -374,6 +381,13 @@
       "subroutine": true,
       "symbol": "MOVE_CPU_CUSTOM_CURSOR",
       "patchAsm": "moveCpuCustomCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "map from team index on OG team select to XY for moveCpuCursor",
+      "subroutine": true,
+      "symbol": "TEAM_INDEX_TO_XY",
+      "patchAsm": "teamSelectIndexToXY.asm"
     },
     {
       "type": "prom",

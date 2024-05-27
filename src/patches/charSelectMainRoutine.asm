@@ -193,7 +193,8 @@ bne renderCpuChosenTeam_checkP2 ; player 1 is playing, go check p2
 ;; p1 is not playing, so p1 is a cpu 
 move.b #0, D4
 move.w #1, D6 ; avatar index 1
-move.b $108231, D1
+move.b $108231, D1 ; load the chosen team ID
+lea $P1_CHOSEN_CHAR0, A1
 lea $P2_CHOSEN_CHAR2, A2
 bsr renderCpuChosenTeam_doRender
 
@@ -203,7 +204,8 @@ bne renderCpuChosenTeam_done ; they are playing, nothing to do
 ;; p2 is not playing, so p2 is a cpu 
 move.b #1, D4
 move.w #4, D6 ; avatar index 4
-move.b $108431, D1
+move.b $108431, D1 ; load the chosen team ID
+lea $P2_CHOSEN_CHAR2, A1
 lea $P1_CHOSEN_CHAR0, A2
 bsr renderCpuChosenTeam_doRender
 
@@ -216,17 +218,26 @@ rts
 ;;; multiple times depending on single player versus demo mode
 ;;;
 ;;; parameters
-;;; D4 0 for p1 or 1 for p2
-;;; D6.w avatar index
-;;; D1.b chosen team id
-;;; A2 other team's chosen characters list
+;;; D4b: 0 for p1 or 1 for p2
+;;; D6.w: avatar index
+;;; D1.b: chosen team id
+;;; A1: this team's chosen character list 
+;;; A2: other team's chosen characters list
 renderCpuChosenTeam_doRender:
 cmpi.b #8, D1 ; is this Rugal?
 beq renderCpuChosenTeam_rugal
 
 move.w #2, D3 ; get dba primed, 2 since it hinges on -1
 
-;; ok, we have the cpu team id, but not the characters, we need to look them up
+cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
+bne renderCpuChosenTeam_original8
+;; this is cpu custom teams, and the custom team was handed to us in A1
+movea.l A1, A0
+bra renderCpuChosenTeam_renderChar
+
+renderCpuChosenTeam_original8:
+;; this is cpu original 8 teams. In this case we have the team ID, with that 
+;; we need to go get the character ids
 lea $534DC, A0 ; load the starting team->character list address
 mulu.w #4, D1  ; multiply team id by 4, as there are 4 bytes per team (three characters and a ff delimiter)
 adda.w D1, A0  ; move into the list to the correct team

@@ -6,6 +6,9 @@
 ;; D0: si
 ;; D1: x
 ;; D2: y
+;;
+;; uses
+;; D3,D4
 
 ;;;;;;; SCB3: y position, sticky, and size
 move.w #$8200, D3  ; SCB3 base address
