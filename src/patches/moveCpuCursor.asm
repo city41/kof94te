@@ -33,6 +33,7 @@ lea $2TEAM_INDEX_TO_XY, A0
 ; jump ahead into the table based on which team is focused
 adda.w D0, A0
 
+; cpu cursor 1
 ; LEFT SIDE
 ; load up the parameters for moveSprite
 move.w (A0), D1 ; X 
@@ -43,8 +44,44 @@ jsr $2MOVE_SPRITE
 
 ; RIGHT SIDE
 move.w (A0), D1 ; X 
+addi.w #16, D1  ; the ride side is 16px over
 move.w $2(A0), D2 ; Y
-addi.w #80, D1  ; the ride side is 80px over
+addi.w #1, D7   ; move onto next sprite index
+move.w D7, D0
+jsr $2MOVE_SPRITE
+
+; cpu cursor 2
+; LEFT SIDE
+; load up the parameters for moveSprite
+move.w (A0), D1 ; X 
+addi.w #32, D1  ; the ride side is 16px over
+move.w $2(A0), D2 ; Y
+addi.w #1, D7   ; move onto next sprite index
+move.w D7, D0
+jsr $2MOVE_SPRITE
+
+; RIGHT SIDE
+move.w (A0), D1 ; X 
+addi.w #48, D1  ; the ride side is 16px over
+move.w $2(A0), D2 ; Y
+addi.w #1, D7   ; move onto next sprite index
+move.w D7, D0
+jsr $2MOVE_SPRITE
+
+; cpu cursor 3
+; LEFT SIDE
+; load up the parameters for moveSprite
+move.w (A0), D1 ; X 
+addi.w #64, D1  ; the ride side is 16px over
+move.w $2(A0), D2 ; Y
+addi.w #1, D7   ; move onto next sprite index
+move.w D7, D0
+jsr $2MOVE_SPRITE
+
+; RIGHT SIDE
+move.w (A0), D1 ; X 
+addi.w #80, D1  ; the ride side is 16px over
+move.w $2(A0), D2 ; Y
 addi.w #1, D7   ; move onto next sprite index
 move.w D7, D0
 jsr $2MOVE_SPRITE
