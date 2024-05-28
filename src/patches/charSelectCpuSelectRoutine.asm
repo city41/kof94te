@@ -6,6 +6,7 @@
 
 cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
 bne doOriginal8
+
 cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
 beq customTeams_rugal ; if so, Rugal needs to handled separately
 
@@ -17,31 +18,34 @@ andi.b #$7, D4
 bne done
 ;; TODO: this only works with human on p1 (ie cpu is p2)
 
-;; reset back to zero characters
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
+bne prepCustomCpuCursorForSinglePlayerMode
+;; this is demo mode, there are two cpu cursors
+;; p1 cpu
+lea $P1_CUR_INPUT, A0
+bsr pickCustomCpuTeam
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
+jsr $2MOVE_CPU_CUSTOM_CURSOR
+;; p2 cpu
+lea $P2_CUR_INPUT, A0
+bsr pickCustomCpuTeam
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
+jsr $2MOVE_CPU_CUSTOM_CURSOR
+bra done
+
+prepCustomCpuCursorForSinglePlayerMode:
 btst #0, $PLAY_MODE ; is player one playing?
 beq customCpu_loadPlayerDataSkipPlayer1
 ;; player 1 is human, load p2 for cpu
 lea $P2_CUR_INPUT, A0
 bra customCpu_doneLoadingPlayerData
+
 customCpu_loadPlayerDataSkipPlayer1:
 ;; player 2 is human, load p1 for cpu
 lea $P1_CUR_INPUT, A0
-
 customCpu_doneLoadingPlayerData:
 
-move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-
-bsr getRandomCharacterId
-move.b D0, $PX_CHOSEN_CHAR0_OFFSET(A0)
-addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-
-bsr getRandomCharacterId
-move.b D0, $PX_CHOSEN_CHAR1_OFFSET(A0)
-addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
-
-bsr getRandomCharacterId
-move.b D0, $PX_CHOSEN_CHAR2_OFFSET(A0)
-addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+bsr pickCustomCpuTeam
 
 btst #0, $PLAY_MODE
 beq customCpu_loadSiSkipPlayer1
@@ -157,4 +161,27 @@ beq getRandomCharacterId_pickRandomChar ; yes? choose again
 
 ;; the chosen character is not on the team, we are good
 getRandomCharacterId_done:
+rts
+
+
+;; pickCustomCpuTeam
+;; loads up all three characters onto a cpu team
+;;
+;; parameters
+;; A0: pointer to a player's base data
+pickCustomCpuTeam:
+move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+
+bsr getRandomCharacterId
+move.b D0, $PX_CHOSEN_CHAR0_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+
+bsr getRandomCharacterId
+move.b D0, $PX_CHOSEN_CHAR1_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+
+bsr getRandomCharacterId
+move.b D0, $PX_CHOSEN_CHAR2_OFFSET(A0)
+addi.b #1, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+
 rts
