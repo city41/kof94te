@@ -510,6 +510,13 @@
     },
     {
       "type": "prom",
+      "description": "determine which mode of teams the cpu will use",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_TEAM_MODE",
+      "patchAsm": "determineCpuTeamMode.asm"
+    },
+    {
+      "type": "prom",
       "description": "load cpu cursors routine",
       "subroutine": true,
       "symbol": "LOAD_CPU_CURSORS",
