@@ -11,6 +11,7 @@
     "BIOS_PLAYER_MOD2": "10fdb7",
     "BIOS_P1CURRENT": "10fd96",
     "BIOS_P1CHANGE": "10fd97",
+    "BIOS_P2CURRENT": "10fd9c",
     "BIOS_P2CHANGE": "10fd9d",
     "BIOS_STATCURNT": "10fdac",
     "PALETTE_WHITE": "7fff",
@@ -82,6 +83,7 @@
     "MOVEM_STORAGE": "10fa12",
     "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10fb02",
     "CPU_CUSTOM_TEAMS_FLAG": "10fb05",
+    "OVERRODE_CPU_CSTM_FLAG": "10fb06",
 
     "MAIN_PHASE_UNKNOWN": "0",
     "MAIN_PHASE_INIT": "1",
@@ -1313,6 +1315,14 @@
         "movea.l #$530ee, A0",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "check for cpu custom team overrides",
+      "address": "13b06e",
+      "subroutine": true,
+      "symbol": "APPLY_CPU_CUSTOM_TEAM_OVERRIDES",
+      "patchAsm": "checkForCpuCustomTeamOverrides.asm"
     }
   ]
 }
