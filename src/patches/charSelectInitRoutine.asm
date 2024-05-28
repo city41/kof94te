@@ -71,12 +71,13 @@ skipPlayer2:
 
 ;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
-;; TODO: figure out demo mode
 cmpi.b #0, $PLAY_MODE
 bne skipDemoMode
-bra skipDemoMode
 ;; this is demo mode, we need to do both cpu cursors
-
+;; first pick the cpu team mode
+jsr $2DETERMINE_CPU_TEAM_MODE
+;; now we can load the cursors
+jsr $2LOAD_CPU_CURSORS
 ;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
 skipDemoMode:
