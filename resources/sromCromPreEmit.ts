@@ -150,45 +150,128 @@ function prepareForAssembly(
 }
 
 // these are in order of team ids
-const teamToGridSpriteData = [
+const characterToGridSpriteData: Array<{
+  spriteIndexOffset: number;
+  tileIndexOffset: number;
+}> = [
   {
-    // brazil
+    // Heidern
     spriteIndexOffset: 12,
     tileIndexOffset: 0,
   },
   {
-    // china
+    // Ralf
+    spriteIndexOffset: 14,
+    tileIndexOffset: 0,
+  },
+  {
+    // Clark
+    spriteIndexOffset: 16,
+    tileIndexOffset: 0,
+  },
+  {
+    // Athena
     spriteIndexOffset: 0,
     tileIndexOffset: 2,
   },
   {
-    // japan
+    // Sie
+    spriteIndexOffset: 2,
+    tileIndexOffset: 2,
+  },
+  {
+    // Chin
+    spriteIndexOffset: 4,
+    tileIndexOffset: 2,
+  },
+  {
+    // Kyo
     spriteIndexOffset: 0,
     tileIndexOffset: 4,
   },
   {
-    // usa
+    // Beni
+    spriteIndexOffset: 2,
+    tileIndexOffset: 4,
+  },
+  {
+    // Goro
+    spriteIndexOffset: 4,
+    tileIndexOffset: 4,
+  },
+  {
+    // Heavy
     spriteIndexOffset: 6,
     tileIndexOffset: 0,
   },
   {
-    // korea
+    // Lucky
+    spriteIndexOffset: 8,
+    tileIndexOffset: 0,
+  },
+  {
+    // Brian
+    spriteIndexOffset: 10,
+    tileIndexOffset: 0,
+  },
+  {
+    // Kim
     spriteIndexOffset: 6,
     tileIndexOffset: 2,
   },
   {
-    // italy
+    // Chang
+    spriteIndexOffset: 8,
+    tileIndexOffset: 2,
+  },
+  {
+    // Choi
+    spriteIndexOffset: 10,
+    tileIndexOffset: 2,
+  },
+  {
+    // Terry
     spriteIndexOffset: 0,
     tileIndexOffset: 0,
   },
   {
-    // mexico
+    // Andy
+    spriteIndexOffset: 2,
+    tileIndexOffset: 0,
+  },
+  {
+    // Joe
+    spriteIndexOffset: 4,
+    tileIndexOffset: 0,
+  },
+  {
+    // Ryo
     spriteIndexOffset: 12,
     tileIndexOffset: 4,
   },
   {
-    // england
+    // Robert
+    spriteIndexOffset: 14,
+    tileIndexOffset: 4,
+  },
+  {
+    // Takuma
+    spriteIndexOffset: 16,
+    tileIndexOffset: 4,
+  },
+  {
+    // Yuri
     spriteIndexOffset: 12,
+    tileIndexOffset: 2,
+  },
+  {
+    // Mai
+    spriteIndexOffset: 14,
+    tileIndexOffset: 2,
+  },
+  {
+    // King
+    spriteIndexOffset: 16,
     tileIndexOffset: 2,
   },
 ];
@@ -198,19 +281,21 @@ const GRID_IMAGE_SI = 0x153;
 const SCB1_TILE_WORDS_PER_SPRITE = 64;
 
 // take the grey crom image data and generate the data that will ultimately
-// create TEAM_TO_GREY_OUT_TABLE used in greyOutDefeatedTeam.asm
+// create CHARACTER_TO_GREY_OUT_TABLE used in greyOutDefeatedCharacter.asm
 function createGreyCharacterGridEmit(greyCromImage: AsmCromImage) {
-  return teamToGridSpriteData.flatMap((teamSpriteData, i) => {
-    const scb1Columns = greyCromImage.columns.slice(i * 6, (i + 1) * 6);
+  return characterToGridSpriteData.flatMap((charSpriteData, i) => {
+    const scb1Columns = greyCromImage.columns.slice(i * 2, (i + 1) * 2);
 
     const data: number[] = [];
 
     for (let x = 0; x < scb1Columns.length; ++x) {
       const column = scb1Columns[x];
-      const si = GRID_IMAGE_SI + teamSpriteData.spriteIndexOffset + x;
+      const si = GRID_IMAGE_SI + charSpriteData.spriteIndexOffset + x;
 
+      // this starts at y = 0 every time because the source is the grey grid image
+      // which is a flat image with characters in characterId order
       for (let y = 0; y < column.scb1.length; ++y) {
-        const ti = teamSpriteData.tileIndexOffset + y;
+        const ti = charSpriteData.tileIndexOffset + y;
         // SCB1 starts at 0
         const vramAddress = si * SCB1_TILE_WORDS_PER_SPRITE + ti * 2;
         data.push(vramAddress);

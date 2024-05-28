@@ -248,12 +248,6 @@ jsr $2PUT_RUGAL_ON_GRID
 skipRugal:
 
 
-cmpi.b #0, $PLAY_MODE
-beq skipGreyOut ; don't grey out in demo mode
-cmpi.b #3, $PLAY_MODE
-beq skipGreyOut ; don't grey out in versus mode
-jsr $2GREY_OUT_TEAMS
-skipGreyOut:
 
 bsr setCpuAlreadyUsedIndex
 
@@ -470,6 +464,13 @@ move.l #$2VERSION, $VSTRING_DATA + 2
 
 
 bsr renderChosenAvatars
+
+cmpi.b #0, $PLAY_MODE
+beq skipGreyOut ; don't grey out in demo mode
+cmpi.b #3, $PLAY_MODE
+beq skipGreyOut ; don't grey out in versus mode
+jsr $2GREY_OUT_CHARACTERS
+skipGreyOut:
 
 rts
 

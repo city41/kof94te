@@ -179,10 +179,10 @@
     },
     {
       "type": "prom",
-      "description": "team to grey out table for greying out defeated teams",
+      "description": "character to grey out table for greying out defeated characters",
       "subroutine": true,
-      "symbol": "TEAM_TO_GREY_OUT_TABLE",
-      "patchAsm": "team_to_grey_out_table.asm"
+      "symbol": "CHARACTER_TO_GREY_OUT_TABLE",
+      "patchAsm": "character_to_grey_out_table.asm"
     },
     {
       "type": "prom",
@@ -515,10 +515,10 @@
     },
     {
       "type": "prom",
-      "description": "greys out teams that have been defeated on the character grid",
+      "description": "greys out characters that have been defeated on the character grid",
       "subroutine": true,
-      "symbol": "GREY_OUT_TEAMS",
-      "patchAsm": "greyOutDefeatedTeams.asm"
+      "symbol": "GREY_OUT_CHARACTERS",
+      "patchAsm": "greyOutDefeatedCharacters.asm"
     },
     {
       "type": "prom",

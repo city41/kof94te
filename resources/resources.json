@@ -13,8 +13,8 @@
         "dest": "../src/patches/character_grid.asm"
       },
       {
-        "template": "team_to_grey_out_table.asm.hbr",
-        "dest": "../src/patches/team_to_grey_out_table.asm"
+        "template": "character_to_grey_out_table.asm.hbr",
+        "dest": "../src/patches/character_to_grey_out_table.asm"
       },
       {
         "template": "rugal_character_grid_inject_data.asm.hbr",

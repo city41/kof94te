@@ -1,12 +1,12 @@
 ;; the grey scb1 vramaddr|vramrw word pairs
 ;; the data from this was calculated in sromCromPreEmit.ts
-;; the data is in team id order (so Brazil is first)
-;; each team has 24 word pairs
+;; the data is in character id order (so Heidern is first)
+;; each character has 8 word pairs
 ;; each pair is [vramaddr]|[vramrw]
 ;; this is scb1 data that changes the tile and palette
-;; for a team in the character grid
-;; greyOutDefeatedTeams.asm largely just blindly writes
-;; this data for any team that has been defeated, turning them grey
+;; for a character in the character grid
+;; greyOutDefeatedCharacters.asm largely just blindly writes
+;; this data for any character that has been defeated, turning them grey
 dc.w $57c0
 dc.w $bae
 dc.w $57c1
