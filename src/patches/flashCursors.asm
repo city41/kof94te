@@ -32,70 +32,36 @@ p1DoneCopy:
 bra doneP1
 
 doP1AsCpu:
-;; player one is a cpu
+cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
+beq p1CpuCopyWhite_original8
+
+p1CpuCopyWhite_custom:
 btst #1, $CHAR_SELECT_COUNTER
-beq p1CpuCopyBlack
+beq p1CpuCopyBlack_custom
 
-;; cursor 1, left
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 1, right
-move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, left
-move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, right
-move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, left
-move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, right
-move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+lea $2P1_CPU_CURSOR_CUSTOM_WHITE_IMAGE, A6
 bsr copyTiles
 bra p1CpuDoneCopy
 
-p1CpuCopyBlack:
-;; cursor 1, left
+p1CpuCopyBlack_custom:
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+lea $2P1_CPU_CURSOR_CUSTOM_BLACK_IMAGE, A6
 bsr copyTiles
+bra p1CpuDoneCopy
 
-;; cursor 1, right
-move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+p1CpuCopyWhite_original8:
+btst #1, $CHAR_SELECT_COUNTER
+beq p1CpuCopyBlack_original8
+
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_ORIGINAL8_WHITE_IMAGE, A6
 bsr copyTiles
+bra p1CpuDoneCopy
 
-;; cursor 2, left
-move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, right
-move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, left
-move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D0
-lea $2P1_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, right
-move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D0
-lea $2P1_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+p1CpuCopyBlack_original8:
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
+lea $2P1_CPU_CURSOR_ORIGINAL8_BLACK_IMAGE, A6
 bsr copyTiles
 
 p1CpuDoneCopy:
@@ -134,70 +100,36 @@ p2DoneCopy:
 bra doneP2
 
 doP2AsCpu:
-;; player two is a cpu
+cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
+beq p2CpuCopyWhite_original8
+
+p2CpuCopyWhite_custom:
 btst #1, $CHAR_SELECT_COUNTER
-beq p2CpuCopyBlack
+beq p2CpuCopyBlack_custom
 
-;; cursor 1, left
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 1, right
-move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, left
-move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, right
-move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, left
-move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, right
-move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
+lea $2P2_CPU_CURSOR_CUSTOM_WHITE_IMAGE, A6
 bsr copyTiles
 bra p2CpuDoneCopy
 
-p2CpuCopyBlack:
-;; cursor 1, left
+p2CpuCopyBlack_custom:
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
+lea $2P2_CPU_CURSOR_CUSTOM_BLACK_IMAGE, A6
 bsr copyTiles
+bra p2CpuDoneCopy
 
-;; cursor 1, right
-move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+p2CpuCopyWhite_original8:
+btst #1, $CHAR_SELECT_COUNTER
+beq p2CpuCopyBlack_original8
+
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_ORIGINAL8_WHITE_IMAGE, A6
 bsr copyTiles
+bra p2CpuDoneCopy
 
-;; cursor 2, left
-move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 2, right
-move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, left
-move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D0
-lea $2P2_CPU_CURSOR_LEFT_BLACK_IMAGE, A6
-bsr copyTiles
-
-;; cursor 3, right
-move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D0
-lea $2P2_CPU_CURSOR_RIGHT_BLACK_IMAGE, A6
+p2CpuCopyBlack_original8:
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
+lea $2P2_CPU_CURSOR_ORIGINAL8_BLACK_IMAGE, A6
 bsr copyTiles
 
 p2CpuDoneCopy:
@@ -210,18 +142,21 @@ rts
 
 ;;;; SUBROUTINES
 
+
 ;;; copyTiles
 ;;;
-;;; This is specific to cursors, so always assumes the first three tiles of a sprite
+;;; Takes the tiles that make up an entire cursor (original or custom) and copies them into vram
 ;;;
 ;;; parameters
 ;;; D0: sprite index
 ;;; A6: pointer to image
 copyTiles:
-lsl.w #6, D0 ; si * 64, since in SCB1 each sprite is 64 words
-move.w D0, $3c0000 ; VRAMADDR to SCB1, sprite si
-adda.w #4, A6 ; move past the width and height
 
+move.w #5, D4 ; dbra counter
+adda.w #4, A6 ; move past the width and height
+lsl.w #6, D0 ; si * 64, since in SCB1 each sprite is 64 words
+copyTiles_renderColumn:
+move.w D0, $3c0000 ; VRAMADDR to SCB1, sprite si
 ;; copy all the tiles in
 move.w (A6)+, $3c0002
 move.w (A6)+, $3c0002
@@ -229,5 +164,8 @@ move.w (A6)+, $3c0002
 move.w (A6)+, $3c0002
 move.w (A6)+, $3c0002
 move.w (A6)+, $3c0002
-
+;; one column done, now to move onto the next one
+adda.w #4, A6 ; move past SCB3 and SCB4
+addi.w #64, D0 ; move to the next sprite vram address
+dbra D4, copyTiles_renderColumn
 rts

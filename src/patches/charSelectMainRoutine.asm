@@ -125,6 +125,7 @@ checkIfPlayerSelectIsDone_setCpuPhase:
 move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
+jsr $2LOAD_CPU_CURSORS
 
 checkIfPlayerSelectIsDone_done:
 rts

@@ -65,40 +65,36 @@
         "dest": "../src/patches/p2_cursor_right_black.asm"
       },
       {
-        "template": "cpu_p1_cursor_left_white.asm.hbr",
-        "dest": "../src/patches/cpu_p1_cursor_left_white.asm"
+        "template": "cpu_p1_cursor_original8_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_original8_white.asm"
       },
       {
-        "template": "cpu_p1_cursor_left_black.asm.hbr",
-        "dest": "../src/patches/cpu_p1_cursor_left_black.asm"
+        "template": "cpu_p1_cursor_original8_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_original8_black.asm"
       },
       {
-        "template": "cpu_p1_cursor_right_white.asm.hbr",
-        "dest": "../src/patches/cpu_p1_cursor_right_white.asm"
+        "template": "cpu_p2_cursor_original8_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_original8_white.asm"
       },
       {
-        "template": "cpu_p1_cursor_right_black.asm.hbr",
-        "dest": "../src/patches/cpu_p1_cursor_right_black.asm"
+        "template": "cpu_p2_cursor_original8_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_original8_black.asm"
       },
       {
-        "template": "cpu_p2_cursor_left_white.asm.hbr",
-        "dest": "../src/patches/cpu_p2_cursor_left_white.asm"
+        "template": "cpu_p1_cursor_custom_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_custom_white.asm"
       },
       {
-        "template": "cpu_p2_cursor_left_black.asm.hbr",
-        "dest": "../src/patches/cpu_p2_cursor_left_black.asm"
+        "template": "cpu_p1_cursor_custom_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_custom_black.asm"
       },
       {
-        "template": "cpu_p2_cursor_right_white.asm.hbr",
-        "dest": "../src/patches/cpu_p2_cursor_right_white.asm"
+        "template": "cpu_p2_cursor_custom_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_custom_white.asm"
       },
       {
-        "template": "cpu_p2_cursor_right_black.asm.hbr",
-        "dest": "../src/patches/cpu_p2_cursor_right_black.asm"
-      },
-      {
-        "template": "black_bg.asm.hbr",
-        "dest": "../src/patches/black_bg.asm"
+        "template": "cpu_p2_cursor_custom_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_custom_black.asm"
       }
     ]
   },
@@ -176,58 +172,52 @@
       "y": 20
     },
     {
-      "name": "cpu_p1_cursor_left_white",
-      "imageFile": "./cpu_p1_cursor_left_white.png",
+      "name": "cpu_p1_cursor_original8_white",
+      "imageFile": "./cpu_p1_cursor_original8_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p1_cursor_left_black",
-      "imageFile": "./cpu_p1_cursor_left_black.png",
+      "name": "cpu_p1_cursor_original8_black",
+      "imageFile": "./cpu_p1_cursor_original8_black.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p1_cursor_right_white",
-      "imageFile": "./cpu_p1_cursor_right_white.png",
+      "name": "cpu_p2_cursor_original8_white",
+      "imageFile": "./cpu_p2_cursor_original8_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p1_cursor_right_black",
-      "imageFile": "./cpu_p1_cursor_right_black.png",
+      "name": "cpu_p2_cursor_original8_black",
+      "imageFile": "./cpu_p2_cursor_original8_black.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p2_cursor_left_white",
-      "imageFile": "./cpu_p2_cursor_left_white.png",
+      "name": "cpu_p1_cursor_custom_white",
+      "imageFile": "./cpu_p1_cursor_custom_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p2_cursor_left_black",
-      "imageFile": "./cpu_p2_cursor_left_black.png",
+      "name": "cpu_p1_cursor_custom_black",
+      "imageFile": "./cpu_p1_cursor_custom_black.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p2_cursor_right_white",
-      "imageFile": "./cpu_p2_cursor_right_white.png",
+      "name": "cpu_p2_cursor_custom_white",
+      "imageFile": "./cpu_p2_cursor_custom_white.png",
       "x": 0,
       "y": 272
     },
     {
-      "name": "cpu_p2_cursor_right_black",
-      "imageFile": "./cpu_p2_cursor_right_black.png",
+      "name": "cpu_p2_cursor_custom_black",
+      "imageFile": "./cpu_p2_cursor_custom_black.png",
       "x": 0,
       "y": 272
-    },
-    {
-      "name": "black_bg",
-      "imageFile": "./black_bg.png",
-      "x": 0,
-      "y": 0
     }
   ]
 }

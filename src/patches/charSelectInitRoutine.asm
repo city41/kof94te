@@ -50,47 +50,6 @@ ori.b #1, $PLAY_MODE
 ; this is a 2d index into the grid, not pixels
 move.w #0, $P1_CURSOR_X ; start at Terry
 move.w #0, $P1_CURSOR_Y
-
-;;;;;;;;;;;;;;; INIT CPU AGAINST P1 ;;;;;;;;;;;;;;
-cmpi.b #1, $BIOS_PLAYER_MOD2 ;; is player 2 playing?
-beq skipPlayer1 ; player 2 is playing, this is versus mode, so don't do cpu
-
-; load the cpu cursors
-; cpu cursor 1, left side
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 1, right side
-move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, left side
-move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, right side
-move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, left side
-move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, right side
-move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
 ;;;;;;;;;;;;;;;; END INIT PLAYER 1 ;;;;;;;;;;;;;;
 
 skipPlayer1:
@@ -106,131 +65,18 @@ ori.b #2, $PLAY_MODE
 ; this is a 2d index into the grid, not pixels
 move.w #8, $P2_CURSOR_X ; start at Clark
 move.w #0, $P2_CURSOR_Y
-
-;;;;;;;;;;;;;;; INIT CPU AGAINST P2 ;;;;;;;;;;;;;;
-move.b $BIOS_PLAYER_MOD1, D6 ; are they even playing?
-cmpi.b #1, D6 ;; look specifically for 1: playing
-beq skipPlayer2 ; player 1 is playing, this is versus mode, so don't do cpu
-
-; load the cpu cursors
-; cpu cursor 1, left side
-move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 1, right side
-move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, left side
-move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, right side
-move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, left side
-move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, right side
-move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
 ;;;;;;;;;;;;;;;; END INIT PLAYER 2 ;;;;;;;;;;;;;;
 
 skipPlayer2:
 
 ;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
+;; TODO: figure out demo mode
 cmpi.b #0, $PLAY_MODE
 bne skipDemoMode
+bra skipDemoMode
 ;; this is demo mode, we need to do both cpu cursors
 
-;; p1 side cpu cursors
-; cpu cursor 1, left side
-move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 1, right side
-move.w #$P1_CPU_CURSOR_CHAR1_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, left side
-move.w #$P1_CPU_CURSOR_CHAR2_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, right side
-move.w #$P1_CPU_CURSOR_CHAR2_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, left side
-move.w #$P1_CPU_CURSOR_CHAR3_LEFT_SI, D6
-lea $2P1_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, right side
-move.w #$P1_CPU_CURSOR_CHAR3_RIGHT_SI, D6
-lea $2P1_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; p2 side cpu cursors
-; cpu cursor 1, left side
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 1, right side
-move.w #$P2_CPU_CURSOR_CHAR1_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, left side
-move.w #$P2_CPU_CURSOR_CHAR2_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 2, right side
-move.w #$P2_CPU_CURSOR_CHAR2_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, left side
-move.w #$P2_CPU_CURSOR_CHAR3_LEFT_SI, D6
-lea $2P2_CPU_CURSOR_LEFT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
-
-; cpu cursor 3, right side
-move.w #$P2_CPU_CURSOR_CHAR3_RIGHT_SI, D6
-lea $2P2_CPU_CURSOR_RIGHT_WHITE_IMAGE, A6
-move.w #0, D5              ; offset into tile data
-jsr $2RENDER_STATIC_IMAGE
 ;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
 skipDemoMode:

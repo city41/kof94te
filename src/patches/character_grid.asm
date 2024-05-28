@@ -62,7 +62,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $1000
@@ -94,7 +94,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $1800
@@ -126,7 +126,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $2000
@@ -158,7 +158,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $2800
@@ -190,7 +190,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $3000
@@ -222,7 +222,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $3800
@@ -254,7 +254,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $4000
@@ -286,7 +286,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $4800
@@ -318,7 +318,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $5000
@@ -350,7 +350,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $5800
@@ -382,7 +382,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $6000
@@ -414,7 +414,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $6800
@@ -446,7 +446,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $7000
@@ -478,7 +478,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $7800
@@ -510,7 +510,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $8000
@@ -542,7 +542,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $8800
@@ -574,7 +574,7 @@ dc.w $af9
 dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
-dc.w $eacb
+dc.w $ea8b
 
 ;; SCB4 horizontal position
 dc.w $9000
