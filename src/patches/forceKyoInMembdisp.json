@@ -12,7 +12,7 @@
       "subroutine": true,
       "patchAsm": [
         ";; a4 will point to all six characters in turn",
-        "move.b #0, $71(A4) ; force the character to be Kyo, who has id 6",
+        "move.b #$d, $71(A4) ; force the character to be Kyo, who has id 6",
         "rts"
       ]
     }

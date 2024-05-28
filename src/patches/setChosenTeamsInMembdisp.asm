@@ -32,7 +32,7 @@ p1_skipChar2:
 ;; p2 side
 cmpi.l #$102F00, D7
 bne p2_skipChar0
-move.b $P2_CHOSEN_CHAR0, D6
+move.b $P2_CHOSEN_CHAR2, D6
 move.b D6, $71(A4)
 bra done
 p2_skipChar0:
@@ -44,7 +44,7 @@ bra done
 p2_skipChar1:
 cmpi.l #$103300, D7
 bne done
-move.b $P2_CHOSEN_CHAR2, D6
+move.b $P2_CHOSEN_CHAR0, D6
 move.b D6, $71(A4)
 bra done
 
