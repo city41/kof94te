@@ -70,16 +70,6 @@ move.w #0, $P2_CURSOR_Y
 skipPlayer2:
 
 
-cmpi.b #$ff, $DEFEATED_TEAMS
-beq doRugal
-bra skipRugal
-
-doRugal:
-jsr $2PUT_RUGAL_ON_GRID
-skipRugal:
-
-
-
 bsr setCpuAlreadyUsedIndex
 
 

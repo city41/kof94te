@@ -36,8 +36,6 @@ jsr $2PUT_RUGAL_ON_GRID
 bra doneRugalOnGrid
 
 takeRugalOffGrid:
-cmpi.b #$ff, $DEFEATED_TEAMS
-beq doneRugalOnGrid ; don't remove him if this is the Rugal fight
 jsr $2TAKE_RUGAL_OFF_GRID
 
 doneRugalOnGrid:
@@ -219,7 +217,7 @@ rts
 
 
 ;;; making this its own subroutine as it needs to get called
-;;; multiple times depending on single player versus demo mode
+;;; multiple times depending on if single player or demo mode
 ;;;
 ;;; parameters
 ;;; D4.b: 0 for p1 or 1 for p2
@@ -229,7 +227,7 @@ rts
 ;;; A2: other team's chosen characters list
 renderCpuChosenTeam_doRender:
 cmpi.b #8, D1 ; is this Rugal?
-beq renderCpuChosenTeam_rugal
+beq renderCpuChosenTeam_doRender_done ; then nothing to do, Rugal isn't shown in this situation
 
 move.w #2, D3 ; get dba primed, 2 since it hinges on -1
 
@@ -268,13 +266,7 @@ addi.w #1, D6 ; move to next avatar index
 dbra D3, renderCpuChosenTeam_renderChar
 bra renderCpuChosenTeam_doRender_done
 
-renderCpuChosenTeam_rugal:
-move.w #$18, D7 ; ensure Rugal's id is loaded
-move.b #0, D4   ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-
 renderCpuChosenTeam_doRender_done:
-
 rts
 
 

@@ -5,22 +5,8 @@
 ; A0: address of current CPU index
 
 cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
-bne doRegularCpuCursor
-;; all teams have been defeated, place the cursor on Rugal
-
-;; left side for Rugal
-move.w #142, D1 ; X 
-move.w #382, D2 ; Y
-move.w D7, D0
-jsr $2MOVE_SPRITE
-
-;; right side for Rugal
-move.w #160, D1 ; X 
-move.w #382, D2 ; Y
-move.w D7, D0
-addi.w #5, D0   ; move over 5 sprites to get a "closing" sprite
-jsr $2MOVE_SPRITE
-bra done
+bne doRegularCpuCursor ; no? go do the cursor then
+bra done ; yes? then no cursor at all, Rugal isn't shown in this situation
 
 doRegularCpuCursor:
 clr.w D0
