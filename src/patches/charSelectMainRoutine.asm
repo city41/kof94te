@@ -70,6 +70,8 @@ bra done
 
 doPlayerSelect:
 jsr $2CHAR_SELECT_PLAYER_SELECT_ROUTINE
+bsr showCpuCursorIfContinued
+doPlayerSelect_skipCpuCursorDueToContinue:
 bsr checkIfPlayerSelectIsDone
 bra done
 
@@ -273,4 +275,48 @@ jsr $2RENDER_CHOSEN_AVATAR
 
 renderCpuChosenTeam_doRender_done:
 
+rts
+
+
+;; showCpuCursorIfContinued
+;;
+;; if the player just continued, show the cpu cursor 
+;; during player select
+showCpuCursorIfContinued:
+btst #6, $PLAY_MODE ; did they continue?
+beq showCpuCursorIfContinued_done ; no? nothing to do
+
+cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
+beq showCpuCursorIfContinued_original8Team
+
+;; cpu is using custom teams
+btst #0, $PLAY_MODE
+beq showCpuCursorIfContinued_setupCustomForPlayer2
+lea $P2_CUR_INPUT, A0
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
+bra showCpuCursorIfContinued_doCustomCursor
+
+showCpuCursorIfContinued_setupCustomForPlayer2:
+lea $P1_CUR_INPUT, A0
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
+
+showCpuCursorIfContinued_doCustomCursor:
+jsr $2MOVE_CPU_CUSTOM_CURSOR
+bra showCpuCursorIfContinued_done
+
+showCpuCursorIfContinued_original8Team:
+btst #0, $PLAY_MODE
+beq showCpuCursorIfContinued_setupOriginalForPlayer2
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D7
+lea $1083c0, A0           ; point to where the cpu index is for p1
+bra showCpuCursorIfContinued_doOriginalCursor
+
+showCpuCursorIfContinued_setupOriginalForPlayer2:
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D7
+lea $1081c0, A0           ; point to where the cpu index is for p2
+
+showCpuCursorIfContinued_doOriginalCursor:
+jsr $2MOVE_CPU_CURSOR
+
+showCpuCursorIfContinued_done:
 rts

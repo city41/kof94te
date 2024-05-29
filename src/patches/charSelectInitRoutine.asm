@@ -69,18 +69,6 @@ move.w #0, $P2_CURSOR_Y
 
 skipPlayer2:
 
-;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
-
-cmpi.b #0, $PLAY_MODE
-bne skipDemoMode
-;; this is demo mode, we need to do both cpu cursors
-;; first pick the cpu team mode
-jsr $2DETERMINE_CPU_TEAM_MODE
-;; now we can load the cursors
-jsr $2LOAD_CPU_CURSORS
-;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
-
-skipDemoMode:
 
 cmpi.b #$ff, $DEFEATED_TEAMS
 beq doRugal
@@ -299,7 +287,24 @@ jsr $2RENDER_STATIC_IMAGE
 
 skipPlayer2Cursor:
 
+btst #6, $PLAY_MODE ; did they just continue?
+beq skipLoadCpuCursorsForContinue
+;; they just continued, we need to load the cpu cursors
+;; as they are shown right away
+jsr $2LOAD_CPU_CURSORS
+skipLoadCpuCursorsForContinue:
 ;;;;;;;;;;; END LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;; DEMO MODE INIT ;;;;;;;;;;;;;;;;;
+cmpi.b #0, $PLAY_MODE
+bne skipDemoModeInit
+;; this is demo mode, we need to do both cpu cursors
+;; first pick the cpu team mode
+jsr $2DETERMINE_CPU_TEAM_MODE
+;; now we can load the cursors
+jsr $2LOAD_CPU_CURSORS
+skipDemoModeInit:
+;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
 ;; get read to either show or hide the version string, based on if start is pressed during main
 move.w #$7077, $VSTRING_DATA ; load where in the fix layer it should go

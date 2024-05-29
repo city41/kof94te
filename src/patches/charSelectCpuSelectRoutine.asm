@@ -16,7 +16,6 @@ andi.b #$7, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 8 frames
 bne done
-;; TODO: this only works with human on p1 (ie cpu is p2)
 
 cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCustomCpuCursorForSinglePlayerMode
@@ -45,7 +44,10 @@ customCpu_loadPlayerDataSkipPlayer1:
 lea $P1_CUR_INPUT, A0
 customCpu_doneLoadingPlayerData:
 
-bsr pickCustomCpuTeam
+btst #6, $PLAY_MODE ; did the player just continue?
+bne customCpu_skipPickCustomCpuTeam ; then don't pick a new team
+bsr pickCustomCpuTeam 
+customCpu_skipPickCustomCpuTeam:
 
 btst #0, $PLAY_MODE
 beq customCpu_loadSiSkipPlayer1
