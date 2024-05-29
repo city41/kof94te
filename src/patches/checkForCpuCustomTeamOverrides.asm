@@ -7,6 +7,10 @@
 ;; restore what was clobbered
 jsr $15a0
 
+;; clear any previous override, they do to do this everytime they play the game
+move.b #0, $OVERRODE_CPU_CSTM_FLAG
+move.b #0, $CPU_CUSTOM_TEAMS_FLAG
+
 cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
 bne skipPlayer1
 move.b $BIOS_P1CURRENT, D1
@@ -60,10 +64,4 @@ nop
 dbra D3, waitNop
 move.b #1, $300001 ; watchdog
 dbra D2, waitCycle
-rts
-
-
-waitForResponse:
-cmpi.b #0, $320000
-beq waitForResponse
 rts
