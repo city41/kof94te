@@ -18,7 +18,7 @@ jsr $2MOVE_SPRITE
 move.w #160, D1 ; X 
 move.w #382, D2 ; Y
 move.w D7, D0
-addi.w #3, D0   ; move over 3 sprites to get a "closing" sprite
+addi.w #5, D0   ; move over 5 sprites to get a "closing" sprite
 jsr $2MOVE_SPRITE
 bra done
 
