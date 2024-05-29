@@ -1,5 +1,8 @@
 # part 1: Takuma stands proudly looking up at the sky
-# TAKUMA: WE LOST! HOW COULD WE LOSE?
+# TAKUMA
 タクマn
- 負けたよ！n
- 一体何故負けたんだ？e
+# WE LOST!
+# HOW COULD WE
+# LOSE?
+ ぼくたちのまけだ！n
+ なんでまけてしまったんだろう？e

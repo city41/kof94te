@@ -1,5 +1,7 @@
-# part 3: camera pans away
-# KING: A LOT! WE'RE RICH!
+# part 3: camera pans up and then goes to credits
+# KING
 キングn
- 数えきれないほど！n
- 私たちは金持ちになった！e
+# A LOT!
+# WE'RE RICH!
+  かなりのかちだ！n
+  われわれはおおがねもちだ.e

@@ -1,17 +1,26 @@
-# part 1: Kyo, Beni and Goro are talking
-# KYO: THIS TOURNAMENT...
+# part 1: Kyo, Beni and Daimon are talking together
+# KYO
 キヨウn
- この大会は結局たたの茶番劇だn
- ったな.c
-# BENI: WHAT DO YOU MEAN?
+# THIS TOURNAMENT
+# WAS AN ILLEGAL
+# SCAM.
+ このトーナメントはいほうなふn
+ せいこういだった.c
+# BENIMARU
 ベニマルn
- どういう意味？c
-# KYO: IT WAS SETUP...
+# WHAT DO YOU
+# MEAN?
+ どういうこと？c
+# KYO
 キヨウn
- それはルガールがこの大会の優n
- 勝者を捕獲して石像に変えるたc
- めの罠だった！c
-# DAIMON: REALLY?...
+# IT WAS SETUP BY
+# RUGAL TO CAPTURE
+# THE WINNERS!
+ これはしょうしゃをつかまえるn
+ ためにルガールによってしくまc
+ れたんだ.c
+# DAIMON
 ダイモソn
- まさか！？本当に正気を失っn
- た主催者だ！e
+# REALLY? THAT'S
+# CRAZY!
+ ほんとう？ありえない！e

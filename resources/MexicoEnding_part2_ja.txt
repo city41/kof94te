@@ -1,11 +1,17 @@
-# Part 2: Robert and Ryo crouch on the boat, talking
+# part 2: Robert and Ryo crouch on the boat, talking
 # quietly to each other
-# ROBERT: UH OH.
+
+# ROBERT
 ロバートn
- おもろい。。。c
-# RYO: HE'S UP TO SOMETHING
+# UH OH
+ やばいぞ。。。c
+# RYO
 リョウn
- 彼は今何かを企んでいるだろう.c
-# ROBERT: LET'S GET OUT...
+# HE's UP TO
+# SOMETHING
+ かれはなにかをたくんでいる.c
+# ROBERT
 ロバートn
- ここから出るんやな！e
+# LET's GET OUT
+# OF HERE!
+ ここからでていこう！e

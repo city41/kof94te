@@ -1,4 +1,8 @@
-# part 3: Kyo is holding his bandana
+# part 3: Kyo holds his bandana in his hand and looks excited
+# KYO
 キヨウn
- 次の大会へ！n
- 行くぜ！e
+# TO THE NEXT
+# TOURNAMENT!
+# COME ON!
+ つぎのトーナメントに！n
+ いくよ！e

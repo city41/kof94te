@@ -1,5 +1,8 @@
-# part 2: Brian is on camera alone
-# BRIAN: YEAH! ANYWAY···LET'S GO...
+# part 2: Brian is on camera by himself
+# BRIAN
 ブライアンn
- そうだね！兎に角。。。n
- ビールを飲みに行こうぜ！e
+# YEAH! ANYWAY···
+# LET'S GO GET A
+# BEER.
+ 同意します！ともかく。。。n
+ ビールをもらいに行こう.e

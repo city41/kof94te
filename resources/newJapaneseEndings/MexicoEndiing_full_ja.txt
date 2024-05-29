@@ -1,0 +1,40 @@
+# Note the English and Japanese are very likely NOT 1:1
+# but putting the English in to help understand what is what
+#
+# part 1: Takuma stands proudly looking up at the sky
+# TAKUMA
+タクマ
+# WE LOST!
+# HOW COULD WE
+# LOSE?
+ ぼくたちのまけだ！
+ なんでまけてしまったんだろう？
+
+# part 2: Robert and Ryo crouch on the boat, talking
+# quietly to each other
+
+# ROBERT
+ロバート
+# UH OH
+ やばいぞ。。。
+# RYO
+リョウ
+# HE's UP TO
+# SOMETHING
+ かれはなにかをたくんでいる。
+# ROBERT
+ロバート
+# LET's GET OUT
+# OF HERE!
+ ここからでていこう！
+
+# part 3: Takuma is exuberant with a red background
+# TAKUMA
+タクマ
+# WE NEED TO
+# TRAIN MORE!
+ もっとトレーニングしないと！ 
+
+# part 4: Robert and Ryo run away from Takuma
+# GIVE US A BREAK!
+ かんべんしてくれ！
