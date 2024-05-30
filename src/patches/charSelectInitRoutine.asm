@@ -207,15 +207,9 @@ doneRandomSelectFlags:
 cmpi.b #0, $PLAY_MODE
 ;; demo mode
 beq setCpuSelect
-cmpi.b #3, $PLAY_MODE
-;; versus mode
-beq setPlayerSelect
-btst #5, $PLAY_MODE
-;; single player random select
-bra setPlayerSelect
-btst #7, $PLAY_MODE
-;; subsequent match in a single player game
-bne setCpuSelect
+;; for all other cases, player select handles them correctly
+;; in the case of subsequent single player rounds, it will do one frame of player select
+;; then cpu select, which is fine and actually cleaner
 bra setPlayerSelect
 
 setCpuSelect:
@@ -300,8 +294,6 @@ skipDemoModeInit:
 move.w #$7077, $VSTRING_DATA ; load where in the fix layer it should go
 move.l #$2VERSION, $VSTRING_DATA + 2
 
-
-bsr renderChosenAvatars
 
 cmpi.b #0, $PLAY_MODE
 beq skipGreyOut ; don't grey out in demo mode
@@ -460,67 +452,3 @@ p2_skipEngland:
 
 setCpuAlreadyUsedIndex_done:
 rts
-
-
-
-;; renderChosenAvatars
-;; for both players, will render in the chosen avatars
-;; this will be either 0 or 3 chosen avatars at this point
-renderChosenAvatars:
-
-;; player 1
-tst.b $P1_NUM_CHOSEN_CHARS
-beq renderChosenAvatar_skipPlayer1 ; none chosen? nothing to do
-;; if we get here, we know all three have been chosen
-move.w #1, D6 ; first avatar of p1 team
-clr.w D7
-move.b $P1_CHOSEN_CHAR0, D7
-move.b $P1_CHOSEN_CHAR0 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-
-; if they chose Rugal, we are done
-cmpi.b #$18, $P1_CHOSEN_CHAR0
-beq renderChosenAvatar_skipPlayer1
-
-move.w #2, D6 ; second avatar of p1 team
-clr.w D7
-move.b $P1_CHOSEN_CHAR1, D7
-move.b $P1_CHOSEN_CHAR1 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-move.w #3, D6 ; third avatar of p1 team
-clr.w D7
-move.b $P1_CHOSEN_CHAR2, D7
-move.b $P1_CHOSEN_CHAR2 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-
-renderChosenAvatar_skipPlayer1:
-;; player 2
-tst.b $P2_NUM_CHOSEN_CHARS
-beq renderChosenAvatar_skipPlayer2 ; none chosen? nothing to do
-;; if we get here, we know all three have been chosen
-move.w #4, D6 ; first avatar of p2 team 
-clr.w D7
-move.b $P2_CHOSEN_CHAR0, D7
-move.b $P2_CHOSEN_CHAR0 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-
-; if they chose Rugal, we are done
-cmpi.b #$18, $P2_CHOSEN_CHAR0
-beq renderChosenAvatar_skipPlayer2
-
-move.w #5, D6 ; second avatar of p2 team
-clr.w D7
-move.b $P2_CHOSEN_CHAR1, D7
-move.b $P2_CHOSEN_CHAR1 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-move.w #6, D6 ; third avatar of p2 team
-clr.w D7
-move.b $P2_CHOSEN_CHAR2, D7
-move.b $P2_CHOSEN_CHAR2 + 3, D4 ; palette flag
-jsr $2RENDER_CHOSEN_AVATAR
-
-renderChosenAvatar_skipPlayer2:
-rts
-
-
-

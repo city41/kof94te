@@ -431,7 +431,8 @@ beq renderChosenAvatars_teamRandomSelect
 bra renderChosenAvatars_noRandomSelect
 
 renderChosenAvatars_rugal:
-move.b #1, D3 ; this is rugal, only one character
+;; this should be either 0 or 1
+move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D3
 lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2 ; draw from real chosen chars
 bra renderChosenAvatars_renderAvatars
 
