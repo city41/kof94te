@@ -68,13 +68,13 @@ btst #1, $PLAY_MODE ; is p2 playing?
 beq player2IsCpu ; oh p2 is cpu, jump ahed
 
 ; they are playing, move their choses where the game expects them 
-move.b $P2_CHOSEN_CHAR0, D7
+move.b $P2_CHOSEN_CHAR2, D7
 move.b D7, (A4)
 
 move.b $P2_CHOSEN_CHAR1, D7
 move.b D7, $1(A4)
 
-move.b $P2_CHOSEN_CHAR2, D7
+move.b $P2_CHOSEN_CHAR0, D7
 move.b D7, $2(A4)
 
 lea $P2_CUR_INPUT, A0
