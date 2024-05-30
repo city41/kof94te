@@ -8,11 +8,13 @@ btst #0, $PLAY_MODE ; is p1 playing?
 beq setForPlayerTwo
 lea $P1_CHOSEN_CHAR0, A2 ; set it up to use p1 characters
 move.b $108171, D0 ; load the p1 character who lost
+move.b #1, $SIDE_THAT_WENT_TO_CONTINUE
 bra doneChoosingPlayer
 setForPlayerTwo:
 ;; CHAR2 since p2 characters are mapped in memory backwards
 lea $P2_CHOSEN_CHAR0, A2 ; set it up to use p2 characters
 move.b $108371, D0 ; load the p2 character who lost
+move.b #2, $SIDE_THAT_WENT_TO_CONTINUE
 doneChoosingPlayer:
 
 

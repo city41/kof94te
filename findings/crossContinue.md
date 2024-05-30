@@ -2,18 +2,12 @@
 
 This is when one player loses and gets the continue screen, but then the other player continues. This is more common on AES as it's a way to extend the 4 credits to 8, but it's possible on MVS too.
 
-## Detecting cross continue
+## p2 lost, and p1 continued
 
-scenario: p1 lost, p2 continued
-
-A cross continue can be detected by
-108238 is $80, indicating p1 lost
-BIOS_PLAYER_MOD1 is 0, indicating p1 is not playing
-BIOS_PLAYER_MOD2 is 1, indicating p2 is playing
-
-and the opposite for the opposite scenario, but 108438 for loss detection
-
-Is that enough to detect this situation 100% of the time?
+BIOS_PLAYER_MOD1: 1
+BIOS_PLAYER_MOD2: 0
+108238 (p1 lost): 2
+108438 (p2 lost): 80
 
 ## A fresh p1 game after hard reset
 

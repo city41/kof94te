@@ -477,16 +477,16 @@ accountForCrossContinue:
 ;;; first detect if a cross continue happened
 cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
 bne accountForCrossContinue_checkPlayer2 ; no? let's see if the opposite cross continue happened
-cmpi.b #$80, $P2_LAST_MATCH_RESULT ; but player 2 lost?
-beq accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
-bne accountForCrossContinue_checkPlayer2 ; no? let's see if the opposite cross continue happened
+cmpi.b #2, $SIDE_THAT_WENT_TO_CONTINUE ; but player 2 lost and went to continue?
+bne accountForCrossContinue_done ; no? then no cross continue
+bra accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
 
 accountForCrossContinue_checkPlayer2:
 cmpi.b #1, $BIOS_PLAYER_MOD2 ; is player 2 playing?
 bne accountForCrossContinue_done ; player 2 is not playing? then no cross continue happened
-cmpi.b #$80, $P1_LAST_MATCH_RESULT ; but player 1 lost?
-beq accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
+cmpi.b #1, $SIDE_THAT_WENT_TO_CONTINUE ; but player 1 lost and went to continue?
 bne accountForCrossContinue_done ; no? no cross continues, we're good
+bra accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
 
 accountForCrossContinue_aCrossContinueHappened:
 ;; a cross continue happened, need to swap the player states
@@ -508,5 +508,7 @@ move.b $P2_CHOSEN_CHAR2, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2
 
 
 accountForCrossContinue_done:
+;; reset the flag so it doesnt get stale
+move.b #0, $SIDE_THAT_WENT_TO_CONTINUE
 rts
 
