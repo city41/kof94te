@@ -23,7 +23,7 @@ dc.w $0
 
 ;; SCB1 word pairs
 dc.w $ff42
-dc.w $1210
+dc.w $1710
 dc.w $af9
 dc.w $1200
 dc.w $ff48

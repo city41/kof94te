@@ -21,7 +21,7 @@ clr.w D3
 move.b (A2), D3 ; load the first character id
 bsr calcX       ; X is in D1
 bsr calcY       ; Y is in D2
-addi.w #17, D1  ; move x over
+addi.w #16, D1  ; move x over
 addi.w #1, D0   ; move to next sprite
 jsr $2MOVE_SPRITE
 

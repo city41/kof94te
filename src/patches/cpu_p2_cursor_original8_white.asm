@@ -71,7 +71,7 @@ dc.w $1800
 
 ;; SCB1 word pairs
 dc.w $ff57
-dc.w $1210
+dc.w $1710
 dc.w $af9
 dc.w $1200
 dc.w $ff49

@@ -131,7 +131,7 @@ dc.w $7fff
 dc.w $8000
 dc.w $9652
 dc.w $ab53
-dc.w $cfb0
+dc.w $c830
 dc.w $d430
 dc.w $dfea
 dc.w $fea5
@@ -260,17 +260,17 @@ dc.w $2320
 dc.w $4f90
 dc.w $6510
 dc.w $7fff
+dc.w $8000
 dc.w $8ba9
 dc.w $8edb
 dc.w $a644
 dc.w $ae84
+dc.w $cfb0
 dc.w $d010
 dc.w $dffd
 dc.w $efb6
 dc.w $fa41
 dc.w $ffe9
-dc.w $8000
-dc.w $8000
 ;;;;; palette 10 (16) ;;;;;
 dc.w $5f0f
 dc.w $b42
