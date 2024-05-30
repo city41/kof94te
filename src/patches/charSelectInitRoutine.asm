@@ -5,6 +5,18 @@ move.b #0, $IN_HERE_COMES_CHALLENGER
 move.b #$MAIN_PHASE_INIT, $MAIN_HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 
+;; first store the state of the last match
+;; that way we don't muck with the game's memory
+;; and in case of a cross continue, the results can flip along with
+;; everything else
+move.b $108238, $P1_LAST_MATCH_RESULT
+move.b $108438, $P2_LAST_MATCH_RESULT
+
+;; did a cross continue just happen? let's check
+;; and react accordingly
+bsr accountForCrossContinue
+
+
 ;; reset the player mode, we'll figure it out through the course of init
 ;; 
 ;; PLAY_MODE values:
@@ -82,10 +94,10 @@ btst #1, $PLAY_MODE ; but p2 is playing too? versus mode, skip
 bne p1_firstCharSelect
 
 ; single player mode, p1 side
-cmpi.b #$80, $108238 ; player 1 is human, did they lose?
+cmpi.b #$80, $P1_LAST_MATCH_RESULT ; player 1 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
 beq p1_continued
-cmpi.b #$80, $108438
+cmpi.b #$80, $P2_LAST_MATCH_RESULT
 bne p1_firstCharSelect ; if player 2 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 bset #7, $PLAY_MODE
@@ -124,10 +136,10 @@ btst #0, $PLAY_MODE ; but p1 is playing too? versus mode, skip
 bne p2_firstCharSelect
 
 ; single player mode, p2 side
-cmpi.b #$80, $108438 ; player 2 is human, did they lose?
+cmpi.b #$80, $P2_LAST_MATCH_RESULT ; player 2 is human, did they lose?
 ;; if it is $80, then they lost and they continued, this is the very first char select
 beq p2_continued
-cmpi.b #$80, $108238
+cmpi.b #$80, $P1_LAST_MATCH_RESULT
 bne p2_firstCharSelect ; if player 1 hasn't lost, then this is the first char select
 ;; set flag to indicate to main this is not the first char select
 bset #7, $PLAY_MODE
@@ -452,3 +464,38 @@ p2_skipEngland:
 
 setCpuAlreadyUsedIndex_done:
 rts
+
+
+;;; accountForCrossContinue
+;;;
+;;; detects if a cross continue happened. If so,
+;;; swaps player states
+;;;
+;;; a cross continue is when p1 loses and p2 continues
+;;; or vice versa
+accountForCrossContinue:
+;;; first detect if a cross continue happened
+cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
+bne accountForCrossContinue_checkPlayer2 ; no? let's see if the opposite cross continue happened
+cmpi.b #$80, $P2_LAST_MATCH_RESULT ; but player 2 lost?
+beq accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
+bne accountForCrossContinue_checkPlayer2 ; no? let's see if the opposite cross continue happened
+
+accountForCrossContinue_checkPlayer2:
+cmpi.b #1, $BIOS_PLAYER_MOD2 ; is player 2 playing?
+bne accountForCrossContinue_done ; player 2 is not playing? then no cross continue happened
+cmpi.b #$80, $P1_LAST_MATCH_RESULT ; but player 1 lost?
+beq accountForCrossContinue_aCrossContinueHappened ; yes? a cross continue happened
+bne accountForCrossContinue_done ; no? no cross continues, we're good
+
+accountForCrossContinue_aCrossContinueHappened:
+;; a cross continue happened, need to swap the player states
+lea $P1_CUR_INPUT, A0
+lea $P2_CUR_INPUT, A1
+move.w #$SIZEOF_PX, D0
+jsr $2SWAP_MEMORY_RANGE
+
+
+accountForCrossContinue_done:
+rts
+

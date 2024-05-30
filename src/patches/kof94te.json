@@ -49,6 +49,7 @@
     "P1_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f820",
     "P1_ORIGINAL_TEAM_ID": "10f830",
     "P1_IS_READY": "10f832",
+    "P1_LAST_MATCH_RESULT": "10f833",
     "P2_CUR_INPUT": "10f8a0",
     "P2_CURSOR_X": "10f8a2",
     "P2_CURSOR_Y": "10f8a4",
@@ -70,6 +71,7 @@
     "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10f8c0",
     "P2_ORIGINAL_TEAM_ID": "10f8d0",
     "P2_IS_READY": "10f8d2",
+    "P2_LAST_MATCH_RESULT": "10f8d3",
     "CPU_DEFEATED_CHARACTERS": "10f8d4",
     "READY_TO_EXIT_CHAR_SELECT": "10f8e0",
     "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10f8e1",
@@ -131,6 +133,9 @@
     "PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET": "20",
     "PX_ORIGINAL_TEAM_ID_OFFSET": "30",
     "PX_IS_READY_OFFSET": "32",
+    "PX_LAST_MATCH_RESULT_OFFSET": "33",
+
+    "SIZEOF_PX": "34",
 
     "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7052",
     "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7292",
@@ -535,6 +540,13 @@
       "subroutine": true,
       "symbol": "GREY_OUT_CHARACTERS",
       "patchAsm": "greyOutDefeatedCharacters.asm"
+    },
+    {
+      "type": "prom",
+      "description": "swap memory range routine",
+      "subroutine": true,
+      "symbol": "SWAP_MEMORY_RANGE",
+      "patchAsm": "swapMemoryRange.asm"
     },
     {
       "type": "prom",
