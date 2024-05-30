@@ -4,6 +4,8 @@
 
 ;;; nothing to restore from the clobber
 
+
+;; did the cpu win? if so, bail and just let the original win scene routines run
 btst #0, $PLAY_MODE ; is p1 playing?
 beq checkPlayerTwo
 btst #1, $PLAY_MODE ; is p2 playing?
@@ -52,16 +54,10 @@ cpuWon_done:
 ; rts
 
 humanWon:
-cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG ; is the cpu using original 8 teams?
-bne skipCpuOriginal8Check
-;; ok the cpu is using original 8 teams. If this is NOT versus mode, dont' fudge teams
-cmpi.b #3, $PLAY_MODE
-bne doneAlteringTeams
-
-skipCpuOriginal8Check:
-;; ok this is either versus mode, or the cpu is using custom teams
-;; either way, we need to fudge the team ids
 movem.l A4/A5, $MOVEM_STORAGE
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
+bne doneAlteringTeams ; only alter teams in versus mode
+
 cmpi.b #$80, $108238 ; did player 1 lose?
 beq alteringTeams_doP2
 ;; p1 won, so alter the teams based on p1's winner
