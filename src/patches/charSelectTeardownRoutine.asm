@@ -41,7 +41,7 @@ player1IsCpu:
 cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
 bne player1IsCpu_skipSetCpuCustomTeam
 ;; we are using cpu custom teams, so the random team was
-;; saved into P2_CHOSEN_CHARX, move it to where the game expects it
+;; saved into P1_CHOSEN_CHARX, move it to where the game expects it
 move.b $P1_CHOSEN_CHAR0, (A4)
 move.b $P1_CHOSEN_CHAR1, $1(A4)
 move.b $P1_CHOSEN_CHAR2, $2(A4)

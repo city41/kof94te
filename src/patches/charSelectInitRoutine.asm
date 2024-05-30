@@ -495,6 +495,17 @@ lea $P2_CUR_INPUT, A1
 move.w #$SIZEOF_PX, D0
 jsr $2SWAP_MEMORY_RANGE
 
+;; and now patch up the main game's memory, this is because we
+;; are swapping earlier than the game is. Ideally we'd swap after
+;; the game has, but not sure how to do that...
+;; TODO: reverse engineer this
+move.b $P1_CHOSEN_CHAR0, $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING
+move.b $P1_CHOSEN_CHAR1, $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1
+move.b $P1_CHOSEN_CHAR2, $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2
+move.b $P2_CHOSEN_CHAR0, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING
+move.b $P2_CHOSEN_CHAR1, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1
+move.b $P2_CHOSEN_CHAR2, $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2
+
 
 accountForCrossContinue_done:
 rts
