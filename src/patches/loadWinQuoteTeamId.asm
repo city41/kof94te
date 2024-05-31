@@ -27,6 +27,7 @@ move.b $108371, D2 ; load the losing character's id
 doneLoadingLosingCharId:
 lea $2CHARID_TO_TEAMID, A2
 adda.w D2, A2  ; index into the table
+moveq #0, D1
 move.b (A2), D1 ; load the losing character's team id into D1, where the game expects it
 
 
