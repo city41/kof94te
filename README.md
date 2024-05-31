@@ -19,11 +19,13 @@ This hack brings custom teams to KOF94:
 - A full character select screen similar to KOF95's
 - Random character and random team select options
 - Custom teams properly shown in win screens
+- Win quotes properly adjusted to custom teams
 - Custom teams properly shown in the continue screen
 - Custom teams properly shown in cutscenes and endings
 - Some minor versus mode quality of life improvements
   - Randomly chooses a background to fight on
   - Each player can choose a new team before each match
+- The CPU can choose custom teams too. More info here: https://neorh.mattgreer.dev/#cpu-custom-teams
 
 Since doing a new ending wasn't really feasible, the hack contains four reworked endings if you win the game with a custom team.
 
