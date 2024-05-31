@@ -801,7 +801,7 @@
     {
       "type": "prom",
       "subroutine": true,
-      "symbol": "CHAR_ID_TO_TEAM_ID",
+      "symbol": "CHARID_TO_TEAMID",
       "patchAsm": "charIdToTeamId.asm"
     },
     {
@@ -817,6 +817,20 @@
       "subroutine": true,
       "symbol": "WINNER_SCREEN_INIT",
       "patchAsm": "winScreenInit.asm"
+    },
+    {
+      "type": "prom",
+      "description": "win quote: set losing team id based on losing character",
+      "address": "13f2bc",
+      "subroutine": true,
+      "symbol": "LOAD_WIN_QUOTE_TEAM_ID",
+      "patchAsm": "loadWinQuoteTeamId.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling words",
+      "address": "13f2c2",
+      "patchAsm": ["nop", "nop", "nop", "nop", "nop", "nop", "nop"]
     },
     {
       "type": "prom",
