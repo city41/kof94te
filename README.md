@@ -15,6 +15,7 @@ Instead you must choose from pre-formed teams. From King of Fighters '95 on, you
 This hack brings custom teams to KOF94:
 
 ![kof94te character select screen](https://github.com/city41/kof94te/blob/main/kof94teCharSelect.png?raw=true)
+![kof94te character select screen with cpu custom teams](https://github.com/city41/kof94te/blob/main/cpuCustomTeams.png?raw=true)
 
 - A full character select screen similar to KOF95's
 - Random character and random team select options
