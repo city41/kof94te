@@ -28,6 +28,7 @@
     "WINNING_TEAM_LIST": "10f7c0",
     "VSTRING_DATA": "10f7d0",
     "PLAY_MODE": "10f7fc",
+    "LAST_PLAYMODE": "10f7fd",
     "P1_CUR_INPUT": "10f800",
     "P1_CURSOR_X": "10f802",
     "P1_CURSOR_Y": "10f804",

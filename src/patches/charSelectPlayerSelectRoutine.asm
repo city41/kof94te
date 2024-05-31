@@ -431,8 +431,14 @@ beq renderChosenAvatars_teamRandomSelect
 bra renderChosenAvatars_noRandomSelect
 
 renderChosenAvatars_rugal:
-;; this should be either 0 or 1
+;; this should be either 0 (no character has actually been selected, Rugals' id is stale data)
+;; or 3 (player has chosen Rugal, so their team is 18/19/19)
+;; in that case, we need to go down to 1
 move.b $PX_NUM_CHOSEN_CHARS_OFFSET(A0), D3
+cmpi.b #0, D3
+beq renderChosenAvatar_rugal_skipClamp
+move.b #1, D3 ; ok it's too big, clamp back to 1
+renderChosenAvatar_rugal_skipClamp:
 lea $PX_CHOSEN_CHAR0_OFFSET(A0), A2 ; draw from real chosen chars
 bra renderChosenAvatars_renderAvatars
 

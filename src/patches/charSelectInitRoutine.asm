@@ -30,6 +30,8 @@ bsr accountForCrossContinue
 ;;   --- this happens when the player has beaten their first team
 ;;   --- all subsequent char selects are read only
 ;;   --- but if they lose and continue, this bit will be uncleared
+;; save the last play mode, as we need to know if the player just exited a versus round
+move.b $PLAY_MODE, $LAST_PLAYMODE
 move.b #0, $PLAY_MODE
 
 move.w #$P1_CURSOR_LEFT_SI, $P1_CURSOR_SPRITEINDEX
@@ -322,7 +324,12 @@ rts
 ;; clearDefeatedCharBytes
 ;; sets the defeated char bits all to zero for a fresh start
 clearDefeatedCharBytes:
+;; hack, sometimes this gets called at wrong times, we should look to
+;; DEFEATED_TEAMS as guidance
+cmpi.b #0, $DEFEATED_TEAMS
+bne clearDefeatedCharBytes_done
 move.l #0, $CPU_DEFEATED_CHARACTERS
+clearDefeatedCharBytes_done:
 rts
 
 
@@ -333,6 +340,10 @@ rts
 ;; parameters
 ;; A0: The cpu team list
 setDefeatedCharBytes:
+;; if the last round was a versus round, don't set anything
+cmpi.b #3, $LAST_PLAYMODE
+beq setDefeatedCharBytes_done
+
 move.l $CPU_DEFEATED_CHARACTERS, D2
 move.b (A0), D1
 bset.l D1, D2
@@ -341,6 +352,8 @@ bset.l D1, D2
 move.b $2(A0), D1
 bset.l D1, D2
 move.l D2, $CPU_DEFEATED_CHARACTERS
+
+setDefeatedCharBytes_done:
 rts
 
 

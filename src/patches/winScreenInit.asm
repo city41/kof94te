@@ -2,7 +2,7 @@
 ;;; nothing to restore from the clobber
 ;;; with cpu custom teams, this now sets up the win screen no matter who won
 ;;; and doesn't get involved in changing team ids at all. Changing the cpu team id
-;;; is very dangerous, it almost always leads to an address error.
+;;; is very dangerous, it almost always leads to an address exception.
 
 movem.l A4/A5, $MOVEM_STORAGE
 
