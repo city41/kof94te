@@ -19,26 +19,26 @@ cmp.b D7, D5 ; does the other team's first character match the cpu character we 
 bne determineCpuCharPaletteFlag_cpu_checkChar1
 ;; the cpu chose a character that the human chose, take the human's palette
 ;; flag and flip it
-move.b $1(A2), D3 ; get the other team's character's palette flag
-move.b #1, D2
-sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
-move.b D2, D4 ; move the final answer into D4, the "return value"
-bra determineCpuCharPaletteFlag_done
-
-determineCpuCharPaletteFlag_cpu_checkChar1:
-move.b $2(A2), D5 ; load the other team's second character
-cmp.b D7, D5
-bne determineCpuCharPaletteFlag_cpu_checkChar2
-;; the cpu chose a character that the human chose, take the human's palette
-;; flag and flip it
 move.b $3(A2), D3 ; get the other team's character's palette flag
 move.b #1, D2
 sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
 move.b D2, D4 ; move the final answer into D4, the "return value"
 bra determineCpuCharPaletteFlag_done
 
+determineCpuCharPaletteFlag_cpu_checkChar1:
+move.b $1(A2), D5 ; load the other team's second character
+cmp.b D7, D5
+bne determineCpuCharPaletteFlag_cpu_checkChar2
+;; the cpu chose a character that the human chose, take the human's palette
+;; flag and flip it
+move.b $4(A2), D3 ; get the other team's character's palette flag
+move.b #1, D2
+sub.b D3, D2 ; do flippedFlag = 1 - flag, go from 0->1 or 1->0
+move.b D2, D4 ; move the final answer into D4, the "return value"
+bra determineCpuCharPaletteFlag_done
+
 determineCpuCharPaletteFlag_cpu_checkChar2:
-move.b $4(A2), D5 ; load the other team's third character
+move.b $2(A2), D5 ; load the other team's third character
 cmp.b D7, D5
 bne determineCpuCharPaletteFlag_defaultChoice ; chose a character the human didn't choose? just go with reg palette
 ;; the cpu chose a character that the human chose, take the human's palette
