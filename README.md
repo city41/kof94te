@@ -21,7 +21,7 @@ This hack brings custom teams to KOF94:
 - Random character and random team select options
 - Custom teams properly shown in win screens
 - Win quotes properly adjusted to custom teams
-- Custom teams properly shown in the continue screen
+- Custom teams properly shown in the continue screen and the game over screen
 - Custom teams properly shown in cutscenes and endings
 - Some minor versus mode quality of life improvements
   - Randomly chooses a background to fight on
