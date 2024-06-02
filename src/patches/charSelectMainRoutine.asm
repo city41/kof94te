@@ -40,11 +40,11 @@ jsr $2TAKE_RUGAL_OFF_GRID
 
 doneRugalOnGrid:
 
-;; this counter is used just below for random stages in versus mode
-;; it's also used to throttle character random select
-move.b $CHAR_SELECT_COUNTER, D6 ; load the counter
+;;; this is a generic counter used by many parts of the hack
+;;; that need basic throttling or basic randomness
+move.b $GENERAL_COUNTER, D6 ; load the counter
 addi.b #1, D6
-move.b D6, $CHAR_SELECT_COUNTER ; save its new value
+move.b D6, $GENERAL_COUNTER ; save its new value
 
 ;; if this is versus mode, randomize the team to get a random stage
 cmpi.b #3, $PLAY_MODE
@@ -128,7 +128,7 @@ move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
-move.b #0, $CHAR_SELECT_COUNTER
+move.b #0, $GENERAL_COUNTER
 
 checkIfPlayerSelectIsDone_done:
 rts

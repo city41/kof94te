@@ -1,5 +1,5 @@
 ;; reset the general counter
-move.b #0, $CHAR_SELECT_COUNTER
+move.b #0, $GENERAL_COUNTER
 ;; if using cpu custom teams, ensure it attempts four teams
 ;; before finishing
 move.b #3, $CPU_CUSTOM_TEAM_COUNTDOWN
