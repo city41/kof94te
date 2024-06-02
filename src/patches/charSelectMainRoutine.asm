@@ -127,6 +127,8 @@ move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2LOAD_CPU_CURSORS
+;; reset the general counter
+move.b #0, $CHAR_SELECT_COUNTER
 
 checkIfPlayerSelectIsDone_done:
 rts
