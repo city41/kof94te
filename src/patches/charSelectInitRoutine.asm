@@ -192,7 +192,7 @@ beq clearRandomSelectFlags
 ;; set up char select to randomize for p1
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
 ;; of characters to randomly select, but going with 36 for now
-move.b #36, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+move.b #$SLOT_MACHINE_DURATION, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P1_NUM_NON_RANDOM_CHARS, $P1_NUM_CHOSEN_CHARS 
 move.b #0, $P2_RANDOM_SELECT_TYPE ; clear player 2 just in case
@@ -204,7 +204,7 @@ beq clearRandomSelectFlags
 ;; set up char select to randomize for p2 here
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
 ;; of characters to randomly select, but going with 36 for now
-move.b #36, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+move.b #$SLOT_MACHINE_DURATION, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P2_NUM_NON_RANDOM_CHARS, $P2_NUM_CHOSEN_CHARS 
 move.b #0, $P1_RANDOM_SELECT_TYPE ; clear player 1 just in case
