@@ -1,3 +1,6 @@
+;; if using cpu custom teams, ensure it attempts four teams
+;; before finishing
+move.b #3, $CPU_CUSTOM_TEAM_COUNTDOWN
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER

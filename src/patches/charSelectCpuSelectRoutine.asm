@@ -17,6 +17,13 @@ andi.b #$7, D4
 ;; this means only random select every 8 frames
 bne done
 
+;; if we have ran out of intermediate teams, we are done
+cmpi.b #0, $CPU_CUSTOM_TEAM_COUNTDOWN
+beq done
+
+;; indicate we have done one more intermediate team
+subi.b #1, $CPU_CUSTOM_TEAM_COUNTDOWN
+
 cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCustomCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
