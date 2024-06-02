@@ -63,19 +63,39 @@ cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
 cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
+cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
+beq doSubsequentSelect
 bra done
 
 
 doPlayerSelect:
 jsr $2CHAR_SELECT_PLAYER_SELECT_ROUTINE
 bsr showCpuCursorAndTeamIfContinued
-doPlayerSelect_skipCpuCursorDueToContinue:
 bsr checkIfPlayerSelectIsDone
+cmpi.b #1, D6 ; if it is done, D6 will be 1
+bne skipTransitionPastPlayerSelect ; not done yet
+bsr transitionPastPlayerSelect ; move to next phase
+skipTransitionPastPlayerSelect:
 bra done
+
 
 doCpuSelect:
 jsr $2CHAR_SELECT_CPU_SELECT_ROUTINE
 bsr checkIfCpuSelectIsDone
+cmpi.b #1, D6 ; if it is done, D6 will be 1
+bne skipTransitionPastCpuSelect
+bsr transitionPastCpuSelect
+skipTransitionPastCpuSelect:
+bra done
+
+doSubsequentSelect:
+jsr $2CHAR_SELECT_PLAYER_SELECT_ROUTINE
+jsr $2CHAR_SELECT_CPU_SELECT_ROUTINE
+bsr checkIfSubsequentSelectIsDone
+cmpi.b #1, D6 ; if it is done, D6 will be 1
+bne skipTransitionPastSubsequentSelect
+bsr transitionPastSubsequentSelect
+skipTransitionPastSubsequentSelect:
 bra done
 
 done:
@@ -85,7 +105,10 @@ rts
  
 ;;; checkIfPlayerSelectIsDone
 ;;; looks to see if all human players (1 or 2 of them),
-;;; have chosen their entire team. If so, sets phase to CPU_SELECT
+;;; have chosen their entire team.
+;;;
+;;; returns
+;;; D6.b: 0 if not done, 1 if done
 checkIfPlayerSelectIsDone:
 move.b #0, D2 ; D2 will hold the number of needed ready flags: either 1 or 2 (versus mode)
 
@@ -93,35 +116,49 @@ clr.b D1
 
 btst #0, $PLAY_MODE ; is p1 playing?
 beq checkIfPlayerSelectIsDone_skipPlayer1
-add.b $P1_IS_READY, D1
-addi.b #1, D2
+add.b $P1_IS_READY, D1 ; grab whether P1 is ready or not
+addi.b #1, D2 ; increase number of checks needed
 
 checkIfPlayerSelectIsDone_skipPlayer1:
 
 btst #1, $PLAY_MODE ; is p2 playing?
 beq checkIfPlayerSelectIsDone_skipPlayer2
-add.b $P2_IS_READY, D1
-addi.b #1, D2
+add.b $P2_IS_READY, D1 ; grab whether P2 is ready or not
+addi.b #1, D2 ; increase number of checks needed
 
 checkIfPlayerSelectIsDone_skipPlayer2:
 
 cmp.b D1, D2
 
 ;; nope, someone is not ready yet
-bne checkIfPlayerSelectIsDone_done
+bne checkIfPlayerSelectIsDone_notReady
 
-; all players are ready, we are done with player select
+; ; all players are ready, we are done with player select
+move.b #1, D6
+bra checkIfCpuSelectIsDone_done
 
+checkIfPlayerSelectIsDone_notReady:
+move.b #0, D6
+
+checkIfPlayerSelectIsDone_done:
+rts
+
+
+
+;;; transitionPastPlayerSelect
+;;; moves from player select to cpu or done,
+;;; depending on if this is versus mode or not
+transitionPastPlayerSelect:
 ; is this versus mode? then we are totally done
 cmpi.b #3, $PLAY_MODE
-bne checkIfPlayerSelectIsDone_setCpuPhase
+bne transitionPastPlayerSelect_setCpuPhase
 ;; this is versus mode, char select is now done
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
-bra checkIfPlayerSelectIsDone_done
+bra transitionPlastPlayerSelect_done
 
-checkIfPlayerSelectIsDone_setCpuPhase:
+transitionPastPlayerSelect_setCpuPhase:
 move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
@@ -130,13 +167,16 @@ jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
 move.b #0, $GENERAL_COUNTER
 
-checkIfPlayerSelectIsDone_done:
+transitionPlastPlayerSelect_done:
 rts
+
 
 
 ;;; checkIfCpuSelectIsDone
 ;;; looks to see if the cpu randomization is done
-;;; if so, sets phase to DONE
+;;;
+;;; returns
+;;; D6.b: 0 if not done, 1 if done
 
 checkIfCpuSelectIsDone:
 ;; if we are using cpu custom teams, we don't need to do a p1/p2 branch
@@ -145,7 +185,7 @@ bne checkIfCpuSelectIsDone_original8
 ;; ok this is cpu custom teams, we know we are done when the countdown hits zero
 cmpi.b #0, $CPU_CUSTOM_TEAM_COUNTDOWN
 beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_done ; not done yet, try again next frame
+bra checkIfCpuSelectIsDone_notYet ; not done yet, try again next frame
 
 
 checkIfCpuSelectIsDone_original8:
@@ -167,10 +207,10 @@ beq checkIfCpuSelectIsDone_cpuIsDone
 ;; when returning to single player, it will randomly pick a new team
 ;; instead of refighting the one you were interrupted on
 btst #7, $PLAY_MODE
-beq checkIfCpuSelectIsDone_done
+beq checkIfCpuSelectIsDone_notYet
 cmpi.b #$12, $108654
 beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_done
+bra checkIfCpuSelectIsDone_notYet
 
 checkIfCpuSelectIsDone_skipPlayer1:
 ;; now check player 2, either player 1 isn't playing
@@ -182,18 +222,65 @@ beq checkIfCpuSelectIsDone_cpuIsDone
 
 ;; see hack alert above
 btst #7, $PLAY_MODE
-beq checkIfCpuSelectIsDone_done
+beq checkIfCpuSelectIsDone_notYet
 cmpi.b #$12, $108654
 beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_done
+bra checkIfCpuSelectIsDone_notYet
 
 checkIfCpuSelectIsDone_cpuIsDone:
-;; cpu is done, show their team in the chosen section
+move.b #1, D6
+bra checkIfCpuSelectIsDone_done
+
+checkIfCpuSelectIsDone_notYet:
+move.b #0, D6
+
+checkIfCpuSelectIsDone_done:
+rts
+
+
+;;; transitionPastCpuSelect
+;;; moves from cpu select to done,
+transitionPastCpuSelect:
+; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
+rts
 
-checkIfCpuSelectIsDone_done:
+
+
+;;; checkIfSubsequentSelectIsDone
+;;; this is for single player games beyond the first
+;;; fight. The char select screen is basically read-only
+;;; but we still need to do the slot machine and cpu custom teams
+;;; in some cases
+;;;
+;;; returns
+;;; D6.b: 0 if not done, 1 if done
+checkIfSubsequentSelectIsDone:
+bsr checkIfPlayerSelectIsDone ; go see if the player is done
+cmpi.b #0, D6
+beq checkIfSubsequentSelectIsDone_notYet ; player is not done yet
+;; ok player is done, what about cpu?
+bsr checkIfCpuSelectIsDone 
+cmpi.b #0, D6
+beq checkIfSubsequentSelectIsDone_notYet ; cpu is not done yet
+
+checkIfSubsequentSelectIsDone_subsequentIsDone:
+move.b #1, D6
+bra checkIfSubsequentSelectIsDone_done
+
+checkIfSubsequentSelectIsDone_notYet:
+move.b #0, D6
+
+checkIfSubsequentSelectIsDone_done:
+rts
+
+;;; transitionPastSubsequentSelect
+;;; moves from subsequent select to done,
+transitionPastSubsequentSelect:
+;;; for now, this just does the same thing as cpu
+bsr transitionPastCpuSelect
 rts
 
 
