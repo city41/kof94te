@@ -7,7 +7,7 @@ move.w #1, $3c0004 ; VRAMMOD=1
 btst #0, $PLAY_MODE
 beq doP1AsCpu
 ;; player one is playing
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p1CopyBlack
 
 move.w #$P1_CURSOR_LEFT_SI, D0
@@ -39,7 +39,7 @@ cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
 beq p1CpuCopyWhite_original8
 
 p1CpuCopyWhite_custom:
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p1CpuCopyBlack_custom
 
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
@@ -54,7 +54,7 @@ bsr copyCpuTiles
 bra p1CpuDoneCopy
 
 p1CpuCopyWhite_original8:
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p1CpuCopyBlack_original8
 
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
@@ -78,7 +78,7 @@ doneP1:
 btst #1, $PLAY_MODE
 beq doP2AsCpu
 ;; player two is playing
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p2CopyBlack
 
 move.w #$P2_CURSOR_LEFT_SI, D0
@@ -110,7 +110,7 @@ cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
 beq p2CpuCopyWhite_original8
 
 p2CpuCopyWhite_custom:
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p2CpuCopyBlack_custom
 
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
@@ -125,7 +125,7 @@ bsr copyCpuTiles
 bra p2CpuDoneCopy
 
 p2CpuCopyWhite_original8:
-btst #1, $CHAR_SELECT_COUNTER
+btst #1, $GENERAL_COUNTER
 beq p2CpuCopyBlack_original8
 
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0

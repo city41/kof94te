@@ -11,7 +11,7 @@ cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
 beq customTeams_rugal ; if so, Rugal needs to handled separately
 
 ;; throttle back the speed of cpu random select
-move.b $CHAR_SELECT_COUNTER, D4
+move.b $GENERAL_COUNTER, D4
 andi.b #$7, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 8 frames

@@ -1,3 +1,5 @@
+;; reset the general counter
+move.b #0, $GENERAL_COUNTER
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER
@@ -189,7 +191,7 @@ beq clearRandomSelectFlags
 ;; set up char select to randomize for p1
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
 ;; of characters to randomly select, but going with 36 for now
-move.b #36, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+move.b #$SLOT_MACHINE_DURATION, $P1_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P1_NUM_NON_RANDOM_CHARS, $P1_NUM_CHOSEN_CHARS 
 move.b #0, $P2_RANDOM_SELECT_TYPE ; clear player 2 just in case
@@ -201,7 +203,7 @@ beq clearRandomSelectFlags
 ;; set up char select to randomize for p2 here
 ;; TODO: technically this should be 36, 24, or 12, depending on the number
 ;; of characters to randomly select, but going with 36 for now
-move.b #36, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
+move.b #$SLOT_MACHINE_DURATION, $P2_SLOT_MACHINE_COUNTDOWN ; get the slot machine going
 ;; maintain the non random characters
 move.b $P2_NUM_NON_RANDOM_CHARS, $P2_NUM_CHOSEN_CHARS 
 move.b #0, $P1_RANDOM_SELECT_TYPE ; clear player 1 just in case
@@ -221,6 +223,8 @@ doneRandomSelectFlags:
 cmpi.b #0, $PLAY_MODE
 ;; demo mode
 beq setCpuSelect
+btst #7, $PLAY_MODE
+bne setSubsequentSelect
 ;; for all other cases, player select handles them correctly
 ;; in the case of subsequent single player rounds, it will do one frame of player select
 ;; then cpu select, which is fine and actually cleaner
@@ -228,17 +232,20 @@ bra setPlayerSelect
 
 setCpuSelect:
 move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
-move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
+bra doneSettingPhase
+
+setSubsequentSelect:
+jsr $2LOAD_CPU_CURSORS
+move.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
 bra doneSettingPhase
 
 setPlayerSelect:
 move.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
-move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
 bra doneSettingPhase
 
 doneSettingPhase:
+move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
+move.b #0, $READY_TO_EXIT_CHAR_SELECT
 ;;;;;;;;;;; END DETERMINE THE PHASE FOR MAIN ;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;; LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

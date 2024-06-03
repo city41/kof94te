@@ -78,9 +78,9 @@ beq skipSlotMachine
 subi.b #1, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 
 ;; now see if we are ready to save a character
-cmpi.b #24, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+cmpi.b #20, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 beq slotMachine_setupChooseChar
-cmpi.b #12, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
+cmpi.b #9, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 beq slotMachine_setupChooseChar
 cmpi.b #0, $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 beq slotMachine_setupChooseChar
