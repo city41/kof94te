@@ -1,5 +1,5 @@
 ;; reset the general counter
-move.b #0, $GENERAL_COUNTER
+move.b #$ff, $GENERAL_COUNTER
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER
