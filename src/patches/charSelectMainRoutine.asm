@@ -179,16 +179,6 @@ rts
 ;;; D6.b: 0 if not done, 1 if done
 
 checkIfCpuSelectIsDone:
-;; if we are using cpu custom teams, we don't need to do a p1/p2 branch
-cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
-bne checkIfCpuSelectIsDone_original8
-;; ok this is cpu custom teams, we know we are done when the countdown hits zero
-cmpi.b #0, $CPU_CUSTOM_TEAM_COUNTDOWN
-beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_notYet ; not done yet, try again next frame
-
-
-checkIfCpuSelectIsDone_original8:
 btst #0, $PLAY_MODE ; is player 1 playing?
 beq checkIfCpuSelectIsDone_skipPlayer1
 cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P1
