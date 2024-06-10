@@ -19,9 +19,6 @@ export const cromSpans = [
     end: 32766,
     pair: "c7/c8",
   },
-];
-
-export const japaneseEndingsCromSpans = [
   {
     // 115 tiles
     globalOffset: TILES_PER_PAIR * 0,
@@ -36,6 +33,9 @@ export const japaneseEndingsCromSpans = [
     end: 11775,
     pair: "c1/c2",
   },
+];
+
+export const japaneseEndingsCromSpans = [
   {
     // 257 tiles
     globalOffset: TILES_PER_PAIR * 0,
