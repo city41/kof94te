@@ -1,4 +1,4 @@
-dc.w 124 ; number of palettes
+dc.w 123 ; number of palettes
 ;;;;; palette 0 (0) ;;;;;
 dc.w $8000
 dc.w $8000
@@ -1039,20 +1039,20 @@ dc.w $8000
 ;;;;; palette 3d (61) ;;;;;
 dc.w $5f0f
 dc.w $3fd6
-dc.w $4ffb
-dc.w $5a40
+dc.w $5010
 dc.w $6d83
 dc.w $6fea
-dc.w $7e82
+dc.w $6ffe
 dc.w $7fff
 dc.w $8000
-dc.w $8500
 dc.w $8510
 dc.w $ea41
 dc.w $efb6
 dc.w $f565
 dc.w $f840
 dc.w $fc94
+dc.w $8000
+dc.w $8000
 ;;;;; palette 3e (62) ;;;;;
 dc.w $5f0f
 dc.w $1b50
@@ -1124,20 +1124,20 @@ dc.w $f941
 ;;;;; palette 42 (66) ;;;;;
 dc.w $5f0f
 dc.w $2400
-dc.w $2510
+dc.w $4ffb
+dc.w $5a40
+dc.w $7e82
 dc.w $7fff
 dc.w $8000
+dc.w $8500
 dc.w $8975
-dc.w $cffa
 dc.w $d430
 dc.w $dd72
 dc.w $e941
-dc.w $ee83
+dc.w $efb6
 dc.w $f542
-dc.w $fa41
 dc.w $ffb5
 dc.w $ffe9
-dc.w $8000
 ;;;;; palette 43 (67) ;;;;;
 dc.w $5f0f
 dc.w $1fa4
@@ -1174,23 +1174,6 @@ dc.w $c846
 dc.w $d841
 ;;;;; palette 45 (69) ;;;;;
 dc.w $5f0f
-dc.w $f93
-dc.w $2b84
-dc.w $4443
-dc.w $4ffb
-dc.w $7fff
-dc.w $8000
-dc.w $9120
-dc.w $9f92
-dc.w $bb40
-dc.w $c000
-dc.w $dfd6
-dc.w $eeb5
-dc.w $efb6
-dc.w $ffe9
-dc.w $fff9
-;;;;; palette 46 (70) ;;;;;
-dc.w $5f0f
 dc.w $1d36
 dc.w $6820
 dc.w $7fc5
@@ -1206,7 +1189,7 @@ dc.w $fc50
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 47 (71) ;;;;;
+;;;;; palette 46 (70) ;;;;;
 dc.w $5f0f
 dc.w $630
 dc.w $a61
@@ -1216,12 +1199,29 @@ dc.w $3786
 dc.w $4e94
 dc.w $7fff
 dc.w $8000
-dc.w $bbba
 dc.w $c454
+dc.w $cffa
+dc.w $ee83
 dc.w $efc6
 dc.w $effb
 dc.w $fa41
+dc.w $ffb5
+;;;;; palette 47 (71) ;;;;;
+dc.w $5f0f
+dc.w $f93
+dc.w $2b00
+dc.w $3b41
+dc.w $4443
+dc.w $4ffb
+dc.w $6500
+dc.w $6fb7
+dc.w $7fff
 dc.w $8000
+dc.w $9120
+dc.w $bb40
+dc.w $bf94
+dc.w $dfd6
+dc.w $efeb
 dc.w $8000
 ;;;;; palette 48 (72) ;;;;;
 dc.w $5f0f
@@ -1361,20 +1361,20 @@ dc.w $8000
 dc.w $8000
 ;;;;; palette 50 (80) ;;;;;
 dc.w $5f0f
-dc.w $3fd6
-dc.w $5010
-dc.w $6d83
-dc.w $6fea
+dc.w $f93
+dc.w $1b50
+dc.w $2e83
+dc.w $4443
 dc.w $7fff
 dc.w $8000
-dc.w $8510
-dc.w $ea41
-dc.w $efb6
-dc.w $f565
-dc.w $f840
-dc.w $fc94
-dc.w $8000
-dc.w $8000
+dc.w $8610
+dc.w $8fec
+dc.w $a211
+dc.w $bb40
+dc.w $c500
+dc.w $dfd6
+dc.w $ffb5
+dc.w $ffe9
 dc.w $8000
 ;;;;; palette 51 (81) ;;;;;
 dc.w $5f0f
@@ -1403,13 +1403,13 @@ dc.w $7e82
 dc.w $7fff
 dc.w $8000
 dc.w $8500
-dc.w $9f92
 dc.w $a910
 dc.w $b210
-dc.w $bb40
 dc.w $c400
 dc.w $efb6
-dc.w $ffe9
+dc.w $8000
+dc.w $8000
+dc.w $8000
 ;;;;; palette 53 (83) ;;;;;
 dc.w $5f0f
 dc.w $1764
@@ -1429,21 +1429,21 @@ dc.w $8000
 dc.w $8000
 ;;;;; palette 54 (84) ;;;;;
 dc.w $5f0f
-dc.w $f93
-dc.w $4443
+dc.w $2510
+dc.w $3786
+dc.w $4e94
 dc.w $7fff
 dc.w $8000
-dc.w $8500
-dc.w $9f92
-dc.w $a211
-dc.w $bb40
-dc.w $c000
-dc.w $c500
-dc.w $dfd6
-dc.w $efb6
-dc.w $ffe9
-dc.w $fff9
-dc.w $8000
+dc.w $bbba
+dc.w $c454
+dc.w $cffa
+dc.w $d241
+dc.w $ee83
+dc.w $efc6
+dc.w $effb
+dc.w $f010
+dc.w $fa41
+dc.w $ffb5
 ;;;;; palette 55 (85) ;;;;;
 dc.w $5f0f
 dc.w $888
@@ -1452,50 +1452,33 @@ dc.w $4ffb
 dc.w $7fff
 dc.w $8000
 dc.w $8eee
-dc.w $9120
 dc.w $a211
 dc.w $bb40
 dc.w $c500
 dc.w $dfd6
+dc.w $ebb9
 dc.w $f000
 dc.w $f444
 dc.w $f999
 dc.w $fbbb
 ;;;;; palette 56 (86) ;;;;;
 dc.w $5f0f
-dc.w $555
-dc.w $eee
-dc.w $2510
-dc.w $7999
-dc.w $7fff
-dc.w $8000
-dc.w $8222
-dc.w $cffa
-dc.w $d241
-dc.w $ee83
-dc.w $f010
-dc.w $f999
-dc.w $fa41
-dc.w $ffb5
-dc.w $ffff
-;;;;; palette 57 (87) ;;;;;
-dc.w $5f0f
 dc.w $111
+dc.w $555
 dc.w $888
-dc.w $999
-dc.w $7555
+dc.w $eee
+dc.w $7999
 dc.w $7eee
 dc.w $7fff
 dc.w $8000
+dc.w $8222
 dc.w $8555
 dc.w $8ccc
 dc.w $f222
 dc.w $f444
-dc.w $f555
 dc.w $f666
 dc.w $f999
-dc.w $fbbb
-;;;;; palette 58 (88) ;;;;;
+;;;;; palette 57 (87) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $333
@@ -1512,7 +1495,7 @@ dc.w $f999
 dc.w $fbbb
 dc.w $8000
 dc.w $8000
-;;;;; palette 59 (89) ;;;;;
+;;;;; palette 58 (88) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $555
@@ -1529,7 +1512,7 @@ dc.w $f333
 dc.w $f888
 dc.w $f999
 dc.w $8000
-;;;;; palette 5a (90) ;;;;;
+;;;;; palette 59 (89) ;;;;;
 dc.w $5f0f
 dc.w $333
 dc.w $fff
@@ -1546,7 +1529,7 @@ dc.w $f999
 dc.w $faaa
 dc.w $fbbb
 dc.w $8000
-;;;;; palette 5b (91) ;;;;;
+;;;;; palette 5a (90) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $fff
@@ -1563,41 +1546,41 @@ dc.w $f999
 dc.w $fccc
 dc.w $feee
 dc.w $8000
-;;;;; palette 5c (92) ;;;;;
+;;;;; palette 5b (91) ;;;;;
 dc.w $5f0f
+dc.w $555
 dc.w $999
-dc.w $7666
-dc.w $7ccc
+dc.w $eee
+dc.w $7999
 dc.w $7fff
 dc.w $8000
 dc.w $8222
 dc.w $8555
-dc.w $8666
 dc.w $8ccc
 dc.w $8ddd
 dc.w $8eee
-dc.w $f222
 dc.w $f555
+dc.w $f888
 dc.w $f999
-dc.w $feee
-;;;;; palette 5d (93) ;;;;;
+dc.w $ffff
+;;;;; palette 5c (92) ;;;;;
 dc.w $5f0f
-dc.w $888
 dc.w $999
-dc.w $7111
 dc.w $7444
+dc.w $7555
 dc.w $7666
 dc.w $7ccc
-dc.w $7ddd
 dc.w $7fff
 dc.w $8000
 dc.w $8666
 dc.w $8ccc
 dc.w $8eee
 dc.w $f222
+dc.w $f555
 dc.w $f999
+dc.w $fbbb
 dc.w $feee
-;;;;; palette 5e (94) ;;;;;
+;;;;; palette 5d (93) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $111
@@ -1614,7 +1597,7 @@ dc.w $f555
 dc.w $f999
 dc.w $fbbb
 dc.w $8000
-;;;;; palette 5f (95) ;;;;;
+;;;;; palette 5e (94) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $aaa
@@ -1631,7 +1614,7 @@ dc.w $f777
 dc.w $f999
 dc.w $feee
 dc.w $8000
-;;;;; palette 60 (96) ;;;;;
+;;;;; palette 5f (95) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $555
@@ -1648,12 +1631,13 @@ dc.w $f333
 dc.w $f999
 dc.w $fbbb
 dc.w $fddd
-;;;;; palette 61 (97) ;;;;;
+;;;;; palette 60 (96) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $888
 dc.w $7111
 dc.w $7555
+dc.w $7ddd
 dc.w $7fff
 dc.w $8000
 dc.w $8222
@@ -1664,8 +1648,7 @@ dc.w $8ccc
 dc.w $8eee
 dc.w $f333
 dc.w $f999
-dc.w $8000
-;;;;; palette 62 (98) ;;;;;
+;;;;; palette 61 (97) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $333
@@ -1682,7 +1665,7 @@ dc.w $8444
 dc.w $f333
 dc.w $f666
 dc.w $f999
-;;;;; palette 63 (99) ;;;;;
+;;;;; palette 62 (98) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -1699,7 +1682,7 @@ dc.w $f555
 dc.w $f999
 dc.w $fbbb
 dc.w $fddd
-;;;;; palette 64 (100) ;;;;;
+;;;;; palette 63 (99) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $444
@@ -1716,7 +1699,7 @@ dc.w $f000
 dc.w $f999
 dc.w $8000
 dc.w $8000
-;;;;; palette 65 (101) ;;;;;
+;;;;; palette 64 (100) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $777
@@ -1733,7 +1716,7 @@ dc.w $8bbb
 dc.w $f555
 dc.w $f999
 dc.w $fbbb
-;;;;; palette 66 (102) ;;;;;
+;;;;; palette 65 (101) ;;;;;
 dc.w $5f0f
 dc.w $555
 dc.w $777
@@ -1750,7 +1733,7 @@ dc.w $f333
 dc.w $f444
 dc.w $f999
 dc.w $8000
-;;;;; palette 67 (103) ;;;;;
+;;;;; palette 66 (102) ;;;;;
 dc.w $5f0f
 dc.w $444
 dc.w $999
@@ -1767,7 +1750,7 @@ dc.w $8fff
 dc.w $f555
 dc.w $f999
 dc.w $fbbb
-;;;;; palette 68 (104) ;;;;;
+;;;;; palette 67 (103) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $222
@@ -1784,7 +1767,7 @@ dc.w $f333
 dc.w $f999
 dc.w $8000
 dc.w $8000
-;;;;; palette 69 (105) ;;;;;
+;;;;; palette 68 (104) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $aaa
@@ -1801,7 +1784,7 @@ dc.w $fddd
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 6a (106) ;;;;;
+;;;;; palette 69 (105) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $aaa
@@ -1818,7 +1801,7 @@ dc.w $f999
 dc.w $feee
 dc.w $8000
 dc.w $8000
-;;;;; palette 6b (107) ;;;;;
+;;;;; palette 6a (106) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $333
@@ -1835,7 +1818,7 @@ dc.w $f999
 dc.w $fbbb
 dc.w $8000
 dc.w $8000
-;;;;; palette 6c (108) ;;;;;
+;;;;; palette 6b (107) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $555
@@ -1852,7 +1835,7 @@ dc.w $f999
 dc.w $fbbb
 dc.w $ffff
 dc.w $8000
-;;;;; palette 6d (109) ;;;;;
+;;;;; palette 6c (108) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $555
@@ -1869,7 +1852,7 @@ dc.w $f999
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 6e (110) ;;;;;
+;;;;; palette 6d (109) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $444
@@ -1886,7 +1869,7 @@ dc.w $f999
 dc.w $fbbb
 dc.w $ffff
 dc.w $8000
-;;;;; palette 6f (111) ;;;;;
+;;;;; palette 6e (110) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $333
@@ -1903,7 +1886,7 @@ dc.w $ffff
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 70 (112) ;;;;;
+;;;;; palette 6f (111) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -1920,7 +1903,7 @@ dc.w $8eee
 dc.w $f111
 dc.w $f555
 dc.w $f999
-;;;;; palette 71 (113) ;;;;;
+;;;;; palette 70 (112) ;;;;;
 dc.w $5f0f
 dc.w $333
 dc.w $999
@@ -1937,7 +1920,7 @@ dc.w $f999
 dc.w $fbbb
 dc.w $8000
 dc.w $8000
-;;;;; palette 72 (114) ;;;;;
+;;;;; palette 71 (113) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $555
@@ -1954,7 +1937,7 @@ dc.w $fbbb
 dc.w $fddd
 dc.w $8000
 dc.w $8000
-;;;;; palette 73 (115) ;;;;;
+;;;;; palette 72 (114) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $7111
@@ -1971,7 +1954,7 @@ dc.w $8000
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 74 (116) ;;;;;
+;;;;; palette 73 (115) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $333
@@ -1988,7 +1971,7 @@ dc.w $f333
 dc.w $f999
 dc.w $8000
 dc.w $8000
-;;;;; palette 75 (117) ;;;;;
+;;;;; palette 74 (116) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -2005,7 +1988,7 @@ dc.w $8000
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 76 (118) ;;;;;
+;;;;; palette 75 (117) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -2022,7 +2005,7 @@ dc.w $8000
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 77 (119) ;;;;;
+;;;;; palette 76 (118) ;;;;;
 dc.w $5f0f
 dc.w $999
 dc.w $7555
@@ -2039,7 +2022,7 @@ dc.w $f999
 dc.w $8000
 dc.w $8000
 dc.w $8000
-;;;;; palette 78 (120) ;;;;;
+;;;;; palette 77 (119) ;;;;;
 dc.w $5f0f
 dc.w $0
 dc.w $222
@@ -2056,7 +2039,7 @@ dc.w $f999
 dc.w $fddd
 dc.w $ffff
 dc.w $8000
-;;;;; palette 79 (121) ;;;;;
+;;;;; palette 78 (120) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -2073,7 +2056,7 @@ dc.w $f555
 dc.w $f999
 dc.w $8000
 dc.w $8000
-;;;;; palette 7a (122) ;;;;;
+;;;;; palette 79 (121) ;;;;;
 dc.w $5f0f
 dc.w $111
 dc.w $222
@@ -2090,7 +2073,7 @@ dc.w $f999
 dc.w $fddd
 dc.w $8000
 dc.w $8000
-;;;;; palette 7b (123) ;;;;;
+;;;;; palette 7a (122) ;;;;;
 dc.w $5f0f
 dc.w $222
 dc.w $444
