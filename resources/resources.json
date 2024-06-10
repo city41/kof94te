@@ -101,7 +101,7 @@
   "cromImages": [
     {
       "name": "character_grid",
-      "imageFile": "./character_grid.png",
+      "imageFile": "./character_grid_a94.png",
       "x": 16,
       "y": 27
     },
@@ -117,7 +117,7 @@
     },
     {
       "name": "avatars_alt",
-      "imageFile": "./avatars_alt.png"
+      "imageFile": "./avatars.png"
     },
     {
       "name": "character_grid_grey",

@@ -6,12 +6,12 @@ dc.w 3 ; height in tiles
 ;;; column 0
 
 ;; SCB1 word pairs
-dc.w $ff59
-dc.w $1f10
-dc.w $ff4f
-dc.w $1f10
-dc.w $ff51
-dc.w $1f10
+dc.w $ff26
+dc.w $1810
+dc.w $bf9
+dc.w $1800
+dc.w $bfb
+dc.w $1800
 
 ;; SCB3 vertical position|sticky|size
 dc.w $7003
@@ -22,12 +22,12 @@ dc.w $0
 ;;; column 1
 
 ;; SCB1 word pairs
-dc.w $ff5a
-dc.w $1310
+dc.w $ff27
+dc.w $1210
 dc.w $af9
 dc.w $1200
-dc.w $ff52
-dc.w $1310
+dc.w $bfc
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
 dc.w $7003
@@ -70,12 +70,12 @@ dc.w $1800
 ;;; column 4
 
 ;; SCB1 word pairs
-dc.w $ff5b
-dc.w $1f10
+dc.w $ff28
+dc.w $1810
 dc.w $af9
 dc.w $1200
-dc.w $ff53
-dc.w $1310
+dc.w $bfd
+dc.w $1200
 
 ;; SCB3 vertical position|sticky|size
 dc.w $7003
@@ -86,12 +86,12 @@ dc.w $2000
 ;;; column 5
 
 ;; SCB1 word pairs
-dc.w $ff5c
-dc.w $1f10
-dc.w $ff50
-dc.w $1f10
-dc.w $ff54
-dc.w $1f10
+dc.w $ff29
+dc.w $1810
+dc.w $bfa
+dc.w $1800
+dc.w $bfe
+dc.w $1800
 
 ;; SCB3 vertical position|sticky|size
 dc.w $7003
