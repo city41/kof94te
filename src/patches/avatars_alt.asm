@@ -246,15 +246,15 @@ dc.w $5300
 dc.w $b99
 dc.w $5400
 dc.w $bc9
-dc.w $6400
+dc.w $5400
 
 ;;; column 31
 
 ;; SCB1 word pairs
 dc.w $b9a
-dc.w $5200
+dc.w $5400
 dc.w $bca
-dc.w $6400
+dc.w $5400
 
 ;;; column 32
 
@@ -270,7 +270,7 @@ dc.w $6200
 dc.w $b9c
 dc.w $5500
 dc.w $bcc
-dc.w $6500
+dc.w $6400
 
 ;;; column 34
 
@@ -310,31 +310,31 @@ dc.w $5700
 dc.w $ba1
 dc.w $5100
 dc.w $bd1
-dc.w $6500
+dc.w $6400
 
 ;;; column 39
 
 ;; SCB1 word pairs
 dc.w $ba2
-dc.w $5400
+dc.w $5500
 dc.w $bd2
-dc.w $6600
+dc.w $6500
 
 ;;; column 40
 
 ;; SCB1 word pairs
 dc.w $ba3
-dc.w $5500
+dc.w $5200
 dc.w $bd3
-dc.w $6700
+dc.w $6600
 
 ;;; column 41
 
 ;; SCB1 word pairs
 dc.w $ba4
-dc.w $5500
+dc.w $5200
 dc.w $bd4
-dc.w $6700
+dc.w $6600
 
 ;;; column 42
 
