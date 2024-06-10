@@ -9,9 +9,9 @@ dc.w 3 ; height in tiles
 dc.w $af9
 dc.w $1200
 dc.w $be3
-dc.w $1500
+dc.w $1600
 dc.w $be4
-dc.w $1500
+dc.w $1600
 
 ;; SCB3 vertical position|sticky|size
 dc.w $ee03

@@ -113,11 +113,11 @@
     },
     {
       "name": "avatars",
-      "imageFile": "./avatars.png"
+      "imageFile": "./avatars_94.png"
     },
     {
       "name": "avatars_alt",
-      "imageFile": "./avatars.png"
+      "imageFile": "./avatars_94.png"
     },
     {
       "name": "character_grid_grey",

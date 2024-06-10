@@ -7,9 +7,9 @@ dc.w 2 ; height in tiles
 
 ;; SCB1 word pairs
 dc.w $be9
-dc.w $1500
+dc.w $1800
 dc.w $bea
-dc.w $1500
+dc.w $1800
 
 ;; SCB3 vertical position|sticky|size
 dc.w $ee02
