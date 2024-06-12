@@ -6,19 +6,19 @@
     "inputs": [
       {
         "template": "palettes.asm.hbr",
-        "dest": "../src/patches/palettes.asm"
+        "dest": "../src/patches/palettes_a95.asm"
       },
       {
         "template": "character_grid.asm.hbr",
-        "dest": "../src/patches/character_grid.asm"
+        "dest": "../src/patches/character_grid_a95.asm"
       },
       {
         "template": "character_to_grey_out_table.asm.hbr",
-        "dest": "../src/patches/character_to_grey_out_table.asm"
+        "dest": "../src/patches/character_to_grey_out_table_a95.asm"
       },
       {
         "template": "rugal_character_grid_inject_data.asm.hbr",
-        "dest": "../src/patches/rugal_character_grid_inject_data.asm"
+        "dest": "../src/patches/rugal_character_grid_inject_data_a95.asm"
       },
       {
         "template": "rugal_character_grid_clear_data.asm.hbr",
@@ -26,11 +26,11 @@
       },
       {
         "template": "avatars.asm.hbr",
-        "dest": "../src/patches/avatars.asm"
+        "dest": "../src/patches/avatars_a95.asm"
       },
       {
         "template": "avatars_alt.asm.hbr",
-        "dest": "../src/patches/avatars_alt.asm"
+        "dest": "../src/patches/avatars_alt_a95.asm"
       },
       {
         "template": "p1_cursor_left_black.asm.hbr",
@@ -101,27 +101,27 @@
   "cromImages": [
     {
       "name": "character_grid",
-      "imageFile": "./character_grid.png",
+      "imageFile": "./character_grid_a95.png",
       "x": 16,
       "y": 27
     },
     {
       "name": "rugal_character_grid",
-      "imageFile": "./rugal_character_grid.png",
+      "imageFile": "./rugal_character_grid_a95.png",
       "x": 144,
       "y": 123
     },
     {
       "name": "avatars",
-      "imageFile": "./avatars.png"
+      "imageFile": "./avatars_a95.png"
     },
     {
       "name": "avatars_alt",
-      "imageFile": "./avatars_alt.png"
+      "imageFile": "./avatars_alt_a95.png"
     },
     {
       "name": "character_grid_grey",
-      "imageFile": "./character_grid_grey.png"
+      "imageFile": "./character_grid_grey_a95.png"
     },
     {
       "name": "p1_cursor_left_white",

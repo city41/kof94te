@@ -138,20 +138,27 @@ function renderAltData(
   }
 }
 
-async function main(screenshotDirPath: string, avatarPngPath: string) {
-  const regAvatarImage = await loadImage(avatarPngPath);
-  const regAvatarCanvas = createCanvas(
-    regAvatarImage.width,
-    regAvatarImage.height
+async function main(
+  k95AvatarPath: string,
+  k95AvatarAltPath: string,
+  k94AvatarPath: string
+) {
+  const reg94AvatarImage = await loadImage(k94AvatarPath);
+  const reg94AvatarCanvas = createCanvas(
+    reg94AvatarImage.width,
+    reg94AvatarImage.height
   );
-  const regAvatarContext = regAvatarCanvas.getContext("2d");
-  regAvatarContext.drawImage(regAvatarImage, 0, 0);
+  const reg94AvatarContext = reg94AvatarCanvas.getContext("2d");
+  reg94AvatarContext.drawImage(reg94AvatarImage, 0, 0);
 
-  const altAvatarCanvas = createCanvas(
-    regAvatarImage.width,
-    regAvatarImage.height
+  const alt94AvatarCanvas = createCanvas(
+    reg94AvatarImage.width,
+    reg94AvatarImage.height
   );
-  const altAvatarContext = altAvatarCanvas.getContext("2d");
+  const alt94AvatarContext = alt94AvatarCanvas.getContext("2d");
+
+  const reg95AvatarImage = await loadImage(k95AvatarPath);
+  const alt95AvatarImage = await loadImage(k95AvatarAltPath);
 
   for (let i = 0; i < 24; ++i) {
     const screenshotPath = path.resolve(
@@ -160,38 +167,44 @@ async function main(screenshotDirPath: string, avatarPngPath: string) {
     );
     const screenshot = await loadImage(screenshotPath);
 
-    const regData = regAvatarContext.getImageData(i * 32, 0, 32, 32);
-    const altData = altAvatarContext.getImageData(i * 32, 0, 32, 32);
+    const regData = reg94AvatarContext.getImageData(i * 32, 0, 32, 32);
+    const altData = alt94AvatarContext.getImageData(i * 32, 0, 32, 32);
 
     renderAltData(regData, altData, screenshot);
 
     console.log({ altData });
 
-    altAvatarContext.putImageData(altData, i * 32, 0);
+    alt94AvatarContext.putImageData(altData, i * 32, 0);
   }
 
-  const altBuffer = altAvatarCanvas.toBuffer();
+  const altBuffer = alt94AvatarCanvas.toBuffer();
   const writeDir = path.dirname(avatarPngPath);
-  const writePath = path.resolve(
-    writeDir,
-    `${path.basename(avatarPngPath, ".png")}_alt.generated.png`
-  );
+  const writePath = path.resolve(writeDir, "avatars_alt.generated.png");
 
   await fsp.writeFile(writePath, altBuffer);
 
   console.log("wrote to", writePath);
 }
 
-const [_tsnode, _createAltColorAvatars, screenshotDirPath, avatarPngPath] =
-  process.argv;
+const [
+  _tsnode,
+  _createAltColorAvatars,
+  k95AvatarPath,
+  k95AltAvatarPath,
+  k94avatarPngPath,
+] = process.argv;
 
-if (!screenshotDirPath || !avatarPngPath) {
+if (!k95AvatarPath || !k95AltAvatarPath || !k94avatarPngPath) {
   console.error(
-    "usage: ts-node createAltColorAvatars.ts <screenshot-dir-path> <avatar-png-path>"
+    "usage: ts-node createAltColor94Avatars.ts <k95-avatar-path> <k95-alt-avatar-path> <k94-avatar-path>"
   );
   process.exit(1);
 }
 
-main(path.resolve(screenshotDirPath), path.resolve(avatarPngPath))
+main(
+  path.resolve(k95AvatarPath),
+  path.resolve(k95AltAvatarPath),
+  path.resolve(k94avatarPngPath)
+)
   .then(() => console.log("done"))
   .catch((e) => console.error(e));

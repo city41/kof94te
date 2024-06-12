@@ -1,5 +1,5 @@
 {
-  "description": "Go to new routine after HTP instead of team select",
+  "description": "KOF94TE: KOF95/98 Avatars version",
   "subroutineSpace": {
     "start": "97000",
     "end": "bfff0"
@@ -187,28 +187,28 @@
       "description": "palettes",
       "subroutine": true,
       "symbol": "PALETTES",
-      "patchAsm": "palettes.asm"
+      "patchAsm": "palettes_a95.asm"
     },
     {
       "type": "prom",
       "description": "character to grey out table for greying out defeated characters",
       "subroutine": true,
       "symbol": "CHARACTER_TO_GREY_OUT_TABLE",
-      "patchAsm": "character_to_grey_out_table.asm"
+      "patchAsm": "character_to_grey_out_table_a95.asm"
     },
     {
       "type": "prom",
       "description": "character_grid image",
       "subroutine": true,
       "symbol": "CHARACTER_GRID_IMAGE",
-      "patchAsm": "character_grid.asm"
+      "patchAsm": "character_grid_a95.asm"
     },
     {
       "type": "prom",
       "description": "rugal character grid inject data",
       "subroutine": true,
       "symbol": "RUGAL_CG_INJECT_DATA",
-      "patchAsm": "rugal_character_grid_inject_data.asm"
+      "patchAsm": "rugal_character_grid_inject_data_a95.asm"
     },
     {
       "type": "prom",
@@ -222,14 +222,14 @@
       "description": "avatars image",
       "subroutine": true,
       "symbol": "AVATARS_IMAGE",
-      "patchAsm": "avatars.asm"
+      "patchAsm": "avatars_a95.asm"
     },
     {
       "type": "prom",
       "description": "avatars alt image",
       "subroutine": true,
       "symbol": "AVATARS_ALT_IMAGE",
-      "patchAsm": "avatars_alt.asm"
+      "patchAsm": "avatars_alt_a95.asm"
     },
     {
       "type": "prom",
@@ -675,19 +675,7 @@
       "description": "have the game leave our palettes alone",
       "address": "133642",
       "subroutine": true,
-      "patchAsm": [
-        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
-        "bne skip ; not in char select? nothing to do",
-        "cmpi.w #15, D0",
-        "ble skip ; not touching one of our palettes? nothing to do",
-        "cmpi.w #94, D0",
-        "bge skip ; not touching one of our palettes? nothing to do",
-        "move.w #94, D0  ; have it write into a palette that isn't ours",
-        "skip:",
-        "lea $400000, A1",
-        "done:",
-        "rts"
-      ]
+      "patchAsm": "guardPalettes_a95.asm"
     },
     {
       "type": "prom",

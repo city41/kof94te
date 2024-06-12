@@ -1,0 +1,1363 @@
+{
+  "description": "KOF94TE: KOF94 Avatars version",
+  "subroutineSpace": {
+    "start": "97000",
+    "end": "bfff0"
+  },
+  "symbols": {
+    "VRAMADDR": "3c0000",
+    "ROM_CONTINUE_POSITION_TABLE": "45448",
+    "BIOS_PLAYER_MOD1": "10fdb6",
+    "BIOS_PLAYER_MOD2": "10fdb7",
+    "BIOS_P1CURRENT": "10fd96",
+    "BIOS_P1CHANGE": "10fd97",
+    "BIOS_P2CURRENT": "10fd9c",
+    "BIOS_P2CHANGE": "10fd9d",
+    "BIOS_STATCURNT": "10fdac",
+    "PALETTE_WHITE": "7fff",
+    "PALETTE_BLACK": "8000",
+    "CPU_RANDOM_SELECT_COUNTER_FOR_P1": "1083d3",
+    "CPU_RANDOM_SELECT_COUNTER_FOR_P2": "1081d3",
+    "P1_CHOSEN_CHARS_IN_ORDER_OF_FIGHTING": "108232",
+    "P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108235",
+    "P2_CHOSEN_CHARS_IN_ORDER_OF_FIGHTING": "108432",
+    "P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING": "108435",
+    "DEFEATED_TEAMS": "1087df",
+    "LANGUAGE_ID": "108836",
+
+    "WINNING_TEAM_LIST": "10e7c0",
+    "VSTRING_DATA": "10e7d0",
+    "PLAY_MODE": "10e7fc",
+    "LAST_PLAYMODE": "10e7fd",
+    "P1_CUR_INPUT": "10e800",
+    "P1_CURSOR_X": "10e802",
+    "P1_CURSOR_Y": "10e804",
+    "P1_CHOSEN_CHAR0": "10e806",
+    "P1_CHOSEN_CHAR1": "10e807",
+    "P1_CHOSEN_CHAR2": "10e808",
+    "P1_CHOSEN_CHAR0_PAL_FLAG": "10e809",
+    "P1_CHOSEN_CHAR1_PAL_FLAG": "10e80a",
+    "P1_CHOSEN_CHAR2_PAL_FLAG": "10e80b",
+    "P1_NUM_CHOSEN_CHARS": "10e80c",
+    "P1_FOCUSED_CHAR_NAME_FIX_ADDRESS": "10e80e",
+    "P1_CHAR_NAME_TABLE_ADDRESS": "10e810",
+    "P1_SLOT_MACHINE_COUNTDOWN": "10e814",
+    "P1_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10e815",
+    "P1_CURSOR_SPRITEINDEX": "10e816",
+    "P1_CHOSEN_TEAM_AVATARINDEX": "10e818",
+    "P1_RANDOM_SELECT_TYPE": "10e81a",
+    "P1_NUM_NON_RANDOM_CHARS": "10e81b",
+    "P1_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10e820",
+    "P1_ORIGINAL_TEAM_ID": "10e830",
+    "P1_IS_READY": "10e832",
+    "P1_LAST_MATCH_RESULT": "10e833",
+    "P2_CUR_INPUT": "10e8a0",
+    "P2_CURSOR_X": "10e8a2",
+    "P2_CURSOR_Y": "10e8a4",
+    "P2_CHOSEN_CHAR0": "10e8a6",
+    "P2_CHOSEN_CHAR1": "10e8a7",
+    "P2_CHOSEN_CHAR2": "10e8a8",
+    "P2_CHOSEN_CHAR0_PAL_FLAG": "10e8a9",
+    "P2_CHOSEN_CHAR1_PAL_FLAG": "10e8aa",
+    "P2_CHOSEN_CHAR2_PAL_FLAG": "10e8ab",
+    "P2_NUM_CHOSEN_CHARS": "10e8ac",
+    "P2_FOCUSED_CHAR_NAME_FIX_ADDRESS": "10e8ae",
+    "P2_CHAR_NAME_TABLE_ADDRESS": "10e8b0",
+    "P2_SLOT_MACHINE_COUNTDOWN": "10e8b4",
+    "P2_RANDOM_SELECT_PALETTE_FLAG_CHOICE": "10e8b5",
+    "P2_CURSOR_SPRITEINDEX": "10e8b6",
+    "P2_CHOSEN_TEAM_AVATARINDEX": "10e8b8",
+    "P2_RANDOM_SELECT_TYPE": "10e8ba",
+    "P2_NUM_NON_RANDOM_CHARS": "10e8bb",
+    "P2_TEAM_RANDOM_TEMP_CHOSEN_CHARS": "10e8c0",
+    "P2_ORIGINAL_TEAM_ID": "10e8d0",
+    "P2_IS_READY": "10e8d2",
+    "P2_LAST_MATCH_RESULT": "10e8d3",
+    "CPU_DEFEATED_CHARACTERS": "10e8d4",
+    "READY_TO_EXIT_CHAR_SELECT": "10e8e0",
+    "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10e8e1",
+    "IN_CHAR_SELECT_FLAG": "10e8e5",
+    "PLAY_HERE_COMES_CHALLENGER_CHIME": "10e8e6",
+    "IN_HERE_COMES_CHALLENGER": "10e8e7",
+    "STORE_A0A1A2": "10e8e8",
+    "AFTER_SCREEN_ALREADY_SET_LEFT": "10e912",
+    "GENERAL_COUNTER": "10e913",
+    "AFTER_SCREEN_POSITION_TABLE": "10e914",
+    "MOVEM_STORAGE": "10ea12",
+    "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10eb02",
+    "CPU_CUSTOM_TEAMS_FLAG": "10eb05",
+    "OVERRODE_CPU_CSTM_FLAG": "10eb06",
+    "SIDE_THAT_WENT_TO_CONTINUE": "10eb07",
+
+    "MAIN_PHASE_UNKNOWN": "0",
+    "MAIN_PHASE_INIT": "1",
+    "MAIN_PHASE_PLAYER_SELECT": "2",
+    "MAIN_PHASE_CPU_SELECT": "3",
+    "MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT": "4",
+    "MAIN_PHASE_DONE": "5",
+    "MAIN_HACK_PHASE": "10eb04",
+
+    "STORE_ALL_REGISTERS": "10eb0c",
+    "CUTSCENE23_STRING": "10e400",
+
+    "GRID_IMAGE_SI": "153",
+    "P1_CURSOR_LEFT_SI": "169",
+    "P1_CURSOR_RIGHT_SI": "16a",
+    "P1_CPU_CURSOR_CHAR1_LEFT_SI": "169",
+    "P1_CPU_CURSOR_CHAR1_RIGHT_SI": "16a",
+    "P1_CPU_CURSOR_CHAR2_LEFT_SI": "16b",
+    "P1_CPU_CURSOR_CHAR2_RIGHT_SI": "16c",
+    "P1_CPU_CURSOR_CHAR3_LEFT_SI": "16d",
+    "P1_CPU_CURSOR_CHAR3_RIGHT_SI": "16e",
+    "P2_CURSOR_LEFT_SI": "16f",
+    "P2_CURSOR_RIGHT_SI": "170",
+    "P2_CPU_CURSOR_CHAR1_LEFT_SI": "16f",
+    "P2_CPU_CURSOR_CHAR1_RIGHT_SI": "170",
+    "P2_CPU_CURSOR_CHAR2_LEFT_SI": "171",
+    "P2_CPU_CURSOR_CHAR2_RIGHT_SI": "172",
+    "P2_CPU_CURSOR_CHAR3_LEFT_SI": "173",
+    "P2_CPU_CURSOR_CHAR3_RIGHT_SI": "174",
+
+    "PX_CUR_INPUT_OFFSET": "0",
+    "PX_CURSOR_X_OFFSET": "2",
+    "PX_CURSOR_Y_OFFSET": "4",
+    "PX_CHOSEN_CHAR0_OFFSET": "6",
+    "PX_CHOSEN_CHAR1_OFFSET": "7",
+    "PX_CHOSEN_CHAR2_OFFSET": "8",
+    "PX_NUM_CHOSEN_CHARS_OFFSET": "c",
+    "PX_FOCUSED_CHAR_NAME_FIX_ADDRESS_OFFSET": "e",
+    "PX_CHAR_NAME_TABLE_ADDRESS_OFFSET": "10",
+    "PX_SLOT_MACHINE_COUNTDOWN_OFFSET": "14",
+    "PX_RANDOM_SELECT_PALETTE_FLAG_CHOICE_OFFSET": "15",
+    "PX_CURSOR_SPRITEINDEX_OFFSET": "16",
+    "PX_CHOSEN_TEAM_AVATARINDEX_OFFSET": "18",
+    "PX_RANDOM_SELECT_TYPE_OFFSET": "1a",
+    "PX_NUM_NON_RANDOM_CHARS_OFFSET": "1b",
+    "PX_TEAM_RANDOM_TEMP_CHOSEN_CHARS_OFFSET": "20",
+    "PX_ORIGINAL_TEAM_ID_OFFSET": "30",
+    "PX_IS_READY_OFFSET": "32",
+    "PX_LAST_MATCH_RESULT_OFFSET": "33",
+
+    "SIZEOF_PX": "34",
+
+    "P1_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7052",
+    "P2_FOCUSED_NAME_FIX_ADDRESS_VALUE": "7292",
+
+    "RANDOM_SELECT_TYPE_NONE": "0",
+    "RANDOM_SELECT_TYPE_CHAR": "1",
+    "RANDOM_SELECT_TYPE_TEAM": "2",
+
+    "SLOT_MACHINE_DURATION": "1c"
+  },
+  "patches": [
+    {
+      "type": "prom",
+      "description": "general string to fix layer routine",
+      "subroutine": true,
+      "symbol": "STRING_TO_FIX_LAYER_ROUTINE",
+      "patchAsm": "stringToFixLayer.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13260e",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "string": true,
+      "value": "HEIDERN           RALF              CLARK             ATHENA ASAMIYA    SIE KENSOU        CHIN GENTSAI      KYO KUSANAGI      BENIMARU N.       GORO DAIMON       HEAVY D!          LUCKY GLAUBER     BRIAN BATTLER     KIM KAPHWAN       CHANG KOEHAN      CHOI BOUNGE       TERRY BOGARD      ANDY BOGARD       JOE HIGASHI       RYO SAKAZAKI      ROBERT GARCIA     TAKUMA SAKAZAKI   YURI SAKAZAKI     MAI SHIRANUI      KING              DEBUG RUGAL                         CHARACTER ROULETTETEAM ROULETTE     ",
+      "symbol": "P1_CHAR_NAME_TABLE"
+    },
+    {
+      "type": "prom",
+      "string": true,
+      "value": "           HEIDERN              RALF             CLARK    ATHENA ASAMIYA        SIE KENSOU      CHIN GENTSAI      KYO KUSANAGI       BENIMARU N.       GORO DAIMON          HEAVY D!     LUCKY GLAUBER     BRIAN BATTLER       KIM KAPHWAN      CHANG KOEHAN       CHOI BOUNGE      TERRY BOGARD       ANDY BOGARD       JOE HIGASHI      RYO SAKAZAKI     ROBERT GARCIA   TAKUMA SAKAZAKI     YURI SAKAZAKI      MAI SHIRANUI              KING       DEBUG RUGAL                  CHARACTER ROULETTE     TEAM ROULETTE",
+      "symbol": "P2_CHAR_NAME_TABLE"
+    },
+    {
+      "type": "prom",
+      "description": "position in grid to character id map",
+      "subroutine": true,
+      "symbol": "GRID_TO_CHARACTER_ID",
+      "patchAsm": "positionInGridToCharacterId.asm"
+    },
+    {
+      "type": "prom",
+      "description": "palettes",
+      "subroutine": true,
+      "symbol": "PALETTES",
+      "patchAsm": "palettes_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character to grey out table for greying out defeated characters",
+      "subroutine": true,
+      "symbol": "CHARACTER_TO_GREY_OUT_TABLE",
+      "patchAsm": "character_to_grey_out_table_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character_grid image",
+      "subroutine": true,
+      "symbol": "CHARACTER_GRID_IMAGE",
+      "patchAsm": "character_grid_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "rugal character grid inject data",
+      "subroutine": true,
+      "symbol": "RUGAL_CG_INJECT_DATA",
+      "patchAsm": "rugal_character_grid_inject_data_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "rugal character grid clear data",
+      "subroutine": true,
+      "symbol": "RUGAL_CG_CLEAR_DATA",
+      "patchAsm": "rugal_character_grid_clear_data.asm"
+    },
+    {
+      "type": "prom",
+      "description": "avatars image",
+      "subroutine": true,
+      "symbol": "AVATARS_IMAGE",
+      "patchAsm": "avatars_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "avatars alt image",
+      "subroutine": true,
+      "symbol": "AVATARS_ALT_IMAGE",
+      "patchAsm": "avatars_alt_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, left image, white",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "p1_cursor_left_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, left image, black",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "p1_cursor_left_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, right image, white",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "p1_cursor_right_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, right image, black",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "p1_cursor_right_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 cursor, right image",
+      "subroutine": true,
+      "symbol": "P1_CURSOR_RIGHT_IMAGE",
+      "patchAsm": "p1_cursor_right.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, left image, white",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_LEFT_WHITE_IMAGE",
+      "patchAsm": "p2_cursor_left_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, left image, black",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_LEFT_BLACK_IMAGE",
+      "patchAsm": "p2_cursor_left_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, right image, white",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_RIGHT_WHITE_IMAGE",
+      "patchAsm": "p2_cursor_right_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 cursor, right image, black",
+      "subroutine": true,
+      "symbol": "P2_CURSOR_RIGHT_BLACK_IMAGE",
+      "patchAsm": "p2_cursor_right_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p1, custom, image, white",
+      "subroutine": true,
+      "symbol": "P1_CPU_CURSOR_CUSTOM_WHITE_IMAGE",
+      "patchAsm": "cpu_p1_cursor_custom_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p1, custom, image, black",
+      "subroutine": true,
+      "symbol": "P1_CPU_CURSOR_CUSTOM_BLACK_IMAGE",
+      "patchAsm": "cpu_p1_cursor_custom_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, custom, image, white",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_CUSTOM_WHITE_IMAGE",
+      "patchAsm": "cpu_p2_cursor_custom_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, custom, image, black",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_CUSTOM_BLACK_IMAGE",
+      "patchAsm": "cpu_p2_cursor_custom_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p1, original8, image, black",
+      "subroutine": true,
+      "symbol": "P1_CPU_CURSOR_ORIGINAL8_BLACK_IMAGE",
+      "patchAsm": "cpu_p1_cursor_original8_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p1, original8, image, white",
+      "subroutine": true,
+      "symbol": "P1_CPU_CURSOR_ORIGINAL8_WHITE_IMAGE",
+      "patchAsm": "cpu_p1_cursor_original8_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, original8, image, black",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_ORIGINAL8_BLACK_IMAGE",
+      "patchAsm": "cpu_p2_cursor_original8_black.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu cursor, p2, original8, image, white",
+      "subroutine": true,
+      "symbol": "P2_CPU_CURSOR_ORIGINAL8_WHITE_IMAGE",
+      "patchAsm": "cpu_p2_cursor_original8_white.asm"
+    },
+    {
+      "type": "prom",
+      "description": "load palettes routine",
+      "subroutine": true,
+      "symbol": "LOAD_P_A_L_E_T_T_E_S",
+      "patchAsm": "loadPalettes.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render static image routine",
+      "subroutine": true,
+      "symbol": "RENDER_STATIC_IMAGE",
+      "patchAsm": "renderStaticImage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move sprite routine",
+      "subroutine": true,
+      "symbol": "MOVE_SPRITE",
+      "patchAsm": "moveSprite.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character id to X on the grid. Used by moveCpuCustomCursor",
+      "subroutine": true,
+      "symbol": "CHARID_TO_GRID_X",
+      "patchAsm": "charIdToGridX.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character id to Y on the grid. Used by moveCpuCustomCursor",
+      "subroutine": true,
+      "symbol": "CHARID_TO_GRID_Y",
+      "patchAsm": "charIdToGridY.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cpu cursor routine for custom teams",
+      "subroutine": true,
+      "symbol": "MOVE_CPU_CUSTOM_CURSOR",
+      "patchAsm": "moveCpuCustomCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "map from team index on OG team select to XY for moveCpuCursor",
+      "subroutine": true,
+      "symbol": "TEAM_INDEX_TO_XY",
+      "patchAsm": "teamSelectIndexToXY.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cpu cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CPU_CURSOR",
+      "patchAsm": "moveCpuCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "move cursor routine",
+      "subroutine": true,
+      "symbol": "MOVE_CURSOR",
+      "patchAsm": "moveCursor.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render currently focused character name",
+      "subroutine": true,
+      "symbol": "RENDER_CUR_FOCUSED_CHAR_NAME",
+      "patchAsm": "renderCurFocusedCharName.asm"
+    },
+    {
+      "type": "prom",
+      "description": "truncate sprites routine",
+      "subroutine": true,
+      "symbol": "TRUNCATE_SPRITES_ROUTINE",
+      "patchAsm": "truncateSpritesRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear p1 and p2 focused char names",
+      "subroutine": true,
+      "symbol": "CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE",
+      "patchAsm": "clearFocusedNamesFromFix.asm"
+    },
+    {
+      "type": "prom",
+      "description": "checks if team is one of the original 8",
+      "subroutine": true,
+      "symbol": "SET_ORIGINAL_TEAM_ID",
+      "patchAsm": "setOriginalTeamId.asm"
+    },
+    {
+      "type": "prom",
+      "description": "teardown routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_TEARDOWN_ROUTINE",
+      "patchAsm": "charSelectTeardownRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clear chosen avatar routine",
+      "subroutine": true,
+      "symbol": "CLEAR_CHOSEN_AVATAR",
+      "patchAsm": "clearChosenAvatar.asm"
+    },
+    {
+      "type": "prom",
+      "description": "render chosen avatar routine",
+      "subroutine": true,
+      "symbol": "RENDER_CHOSEN_AVATAR",
+      "patchAsm": "renderChosenAvatar.asm"
+    },
+    {
+      "type": "prom",
+      "description": "character random select routine",
+      "subroutine": true,
+      "symbol": "CHAR_RANDOM_SELECT",
+      "patchAsm": "charRandomSelect.asm"
+    },
+    {
+      "type": "prom",
+      "description": "team random select routine",
+      "subroutine": true,
+      "symbol": "TEAM_RANDOM_SELECT",
+      "patchAsm": "teamRandomSelect.asm"
+    },
+    {
+      "type": "prom",
+      "description": "player select routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_PLAYER_SELECT_ROUTINE",
+      "patchAsm": "charSelectPlayerSelectRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu select routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
+      "patchAsm": "charSelectCpuSelectRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "adds Rugal to the char select grid for the boss fight",
+      "subroutine": true,
+      "symbol": "PUT_RUGAL_ON_GRID",
+      "patchAsm": "putRugalOnGrid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "removes Rugal from the char select grid for the boss fight",
+      "subroutine": true,
+      "symbol": "TAKE_RUGAL_OFF_GRID",
+      "patchAsm": "takeRugalOffGrid.asm"
+    },
+    {
+      "type": "prom",
+      "description": "determine cpu char palette flag routine",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_CHAR_PALETTE_FLAG",
+      "patchAsm": "determineCpuCharPaletteFlag.asm"
+    },
+    {
+      "type": "prom",
+      "description": "flash cursors routine",
+      "subroutine": true,
+      "symbol": "FLASH_CURSORS",
+      "patchAsm": "flashCursors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "determine which mode of teams the cpu will use",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_TEAM_MODE",
+      "patchAsm": "determineCpuTeamMode.asm"
+    },
+    {
+      "type": "prom",
+      "description": "load cpu cursors routine",
+      "subroutine": true,
+      "symbol": "LOAD_CPU_CURSORS",
+      "patchAsm": "loadCpuCursors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "main routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_MAIN_ROUTINE",
+      "patchAsm": "charSelectMainRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "description": "greys out characters that have been defeated on the character grid",
+      "subroutine": true,
+      "symbol": "GREY_OUT_CHARACTERS",
+      "patchAsm": "greyOutDefeatedCharacters.asm"
+    },
+    {
+      "type": "prom",
+      "description": "swap memory range routine",
+      "subroutine": true,
+      "symbol": "SWAP_MEMORY_RANGE",
+      "patchAsm": "swapMemoryRange.asm"
+    },
+    {
+      "type": "prom",
+      "description": "init routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_INIT_ROUTINE",
+      "patchAsm": "charSelectInitRoutine.asm"
+    },
+    {
+      "type": "prom",
+      "descrition": "jump to char init after team init is done",
+      "address": "13703c",
+      "subroutine": true,
+      "patchAsm": [
+        "jsr $2CHAR_SELECT_INIT_ROUTINE",
+        "move.l #$37046, $108584",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "137042",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "13369c",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $336a6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $337a6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1336a2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "1337cc",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $337d6, A2",
+        "adda.w D1, A2",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $338d6, A2 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "1337d2",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "skip the sprite clearing block",
+      "address": "133a28",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "lea $33a32, A0",
+        "adda.w D2, A0",
+        ";;; end restore what was clobbered",
+        "move.b $IN_CHAR_SELECT_FLAG, D5",
+        "cmpi.b #1, D5",
+        "bne done",
+        "lea $33b32, A0 ; skip all sprite clears",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "remove adda as it is now in the subroutine",
+      "address": "133a2e",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "vblank hook",
+      "address": "132be4",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne done",
+
+        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
+        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
+        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
+        "bra done",
+
+        "done:",
+        ";;; restore what got clobbered",
+        "jsr $6536",
+        ";;; end replace",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "have the game leave our palettes alone",
+      "address": "133642",
+      "subroutine": true,
+      "patchAsm": "guardPalettes_a94.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Check for exit after team select",
+      "address": "137074",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what got clobbered",
+        "move.b #$3c, $655(A5)",
+        ";;; if the char select should be read only, we don't want to do anything",
+        "btst #7, $PLAY_MODE",
+        "bne done",
+        "cmpi.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER",
+        "bne notReadyYet",
+        "move.w #$1, $108654 ; empty the timer so game naturally exits",
+        "bra done",
+        "notReadyYet:",
+        "move.b #$14, $108654 ; reload the timer so we dont exit",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "run teardown just before going to order select",
+      "address": "137116",
+      "subroutine": true,
+      "patchAsm": [
+        ";;; restore what was clobbered",
+        "move.l #$37eb2, $584(A5)",
+        ";;; end restore",
+        "jsr $2CHAR_SELECT_TEARDOWN_ROUTINE",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13711c",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "set chosen teams in membdisp",
+      "address": "1379d2",
+      "subroutine": true,
+      "symbol": "SET_CHOSEN_TEAMS_IN_MEMBDISP",
+      "patchAsm": "setChosenTeamsInMembdisp.asm"
+    },
+    {
+      "type": "prom",
+      "description": "prevent A in team select, let the game continue once cpu random select is done",
+      "address": "137466",
+      "subroutine": true,
+      "patchAsm": [
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "beq setDone ; char select has finished, let the game know",
+        "bra setNotDone",
+        "setDone:",
+        "cmpi.b #0, D0 ; char select is done, force a non-zero result so game does move on",
+        "bra done",
+        "setNotDone:",
+        "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
+        "bra done",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13746c",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Have game use our dynamic x position table for win screen instead of the canned rom one",
+      "address": "13fda6",
+      "subroutine": true,
+      "patchAsm": [
+        ";; if a human won, use dynamic table, otherwise use static table",
+        "btst #0, $PLAY_MODE ; is p1 playing?",
+        "beq checkPlayerTwo",
+        "btst #1, $PLAY_MODE ; is p2 playing?",
+        "bne humanWon ; versus mode, so a human won",
+        "; player 2 is the cpu, did player 1 lose?",
+        "cmpi.b #$80, $108238 ; player 1 is human, did they lose?",
+        "bne humanWon",
+        "bra cpuWon",
+
+        "checkPlayerTwo:",
+        ";; we already know we are not in versus mode, otherwise we would not have branched here",
+        "cmpi.b #$80, $108438 ; player 2 is human, did they lose?",
+        "bne humanWon",
+
+        "cpuWon:",
+        ";; load the original static table",
+        "move.l #$626ee, $506a(A5)",
+        ";bra done",
+
+        "humanWon:",
+        "move.l #$AFTER_SCREEN_POSITION_TABLE, $506a(A5)",
+
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13fdac",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "CHARID_TO_TEAMID",
+      "patchAsm": "charIdToTeamId.asm"
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "WIN_SCREEN_TABLES",
+      "patchAsm": "winScreenTables.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Set up win screen based on custom team",
+      "address": "13fd40",
+      "subroutine": true,
+      "symbol": "WINNER_SCREEN_INIT",
+      "patchAsm": "winScreenInit.asm"
+    },
+    {
+      "type": "prom",
+      "description": "win quote: set losing team id based on losing character",
+      "address": "13f2bc",
+      "subroutine": true,
+      "symbol": "LOAD_WIN_QUOTE_TEAM_ID",
+      "patchAsm": "loadWinQuoteTeamId.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling words",
+      "address": "13f2c2",
+      "patchAsm": ["nop", "nop", "nop", "nop", "nop", "nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Have game use our dynamic x position table for continue screen instead of the canned rom one",
+      "address": "145422",
+      "patchAsm": ["lea $AFTER_SCREEN_POSITION_TABLE, A0"]
+    },
+    {
+      "type": "prom",
+      "description": "The continue sfx char id to sfx offset table",
+      "subroutine": true,
+      "symbol": "CHARID_TO_CONTINUE_SFX_OFFSET_TABLE",
+      "patchAsm": "charIdToContinueSfxOffset.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Load the proper continue sfx depending on who lost the match",
+      "address": "144c2a",
+      "subroutine": true,
+      "symbol": "LOAD_CONTINUE_SFX_BASED_ON_WHO_LOST",
+      "patchAsm": "loadContinueSfxBasedOnWhoLost.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Load the actual losing characters into the continue screen",
+      "address": "145da8",
+      "subroutine": true,
+      "symbol": "CONTINUE_SCREEN_INIT",
+      "patchAsm": "continueScreenInit.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match)",
+      "address": "1032f0",
+      "subroutine": true,
+      "symbol": "SETUP_CHARACTER_COLORS",
+      "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match) at the second location",
+      "address": "103374",
+      "subroutine": true,
+      "symbol": "SECOND_LOCATION_CAR_COLS",
+      "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Set up character colors (reg or alt, ie mirror match) at the third location",
+      "address": "103318",
+      "subroutine": true,
+      "symbol": "THIRD_LOCATION_CAR_COLS",
+      "patchAsm": "setupCharacterColors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Choose the next cpu team in single player mode",
+      "address": "1375fc",
+      "subroutine": true,
+      "patchAsm": [
+        ";; D0 contains the raw rng result",
+        "getNextTeam:",
+        "andi.w #$7, D0 ; chop it down to bottom 3 bits",
+        ";;; at this point we have a random 0-7",
+        ";;; now as long as it is a defeated team, increment",
+        "btst D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES",
+        "beq done ; not a defeated team, we're good",
+        "addi.b #1, D0 ; move onto the next team and try again",
+        "bra getNextTeam",
+        "done:",
+        "bset D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; store we've seen this team for next time",
+        ";;; this +7 causes a minimum of one loop for visual effect",
+        ";;; but will still land on the team we decided on",
+        ";;; 7 and not 8 because the game is using dbra",
+        "addq.w #7, D0",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "Get rid of the game's add 8 as we are adding 7 now (above)",
+      "address": "137602",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Have the game stop playing any sound effects from team select.",
+      "address": "106556",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne play ; not in char select, let the sound play",
+        "cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE ; is this cpu select?",
+        "beq play ; then play the sound",
+        "cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE ; is this cpu subsequent select?",
+        "beq play ; then play the sound",
+        "cmpi.b #$61, D0 ; in char select, is the sound the chose team sound effect?",
+        "bne checkForMovementSfx ; some other sound, keep going",
+        "cmpi.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME ; but is it actually the here comes challenge chime (same sfx)?",
+        "beq playHCC ; it is? then let it play",
+        "bra done ; it's not? then it's a regular choice sfx, don't let it play",
+        "checkForMovementSfx:",
+        "cmpi.b #$60, D0 ; is it the cursor movement sfx?",
+        "beq done ; then don't let it play",
+        "bra play ; otherwise, let it play",
+        "playHCC:",
+        "move.b #0, $PLAY_HERE_COMES_CHALLENGER_CHIME ; turn off the flag, we have consumed it",
+        "play:",
+        "move.b D0, $320000",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "CUTSCENE2_TABLES",
+      "patchAsm": "cutscene2Tables.asm"
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "ENDING_TEAM_INDEX_TO_ID",
+      "patchAsm": [
+        "dc.b 7 ; England",
+        "dc.b 6 ; Mexico",
+        "dc.b 3 ; USA",
+        "dc.b 2 ; Japan"
+      ]
+    },
+    {
+      "type": "prom",
+      "subroutine": true,
+      "symbol": "ENDING_TEAM_ID_TO_MEMBERS",
+      "patchAsm": [
+        "dc.l $534dc + (7 * 4)  ; England",
+        "dc.l $534dc + (6 * 4)  ; Mexico",
+        "dc.l $534dc + (3 * 4)  ; USA",
+        "dc.l $534dc + (2 * 4)  ; Japan"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "Inits cutscene 1 and 2 (and 3?)",
+      "address": "13511e",
+      "subroutine": true,
+      "symbol": "CUTSCENE_INIT",
+      "patchAsm": "cutsceneInit.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Have game use our dynamic x/y position table for cutscene2 instead of the canned rom one. This fits because the rom has a nop right after",
+      "address": "143cb0",
+      "patchAsm": ["lea $AFTER_SCREEN_POSITION_TABLE, A0"]
+    },
+    {
+      "type": "prom",
+      "description": "Char ID -> crom name string table, usable in English and Spanish",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_ENES",
+      "patchAsm": "charIdToNameStringEnEs.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Char ID -> crom name string table, usable in Japanese",
+      "subroutine": true,
+      "symbol": "CHARID_TO_NAME_STRING_JA",
+      "patchAsm": "charIdToNameStringJa.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Write a character name for cutscene dialogs",
+      "subroutine": true,
+      "symbol": "WRITE_NAME_ROUTINE",
+      "patchAsm": "writeName.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Write a line from dialog data for cutscene dialogs",
+      "subroutine": true,
+      "symbol": "WRITE_DIALOG_ROUTINE",
+      "patchAsm": "writeDialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 2 Rugal dialog that is female targeted in Spanish",
+      "symbol": "RUGAL_LINE_FEMALE_TARGETED_ES",
+      "subroutine": true,
+      "patchAsm": "cutscene2RugalLineFemaleTargeted_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 2 Rugal dialog that is male targeted in Spanish",
+      "symbol": "RUGAL_LINE_MALE_TARGETED_ES",
+      "subroutine": true,
+      "patchAsm": "cutscene2RugalLineMaleTargeted_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 2 custom dialog hook",
+      "subroutine": true,
+      "address": "1443ea",
+      "symbol": "CUTSCENE2_DIALOG",
+      "patchAsm": "cutscene2Dialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "1443f0",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 1, en",
+      "symbol": "USA_ENDING_PART1_EN",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, en",
+      "symbol": "USA_ENDING_PART2_EN",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, en",
+      "symbol": "USA_ENDING_PART3_EN",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 1, es",
+      "symbol": "USA_ENDING_PART1_ES",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, es",
+      "symbol": "USA_ENDING_PART2_ES",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, es",
+      "symbol": "USA_ENDING_PART3_ES",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 1, ja",
+      "symbol": "USA_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 2, ja",
+      "symbol": "USA_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New USA ending, part 3, ja",
+      "symbol": "USA_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "USAEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, en",
+      "symbol": "JPN_ENDING_PART1_EN",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, en",
+      "symbol": "JPN_ENDING_PART2_EN",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, en",
+      "symbol": "JPN_ENDING_PART3_EN",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, es",
+      "symbol": "JPN_ENDING_PART1_ES",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, es",
+      "symbol": "JPN_ENDING_PART2_ES",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, es",
+      "symbol": "JPN_ENDING_PART3_ES",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 1, ja",
+      "symbol": "JPN_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 2, ja",
+      "symbol": "JPN_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Japan ending, part 3, ja",
+      "symbol": "JPN_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "JapanEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 1, en",
+      "symbol": "MEX_ENDING_PART1_EN",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, en",
+      "symbol": "MEX_ENDING_PART2_EN",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, en",
+      "symbol": "MEX_ENDING_PART3_EN",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, en",
+      "symbol": "MEX_ENDING_PART4_EN",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part4_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 1, es",
+      "symbol": "MEX_ENDING_PART1_ES",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, es",
+      "symbol": "MEX_ENDING_PART2_ES",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, es",
+      "symbol": "MEX_ENDING_PART3_ES",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, es",
+      "symbol": "MEX_ENDING_PART4_ES",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part4_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 1, ja",
+      "symbol": "MEX_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 2, ja",
+      "symbol": "MEX_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 3, ja",
+      "symbol": "MEX_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New Mexico ending, part 4, ja",
+      "symbol": "MEX_ENDING_PART4_JA",
+      "subroutine": true,
+      "patchAsm": "MexicoEndingDialog_part4_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, en",
+      "symbol": "ENG_ENDING_PART1_EN",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part1_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, en",
+      "symbol": "ENG_ENDING_PART2_EN",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part2_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, en",
+      "symbol": "ENG_ENDING_PART3_EN",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part3_en.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, es",
+      "symbol": "ENG_ENDING_PART1_ES",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part1_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, es",
+      "symbol": "ENG_ENDING_PART2_ES",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part2_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, es",
+      "symbol": "ENG_ENDING_PART3_ES",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part3_es.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 1, ja",
+      "symbol": "ENG_ENDING_PART1_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part1_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 2, ja",
+      "symbol": "ENG_ENDING_PART2_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part2_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "New England ending, part 3, ja",
+      "symbol": "ENG_ENDING_PART3_JA",
+      "subroutine": true,
+      "patchAsm": "EnglandEndingDialog_part3_ja.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 3 load custom character sprites",
+      "address": "13c1a2",
+      "subroutine": true,
+      "symbol": "CUTSCENE3_CHARACTERS",
+      "patchAsm": "cutscene3Characters.asm"
+    },
+    {
+      "type": "prom",
+      "description": "clean up straggling word",
+      "address": "13c1a8",
+      "patchAsm": ["nop"]
+    },
+    {
+      "type": "prom",
+      "description": "cutscene 3 custom dialog hook",
+      "subroutine": true,
+      "address": "13ea8e",
+      "symbol": "CUTSCENE3_ENDING_DIALOG",
+      "patchAsm": "cutscene3EndingDialog.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Replace the team select background with one that has no globe",
+      "address": "d8c00",
+      "patchAsm": "cleanTeamSelectBgTilemap.asm"
+    },
+    {
+      "type": "prom",
+      "description": "signal to play here comes challenger chime when in char select",
+      "address": "133e08",
+      "subroutine": true,
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne skipSignalSound",
+        "move.b #1, $IN_HERE_COMES_CHALLENGER  ; signal we are in HERE COMES CHALLENGE mode",
+        "move.b #1, $PLAY_HERE_COMES_CHALLENGER_CHIME  ; signal to play the sound effect",
+        "skipSignalSound:",
+        ";;; restore what was clobbered",
+        "movea.l #$530ee, A0",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "check for cpu custom team overrides",
+      "address": "13b06e",
+      "subroutine": true,
+      "symbol": "APPLY_CPU_CUSTOM_TEAM_OVERRIDES",
+      "patchAsm": "checkForCpuCustomTeamOverrides.asm"
+    }
+  ]
+}
