@@ -14,14 +14,23 @@ tst.b $PX_SLOT_MACHINE_COUNTDOWN_OFFSET(A0)
 bne done
 
 move.b $PX_CUR_INPUT_OFFSET(A0), D0 ; move current input into D0
+andi.b #$f, D0                     ; clear out any button presses, we only care about LRUD
 move.w $PX_CURSOR_X_OFFSET(A0), D1 ; load current cursor X
 move.w $PX_CURSOR_Y_OFFSET(A0), D2 ; and Y
+
+cmpi.b #0, D0                  ; is there any real human input?
+bne setPlayFlag                ; there is? then set the play sfx flag
+move.b #0, $PLAY_MOVEMENT_SFX  ; there isn't? clear the play sfx flag
+bra checkInput
+
+setPlayFlag:
+move.b #1, $PLAY_MOVEMENT_SFX
 
 checkInput:
 
 btst #$3, D0 ; is Right pressed?
 beq skipIncCursorX ; it's not? skip the increment
-move.b #$60, $320000  ; play the sound effect
+bsr playMovementSfx
 addi.w #1, D1
 cmpi.w #8, D1
 ble.s skipUpperXWrap
@@ -31,7 +40,7 @@ skipIncCursorX:
 
 btst #$2, D0 ; is Left pressed?
 beq skipDecCursorX ; it's not? skip the decrement
-move.b #$60, $320000  ; play the sound effect
+bsr playMovementSfx
 subi.w #1, D1
 cmpi.w #$ffff, D1
 bne skipLowerXWrap
@@ -41,7 +50,7 @@ skipDecCursorX:
 
 btst #$1, D0 ; is Down pressed?
 beq skipIncCursorY ; it's not? skip the increment
-move.b #$60, $320000  ; play the sound effect
+bsr playMovementSfx
 addi.w #1, D2
 cmpi.w #2, D2
 ble.s skipUpperYWrap
@@ -51,7 +60,7 @@ skipIncCursorY:
 
 btst #$0, D0 ; is Up pressed?
 beq skipDecCursorY ; it's not? skip the decrement
-move.b #$60, $320000  ; play the sound effect
+bsr playMovementSfx
 subi.w #1, D2
 cmpi.w #$ffff, D2
 bne skipLowerYWrap
@@ -65,7 +74,7 @@ beq doDeadSpot   ; Rugal is on, so there is no dead spot
 bra notInDeadSpot
 
 doDeadSpot:
-cmpi.w#3, D1
+cmpi.w #3, D1
 ble notInDeadSpot
 cmpi.w #5, D1
 bge notInDeadSpot
@@ -185,4 +194,17 @@ addi.w #1, D0 ; we need the sprite next door for right
 jsr $2MOVE_SPRITE ; and finally, move the sprite
 
 done:
+rts
+
+
+
+;;; playMovementSfx
+;;; plays the movement sfx as long as the mute flag isn't set
+playMovementSfx:
+cmpi.b #0, $PLAY_MOVEMENT_SFX
+beq playMovementSfx_done
+
+move.b #$60, $320000  ; play the sound effect
+
+playMovementSfx_done:
 rts

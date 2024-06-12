@@ -25,6 +25,7 @@
     "DEFEATED_TEAMS": "1087df",
     "LANGUAGE_ID": "108836",
 
+    "CUTSCENE23_STRING": "10e400",
     "WINNING_TEAM_LIST": "10e7c0",
     "VSTRING_DATA": "10e7d0",
     "PLAY_MODE": "10e7fc",
@@ -98,7 +99,7 @@
     "MAIN_HACK_PHASE": "10eb04",
 
     "STORE_ALL_REGISTERS": "10eb0c",
-    "CUTSCENE23_STRING": "10e400",
+    "PLAY_MOVEMENT_SFX": "10eb30",
 
     "GRID_IMAGE_SI": "153",
     "P1_CURSOR_LEFT_SI": "169",
