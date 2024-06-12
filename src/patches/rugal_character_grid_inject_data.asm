@@ -11,7 +11,7 @@ dc.w $3b00
 dc.w $56ce
 dc.w $b15
 dc.w $56cf
-dc.w $3c00
+dc.w $3b00
 dc.w $570c
 dc.w $b14
 dc.w $570d
@@ -19,5 +19,5 @@ dc.w $3b00
 dc.w $570e
 dc.w $b16
 dc.w $570f
-dc.w $3d00
+dc.w $3b00
 

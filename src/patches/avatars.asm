@@ -158,7 +158,7 @@ dc.w $1500
 dc.w $b2a
 dc.w $1500
 dc.w $b5c
-dc.w $3e00
+dc.w $3d00
 
 ;;; column 20
 
@@ -198,7 +198,7 @@ dc.w $1700
 dc.w $b2f
 dc.w $2400
 dc.w $b61
-dc.w $3f00
+dc.w $3e00
 
 ;;; column 25
 
@@ -206,7 +206,7 @@ dc.w $3f00
 dc.w $b30
 dc.w $2400
 dc.w $b62
-dc.w $3f00
+dc.w $3e00
 
 ;;; column 26
 
@@ -238,7 +238,7 @@ dc.w $2c00
 dc.w $b34
 dc.w $2600
 dc.w $b66
-dc.w $4000
+dc.w $3f00
 
 ;;; column 30
 
@@ -254,7 +254,7 @@ dc.w $1c00
 dc.w $b36
 dc.w $1200
 dc.w $b68
-dc.w $4100
+dc.w $4000
 
 ;;; column 32
 
@@ -342,7 +342,7 @@ dc.w $3800
 dc.w $b41
 dc.w $2700
 dc.w $b73
-dc.w $4200
+dc.w $4100
 
 ;;; column 43
 
@@ -358,7 +358,7 @@ dc.w $2e00
 dc.w $b43
 dc.w $2800
 dc.w $b75
-dc.w $4300
+dc.w $4200
 
 ;;; column 45
 
@@ -366,7 +366,7 @@ dc.w $4300
 dc.w $b44
 dc.w $2800
 dc.w $b76
-dc.w $4400
+dc.w $4300
 
 ;;; column 46
 
@@ -374,7 +374,7 @@ dc.w $4400
 dc.w $b45
 dc.w $2900
 dc.w $b77
-dc.w $4500
+dc.w $4400
 
 ;;; column 47
 
@@ -388,16 +388,16 @@ dc.w $3200
 
 ;; SCB1 word pairs
 dc.w $b47
-dc.w $3b00
+dc.w $3c00
 dc.w $b79
-dc.w $4600
+dc.w $4500
 
 ;;; column 49
 
 ;; SCB1 word pairs
 dc.w $b48
-dc.w $3b00
+dc.w $3c00
 dc.w $b7a
-dc.w $4700
+dc.w $4600
 
 ;; end tiles

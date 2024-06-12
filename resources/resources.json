@@ -107,7 +107,7 @@
     },
     {
       "name": "rugal_character_grid",
-      "imageFile": "./rugal_character_grid_a94.png",
+      "imageFile": "./rugal_character_grid_a94_15.png",
       "x": 144,
       "y": 123
     },
@@ -121,7 +121,7 @@
     },
     {
       "name": "character_grid_grey",
-      "imageFile": "./character_grid_grey_a94.png"
+      "imageFile": "./character_grid_grey_a94_15.png"
     },
     {
       "name": "p1_cursor_left_white",

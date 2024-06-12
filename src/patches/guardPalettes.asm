@@ -8,9 +8,9 @@ cmpi.b #1, $IN_CHAR_SELECT_FLAG
 bne skip ; not in char select? nothing to do
 cmpi.w #15, D0
 ble skip ; not touching one of our palettes? nothing to do
-cmpi.w #140, D0
+cmpi.w #102, D0
 bge skip ; not touching one of our palettes? nothing to do
-move.w #140, D0  ; have it write into a palette that isn't ours
+move.w #102, D0  ; have it write into a palette that isn't ours
 
 skip:
 lea $400000, A1
