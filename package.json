@@ -10,7 +10,8 @@
     "to-neosd": "bash scripts/toneosd.sh",
     "mame": "mame -w -nofilter -nomouse -sound none kof94",
     "mames": "mame -w -nofilter -nomouse kof94",
-    "run-srom-crom": "NODE_OPTIONS='--loader ts-node/esm' yarn sromcrom -i resources/resources.json"
+    "run-srom-crom-a94": "NODE_OPTIONS='--loader ts-node/esm' yarn sromcrom -i resources/resources_a94.json",
+    "run-srom-crom-a95": "NODE_OPTIONS='--loader ts-node/esm' yarn sromcrom -i resources/resources_a95.json"
   },
   "dependencies": {
     "@city41/sromcrom": "^0.15.1",

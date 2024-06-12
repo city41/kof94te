@@ -1,0 +1,223 @@
+{
+  "romPathRoot": "./newtiles",
+  "padCROMFilesTo": 1048576,
+  "codeEmit": {
+    "preEmit": "sromCromPreEmit.ts",
+    "inputs": [
+      {
+        "template": "palettes.asm.hbr",
+        "dest": "../src/patches/palettes_a95.asm"
+      },
+      {
+        "template": "character_grid.asm.hbr",
+        "dest": "../src/patches/character_grid_a95.asm"
+      },
+      {
+        "template": "character_to_grey_out_table.asm.hbr",
+        "dest": "../src/patches/character_to_grey_out_table_a95.asm"
+      },
+      {
+        "template": "rugal_character_grid_inject_data.asm.hbr",
+        "dest": "../src/patches/rugal_character_grid_inject_data_a95.asm"
+      },
+      {
+        "template": "rugal_character_grid_clear_data.asm.hbr",
+        "dest": "../src/patches/rugal_character_grid_clear_data.asm"
+      },
+      {
+        "template": "avatars.asm.hbr",
+        "dest": "../src/patches/avatars_a95.asm"
+      },
+      {
+        "template": "avatars_alt.asm.hbr",
+        "dest": "../src/patches/avatars_alt_a95.asm"
+      },
+      {
+        "template": "p1_cursor_left_black.asm.hbr",
+        "dest": "../src/patches/p1_cursor_left_black.asm"
+      },
+      {
+        "template": "p1_cursor_left_white.asm.hbr",
+        "dest": "../src/patches/p1_cursor_left_white.asm"
+      },
+      {
+        "template": "p1_cursor_right_black.asm.hbr",
+        "dest": "../src/patches/p1_cursor_right_black.asm"
+      },
+      {
+        "template": "p1_cursor_right_white.asm.hbr",
+        "dest": "../src/patches/p1_cursor_right_white.asm"
+      },
+      {
+        "template": "p2_cursor_left_white.asm.hbr",
+        "dest": "../src/patches/p2_cursor_left_white.asm"
+      },
+      {
+        "template": "p2_cursor_left_black.asm.hbr",
+        "dest": "../src/patches/p2_cursor_left_black.asm"
+      },
+      {
+        "template": "p2_cursor_right_white.asm.hbr",
+        "dest": "../src/patches/p2_cursor_right_white.asm"
+      },
+      {
+        "template": "p2_cursor_right_black.asm.hbr",
+        "dest": "../src/patches/p2_cursor_right_black.asm"
+      },
+      {
+        "template": "cpu_p1_cursor_original8_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_original8_white.asm"
+      },
+      {
+        "template": "cpu_p1_cursor_original8_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_original8_black.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_original8_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_original8_white.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_original8_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_original8_black.asm"
+      },
+      {
+        "template": "cpu_p1_cursor_custom_white.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_custom_white.asm"
+      },
+      {
+        "template": "cpu_p1_cursor_custom_black.asm.hbr",
+        "dest": "../src/patches/cpu_p1_cursor_custom_black.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_custom_white.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_custom_white.asm"
+      },
+      {
+        "template": "cpu_p2_cursor_custom_black.asm.hbr",
+        "dest": "../src/patches/cpu_p2_cursor_custom_black.asm"
+      }
+    ]
+  },
+  "cromImages": [
+    {
+      "name": "character_grid",
+      "imageFile": "./character_grid_a95.png",
+      "x": 16,
+      "y": 27
+    },
+    {
+      "name": "rugal_character_grid",
+      "imageFile": "./rugal_character_grid_a95.png",
+      "x": 144,
+      "y": 123
+    },
+    {
+      "name": "avatars",
+      "imageFile": "./avatars_a95.png"
+    },
+    {
+      "name": "avatars_alt",
+      "imageFile": "./avatars_alt_a95.png"
+    },
+    {
+      "name": "character_grid_grey",
+      "imageFile": "./character_grid_grey_a95.png"
+    },
+    {
+      "name": "p1_cursor_left_white",
+      "imageFile": "./p1_cursor_left_white.png",
+      "x": 16,
+      "y": 20
+    },
+    {
+      "name": "p1_cursor_left_black",
+      "imageFile": "./p1_cursor_left_black.png",
+      "x": 16,
+      "y": 20
+    },
+    {
+      "name": "p1_cursor_right_white",
+      "imageFile": "./p1_cursor_right_white.png",
+      "x": 34,
+      "y": 20
+    },
+    {
+      "name": "p1_cursor_right_black",
+      "imageFile": "./p1_cursor_right_black.png",
+      "x": 34,
+      "y": 20
+    },
+    {
+      "name": "p2_cursor_left_white",
+      "imageFile": "./p2_cursor_left_white.png",
+      "x": 272,
+      "y": 20
+    },
+    {
+      "name": "p2_cursor_left_black",
+      "imageFile": "./p2_cursor_left_black.png",
+      "x": 272,
+      "y": 20
+    },
+    {
+      "name": "p2_cursor_right_white",
+      "imageFile": "./p2_cursor_right_white.png",
+      "x": 288,
+      "y": 20
+    },
+    {
+      "name": "p2_cursor_right_black",
+      "imageFile": "./p2_cursor_right_black.png",
+      "x": 288,
+      "y": 20
+    },
+    {
+      "name": "cpu_p1_cursor_original8_white",
+      "imageFile": "./cpu_p1_cursor_original8_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p1_cursor_original8_black",
+      "imageFile": "./cpu_p1_cursor_original8_black.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_original8_white",
+      "imageFile": "./cpu_p2_cursor_original8_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_original8_black",
+      "imageFile": "./cpu_p2_cursor_original8_black.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p1_cursor_custom_white",
+      "imageFile": "./cpu_p1_cursor_custom_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p1_cursor_custom_black",
+      "imageFile": "./cpu_p1_cursor_custom_black.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_custom_white",
+      "imageFile": "./cpu_p2_cursor_custom_white.png",
+      "x": 0,
+      "y": 272
+    },
+    {
+      "name": "cpu_p2_cursor_custom_black",
+      "imageFile": "./cpu_p2_cursor_custom_black.png",
+      "x": 0,
+      "y": 272
+    }
+  ]
+}

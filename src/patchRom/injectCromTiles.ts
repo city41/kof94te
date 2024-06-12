@@ -6,11 +6,35 @@ import { RomFileBuffer } from "./types";
 
 // todo: can this be calculated?
 const NEW_TILES_FIRST_INDEX = 256;
-const NEW_TILES_LAST_INDEX = 722;
-const TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
+// these are dynamically calculated below depending on if we are building a94 or a95
+let NEW_TILES_LAST_INDEX = 0;
+let TOTAL_NEW_TILES = 0;
 
 // a crom tile is 128 bytes, but this is since it's split across two files
 const CROM_TILE_SIZE_PER_ROM = 64;
+
+function isEmptyTile(crom: number[], i: number): boolean {
+  const bytes = crom.slice(
+    i * CROM_TILE_SIZE_PER_ROM,
+    (i + 1) * CROM_TILE_SIZE_PER_ROM
+  );
+
+  return bytes.every((b) => b === 0);
+}
+
+function getLastIndex(crom: number[]): number {
+  let i = NEW_TILES_FIRST_INDEX;
+
+  for (;;) {
+    if (isEmptyTile(crom, i)) {
+      break;
+    } else {
+      i += 1;
+    }
+  }
+
+  return i;
+}
 
 async function injectCromTiles(): Promise<RomFileBuffer[]> {
   console.log("injecting crom tiles...");
@@ -54,6 +78,9 @@ async function injectCromTiles(): Promise<RomFileBuffer[]> {
       path.resolve(__dirname, "../../resources/japanese-tiles.c2")
     )
   );
+
+  NEW_TILES_LAST_INDEX = getLastIndex(newTilesC1Buffer);
+  TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
 
   function replaceTile(
     srcIndex: number,

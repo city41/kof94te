@@ -6,9 +6,9 @@ dc.w 2 ; height in tiles
 ;;; column 0
 
 ;; SCB1 word pairs
-dc.w $ff65
+dc.w $ff3d
 dc.w $1610
-dc.w $ff66
+dc.w $ff3e
 dc.w $1610
 
 ;; SCB3 vertical position|sticky|size
