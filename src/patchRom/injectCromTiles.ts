@@ -13,27 +13,36 @@ let TOTAL_NEW_TILES = 0;
 // a crom tile is 128 bytes, but this is since it's split across two files
 const CROM_TILE_SIZE_PER_ROM = 64;
 
-function isEmptyTile(crom: number[], i: number): boolean {
-  const bytes = crom.slice(
+function isEmptyTile(crom1: number[], crom2: number[], i: number): boolean {
+  const bytes1 = crom1.slice(
     i * CROM_TILE_SIZE_PER_ROM,
     (i + 1) * CROM_TILE_SIZE_PER_ROM
   );
 
-  return bytes.every((b) => b === 0);
+  const bytes2 = crom2.slice(
+    i * CROM_TILE_SIZE_PER_ROM,
+    (i + 1) * CROM_TILE_SIZE_PER_ROM
+  );
+
+  return bytes1.every((b) => b === 0) && bytes2.every((b) => b === 0);
 }
 
-function getLastIndex(crom: number[]): number {
+function getLastIndex(crom1: number[], crom2: number[]): number {
   let i = NEW_TILES_FIRST_INDEX;
 
   for (;;) {
-    if (isEmptyTile(crom, i)) {
+    if (
+      isEmptyTile(crom1, crom2, i) &&
+      isEmptyTile(crom1, crom2, i + 1) &&
+      isEmptyTile(crom1, crom2, i + 2)
+    ) {
       break;
     } else {
       i += 1;
     }
   }
 
-  return i;
+  return i - 1;
 }
 
 async function injectCromTiles(): Promise<RomFileBuffer[]> {
@@ -79,8 +88,9 @@ async function injectCromTiles(): Promise<RomFileBuffer[]> {
     )
   );
 
-  NEW_TILES_LAST_INDEX = getLastIndex(newTilesC1Buffer);
+  NEW_TILES_LAST_INDEX = getLastIndex(newTilesC1Buffer, newTilesC2Buffer);
   TOTAL_NEW_TILES = NEW_TILES_LAST_INDEX - NEW_TILES_FIRST_INDEX + 1;
+  console.log({ NEW_TILES_FIRST_INDEX, NEW_TILES_LAST_INDEX, TOTAL_NEW_TILES });
 
   function replaceTile(
     srcIndex: number,
