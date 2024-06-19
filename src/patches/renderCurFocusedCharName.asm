@@ -39,7 +39,7 @@ dbra D0, renderChar
 bra done
 
 clearFocusedName:
-move.b #17, D0 ; clear out 18 tiles, 17 since dbra hinges on -1
+move.w #17, D0 ; clear out 18 tiles, 17 since dbra hinges on -1
 clearChar:
 move.w #$f20, $3c0002 ; write the blank tile into vram
 dbra D0, clearChar
