@@ -1359,6 +1359,12 @@
       "subroutine": true,
       "symbol": "APPLY_CPU_CUSTOM_TEAM_OVERRIDES",
       "patchAsm": "checkForCpuCustomTeamOverrides.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Skip functions in team select",
+      "address": "13704a",
+      "patchAsm": ["nop", "nop"]
     }
   ]
 }
