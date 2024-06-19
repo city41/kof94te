@@ -7,29 +7,6 @@ jsr $2MOVE_SPRITE
 
 jsr $2FLASH_CURSORS
 
-btst #0, $BIOS_STATCURNT ; is p1 start pressed?
-bne renderVersion_checkP2Start
-bra clearVersion
-
-renderVersion_checkP2Start:
-btst #2, $BIOS_STATCURNT ; and p2 start pressed too?
-bne renderVersion ; then show the version
-bra clearVersion ; else, don't show it
-
-renderVersion:
-move.b #1, $VSTRING_DATA + 6
-bra doVersionString
-
-clearVersion:
-move.b #0, $VSTRING_DATA + 6
-
-doVersionString:
-lea $VSTRING_DATA, A6
-;; need to save A5 as the game's rng relies on it
-movem.l A5, $MOVEM_STORAGE
-jsr $2STRING_TO_FIX_LAYER_ROUTINE
-movem.l $MOVEM_STORAGE, A5
-
 btst #3, $100000 ; is the Rugal debug dip turned on?
 beq takeRugalOffGrid
 jsr $2PUT_RUGAL_ON_GRID

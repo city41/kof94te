@@ -117,12 +117,5 @@ player2Done:
 done:
 jsr $2CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE
 
-;; clear out the version string in case the user had start held down when teardown triggered
-move.b #0, $VSTRING_DATA + 6
-lea $VSTRING_DATA, A6
-movem.l A5, $MOVEM_STORAGE
-jsr $2STRING_TO_FIX_LAYER_ROUTINE
-movem.l $MOVEM_STORAGE, A5
-
 movem.l $MOVEM_STORAGE, A4
 rts

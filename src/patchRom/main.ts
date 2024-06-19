@@ -197,22 +197,6 @@ function loadInitialSymbols(
   );
 }
 
-function getVersionStringPatch(): StringPromPatch {
-  const packageJson = require("../../package.json");
-  const version = packageJson.version;
-
-  if (!version) {
-    throw new Error("getVersionStringPatch: version not found in package.json");
-  }
-
-  return {
-    type: "prom",
-    string: true,
-    value: `KOF94TE v${version} neorh.mattgreer.dev`,
-    symbol: "VERSION",
-  };
-}
-
 async function main(patchJsonPaths: string[]) {
   await fsp.rm(tmpDir, {
     recursive: true,
@@ -228,8 +212,6 @@ async function main(patchJsonPaths: string[]) {
   const promData = flipBytes(flippedPromData);
 
   let patchedPromData = [...promData];
-
-  let patchedInVersionString = false;
 
   for (const patchJsonPath of patchJsonPaths) {
     const jsonDir = path.dirname(patchJsonPath);
@@ -260,12 +242,6 @@ async function main(patchJsonPaths: string[]) {
           "This patch contains subroutine patches, but did not specify subroutineSpace"
         );
         process.exit(1);
-      }
-
-      if (!patchedInVersionString) {
-        const versionStringPatch = getVersionStringPatch();
-        patchJson.patches.unshift(versionStringPatch);
-        patchedInVersionString = true;
       }
 
       let symbolTable: Record<string, number> = loadInitialSymbols(
