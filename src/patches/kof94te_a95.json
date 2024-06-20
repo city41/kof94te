@@ -1361,8 +1361,15 @@
       "patchAsm": "checkForCpuCustomTeamOverrides.asm"
     },
     {
+      "skip": true,
       "type": "prom",
-      "description": "Skip functions in team select",
+      "description": "Skip the first function call in team select",
+      "address": "137046",
+      "patchAsm": ["nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "Skip the second function call in team select",
       "address": "13704a",
       "patchAsm": ["nop", "nop"]
     }
