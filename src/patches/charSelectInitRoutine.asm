@@ -313,11 +313,6 @@ jsr $2LOAD_CPU_CURSORS
 skipDemoModeInit:
 ;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
 
-;; get read to either show or hide the version string, based on if start is pressed during main
-move.w #$7077, $VSTRING_DATA ; load where in the fix layer it should go
-move.l #$2VERSION, $VSTRING_DATA + 2
-
-
 cmpi.b #0, $PLAY_MODE
 beq skipGreyOut ; don't grey out in demo mode
 cmpi.b #3, $PLAY_MODE
