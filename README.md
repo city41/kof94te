@@ -34,7 +34,7 @@ If you play through the single player mode with one of the original 8 teams, you
 
 ## Status
 
-The hack is complete.
+The hack is complete and very playable in almost all Neo Geo environments (MAME, MiSTer, NeoSD, etc). There may be some remaining straggling [issues](https://github.com/city41/kof94te/issues) to fix.
 
 You can build the rom and try it yourself here: https://neorh.mattgreer.dev
 
