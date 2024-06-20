@@ -1,3 +1,5 @@
+move.b #5, $CPU_CUSTOM_TEAMS_COUNTDOWN
+
 ;; reset the general counter
 move.b #$ff, $GENERAL_COUNTER
 ;; just in case we got here through HERE COMES CHALLENGER

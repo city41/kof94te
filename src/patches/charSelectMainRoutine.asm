@@ -156,6 +156,10 @@ rts
 ;;; D6.b: 0 if not done, 1 if done
 
 checkIfCpuSelectIsDone:
+cmpi.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
+beq checkIfCpuSelectIsDone_cpuIsDone
+bra checkIfCpuSelectIsDone_notYet
+
 btst #0, $PLAY_MODE ; is player 1 playing?
 beq checkIfCpuSelectIsDone_skipPlayer1
 cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P1
@@ -210,8 +214,10 @@ rts
 transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+; move.b #1, $READY_TO_EXIT_CHAR_SELECT
+jsr $2CHAR_SELECT_TEARDOWN_ROUTINE
+move.l #$37eb2, $108584
 rts
 
 

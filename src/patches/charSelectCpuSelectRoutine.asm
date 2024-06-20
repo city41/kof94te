@@ -17,6 +17,9 @@ andi.b #$7, D4
 ;; this means only random select every 8 frames
 bne done
 
+subi.b #1, $CPU_CUSTOM_TEAMS_COUNTDOWN
+beq done
+
 cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCustomCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
