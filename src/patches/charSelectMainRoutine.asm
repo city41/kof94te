@@ -214,10 +214,13 @@ rts
 transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-; move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-; move.b #1, $READY_TO_EXIT_CHAR_SELECT
-jsr $2CHAR_SELECT_TEARDOWN_ROUTINE
-move.l #$37eb2, $108584
+move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; jsr $2CHAR_SELECT_TEARDOWN_ROUTINE
+; move.l #$37092, $108584
+; jsr $37092
+; move.l #$37eb2, $108584
+move.l #$37046, $108584
 rts
 
 

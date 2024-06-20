@@ -25,3 +25,18 @@ Have KOF94TE only run char select and stop running team select. An initial explo
 ## Notes
 
 CPU random select seems to be at 37092. It calls this function repeatedly while selecting a CPU team.
+
+## ready to exit char select
+
+tha main hack forces a non-zero test so that it doesn't do a `beq` at 3744e
+
+if it doesn't take the branch, it does
+
+```
+ 037450  move.w  D1, D0                                      3001
+ 037452  bsr     $374a4                                      6100 0050
+ 037456  bra     $3745e                                      6000 0006
+ 03745A  bsr     $3754c                                      6100 00F0
+ 03745E  bsr     $37806                                      6100 03A6
+ 037462  rts                                                 4E75
+```
