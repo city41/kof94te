@@ -8,14 +8,17 @@
 ;; 
 ;; see altColors.md for info on how to know what character is being loaded when this routine is called
 
-;; store lots of stuff the game is using
-movem.l A0-A6/D0/D2-D7, $MOVEM_STORAGE
 
 ;; if we are in char select, we don't care, as no characters show up
-move.b $IN_CHAR_SELECT_FLAG, D6
-cmpi.b #1, D6
-beq defaultChoice
+cmp.b $IN_CHAR_SELECT_FLAG, D6
+bne notInCharSelect
+;; we are in char select, just go with the default palette as it doesn't matter
+move.b #0, D1
+rts
 
+notInCharSelect:
+;; store lots of stuff the game is using
+movem.l A0-A6/D0/D2-D7, $MOVEM_STORAGE
 
 ;; figure out which character is loading
 move.l A4, D6

@@ -681,6 +681,7 @@
       "patchAsm": "guardPalettes_a95.asm"
     },
     {
+      "skip": true,
       "type": "prom",
       "description": "Check for exit after team select",
       "address": "137074",
@@ -703,6 +704,14 @@
     },
     {
       "type": "prom",
+      "description": "set chosen teams in membdisp",
+      "address": "1379d2",
+      "subroutine": true,
+      "symbol": "SET_CHOSEN_TEAMS_IN_MEMBDISP",
+      "patchAsm": "setChosenTeamsInMembdisp.asm"
+    },
+    {
+      "type": "prom",
       "description": "run teardown just before going to order select",
       "address": "137116",
       "subroutine": true,
@@ -719,14 +728,6 @@
       "description": "clean up straggling word",
       "address": "13711c",
       "patchAsm": ["nop"]
-    },
-    {
-      "type": "prom",
-      "description": "set chosen teams in membdisp",
-      "address": "1379d2",
-      "subroutine": true,
-      "symbol": "SET_CHOSEN_TEAMS_IN_MEMBDISP",
-      "patchAsm": "setChosenTeamsInMembdisp.asm"
     },
     {
       "type": "prom",
@@ -1375,6 +1376,22 @@
       "description": "Skip the second function call in team select",
       "address": "13704a",
       "patchAsm": ["nop", "nop"]
+    },
+    {
+      "type": "prom",
+      "description": "dont do some memory clears in char select",
+      "subroutine": true,
+      "patchAsm": [
+        "moveq #0, D7",
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne doNormal",
+        "move.w #0, D0",
+        "bra done",
+        "doNormal:",
+        "move.w #$1e, D0",
+        "done:",
+        "rts"
+      ]
     }
   ]
 }

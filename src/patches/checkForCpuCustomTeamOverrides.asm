@@ -7,6 +7,11 @@
 ;; restore what was clobbered
 jsr $15a0
 
+;; TEMP: just always force custom cpu until original 8 is re-implemented
+move.b #1, $OVERRODE_CPU_CSTM_FLAG
+move.b #1, $CPU_CUSTOM_TEAMS_FLAG
+rts
+
 ;; clear any previous override, they do to do this everytime they play the game
 move.b #0, $OVERRODE_CPU_CSTM_FLAG
 move.b #0, $CPU_CUSTOM_TEAMS_FLAG

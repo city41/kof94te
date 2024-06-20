@@ -1,9 +1,15 @@
+cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+;; once we hit done, the game comes in here many times
+;; nothing we can do but wait for the game to move on
+beq done
+
 ;; move the logo and countries off screen, this combined
 ;; with changing the bg tilemap is what accomplishes the clean look
 move.w #129, D0
 move.w #32, D1
 move.w #272, D2 ; y = 224
 jsr $2MOVE_SPRITE
+
 
 jsr $2FLASH_CURSORS
 
@@ -32,10 +38,6 @@ move.b D6, $108231 ; set team 1 to this random id
 move.b D6, $108431 ; and team 2 too
 skipVersusRandomStage:
 
-cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-;; once we hit done, the game comes in here many times
-;; nothing we can do but wait for the game to move on
-beq done
 cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
 cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
@@ -133,6 +135,9 @@ bne transitionPastPlayerSelect_setCpuPhase
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; go back to OG team select, just for a few frames. That way
+; it will do all the necessary things to successfully move to order select
+move.l #$37046, $108584
 bra transitionPlastPlayerSelect_done
 
 transitionPastPlayerSelect_setCpuPhase:
@@ -216,10 +221,8 @@ transitionPastCpuSelect:
 bsr renderCpuChosenTeam
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; jsr $2CHAR_SELECT_TEARDOWN_ROUTINE
-; move.l #$37092, $108584
-; jsr $37092
-; move.l #$37eb2, $108584
+; go back to OG team select, just for a few frames. That way
+; it will do all the necessary things to successfully move to order select
 move.l #$37046, $108584
 rts
 
