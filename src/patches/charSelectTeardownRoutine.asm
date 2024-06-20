@@ -8,6 +8,7 @@ jsr $2MOVE_SPRITE
 
 movem.l A4, $MOVEM_STORAGE
 move.b #0, $IN_CHAR_SELECT_FLAG
+move.b #0, $MAIN_HACK_PHASE
 
 ;; move player 1's choices where the game expects them
 lea $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, A4

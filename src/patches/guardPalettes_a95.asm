@@ -4,7 +4,7 @@
 ;; this is specific to the KOF95/98 avatars version. The only difference is the number of palettes
 ;; (78 versus 77)
 
-cmpi.b #1, $IN_CHAR_SELECT_FLAG
+cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 bne skip ; not in char select? nothing to do
 ; cmpi.w #15, D0
 ; ble skip ; not touching one of our palettes? nothing to do
