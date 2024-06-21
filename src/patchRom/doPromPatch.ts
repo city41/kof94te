@@ -219,8 +219,8 @@ async function doPromPatch(
   subroutineInsertEnd: number;
   symbolTable: Record<string, number>;
 }> {
-  console.log("applying patch");
-  console.log(patch.description ?? "(patch has no description)");
+  console.log("doPromPatch: applying patch");
+  console.log(patch.symbol ?? patch.description ?? "unknown patch");
 
   let result: { patchedPromData: number[]; subroutineInsertEnd: number };
 

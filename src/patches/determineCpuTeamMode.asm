@@ -54,6 +54,4 @@ setCustomTeam:
 move.b #1, $CPU_CUSTOM_TEAMS_FLAG
 
 done:
-;; TEMP: always go with cpu custom teams until original 8 is implemented
-move.b #1, $CPU_CUSTOM_TEAMS_FLAG
 rts

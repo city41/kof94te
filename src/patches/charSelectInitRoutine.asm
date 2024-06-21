@@ -1,4 +1,4 @@
-move.b #5, $CPU_CUSTOM_TEAMS_COUNTDOWN
+move.b #8, $CPU_CUSTOM_TEAMS_COUNTDOWN
 
 ;; reset the general counter
 move.b #$ff, $THROTTLE_COUNTER

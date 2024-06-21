@@ -156,7 +156,7 @@ jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2DETERMINE_CPU_NEXT_STAGE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
-move.b #0, $THROTTLE_COUNTER
+move.b #$ff, $THROTTLE_COUNTER
 
 transitionPlastPlayerSelect_done:
 rts
@@ -371,36 +371,17 @@ beq showCpuCursorAndTeamIfContinued_done ; no? nothing to do
 ;;; first, render their chosen avatars
 bsr renderCpuChosenTeam
 
-cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
-beq showCpuCursorAndTeamIfContinued_original8Team
-
-;; cpu is using custom teams
 btst #0, $PLAY_MODE
-beq showCpuCursorAndTeamIfContinued_setupCustomForPlayer2
+beq showCpuCursorAndTeamIfContinued_setupForPlayer2
 lea $P2_CUR_INPUT, A0
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
-bra showCpuCursorAndTeamIfContinued_doCustomCursor
+bra showCpuCursorAndTeamIfContinued_doCursor
 
-showCpuCursorAndTeamIfContinued_setupCustomForPlayer2:
+showCpuCursorAndTeamIfContinued_setupForPlayer2:
 lea $P1_CUR_INPUT, A0
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 
-showCpuCursorAndTeamIfContinued_doCustomCursor:
-jsr $2MOVE_CPU_CUSTOM_CURSOR
-bra showCpuCursorAndTeamIfContinued_done
-
-showCpuCursorAndTeamIfContinued_original8Team:
-btst #0, $PLAY_MODE
-beq showCpuCursorAndTeamIfContinued_setupOriginalForPlayer2
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D7
-lea $1083c0, A0           ; point to where the cpu index is for p1
-bra showCpuCursorAndTeamIfContinued_doOriginalCursor
-
-showCpuCursorAndTeamIfContinued_setupOriginalForPlayer2:
-move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D7
-lea $1081c0, A0           ; point to where the cpu index is for p2
-
-showCpuCursorAndTeamIfContinued_doOriginalCursor:
+showCpuCursorAndTeamIfContinued_doCursor:
 jsr $2MOVE_CPU_CURSOR
 
 showCpuCursorAndTeamIfContinued_done:

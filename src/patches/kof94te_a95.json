@@ -389,10 +389,10 @@
     },
     {
       "type": "prom",
-      "description": "move cpu cursor routine for custom teams",
+      "description": "move cpu cursor routine",
       "subroutine": true,
-      "symbol": "MOVE_CPU_CUSTOM_CURSOR",
-      "patchAsm": "moveCpuCustomCursor.asm"
+      "symbol": "MOVE_CPU_CURSOR",
+      "patchAsm": "moveCpuCursor.asm"
     },
     {
       "type": "prom",
@@ -400,13 +400,6 @@
       "subroutine": true,
       "symbol": "TEAM_INDEX_TO_XY",
       "patchAsm": "teamSelectIndexToXY.asm"
-    },
-    {
-      "type": "prom",
-      "description": "move cpu cursor routine",
-      "subroutine": true,
-      "symbol": "MOVE_CPU_CURSOR",
-      "patchAsm": "moveCpuCursor.asm"
     },
     {
       "type": "prom",
@@ -487,13 +480,6 @@
     },
     {
       "type": "prom",
-      "description": "cpu select routine",
-      "subroutine": true,
-      "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
-      "patchAsm": "charSelectCpuSelectRoutine.asm"
-    },
-    {
-      "type": "prom",
       "description": "adds Rugal to the char select grid for the boss fight",
       "subroutine": true,
       "symbol": "PUT_RUGAL_ON_GRID",
@@ -533,6 +519,13 @@
       "subroutine": true,
       "symbol": "DETERMINE_CPU_NEXT_STAGE",
       "patchAsm": "determineCpuNextStage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu select routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
+      "patchAsm": "charSelectCpuSelectRoutine.asm"
     },
     {
       "type": "prom",
