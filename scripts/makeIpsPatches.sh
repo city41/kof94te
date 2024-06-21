@@ -22,7 +22,7 @@ buildPatch() {
     mkdir ipsBinaries/hacked_${variant}
 
     yarn run-srom-crom-${variant}
-    yarn ts-node src/patchRom/main.ts src/patches/kof94te_${variant}.json
+    yarn ts-node src/patchRom/main.ts ${variant} src/patches/kof94te.json
     cp $MAME_ROM_DIR/$GAME.zip ipsBinaries/hacked_${variant}
 
     (cd ipsBinaries/hacked_${variant}/ && unzip ${GAME}.zip)
