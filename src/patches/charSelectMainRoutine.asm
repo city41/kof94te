@@ -141,7 +141,6 @@ cmpi.b #3, $PLAY_MODE
 bne transitionPastPlayerSelect_setCpuPhase
 ;; this is versus mode, char select is now done
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
 ; it will do all the necessary things to successfully move to order select
@@ -151,7 +150,6 @@ bra transitionPlastPlayerSelect_done
 transitionPastPlayerSelect_setCpuPhase:
 move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
-move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
