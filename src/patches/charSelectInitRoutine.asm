@@ -1,5 +1,7 @@
+move.b #8, $CPU_CUSTOM_TEAMS_COUNTDOWN
+
 ;; reset the general counter
-move.b #$ff, $GENERAL_COUNTER
+move.b #$ff, $THROTTLE_COUNTER
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER
@@ -244,7 +246,6 @@ move.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 bra doneSettingPhase
 
 doneSettingPhase:
-move.b #0, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #0, $READY_TO_EXIT_CHAR_SELECT
 ;;;;;;;;;;; END DETERMINE THE PHASE FOR MAIN ;;;;;;;;;;;;;;;
 
@@ -310,11 +311,6 @@ jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2LOAD_CPU_CURSORS
 skipDemoModeInit:
 ;;;;;;;;;;;;;;;;; END DEMO MODE INIT ;;;;;;;;;;;;;;;;;
-
-;; get read to either show or hide the version string, based on if start is pressed during main
-move.w #$7077, $VSTRING_DATA ; load where in the fix layer it should go
-move.l #$2VERSION, $VSTRING_DATA + 2
-
 
 cmpi.b #0, $PLAY_MODE
 beq skipGreyOut ; don't grey out in demo mode

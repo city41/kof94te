@@ -1,9 +1,15 @@
+cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+;; once we hit done, the game comes in here many times
+;; nothing we can do but wait for the game to move on
+beq done
+
 ;; move the logo and countries off screen, this combined
 ;; with changing the bg tilemap is what accomplishes the clean look
 move.w #129, D0
 move.w #32, D1
 move.w #272, D2 ; y = 224
 jsr $2MOVE_SPRITE
+
 
 jsr $2FLASH_CURSORS
 
@@ -17,25 +23,27 @@ jsr $2TAKE_RUGAL_OFF_GRID
 
 doneRugalOnGrid:
 
-;;; this is a generic counter used by many parts of the hack
-;;; that need basic throttling or basic randomness
-move.b $GENERAL_COUNTER, D6 ; load the counter
-addi.b #1, D6
-move.b D6, $GENERAL_COUNTER ; save its new value
+;;; this is a generic counter used by parts of the hack that need throttling
+addi.b #1, $THROTTLE_COUNTER
 
 ;; if this is versus mode, randomize the team to get a random stage
-cmpi.b #3, $PLAY_MODE
-bne skipVersusRandomStage ; nope not versus
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
+beq pickVersusRandomStage ; then we need a random stage
+bra skipVersusRandomStage
+
+pickVersusRandomStage:
+;; get a random number between 0-7
+;; the game's rng uses A0
+movem.l A0, $MOVEM_STORAGE
+jsr $2582 ; call the game's rng, it leaves a random byte in D0
+movem.l $MOVEM_STORAGE, A0
+andi.b #$7, D0; chop the random byte down to 3 bits -> 0 through 7
 ;; this is versus mode, randomize the team ids to get a random stage
-andi.b #$7, D6 ; only keep the bottom three bits, that is our team id
-move.b D6, $108231 ; set team 1 to this random id
-move.b D6, $108431 ; and team 2 too
+move.b D0, $108231 ; set team 1 to this random id
+move.b D0, $108431 ; and team 2 too
+
 skipVersusRandomStage:
 
-cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-;; once we hit done, the game comes in here many times
-;; nothing we can do but wait for the game to move on
-beq done
 cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
 cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
@@ -131,18 +139,19 @@ cmpi.b #3, $PLAY_MODE
 bne transitionPastPlayerSelect_setCpuPhase
 ;; this is versus mode, char select is now done
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; go back to OG team select, just for a few frames. That way
+; it will do all the necessary things to successfully move to order select
+move.l #$37046, $108584
 bra transitionPlastPlayerSelect_done
 
 transitionPastPlayerSelect_setCpuPhase:
 move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
-move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
-move.b #0, $GENERAL_COUNTER
+move.b #$ff, $THROTTLE_COUNTER
 
 transitionPlastPlayerSelect_done:
 rts
@@ -156,6 +165,10 @@ rts
 ;;; D6.b: 0 if not done, 1 if done
 
 checkIfCpuSelectIsDone:
+cmpi.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
+beq checkIfCpuSelectIsDone_cpuIsDone
+bra checkIfCpuSelectIsDone_notYet
+
 btst #0, $PLAY_MODE ; is player 1 playing?
 beq checkIfCpuSelectIsDone_skipPlayer1
 cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P1
@@ -212,6 +225,9 @@ transitionPastCpuSelect:
 bsr renderCpuChosenTeam
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; go back to OG team select, just for a few frames. That way
+; it will do all the necessary things to successfully move to order select
+move.l #$37046, $108584
 rts
 
 
@@ -348,36 +364,17 @@ beq showCpuCursorAndTeamIfContinued_done ; no? nothing to do
 ;;; first, render their chosen avatars
 bsr renderCpuChosenTeam
 
-cmpi.b #0, $CPU_CUSTOM_TEAMS_FLAG
-beq showCpuCursorAndTeamIfContinued_original8Team
-
-;; cpu is using custom teams
 btst #0, $PLAY_MODE
-beq showCpuCursorAndTeamIfContinued_setupCustomForPlayer2
+beq showCpuCursorAndTeamIfContinued_setupForPlayer2
 lea $P2_CUR_INPUT, A0
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
-bra showCpuCursorAndTeamIfContinued_doCustomCursor
+bra showCpuCursorAndTeamIfContinued_doCursor
 
-showCpuCursorAndTeamIfContinued_setupCustomForPlayer2:
+showCpuCursorAndTeamIfContinued_setupForPlayer2:
 lea $P1_CUR_INPUT, A0
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 
-showCpuCursorAndTeamIfContinued_doCustomCursor:
-jsr $2MOVE_CPU_CUSTOM_CURSOR
-bra showCpuCursorAndTeamIfContinued_done
-
-showCpuCursorAndTeamIfContinued_original8Team:
-btst #0, $PLAY_MODE
-beq showCpuCursorAndTeamIfContinued_setupOriginalForPlayer2
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D7
-lea $1083c0, A0           ; point to where the cpu index is for p1
-bra showCpuCursorAndTeamIfContinued_doOriginalCursor
-
-showCpuCursorAndTeamIfContinued_setupOriginalForPlayer2:
-move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D7
-lea $1081c0, A0           ; point to where the cpu index is for p2
-
-showCpuCursorAndTeamIfContinued_doOriginalCursor:
+showCpuCursorAndTeamIfContinued_doCursor:
 jsr $2MOVE_CPU_CURSOR
 
 showCpuCursorAndTeamIfContinued_done:

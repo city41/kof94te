@@ -6,8 +6,10 @@ move.w #32, D1
 move.w #496, D2 ; y = 0
 jsr $2MOVE_SPRITE
 
-movem.l A4, $MOVEM_STORAGE
 move.b #0, $IN_CHAR_SELECT_FLAG
+move.b #0, $MAIN_HACK_PHASE
+
+movem.l A4, $MOVEM_STORAGE
 
 ;; move player 1's choices where the game expects them
 lea $P1_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, A4
@@ -119,3 +121,5 @@ jsr $2CLEAR_FOCUSED_NAMES_FROM_FIX_ROUTINE
 
 movem.l $MOVEM_STORAGE, A4
 rts
+
+

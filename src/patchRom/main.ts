@@ -232,6 +232,7 @@ async function main(patchJsonPaths: string[]) {
       );
       usage();
     } else {
+      console.log("patch json", JSON.stringify(patchJson, null, 2));
       if (
         patchJson.patches.some(
           (p) => isAddressPatch(p) && p.subroutine == true
@@ -258,9 +259,16 @@ async function main(patchJsonPaths: string[]) {
 
       for (const patch of patchJson.patches) {
         if (patch.skip) {
-          console.log("SKIPPING!", patch.description);
+          console.log(
+            "SKIPPING!",
+            patch.symbol ?? patch.description ?? "(unknown)"
+          );
           continue;
         }
+        console.log(
+          "next patch",
+          patch.symbol ?? patch.description ?? "(unknown)"
+        );
 
         try {
           const hydratedPatch = await hydratePatch(patch, jsonDir);

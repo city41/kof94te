@@ -76,19 +76,19 @@
     "P2_LAST_MATCH_RESULT": "10e8d3",
     "CPU_DEFEATED_CHARACTERS": "10e8d4",
     "READY_TO_EXIT_CHAR_SELECT": "10e8e0",
-    "READY_TO_EMPTY_TEAM_SELECT_TIMER": "10e8e1",
-    "IN_CHAR_SELECT_FLAG": "10e8e5",
     "PLAY_HERE_COMES_CHALLENGER_CHIME": "10e8e6",
     "IN_HERE_COMES_CHALLENGER": "10e8e7",
     "STORE_A0A1A2": "10e8e8",
     "AFTER_SCREEN_ALREADY_SET_LEFT": "10e912",
-    "GENERAL_COUNTER": "10e913",
+    "THROTTLE_COUNTER": "10e913",
     "AFTER_SCREEN_POSITION_TABLE": "10e914",
     "MOVEM_STORAGE": "10ea12",
     "CPU_RANDOM_SELECT_ALREADY_USED_INDEXES": "10eb02",
     "CPU_CUSTOM_TEAMS_FLAG": "10eb05",
     "OVERRODE_CPU_CSTM_FLAG": "10eb06",
     "SIDE_THAT_WENT_TO_CONTINUE": "10eb07",
+    "CPU_CUSTOM_TEAMS_COUNTDOWN": "10eb08",
+    "IN_CHAR_SELECT_FLAG": "10eb0c",
 
     "MAIN_PHASE_UNKNOWN": "0",
     "MAIN_PHASE_INIT": "1",
@@ -151,13 +151,6 @@
     "SLOT_MACHINE_DURATION": "1c"
   },
   "patches": [
-    {
-      "type": "prom",
-      "description": "general string to fix layer routine",
-      "subroutine": true,
-      "symbol": "STRING_TO_FIX_LAYER_ROUTINE",
-      "patchAsm": "stringToFixLayer.asm"
-    },
     {
       "type": "prom",
       "description": "clean up straggling word",
@@ -259,13 +252,6 @@
       "subroutine": true,
       "symbol": "P1_CURSOR_RIGHT_BLACK_IMAGE",
       "patchAsm": "p1_cursor_right_black.asm"
-    },
-    {
-      "type": "prom",
-      "description": "p1 cursor, right image",
-      "subroutine": true,
-      "symbol": "P1_CURSOR_RIGHT_IMAGE",
-      "patchAsm": "p1_cursor_right.asm"
     },
     {
       "type": "prom",
@@ -374,31 +360,17 @@
     },
     {
       "type": "prom",
-      "description": "character id to X on the grid. Used by moveCpuCustomCursor",
+      "description": "character id to X on the grid. Used by moveCpuCursor",
       "subroutine": true,
       "symbol": "CHARID_TO_GRID_X",
       "patchAsm": "charIdToGridX.asm"
     },
     {
       "type": "prom",
-      "description": "character id to Y on the grid. Used by moveCpuCustomCursor",
+      "description": "character id to Y on the grid. Used by moveCpuCursor",
       "subroutine": true,
       "symbol": "CHARID_TO_GRID_Y",
       "patchAsm": "charIdToGridY.asm"
-    },
-    {
-      "type": "prom",
-      "description": "move cpu cursor routine for custom teams",
-      "subroutine": true,
-      "symbol": "MOVE_CPU_CUSTOM_CURSOR",
-      "patchAsm": "moveCpuCustomCursor.asm"
-    },
-    {
-      "type": "prom",
-      "description": "map from team index on OG team select to XY for moveCpuCursor",
-      "subroutine": true,
-      "symbol": "TEAM_INDEX_TO_XY",
-      "patchAsm": "teamSelectIndexToXY.asm"
     },
     {
       "type": "prom",
@@ -409,7 +381,7 @@
     },
     {
       "type": "prom",
-      "description": "move cursor routine",
+      "description": "move player cursor routine",
       "subroutine": true,
       "symbol": "MOVE_CURSOR",
       "patchAsm": "moveCursor.asm"
@@ -486,13 +458,6 @@
     },
     {
       "type": "prom",
-      "description": "cpu select routine",
-      "subroutine": true,
-      "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
-      "patchAsm": "charSelectCpuSelectRoutine.asm"
-    },
-    {
-      "type": "prom",
       "description": "adds Rugal to the char select grid for the boss fight",
       "subroutine": true,
       "symbol": "PUT_RUGAL_ON_GRID",
@@ -528,6 +493,20 @@
     },
     {
       "type": "prom",
+      "description": "determine the next stage (ie cpu team id) to fight on in single player mode",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_NEXT_STAGE",
+      "patchAsm": "determineCpuNextStage.asm"
+    },
+    {
+      "type": "prom",
+      "description": "cpu select routine",
+      "subroutine": true,
+      "symbol": "CHAR_SELECT_CPU_SELECT_ROUTINE",
+      "patchAsm": "charSelectCpuSelectRoutine.asm"
+    },
+    {
+      "type": "prom",
       "description": "load cpu cursors routine",
       "subroutine": true,
       "symbol": "LOAD_CPU_CURSORS",
@@ -549,7 +528,7 @@
     },
     {
       "type": "prom",
-      "description": "swap memory range routine",
+      "description": "swap memory range routine (for cross continues)",
       "subroutine": true,
       "symbol": "SWAP_MEMORY_RANGE",
       "patchAsm": "swapMemoryRange.asm"
@@ -563,12 +542,13 @@
     },
     {
       "type": "prom",
-      "descrition": "jump to char init after team init is done",
+      "descrition": "jump to char init after team init is done, have char select run instead of team select",
       "address": "13703c",
       "subroutine": true,
       "patchAsm": [
         "jsr $2CHAR_SELECT_INIT_ROUTINE",
-        "move.l #$37046, $108584",
+        "; normally this would set the team select routine address",
+        "move.l #$2CHAR_SELECT_MAIN_ROUTINE, $108584",
         "rts"
       ]
     },
@@ -652,27 +632,6 @@
     },
     {
       "type": "prom",
-      "description": "vblank hook",
-      "address": "132be4",
-      "subroutine": true,
-      "patchAsm": [
-        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
-        "bne done",
-
-        "movem.l D0-D7/A0-A6, $STORE_ALL_REGISTERS",
-        "jsr $2CHAR_SELECT_MAIN_ROUTINE",
-        "movem.l $STORE_ALL_REGISTERS, D0-D7/A0-A6",
-        "bra done",
-
-        "done:",
-        ";;; restore what got clobbered",
-        "jsr $6536",
-        ";;; end replace",
-        "rts"
-      ]
-    },
-    {
-      "type": "prom",
       "description": "have the game leave our palettes alone",
       "address": "133642",
       "subroutine": true,
@@ -680,24 +639,11 @@
     },
     {
       "type": "prom",
-      "description": "Check for exit after team select",
-      "address": "137074",
+      "description": "set chosen teams in membdisp",
+      "address": "1379d2",
       "subroutine": true,
-      "patchAsm": [
-        ";;; restore what got clobbered",
-        "move.b #$3c, $655(A5)",
-        ";;; if the char select should be read only, we don't want to do anything",
-        "btst #7, $PLAY_MODE",
-        "bne done",
-        "cmpi.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER",
-        "bne notReadyYet",
-        "move.w #$1, $108654 ; empty the timer so game naturally exits",
-        "bra done",
-        "notReadyYet:",
-        "move.b #$14, $108654 ; reload the timer so we dont exit",
-        "done:",
-        "rts"
-      ]
+      "symbol": "SET_CHOSEN_TEAMS_IN_MEMBDISP",
+      "patchAsm": "setChosenTeamsInMembdisp.asm"
     },
     {
       "type": "prom",
@@ -717,14 +663,6 @@
       "description": "clean up straggling word",
       "address": "13711c",
       "patchAsm": ["nop"]
-    },
-    {
-      "type": "prom",
-      "description": "set chosen teams in membdisp",
-      "address": "1379d2",
-      "subroutine": true,
-      "symbol": "SET_CHOSEN_TEAMS_IN_MEMBDISP",
-      "patchAsm": "setChosenTeamsInMembdisp.asm"
     },
     {
       "type": "prom",
@@ -877,36 +815,6 @@
       "subroutine": true,
       "symbol": "THIRD_LOCATION_CAR_COLS",
       "patchAsm": "setupCharacterColors.asm"
-    },
-    {
-      "type": "prom",
-      "description": "Choose the next cpu team in single player mode",
-      "address": "1375fc",
-      "subroutine": true,
-      "patchAsm": [
-        ";; D0 contains the raw rng result",
-        "getNextTeam:",
-        "andi.w #$7, D0 ; chop it down to bottom 3 bits",
-        ";;; at this point we have a random 0-7",
-        ";;; now as long as it is a defeated team, increment",
-        "btst D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES",
-        "beq done ; not a defeated team, we're good",
-        "addi.b #1, D0 ; move onto the next team and try again",
-        "bra getNextTeam",
-        "done:",
-        "bset D0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES ; store we've seen this team for next time",
-        ";;; this +7 causes a minimum of one loop for visual effect",
-        ";;; but will still land on the team we decided on",
-        ";;; 7 and not 8 because the game is using dbra",
-        "addq.w #7, D0",
-        "rts"
-      ]
-    },
-    {
-      "type": "prom",
-      "description": "Get rid of the game's add 8 as we are adding 7 now (above)",
-      "address": "137602",
-      "patchAsm": ["nop"]
     },
     {
       "type": "prom",

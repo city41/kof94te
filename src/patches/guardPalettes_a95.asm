@@ -4,12 +4,17 @@
 ;; this is specific to the KOF95/98 avatars version. The only difference is the number of palettes
 ;; (78 versus 77)
 
-cmpi.b #1, $IN_CHAR_SELECT_FLAG
-bne skip ; not in char select? nothing to do
-cmpi.w #15, D0
-ble skip ; not touching one of our palettes? nothing to do
-cmpi.w #94, D0
-bge skip ; not touching one of our palettes? nothing to do
+;; we only need to guard the palettes in two situations
+;; - the end of char select, where we have handed control back to the game briefly
+;; - a HERE COMES CHALLENGER happens during character select.
+
+cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+beq guard
+cmpi.b #1, $IN_HERE_COMES_CHALLENGER
+beq guard
+bra skip
+
+guard:
 move.w #94, D0  ; have it write into a palette that isn't ours
 
 skip:
