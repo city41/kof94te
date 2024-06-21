@@ -529,6 +529,13 @@
     },
     {
       "type": "prom",
+      "description": "determine the next stage (ie cpu team id) to fight on in single player mode",
+      "subroutine": true,
+      "symbol": "DETERMINE_CPU_NEXT_STAGE",
+      "patchAsm": "determineCpuNextStage.asm"
+    },
+    {
+      "type": "prom",
       "description": "load cpu cursors routine",
       "subroutine": true,
       "symbol": "LOAD_CPU_CURSORS",
