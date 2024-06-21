@@ -160,47 +160,8 @@ rts
 ;;;
 ;;; returns
 ;;; D6.b: 0 if not done, 1 if done
-
 checkIfCpuSelectIsDone:
 cmpi.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
-beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_notYet
-
-btst #0, $PLAY_MODE ; is player 1 playing?
-beq checkIfCpuSelectIsDone_skipPlayer1
-cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P1
-beq checkIfCpuSelectIsDone_cpuIsDone
-cmpi.b #8, $108431 ; is the next fight rugal?
-beq checkIfCpuSelectIsDone_cpuIsDone
-
-;;; HACK: this is to account for one usecase
-;; p1 beats the cpu
-;; p2 challenges
-;; p2 beats p2
-;; p1 goes back to single player
-;; this detects that case and moves past char select
-;; after two seconds
-;; this is a hacky/fragile way to solve this. Another problem
-;; when returning to single player, it will randomly pick a new team
-;; instead of refighting the one you were interrupted on
-btst #7, $PLAY_MODE
-beq checkIfCpuSelectIsDone_notYet
-cmpi.b #$12, $108654
-beq checkIfCpuSelectIsDone_cpuIsDone
-bra checkIfCpuSelectIsDone_notYet
-
-checkIfCpuSelectIsDone_skipPlayer1:
-;; now check player 2, either player 1 isn't playing
-;; or this is demo mode. Either way, checking p2 will work
-cmpi.b #$ff, $CPU_RANDOM_SELECT_COUNTER_FOR_P2
-beq checkIfCpuSelectIsDone_cpuIsDone
-cmpi.b #8, $108231 ; is the next fight rugal?
-beq checkIfCpuSelectIsDone_cpuIsDone
-
-;; see hack alert above
-btst #7, $PLAY_MODE
-beq checkIfCpuSelectIsDone_notYet
-cmpi.b #$12, $108654
 beq checkIfCpuSelectIsDone_cpuIsDone
 bra checkIfCpuSelectIsDone_notYet
 
