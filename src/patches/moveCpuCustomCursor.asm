@@ -29,6 +29,10 @@ adda.w #1, A2   ; move to next character
 addi.w #1, D0   ; move to next sprite
 dbra D5, renderCursor
 
+;; play the movement sound effect
+;; kof95 never plays a choice sound effect in this scenario
+;; so we won't either
+move.b #$60, $320000 ; play movement sfx
 rts
 
 

@@ -397,7 +397,7 @@ addi.b #1, D0
 move.b D0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; increment number of chosen characters
 cmpi.b #$ff, D5
 beq saveChar_skipSoundEffect
-move.b #$61, $320000  ; play the sound effect
+move.b #$61, $320000  ; play the character chosen sound effect
 saveChar_skipSoundEffect:
 
 rts
