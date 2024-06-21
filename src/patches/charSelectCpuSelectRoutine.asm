@@ -37,6 +37,7 @@ lea $P2_CUR_INPUT, A0
 bsr pickCpuTeam
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
 jsr $2MOVE_CPU_CURSOR
+move.b #$60, $320000 ; play movement sfx
 bra done
 
 prepCustomCpuCursorForSinglePlayerMode:
@@ -66,6 +67,7 @@ move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 
 customCpu_doneLoadSi:
 jsr $2MOVE_CPU_CURSOR
+move.b #$60, $320000 ; play movement sfx
 
 done:
 rts
