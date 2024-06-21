@@ -139,7 +139,7 @@ move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
 ; it will do all the necessary things to successfully move to order select
-move.l #$37046, $108584
+bsr goToTeamSelect
 bra transitionPlastPlayerSelect_done
 
 transitionPastPlayerSelect_setCpuPhase:
@@ -224,7 +224,7 @@ move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
 ; it will do all the necessary things to successfully move to order select
-move.l #$37046, $108584
+bsr goToTeamSelect
 rts
 
 
@@ -375,4 +375,18 @@ showCpuCursorAndTeamIfContinued_doCursor:
 jsr $2MOVE_CPU_CURSOR
 
 showCpuCursorAndTeamIfContinued_done:
+rts
+
+
+;; goToTeamSelect
+;;
+;; does everything needed to give control back to the game
+;; this is only done at the very end of char select and is 
+;; a tiny hack to let the game set up order select for us
+goToTeamSelect:
+;; set the function pointer to team select
+move.l #$37046, $108584
+;; drain the timer, so it stays in team select as little as possible
+move.w #1, $108654
+
 rts
