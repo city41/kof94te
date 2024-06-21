@@ -1,5 +1,5 @@
 {
-  "description": "KOF94TE: KOF95/98 Avatars version",
+  "description": "KOF94 Team Edit Edition, main patch",
   "subroutineSpace": {
     "start": "97000",
     "end": "bfff0"
@@ -153,12 +153,6 @@
   "patches": [
     {
       "type": "prom",
-      "description": "clean up straggling word",
-      "address": "13260e",
-      "patchAsm": ["nop"]
-    },
-    {
-      "type": "prom",
       "string": true,
       "value": "HEIDERN           RALF              CLARK             ATHENA ASAMIYA    SIE KENSOU        CHIN GENTSAI      KYO KUSANAGI      BENIMARU N.       GORO DAIMON       HEAVY D!          LUCKY GLAUBER     BRIAN BATTLER     KIM KAPHWAN       CHANG KOEHAN      CHOI BOUNGE       TERRY BOGARD      ANDY BOGARD       JOE HIGASHI       RYO SAKAZAKI      ROBERT GARCIA     TAKUMA SAKAZAKI   YURI SAKAZAKI     MAI SHIRANUI      KING              DEBUG RUGAL                         CHARACTER ROULETTETEAM ROULETTE     ",
       "symbol": "P1_CHAR_NAME_TABLE"
@@ -181,28 +175,32 @@
       "description": "palettes",
       "subroutine": true,
       "symbol": "PALETTES",
-      "patchAsm": "palettes_a95.asm"
+      "a94PatchAsm": "palettes_a94.asm",
+      "a95PatchAsm": "palettes_a95.asm"
     },
     {
       "type": "prom",
       "description": "character to grey out table for greying out defeated characters",
       "subroutine": true,
       "symbol": "CHARACTER_TO_GREY_OUT_TABLE",
-      "patchAsm": "character_to_grey_out_table_a95.asm"
+      "a94PatchAsm": "character_to_grey_out_table_a94.asm",
+      "a95PatchAsm": "character_to_grey_out_table_a95.asm"
     },
     {
       "type": "prom",
       "description": "character_grid image",
       "subroutine": true,
       "symbol": "CHARACTER_GRID_IMAGE",
-      "patchAsm": "character_grid_a95.asm"
+      "a94PatchAsm": "character_grid_a94.asm",
+      "a95PatchAsm": "character_grid_a95.asm"
     },
     {
       "type": "prom",
       "description": "rugal character grid inject data",
       "subroutine": true,
       "symbol": "RUGAL_CG_INJECT_DATA",
-      "patchAsm": "rugal_character_grid_inject_data_a95.asm"
+      "a94PatchAsm": "rugal_character_grid_inject_data_a94.asm",
+      "a95PatchAsm": "rugal_character_grid_inject_data_a95.asm"
     },
     {
       "type": "prom",
@@ -216,14 +214,16 @@
       "description": "avatars image",
       "subroutine": true,
       "symbol": "AVATARS_IMAGE",
-      "patchAsm": "avatars_a95.asm"
+      "a94PatchAsm": "avatars_a94.asm",
+      "a95PatchAsm": "avatars_a95.asm"
     },
     {
       "type": "prom",
       "description": "avatars alt image",
       "subroutine": true,
       "symbol": "AVATARS_ALT_IMAGE",
-      "patchAsm": "avatars_alt_a95.asm"
+      "a94PatchAsm": "avatars_alt_a94.asm",
+      "a95PatchAsm": "avatars_alt_a95.asm"
     },
     {
       "type": "prom",
@@ -635,7 +635,7 @@
       "description": "have the game leave our palettes alone",
       "address": "133642",
       "subroutine": true,
-      "patchAsm": "guardPalettes_a95.asm"
+      "patchAsm": "guardPalettes.asm"
     },
     {
       "type": "prom",

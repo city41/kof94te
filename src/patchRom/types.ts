@@ -26,6 +26,13 @@ export type AddressPromFilePathPatch = BasePromPatch & {
   patchAsm: string;
 };
 
+export type AddressPromFileAvatarPathPatch = BasePromPatch & {
+  address?: string;
+  subroutine?: boolean;
+  a94PatchAsm: string;
+  a95PatchAsm: string;
+};
+
 export type StringPromPatch = BasePromPatch & {
   string: true;
   value: string;

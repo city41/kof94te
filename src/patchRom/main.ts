@@ -17,14 +17,19 @@ import {
   Patch,
   PatchJSON,
   StringPromPatch,
+  AddressPromFileAvatarPathPatch,
 } from "./types";
 import { doPromPatch } from "./doPromPatch";
 import { injectCromTiles } from "./injectCromTiles";
 import { clearFixTiles } from "./clearFixTiles";
 import { injectTitleBadgeTiles } from "./injectTitleBadgeTiles";
 
+type AvatarMode = "a94" | "a95";
+
 function usage() {
-  console.error("usage: ts-node src/patchRom/main.ts <patch-json>");
+  console.error(
+    "usage: ts-node src/patchRom/main.ts <a94 or a95> <patch-jsons...>"
+  );
   process.exit(1);
 }
 
@@ -76,6 +81,26 @@ function isAddressPatch(obj: unknown): obj is AddressPromPatch {
   return p.type === "prom" && Array.isArray(p.patchAsm);
 }
 
+function isAddressFileAvatarPathPatch(
+  obj: unknown
+): obj is AddressPromFileAvatarPathPatch {
+  if (!obj) {
+    return false;
+  }
+
+  if (typeof obj !== "object") {
+    return false;
+  }
+
+  const p = obj as AddressPromFileAvatarPathPatch;
+
+  return (
+    p.type === "prom" &&
+    typeof p.a94PatchAsm === "string" &&
+    typeof p.a95PatchAsm === "string"
+  );
+}
+
 function isAddressFilePathPatch(obj: unknown): obj is AddressPromFilePathPatch {
   if (!obj) {
     return false;
@@ -101,7 +126,12 @@ function isPatch(obj: unknown): obj is Patch {
 
   const p = obj as Patch;
 
-  return isStringPatch(p) || isAddressPatch(p) || isAddressFilePathPatch(p);
+  return (
+    isStringPatch(p) ||
+    isAddressPatch(p) ||
+    (isAddressFilePathPatch(p) && !isAddressFileAvatarPathPatch(p)) ||
+    (isAddressFileAvatarPathPatch(p) && !isAddressFilePathPatch(p))
+  );
 }
 
 function isPatchJSON(obj: unknown): obj is PatchJSON {
@@ -110,7 +140,7 @@ function isPatchJSON(obj: unknown): obj is PatchJSON {
   }
 
   if (Array.isArray(obj)) {
-    return true;
+    return false;
   }
 
   const p = obj as PatchJSON;
@@ -123,7 +153,18 @@ function isPatchJSON(obj: unknown): obj is PatchJSON {
     return false;
   }
 
-  return p.patches.every(isPatch);
+  return p.patches.every((patch) => {
+    if (isPatch(patch)) {
+      return true;
+    } else {
+      console.error(
+        "not a valid patch\n\n",
+        JSON.stringify(patch, null, 2),
+        "\n\n"
+      );
+      return false;
+    }
+  });
 }
 
 async function writePatchedZip(
@@ -158,6 +199,19 @@ async function writePatchedZip(
   console.log("about to execute", cpCmd, "in", romTmpDir);
   const output2 = execSync(cpCmd, { cwd: romTmpDir });
   console.log(output2.toString());
+}
+
+function resolveAvatarPatch(patch: Patch, avatarMode: AvatarMode): Patch {
+  if (isAddressFileAvatarPathPatch(patch)) {
+    const patchAsm =
+      avatarMode === "a94" ? patch.a94PatchAsm : patch.a95PatchAsm;
+    return {
+      ...patch,
+      patchAsm,
+    };
+  } else {
+    return patch;
+  }
 }
 
 async function hydratePatch(
@@ -197,7 +251,7 @@ function loadInitialSymbols(
   );
 }
 
-async function main(patchJsonPaths: string[]) {
+async function main(avatarMode: AvatarMode, patchJsonPaths: string[]) {
   await fsp.rm(tmpDir, {
     recursive: true,
     force: true,
@@ -271,7 +325,10 @@ async function main(patchJsonPaths: string[]) {
         );
 
         try {
-          const hydratedPatch = await hydratePatch(patch, jsonDir);
+          const hydratedPatch = await hydratePatch(
+            resolveAvatarPatch(patch, avatarMode),
+            jsonDir
+          );
           const result = await doPromPatch(
             symbolTable,
             patchedPromData,
@@ -335,9 +392,13 @@ async function main(patchJsonPaths: string[]) {
   }
 }
 
-const patchJsonInputPaths = process.argv.slice(2);
+const [_tsNode, _main, avatarMode, ...patchJsonInputPaths] = process.argv;
 
-if (!patchJsonInputPaths?.length) {
+if (!avatarMode || !patchJsonInputPaths?.length) {
+  usage();
+}
+
+if (avatarMode !== "a94" && avatarMode !== "a95") {
   usage();
 }
 
@@ -345,6 +406,6 @@ const finalPatchJsonPaths = patchJsonInputPaths.map((pjip) =>
   path.resolve(process.cwd(), pjip)
 );
 
-main(finalPatchJsonPaths).catch((e) => console.error);
+main(avatarMode as AvatarMode, finalPatchJsonPaths).catch((e) => console.error);
 
 export { isStringPatch };

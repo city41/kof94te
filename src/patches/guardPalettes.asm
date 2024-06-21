@@ -1,8 +1,5 @@
-;; guardPalettes_a95
+;; guardPalettes
 ;; while in character select, makes sure the game doesn't clobber our palettes
-;;
-;; this is specific to the KOF95/98 avatars version. The only difference is the number of palettes
-;; (78 versus 77)
 
 ;; we only need to guard the palettes in two situations
 ;; - the end of char select, where we have handed control back to the game briefly
