@@ -1,14 +1,7 @@
 ; charSelectCpuSelectRoutine
 ; does everything related to the cpu choosing their team. 
-; this is either the place where cpu custom teal select happens
-; or if not using cpu custom teams, just uses the original game's
-; routine and visualizes it
-
-cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
-bne doOriginal8
-
-cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
-beq customTeams_rugal ; if so, Rugal needs to handled separately
+; this can either be custom teams, or original 8 teams
+; the hack handles both now
 
 ;; throttle back the speed of cpu random select
 move.b $GENERAL_COUNTER, D4
@@ -16,6 +9,13 @@ andi.b #$7, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 8 frames
 bne done
+
+cmpi.b #1, $CPU_CUSTOM_TEAMS_FLAG
+bne doOriginal8
+
+cmpi.b #$ff, $DEFEATED_TEAMS ; have all the teams been defeated?
+beq customTeams_rugal ; if so, Rugal needs to handled separately
+
 
 subi.b #1, $CPU_CUSTOM_TEAMS_COUNTDOWN
 beq done
