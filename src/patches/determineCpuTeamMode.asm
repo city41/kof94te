@@ -54,5 +54,4 @@ setCustomTeam:
 move.b #1, $CPU_CUSTOM_TEAMS_FLAG
 
 done:
-move.b #0, $CPU_CUSTOM_TEAMS_FLAG
 rts
