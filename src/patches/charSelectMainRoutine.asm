@@ -23,19 +23,27 @@ jsr $2TAKE_RUGAL_OFF_GRID
 
 doneRugalOnGrid:
 
-;;; this is a generic counter used by many parts of the hack
-;;; that need basic throttling or basic randomness
-move.b $GENERAL_COUNTER, D6 ; load the counter
-addi.b #1, D6
-move.b D6, $GENERAL_COUNTER ; save its new value
+;;; this is a generic counter used by parts of the hack that need throttling
+addi.b #1, $THROTTLE_COUNTER
 
 ;; if this is versus mode, randomize the team to get a random stage
-cmpi.b #3, $PLAY_MODE
-bne skipVersusRandomStage ; nope not versus
-;; this is versus mode, randomize the team ids to get a random stage
-andi.b #$7, D6 ; only keep the bottom three bits, that is our team id
-move.b D6, $108231 ; set team 1 to this random id
-move.b D6, $108431 ; and team 2 too
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
+beq pickVersusRandomStage ; then we need a random stage
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
+beq pickVersusRandomStage ; then we need a random stage for that too
+bra skipVersusRandomStage
+
+pickVersusRandomStage:
+;; get a random number between 0-7
+;; the game's rng uses A0
+movem.l A0, $MOVEM_STORAGE
+jsr $2582 ; call the game's rng, it leaves a random byte in D0
+movem.l $MOVEM_STORAGE, A0
+andi.b #$7, D0; chop the random byte down to 3 bits -> 0 through 7
+;; this is versus or demo mode, randomize the team ids to get a random stage
+move.b D0, $108231 ; set team 1 to this random id
+move.b D0, $108431 ; and team 2 too
+
 skipVersusRandomStage:
 
 cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
@@ -148,7 +156,7 @@ jsr $2DETERMINE_CPU_TEAM_MODE
 jsr $2DETERMINE_CPU_NEXT_STAGE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
-move.b #0, $GENERAL_COUNTER
+move.b #0, $THROTTLE_COUNTER
 
 transitionPlastPlayerSelect_done:
 rts

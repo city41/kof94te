@@ -1,7 +1,7 @@
 move.b #5, $CPU_CUSTOM_TEAMS_COUNTDOWN
 
 ;; reset the general counter
-move.b #$ff, $GENERAL_COUNTER
+move.b #$ff, $THROTTLE_COUNTER
 ;; just in case we got here through HERE COMES CHALLENGER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER

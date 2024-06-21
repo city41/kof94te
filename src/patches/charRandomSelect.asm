@@ -5,7 +5,7 @@ cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 beq charRandomSelect_done ; chose three characters? don't randomize then
 
 ;; throttle back the speed of random select
-move.b $GENERAL_COUNTER, D4
+move.b $THROTTLE_COUNTER, D4
 andi.b #$3, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 4 frames

@@ -4,7 +4,7 @@
 ; the hack handles both now
 
 ;; throttle back the speed of cpu random select
-move.b $GENERAL_COUNTER, D4
+move.b $THROTTLE_COUNTER, D4
 andi.b #$7, D4
 ;; if there are any lower bits, bail
 ;; this means only random select every 8 frames
