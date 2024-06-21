@@ -88,8 +88,6 @@ move.w #0, $P2_CURSOR_Y
 skipPlayer2:
 
 
-bsr setCpuAlreadyUsedIndex
-
 
 btst #0, $PLAY_MODE
 beq p1_pastReady ; p1 isn't playing? skip
@@ -357,128 +355,6 @@ bset.l D1, D2
 move.l D2, $CPU_DEFEATED_CHARACTERS
 
 setDefeatedCharBytes_done:
-rts
-
-
-;; consults the team defeat byte and sets
-;; the already used indexes byte accordingly
-setCpuAlreadyUsedIndex:
-
-cmpi.b #0, $PLAY_MODE
-bne setCpuAlreadyUsedIndex_skipDemoModeClear
-;; this is demo mode. Clear out the byte altogether
-;; to ensure demo mode can always select two random teams
-;; this means in demo mode it can pick the same team multiple
-;; times if you let demo mode run numerous times, but the original
-;; game did that too
-clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-bra setCpuAlreadyUsedIndex_done
-
-setCpuAlreadyUsedIndex_skipDemoModeClear:
-
-cmpi.b #3, $PLAY_MODE
-bne setCpuAlreadyUsedIndex_skipVersusModeClear
-;; this is versus mode. Same idea, just clear the byte out.
-clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-bra setCpuAlreadyUsedIndex_done
-
-setCpuAlreadyUsedIndex_skipVersusModeClear:
-
-btst #0, $PLAY_MODE
-beq setCpuAlreadyUsedIndex_player2 ; player 1 is not playing, onto player 2
-
-clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-btst #0, $DEFEATED_TEAMS
-beq p1_skipBrazil
-bset #2, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipBrazil:
-btst #1, $DEFEATED_TEAMS
-beq p1_skipChina
-bset #6, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipChina:
-btst #2, $DEFEATED_TEAMS
-beq p1_skipJapan
-bset #5, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipJapan:
-btst #3, $DEFEATED_TEAMS
-beq p1_skipUSA
-bset #4, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipUSA:
-btst #4, $DEFEATED_TEAMS
-beq p1_skipKorea
-bset #3, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipKorea:
-btst #5, $DEFEATED_TEAMS
-beq p1_skipItaly
-bset #7, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipItaly:
-btst #6, $DEFEATED_TEAMS
-beq p1_skipMexico
-bset #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipMexico:
-btst #7, $DEFEATED_TEAMS
-beq p1_skipEngland
-bset #1, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p1_skipEngland:
-bra setCpuAlreadyUsedIndex_done
-
-setCpuAlreadyUsedIndex_player2:
-btst #1, $PLAY_MODE
-beq setCpuAlreadyUsedIndex_done ; player two is not playing, nothing to do
-
-clr.b $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-btst #0, $DEFEATED_TEAMS
-beq p2_skipBrazil
-bset #5, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipBrazil:
-btst #1, $DEFEATED_TEAMS
-beq p2_skipChina
-bset #1, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipChina:
-btst #2, $DEFEATED_TEAMS
-beq p2_skipJapan
-bset #2, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipJapan:
-btst #3, $DEFEATED_TEAMS
-beq p2_skipUSA
-bset #3, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipUSA:
-btst #4, $DEFEATED_TEAMS
-beq p2_skipKorea
-bset #4, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipKorea:
-btst #5, $DEFEATED_TEAMS
-beq p2_skipItaly
-bset #0, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipItaly:
-btst #6, $DEFEATED_TEAMS
-beq p2_skipMexico
-bset #7, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipMexico:
-btst #7, $DEFEATED_TEAMS
-beq p2_skipEngland
-bset #6, $CPU_RANDOM_SELECT_ALREADY_USED_INDEXES
-
-p2_skipEngland:
-
-setCpuAlreadyUsedIndex_done:
 rts
 
 
