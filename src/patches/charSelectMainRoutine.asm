@@ -129,26 +129,32 @@ rts
 
 ;;; transitionPastPlayerSelect
 ;;; moves from player select to cpu or done,
-;;; depending on if this is versus mode or not
+;;; depending on if this is versus mode, if the player continued, or not
 transitionPastPlayerSelect:
 ; is this versus mode? then we are totally done
 cmpi.b #3, $PLAY_MODE
-bne transitionPastPlayerSelect_setCpuPhase
-;; this is versus mode, char select is now done
+beq transitionPastPlayerSelect_setCharSelectDone
+; did the player continue?
+btst #6, $PLAY_MODE
+; yes? then we are also totally done
+bne transitionPastPlayerSelect_setCharSelectDone
+
+; this is neither versus mode nor did the player continue,
+; so we need to go to cpu phase
+move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
+;; custom or o8? we have to wait till now to figure this out
+;; because one input is what team the player chose
+jsr $2DETERMINE_CPU_TEAM_MODE
+;; now that we know the mode, we can load cursors
+jsr $2LOAD_CPU_CURSORS
+bra transitionPlastPlayerSelect_done
+
+transitionPastPlayerSelect_setCharSelectDone:
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
 ; it will do all the necessary things to successfully move to order select
 bsr goToTeamSelect
-bra transitionPlastPlayerSelect_done
-
-transitionPastPlayerSelect_setCpuPhase:
-move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
-;; signal out that the game should move on
-jsr $2DETERMINE_CPU_TEAM_MODE
-jsr $2LOAD_CPU_CURSORS
-;; reset the general counter
-move.b #$ff, $THROTTLE_COUNTER
 
 transitionPlastPlayerSelect_done:
 rts

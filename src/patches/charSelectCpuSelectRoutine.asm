@@ -13,7 +13,13 @@ bne done
 subi.b #1, $CPU_CUSTOM_TEAMS_COUNTDOWN
 beq done
 
-;; first, is this the rugal fight?
+;; did the player continue? If so, nothing to do here,
+;; just leave the cpu cursors alone on the cpu team that  
+;; the player will fight again
+btst #6, $PLAY_MODE
+bne done
+
+;; is this the rugal fight?
 cmpi.b #$ff, $DEFEATED_TEAMS
 bne skipRugal
 ;; ok, this is Rugal. We just need to ensure he's set up
