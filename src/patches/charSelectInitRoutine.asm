@@ -115,9 +115,9 @@ bra p1_pastReady
 p1_continued:
 ;; set the continue flag so char select knows to show the cpu team
 bset #6, $PLAY_MODE
-move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P2_CHOSEN_CHAR0
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P2_CHOSEN_CHAR0
 move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 1, $P2_CHOSEN_CHAR1
-move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING + 2, $P2_CHOSEN_CHAR2
+move.b $P2_CHOSEN_CHARS_IN_ORDER_OF_CHOOSING, $P2_CHOSEN_CHAR2
 move.b #3, $P2_NUM_CHOSEN_CHARS
 bra p1_skipClearP2NumChosen
 

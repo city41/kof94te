@@ -6,6 +6,7 @@
   "license": "GPL-3.0-only",
   "scripts": {
     "restore": "cp kof94.zip $MAME_ROM_DIR",
+    "restore-prod": "cp kof94te_prod.zip $MAME_ROM_DIR/kof94.zip",
     "type-check": "yarn tsc --noemit",
     "to-neosd": "bash scripts/toneosd.sh",
     "mame": "mame -w -nofilter -nomouse -sound none kof94",

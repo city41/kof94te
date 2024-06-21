@@ -28,10 +28,7 @@ addi.b #1, $THROTTLE_COUNTER
 
 ;; if this is versus mode, randomize the team to get a random stage
 cmpi.b #3, $PLAY_MODE ; is this versus mode?
-beq pickVersusRandomStage ; then we need a random stage
-bra skipVersusRandomStage
-
-pickVersusRandomStage:
+bne skipVersusRandomStage
 ;; get a random number between 0-7
 ;; the game's rng uses A0
 movem.l A0, $MOVEM_STORAGE
