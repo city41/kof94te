@@ -3,6 +3,11 @@
 ;; then set's the cpu's team id to that value
 ;; this ensures in single player games, all 8 stages (ie teams)
 ;; are visited, which is a requirement for getting to Rugal
+
+;; first, did the player continue? if so, nothing to do, keep using the same stage
+btst #6, $PLAY_MODE
+bne done
+
 bsr getCpuStage ; the chosen team id is left in D0
 btst #0, $PLAY_MODE ; is player one human?
 beq setP1CpuStage
