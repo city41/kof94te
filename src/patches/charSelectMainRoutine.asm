@@ -153,7 +153,6 @@ move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 ;; signal out that the game should move on
 move.b #1, $READY_TO_EMPTY_TEAM_SELECT_TIMER
 jsr $2DETERMINE_CPU_TEAM_MODE
-jsr $2DETERMINE_CPU_NEXT_STAGE
 jsr $2LOAD_CPU_CURSORS
 ;; reset the general counter
 move.b #$ff, $THROTTLE_COUNTER
@@ -267,8 +266,6 @@ rts
 ;;; transitionPastSubsequentSelect
 ;;; moves from subsequent select to done,
 transitionPastSubsequentSelect:
-;; choose the next stage to fight on
-jsr $2DETERMINE_CPU_NEXT_STAGE
 ;;; for now, this just does the same thing as cpu
 bsr transitionPastCpuSelect
 rts

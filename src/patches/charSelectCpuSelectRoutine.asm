@@ -13,6 +13,17 @@ bne done
 subi.b #1, $CPU_CUSTOM_TEAMS_COUNTDOWN
 beq done
 
+;; first, is this the rugal fight?
+cmpi.b #$ff, $DEFEATED_TEAMS
+bne skipRugal
+;; ok, this is Rugal. We just need to ensure he's set up
+;; there's no cursor/random logic needed
+bsr setCpuToRugal
+bra done
+
+
+skipRugal:
+
 cmpi.b #0, $PLAY_MODE ; is this demo mode?
 bne prepCustomCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
@@ -119,7 +130,8 @@ rts
 ;; parameters
 ;; A0: pointer to a player's base data
 pickCpuCustomTeam:
-;; set num chosen back to zero
+;; make sure we have moved to an undefeated team
+jsr $2DETERMINE_CPU_NEXT_STAGE
 move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
 bsr getRandomCharacterId
@@ -174,4 +186,30 @@ pickCpuTeam_custom:
 bsr pickCpuCustomTeam
 
 pickCpuTeam_done:
+rts
+
+
+;; setCpuToRugal
+;; when it's time to fight Rugal, this routine
+;; makes sure everything about the fight is all set up
+setCpuToRugal:
+btst #0, $PLAY_MODE ; is player one playing?
+beq setCpuToRugal_loadPlayerDataSkipPlayer1
+;; player 1 is human, load p2 for cpu
+lea $P2_CUR_INPUT, A0
+move.b #8, $108431 ; make sure team 2 is Rugal
+bra setCpuToRugal_doneLoadingPlayerData
+
+setCpuToRugal_loadPlayerDataSkipPlayer1:
+;; player 2 is human, load p1 for cpu
+lea $P1_CUR_INPUT, A0
+move.b #8, $108231 ; make sure team 1 is Rugal
+
+setCpuToRugal_doneLoadingPlayerData:
+
+move.b #$18, $PX_CHOSEN_CHAR0_OFFSET(A0)
+move.b #$19, $PX_CHOSEN_CHAR1_OFFSET(A0)
+move.b #$19, $PX_CHOSEN_CHAR2_OFFSET(A0)
+move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
+
 rts
