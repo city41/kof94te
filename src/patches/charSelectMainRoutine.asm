@@ -48,6 +48,8 @@ skipVersusRandomStage:
 
 cmpi.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doPlayerSelect
+cmpi.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
+beq doCpuDelay
 cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
 cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
@@ -64,6 +66,23 @@ bne skipTransitionPastPlayerSelect ; not done yet
 bsr transitionPastPlayerSelect ; move to next phase
 skipTransitionPastPlayerSelect:
 bra done
+
+; delay a bit between player select and cpu select
+; so that the final player select sound effect doesn't
+; get cut off
+doCpuDelay:
+subi.b #1, $CPU_DELAY_COUNTDOWN
+bne done
+; countdown has hit zero, time to move to cpu
+;
+; custom or o8? we have to wait till now to figure this out
+; because one input is what team the player chose
+jsr $2DETERMINE_CPU_TEAM_MODE
+; now that we know the mode, we can load cursors
+jsr $2LOAD_CPU_CURSORS
+move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
+bra done
+
 
 
 doCpuSelect:
@@ -145,14 +164,11 @@ btst #6, $PLAY_MODE
 bne transitionPastPlayerSelect_setCharSelectDone
 
 ; this is neither versus mode nor did the player continue,
-; so we need to go to cpu phase
-move.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
-;; custom or o8? we have to wait till now to figure this out
-;; because one input is what team the player chose
-jsr $2DETERMINE_CPU_TEAM_MODE
-;; now that we know the mode, we can load cursors
-jsr $2LOAD_CPU_CURSORS
-bra transitionPlastPlayerSelect_done
+; so we need to go to cpu phase, but first we will delay a bit
+; to allow the player's final sound effect to finish
+move.b #30, $CPU_DELAY_COUNTDOWN
+move.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
+bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
 move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
@@ -161,7 +177,7 @@ move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; it will do all the necessary things to successfully move to order select
 bsr goToTeamSelect
 
-transitionPlastPlayerSelect_done:
+transitionPastPlayerSelect_done:
 rts
 
 
