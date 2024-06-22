@@ -133,43 +133,43 @@
       "name": "p1_cursor_left_black",
       "imageFile": "./p1_cursor_left_black.png",
       "x": 16,
-      "y": 20
+      "y": 19
     },
     {
       "name": "p1_cursor_right_white",
       "imageFile": "./p1_cursor_right_white.png",
       "x": 34,
-      "y": 20
+      "y": 19
     },
     {
       "name": "p1_cursor_right_black",
       "imageFile": "./p1_cursor_right_black.png",
       "x": 34,
-      "y": 20
+      "y": 19
     },
     {
       "name": "p2_cursor_left_white",
       "imageFile": "./p2_cursor_left_white.png",
       "x": 272,
-      "y": 20
+      "y": 19
     },
     {
       "name": "p2_cursor_left_black",
       "imageFile": "./p2_cursor_left_black.png",
       "x": 272,
-      "y": 20
+      "y": 19
     },
     {
       "name": "p2_cursor_right_white",
       "imageFile": "./p2_cursor_right_white.png",
-      "x": 288,
-      "y": 20
+      "x": 289,
+      "y": 19
     },
     {
       "name": "p2_cursor_right_black",
       "imageFile": "./p2_cursor_right_black.png",
-      "x": 288,
-      "y": 20
+      "x": 289,
+      "y": 19
     },
     {
       "name": "cpu_p1_cursor_original8_white",

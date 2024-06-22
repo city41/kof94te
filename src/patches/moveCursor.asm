@@ -133,12 +133,14 @@ bra checkInput ; and rerun the routine with right
 moveCursor:
 move.w D1, $PX_CURSOR_X_OFFSET(A0) ; save the new X
 move.w D2, $PX_CURSOR_Y_OFFSET(A0) ; save the new Y
+move.w D1, D6 ; save a copy for trailer/random nudge below
+move.w D2, D7 ; save a copy for trailer/random nudge below
 
 ;; now move the sprites
 
 ;; move left sprite
 
-;; check for nudge
+;; check for leader nudge
 move.w #0, D4 ; assume we're not nudging
 cmpi.b #0, D1
 beq nudgeForLeader
@@ -146,15 +148,15 @@ cmpi.b #3, D1
 beq nudgeForLeader
 cmpi.b #6, D1
 beq nudgeForLeader
-bra skipNudge
+bra skipLeaderNudge
 
 
 ;; this is a leader, move its left cursor over 1 pixel
 ;; to make it look just a little better
 nudgeForLeader:
 move.w #1, D4
+skipLeaderNudge:
 
-skipNudge:
 
 ;; check for Rugal nudge
 move.w #0, D5  ; assume we're not nudging
@@ -176,7 +178,7 @@ mulu.w #32, D1 ; convert X index to X pixel
 addi.w #15, D1  ; add the X offset (16px from edge of screen)
 add.w D4, D1   ; add the nudge in
 mulu.w #32, D2 ; convert Y index to Y pixel
-addi.w #20, D2 ; add the Y offset (27px from top of screen)
+addi.w #19, D2 ; add the Y offset (27px from top of screen)
 add.w D5, D2   ; add in the Rugal nudge, if any
 move.w #496, D3
 sub.w D2, D3   ; D3 = D3 - D2, convert Y to the bizarre format the system wants
@@ -188,7 +190,31 @@ jsr $2MOVE_SPRITE ; and finally, move the sprite
 movem.w $MOVEM_STORAGE, D1-D3
 
 ;; and the right one
+
+;; check for trailer nudge
+move.w #0, D4 ; assume we're not nudging
+cmpi.b #2, D6
+beq nudgeForTrailer
+cmpi.b #5, D6
+beq nudgeForTrailer
+cmpi.b #8, D6
+beq nudgeForTrailer
+
+; at this point it's not a trailer, but is it character roulette?
+; if so, that needs a nudge too
+cmpi.b #3, D6 ; does x=3?
+bne skipTrailerNudge ; no? then not roulette
+cmpi.b #2, D7 ; does y=2?
+bne skipTrailerNudge ; no? then not roulette
+
+;; this is a trailer, move its left cursor over 1 pixel
+;; to make it look just a little better
+nudgeForTrailer:
+move.w #-1, D4
+skipTrailerNudge:
+
 addi.w #19, D1
+add.w D4, D1 ; add the nudge in 
 move.w $PX_CURSOR_SPRITEINDEX_OFFSET(A0), D0 ; load the sprite index
 addi.w #1, D0 ; we need the sprite next door for right
 jsr $2MOVE_SPRITE ; and finally, move the sprite
