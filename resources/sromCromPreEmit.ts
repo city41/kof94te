@@ -293,8 +293,8 @@ function createGreyCharacterGridEmit(greyCromImage: AsmCromImage) {
 function createRugalInjectData(rugalImage: AsmCromImage): number[] {
   const words: number[] = [];
 
-  // grid first si is 0x153, Rugal's first column is 8 over, and 6 tiles down
-  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 6 * 2;
+  // grid first si is 0x153, Rugal's first column is 8 over, and 7 tiles down
+  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 7 * 2;
 
   words.push(firstColumnSCB1StartingAddress);
   words.push(rugalImage.columns[0].scb1[0].evenWord);
@@ -305,9 +305,9 @@ function createRugalInjectData(rugalImage: AsmCromImage): number[] {
   words.push(firstColumnSCB1StartingAddress + 3);
   words.push(rugalImage.columns[0].scb1[1].oddWord);
 
-  // grid first si is 0x153, Rugal's second column is 9 over, and 6 tiles down
+  // grid first si is 0x153, Rugal's second column is 9 over, and 7 tiles down
 
-  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 6 * 2;
+  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 7 * 2;
 
   words.push(secondColumnSCB1StartingAddress);
   words.push(rugalImage.columns[1].scb1[0].evenWord);

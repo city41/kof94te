@@ -107,9 +107,7 @@
     },
     {
       "name": "rugal_character_grid",
-      "imageFile": "./rugal_character_grid_a95.png",
-      "x": 144,
-      "y": 123
+      "imageFile": "./rugal_character_grid_a95.png"
     },
     {
       "name": "avatars",

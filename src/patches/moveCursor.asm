@@ -169,7 +169,7 @@ cmpi.w #2, D2
 bne skipRugalYNudge
 
 ; we are on Rugal, need to nudge Y down
-move.w #32, D5
+move.w #48, D5
 
 
 skipRugalYNudge:
