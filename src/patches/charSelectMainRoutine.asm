@@ -188,7 +188,7 @@ rts
 ;;; returns
 ;;; D6.b: 0 if not done, 1 if done
 checkIfCpuSelectIsDone:
-cmpi.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
+cmpi.b #0, $CPU_TEAM_SELECT_COUNTDOWN
 beq checkIfCpuSelectIsDone_cpuIsDone
 bra checkIfCpuSelectIsDone_notYet
 

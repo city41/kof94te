@@ -10,7 +10,7 @@ andi.b #$7, D4
 ;; this means only random select every 8 frames
 bne done
 
-subi.b #1, $CPU_CUSTOM_TEAMS_COUNTDOWN
+subi.b #1, $CPU_TEAM_SELECT_COUNTDOWN
 beq done
 
 ;; did the player continue? If so, nothing to do here,
@@ -221,6 +221,6 @@ move.b #$19, $PX_CHOSEN_CHAR2_OFFSET(A0)
 move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
 ; and let's drain the countdown so you don't sit on char select too long
-move.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
+move.b #0, $CPU_TEAM_SELECT_COUNTDOWN
 
 rts
