@@ -166,7 +166,7 @@ bne transitionPastPlayerSelect_setCharSelectDone
 ; this is neither versus mode nor did the player continue,
 ; so we need to go to cpu phase, but first we will delay a bit
 ; to allow the player's final sound effect to finish
-move.b #30, $CPU_DELAY_COUNTDOWN
+move.b #20, $CPU_DELAY_COUNTDOWN
 move.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
 bra transitionPastPlayerSelect_done
 
