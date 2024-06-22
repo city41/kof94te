@@ -133,8 +133,8 @@ bra checkInput ; and rerun the routine with right
 moveCursor:
 move.w D1, $PX_CURSOR_X_OFFSET(A0) ; save the new X
 move.w D2, $PX_CURSOR_Y_OFFSET(A0) ; save the new Y
-move.w D1, D6 ; save a copy for trailer/random nudge below
-move.w D2, D7 ; save a copy for trailer/random nudge below
+move.w D1, D6 ; save a copy for trailer/random/rugal nudge below
+move.w D2, D7 ; save a copy for trailer/random/rugal nudge below
 
 ;; now move the sprites
 
@@ -142,11 +142,11 @@ move.w D2, D7 ; save a copy for trailer/random nudge below
 
 ;; check for leader nudge
 move.w #0, D4 ; assume we're not nudging
-cmpi.b #0, D1
+cmpi.w #0, D1
 beq nudgeForLeader
-cmpi.b #3, D1
+cmpi.w #3, D1
 beq nudgeForLeader
-cmpi.b #6, D1
+cmpi.w #6, D1
 beq nudgeForLeader
 bra skipLeaderNudge
 
@@ -158,21 +158,21 @@ move.w #1, D4
 skipLeaderNudge:
 
 
-;; check for Rugal nudge
+;; check for Rugal y nudge
 move.w #0, D5  ; assume we're not nudging
 btst #3, $100000 ; is the Rugal debug dip turned on?
-beq skipRugalNudge ; nope, no Rugal, no nudge
+beq skipRugalYNudge ; nope, no Rugal, no nudge
 ; ok Rugal is on, but is the cursor at his location?
-cmpi.b #4, D1
-bne skipRugalNudge
-cmpi.b #2, D2
-bne skipRugalNudge
+cmpi.w #4, D1
+bne skipRugalYNudge
+cmpi.w #2, D2
+bne skipRugalYNudge
 
 ; we are on Rugal, need to nudge Y down
 move.w #32, D5
 
 
-skipRugalNudge:
+skipRugalYNudge:
 
 mulu.w #32, D1 ; convert X index to X pixel
 addi.w #15, D1  ; add the X offset (16px from edge of screen)
@@ -191,27 +191,38 @@ movem.w $MOVEM_STORAGE, D1-D3
 
 ;; and the right one
 
-;; check for trailer nudge
+;; check for trailer nudge, ie the character is the third member of their team
 move.w #0, D4 ; assume we're not nudging
-cmpi.b #2, D6
+cmpi.w #2, D6
 beq nudgeForTrailer
-cmpi.b #5, D6
+cmpi.w #5, D6
 beq nudgeForTrailer
-cmpi.b #8, D6
+cmpi.w #8, D6
 beq nudgeForTrailer
 
 ; at this point it's not a trailer, but is it character roulette?
 ; if so, that needs a nudge too
-cmpi.b #3, D6 ; does x=3?
-bne skipTrailerNudge ; no? then not roulette
-cmpi.b #2, D7 ; does y=2?
-bne skipTrailerNudge ; no? then not roulette
+cmpi.w #3, D6 ; does x=3?
+bne skipRouletteNudge ; no? then not roulette
+cmpi.w #2, D7 ; does y=2?
+bne skipRouletteNudge ; no? then not roulette
+bra nudgeForTrailer
 
-;; this is a trailer, move its left cursor over 1 pixel
-;; to make it look just a little better
+skipRouletteNudge:
+
+;; one last check, is this Rugal? he needs a right nudge too
+btst #3, $100000 ; is the Rugal debug dip turned on?
+beq skipTrailerNudge ; nope, no Rugal, no nudge
+; ok Rugal is on, but is the cursor at his location?
+cmpi.w #4, D6 ; does x=4?
+bne skipTrailerNudge ; no? then not Rugal, no nudge
+cmpi.w #2, D7 ; does y=2?
+bne skipTrailerNudge ; no? then not Rugal, no nudge
+
 nudgeForTrailer:
 move.w #-1, D4
 skipTrailerNudge:
+
 
 addi.w #19, D1
 add.w D4, D1 ; add the nudge in 
