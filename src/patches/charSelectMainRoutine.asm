@@ -26,16 +26,21 @@ doneRugalOnGrid:
 ;;; this is a generic counter used by parts of the hack that need throttling
 addi.b #1, $THROTTLE_COUNTER
 
-;; if this is versus mode, randomize the team to get a random stage
+;; if this is versus or demo mode, randomize the team to get a random stage
 cmpi.b #3, $PLAY_MODE ; is this versus mode?
-bne skipVersusRandomStage
+beq pickRandomStage
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
+beq pickRandomStage
+bra skipVersusRandomStage
+
+pickRandomStage:
 ;; get a random number between 0-7
 ;; the game's rng uses A0
 movem.l A0, $MOVEM_STORAGE
 jsr $2582 ; call the game's rng, it leaves a random byte in D0
 movem.l $MOVEM_STORAGE, A0
 andi.b #$7, D0; chop the random byte down to 3 bits -> 0 through 7
-;; this is versus mode, randomize the team ids to get a random stage
+;; this is versus or demo mode, randomize the team ids to get a random stage
 move.b D0, $108231 ; set team 1 to this random id
 move.b D0, $108431 ; and team 2 too
 

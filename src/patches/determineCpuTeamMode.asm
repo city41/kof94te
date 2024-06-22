@@ -3,7 +3,15 @@
 ;;; takes all factors into account and then decides if the CPU should
 ;;; use custom teams or original 8 teams.
 
-;; first did the player override by holding C or D?
+cmpi.b #0, $PLAY_MODE ; is this demo mode?
+bne notDemoMode
+;; demo mode always uses custom teams
+move.b #1, $CPU_CUSTOM_TEAMS_FLAG
+bra done
+
+notDemoMode:
+
+;; did the player override by holding C or D?
 ;; if so, that wins no matter what
 cmpi.b #1, $OVERRODE_CPU_CSTM_FLAG
 beq done
