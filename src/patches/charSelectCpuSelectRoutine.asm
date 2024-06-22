@@ -220,4 +220,7 @@ move.b #$19, $PX_CHOSEN_CHAR1_OFFSET(A0)
 move.b #$19, $PX_CHOSEN_CHAR2_OFFSET(A0)
 move.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 
+; and let's drain the countdown so you don't sit on char select too long
+move.b #0, $CPU_CUSTOM_TEAMS_COUNTDOWN
+
 rts
