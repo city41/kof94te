@@ -45,8 +45,19 @@ doSinglePlayer:
 
 cmpi.b #3, $PX_NUM_CHOSEN_CHARS_OFFSET(A0)
 bne threeCharsNotChosen ; if three have been chosen, don't choose more
-bsr hidePlayerCursor
+
+;; did they choose team select and we need to play the sfx yet?
+cmpi.b #0, $PX_RANDOM_SELECT_TEAM_CHOICE_SFX_COUNTDOWN_OFFSET(A0)
+beq doneWithTeamSelectSfx ; no they didn't (or it's done)
+subi.b #1, $PX_RANDOM_SELECT_TEAM_CHOICE_SFX_COUNTDOWN_OFFSET(A0)
+bne skipChoosingChar ; we have more to decrement, bail all the way and try next frame
+;; ok we have decremented it down to zero, time to play!
+move.b #$61, $320000  ; play the character chosen sound effect
+
+doneWithTeamSelectSfx:
+
 move.b #1, $PX_IS_READY_OFFSET(A0) ; let main know we are ready to move forward
+bsr hidePlayerCursor
 bra skipChoosingChar
 
 threeCharsNotChosen:
@@ -126,6 +137,12 @@ move.b #$ff, D6 ; this is team select, but whole team has not been chosen, dont 
 bra slotMachine_doneChoiceSoundEffect
 slotMachine_turnOnChoiceSoundEffect:
 move.b #$0, D6 ; this is char select, or final team select, do sound effect
+cmpi.b #$RANDOM_SELECT_TYPE_TEAM, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
+bne slotMachine_skipSetDelayedSoundEffect
+;; this is team select, we want to play a single choice sound effect,
+;; but need to delay it
+move.b #10, $PX_RANDOM_SELECT_TEAM_CHOICE_SFX_COUNTDOWN_OFFSET(A0)
+slotMachine_skipSetDelayedSoundEffect:
 slotMachine_doneChoiceSoundEffect:
 bsr saveChar
 dbra D3, slotMachine_chooseChar ; is this team select? go back and keep saving chars then

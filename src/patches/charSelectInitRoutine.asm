@@ -6,6 +6,10 @@ move.b #$ff, $THROTTLE_COUNTER
 ;; clear out the flag
 move.b #0, $IN_HERE_COMES_CHALLENGER
 
+;; clear out the delay sfx timer so we don't accidentally play one
+move.b #0, $P1_RANDOM_SELECT_TEAM_CHOICE_SFX_COUNTDOWN
+move.b #0, $P2_RANDOM_SELECT_TEAM_CHOICE_SFX_COUNTDOWN
+
 move.b #$MAIN_PHASE_INIT, $MAIN_HACK_PHASE
 move.b #1, $IN_CHAR_SELECT_FLAG
 
