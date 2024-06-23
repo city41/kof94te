@@ -4,7 +4,7 @@
 
 ;; SCB1 word pairs
 dc.w $b7b
-dc.w $3400
+dc.w $3700
 dc.w $b49
 dc.w $1700
 
@@ -12,7 +12,7 @@ dc.w $1700
 
 ;; SCB1 word pairs
 dc.w $b7c
-dc.w $3500
+dc.w $3800
 dc.w $b94
 dc.w $1700
 
@@ -52,17 +52,17 @@ dc.w $1900
 
 ;; SCB1 word pairs
 dc.w $b7d
-dc.w $3600
+dc.w $3900
 dc.w $b95
-dc.w $3600
+dc.w $3900
 
 ;;; column 7
 
 ;; SCB1 word pairs
 dc.w $b7e
-dc.w $3600
+dc.w $3900
 dc.w $b96
-dc.w $3600
+dc.w $3900
 
 ;;; column 8
 
@@ -70,7 +70,7 @@ dc.w $3600
 dc.w $b1f
 dc.w $1e00
 dc.w $b97
-dc.w $3e00
+dc.w $4100
 
 ;;; column 9
 
@@ -78,23 +78,23 @@ dc.w $3e00
 dc.w $b20
 dc.w $1e00
 dc.w $b98
-dc.w $3e00
+dc.w $4100
 
 ;;; column 10
 
 ;; SCB1 word pairs
 dc.w $b7f
-dc.w $3700
+dc.w $3a00
 dc.w $b99
-dc.w $3700
+dc.w $3a00
 
 ;;; column 11
 
 ;; SCB1 word pairs
 dc.w $b80
-dc.w $3700
+dc.w $3a00
 dc.w $b9a
-dc.w $3700
+dc.w $3a00
 
 ;;; column 12
 
@@ -132,7 +132,7 @@ dc.w $2a00
 
 ;; SCB1 word pairs
 dc.w $b83
-dc.w $3800
+dc.w $3b00
 dc.w $b59
 dc.w $2b00
 
@@ -140,7 +140,7 @@ dc.w $2b00
 
 ;; SCB1 word pairs
 dc.w $b84
-dc.w $3800
+dc.w $3b00
 dc.w $b5a
 dc.w $2400
 
@@ -148,23 +148,23 @@ dc.w $2400
 
 ;; SCB1 word pairs
 dc.w $b85
-dc.w $3200
+dc.w $3500
 dc.w $b9d
-dc.w $3c00
+dc.w $3f00
 
 ;;; column 19
 
 ;; SCB1 word pairs
 dc.w $b86
-dc.w $3300
+dc.w $3600
 dc.w $b9e
-dc.w $3300
+dc.w $3600
 
 ;;; column 20
 
 ;; SCB1 word pairs
 dc.w $b87
-dc.w $3900
+dc.w $3c00
 dc.w $b5d
 dc.w $1500
 
@@ -172,25 +172,25 @@ dc.w $1500
 
 ;; SCB1 word pairs
 dc.w $b88
-dc.w $3900
+dc.w $3c00
 dc.w $b9f
-dc.w $3900
+dc.w $3c00
 
 ;;; column 22
 
 ;; SCB1 word pairs
 dc.w $b89
-dc.w $3a00
+dc.w $3d00
 dc.w $ba0
-dc.w $3f00
+dc.w $4200
 
 ;;; column 23
 
 ;; SCB1 word pairs
 dc.w $b8a
-dc.w $3a00
+dc.w $3d00
 dc.w $ba1
-dc.w $3a00
+dc.w $3d00
 
 ;;; column 24
 
@@ -198,7 +198,7 @@ dc.w $3a00
 dc.w $b2f
 dc.w $1c00
 dc.w $ba2
-dc.w $3300
+dc.w $3600
 
 ;;; column 25
 
@@ -206,7 +206,7 @@ dc.w $3300
 dc.w $b30
 dc.w $1c00
 dc.w $ba3
-dc.w $4000
+dc.w $4300
 
 ;;; column 26
 
@@ -244,7 +244,7 @@ dc.w $1b00
 
 ;; SCB1 word pairs
 dc.w $b8b
-dc.w $3a00
+dc.w $3d00
 dc.w $ba5
 dc.w $1a00
 
@@ -252,7 +252,7 @@ dc.w $1a00
 
 ;; SCB1 word pairs
 dc.w $b8c
-dc.w $3b00
+dc.w $3e00
 dc.w $ba6
 dc.w $1a00
 
@@ -276,7 +276,7 @@ dc.w $1300
 
 ;; SCB1 word pairs
 dc.w $b8d
-dc.w $3b00
+dc.w $3e00
 dc.w $b6b
 dc.w $1400
 
@@ -284,9 +284,9 @@ dc.w $1400
 
 ;; SCB1 word pairs
 dc.w $b8e
-dc.w $3c00
+dc.w $3f00
 dc.w $ba7
-dc.w $3b00
+dc.w $3e00
 
 ;;; column 36
 
@@ -302,7 +302,7 @@ dc.w $2e00
 dc.w $b3c
 dc.w $2c00
 dc.w $ba8
-dc.w $4100
+dc.w $4400
 
 ;;; column 38
 
@@ -326,7 +326,7 @@ dc.w $2c00
 dc.w $b3f
 dc.w $2d00
 dc.w $ba9
-dc.w $4200
+dc.w $4500
 
 ;;; column 41
 
@@ -340,17 +340,17 @@ dc.w $2d00
 
 ;; SCB1 word pairs
 dc.w $b91
-dc.w $3d00
+dc.w $4000
 dc.w $bab
-dc.w $3d00
+dc.w $4000
 
 ;;; column 43
 
 ;; SCB1 word pairs
 dc.w $b92
-dc.w $3d00
+dc.w $4000
 dc.w $bac
-dc.w $3d00
+dc.w $4000
 
 ;;; column 44
 
