@@ -107,6 +107,19 @@ skipTransitionPastSubsequentSelect:
 bra done
 
 doScaleGridDown:
+jsr $2SCALE_GRID
+subi.w #17, $GRID_SCALE_COUNTDOWN
+bne done
+
+move.w #$GRID_IMAGE_SI, D6
+move.w #18, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
 ; it will do all the necessary things to successfully move to order select
@@ -181,6 +194,7 @@ bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
 move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+move.w #$ff, $GRID_SCALE_COUNTDOWN
 
 transitionPastPlayerSelect_done:
 rts
@@ -214,6 +228,7 @@ transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
 move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+move.w #$ff, $GRID_SCALE_COUNTDOWN
 rts
 
 
@@ -374,7 +389,9 @@ rts
 ;; a tiny hack to let the game set up order select for us
 goToTeamSelect:
 ;; set the function pointer to team select
-move.l #$37046, $108584
+jsr $37046
+; move.l #$37046, $108584
+move.l #$370bc, $108584
 ;; drain the timer, so it stays in team select as little as possible
 move.w #1, $108654
 

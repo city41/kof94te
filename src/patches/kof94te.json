@@ -104,6 +104,7 @@
 
     "STORE_ALL_REGISTERS": "10eb0c",
     "PLAY_MOVEMENT_SFX": "10eb30",
+    "GRID_SCALE_COUNTDOWN": "10eb32",
 
     "GRID_IMAGE_SI": "153",
     "P2_CURSOR_LEFT_SI": "169",
@@ -516,6 +517,13 @@
       "subroutine": true,
       "symbol": "LOAD_CPU_CURSORS",
       "patchAsm": "loadCpuCursors.asm"
+    },
+    {
+      "type": "prom",
+      "description": "scale grid routine",
+      "subroutine": true,
+      "symbol": "SCALE_GRID",
+      "patchAsm": "scaleGrid.asm"
     },
     {
       "type": "prom",
