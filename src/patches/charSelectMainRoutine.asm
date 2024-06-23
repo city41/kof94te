@@ -54,6 +54,8 @@ cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
 cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doSubsequentSelect
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+beq doScaleGridDown
 bra done
 
 
@@ -102,6 +104,13 @@ cmpi.b #1, D6 ; if it is done, D6 will be 1
 bne skipTransitionPastSubsequentSelect
 bsr transitionPastSubsequentSelect
 skipTransitionPastSubsequentSelect:
+bra done
+
+doScaleGridDown:
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; go back to OG team select, just for a few frames. That way
+; it will do all the necessary things to successfully move to order select
+bsr goToTeamSelect
 bra done
 
 done:
@@ -171,11 +180,7 @@ move.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
 bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, just for a few frames. That way
-; it will do all the necessary things to successfully move to order select
-bsr goToTeamSelect
+move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
 
 transitionPastPlayerSelect_done:
 rts
@@ -208,11 +213,7 @@ rts
 transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, just for a few frames. That way
-; it will do all the necessary things to successfully move to order select
-bsr goToTeamSelect
+move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
 rts
 
 
