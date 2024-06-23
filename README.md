@@ -1,6 +1,6 @@
 # King of Fighters 94: Team Edit Edition
 
-Discord: https://discord.gg/Uuaka5mq
+Discord: https://discord.gg/tvm4fpkUNq
 
 A ROM hack for KOF94 that adds team edit.
 
