@@ -124,16 +124,16 @@ doScaleGridDown:
 
 jsr $2SCALE_GRID
 
-cmpi.w #100, $GRID_SCALE_COUNTDOWN
+cmpi.w #190, $GRID_SCALE_COUNTDOWN
 bge skipSlideAvatars
-; jsr $2SLIDE_AVATARS
+jsr $2SLIDE_AVATARS
 skipSlideAvatars:
 
 subi.w #17, $GRID_SCALE_COUNTDOWN
 bne done
 
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, just for a few frames. That way
+; go back to OG team select, That way
 ; it will do all the necessary things to successfully move to order select
 bsr goToTeamSelect
 bra done
@@ -424,3 +424,5 @@ jsr $2TRUNCATE_SPRITES_ROUTINE
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 move.w #6, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
+
+rts
