@@ -121,13 +121,14 @@ bra done
 doScaleGridDown:
 
 jsr $2SCALE_GRID
-
-cmpi.w #190, $GRID_SCALE_COUNTDOWN
-bge skipSlideAvatars
 jsr $2SLIDE_AVATARS
-skipSlideAvatars:
 
-subi.w #17, $GRID_SCALE_COUNTDOWN
+; cmpi.w #190, $GRID_SCALE_COUNTDOWN
+; bge skipSlideAvatars
+; jsr $2SLIDE_AVATARS
+; skipSlideAvatars:
+
+subi.w #51, $GRID_SCALE_COUNTDOWN
 bne done
 
 move.b #$MAIN_PHASE_SCALE_GRID_DONE, $MAIN_HACK_PHASE
