@@ -425,4 +425,7 @@ move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 move.w #6, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
 
+;; set up the grid y position
+move.w #$SCALE_GRID_Y_STARTING_POSITION, $SCALE_GRID_Y_POSITION
+
 rts
