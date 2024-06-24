@@ -123,14 +123,14 @@ bra done
 doScaleGridDown:
 
 jsr $2SCALE_GRID
+
+cmpi.w #100, $GRID_SCALE_COUNTDOWN
+bge skipSlideAvatars
+; jsr $2SLIDE_AVATARS
+skipSlideAvatars:
+
 subi.w #17, $GRID_SCALE_COUNTDOWN
 bne done
-
-move.w #$GRID_IMAGE_SI, D6
-move.w #18, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
-
-
 
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
 ; go back to OG team select, just for a few frames. That way
@@ -424,17 +424,3 @@ jsr $2TRUNCATE_SPRITES_ROUTINE
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 move.w #6, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
-
-;; clear out chosen avatars
-move.w #1, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #2, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #3, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #4, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #5, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #6, D6
-jsr $2CLEAR_CHOSEN_AVATAR

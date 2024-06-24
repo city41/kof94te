@@ -123,6 +123,12 @@ function convertTilesFromRowsToColumns(
   return columns;
 }
 
+const stickyImages = [
+  "character_grid",
+  "p1_blank_chosen_avatars",
+  "p2_blank_chosen_avatars",
+];
+
 function prepareForAssembly(
   cromImage: SromCromCromImage,
   startingPaletteIndex: number
@@ -140,7 +146,7 @@ function prepareForAssembly(
         column,
         cromImage,
         startingPaletteIndex,
-        cromImage.name === "character_grid" && tx > 0
+        stickyImages.includes(cromImage.name) && tx > 0
       )
     ),
   };

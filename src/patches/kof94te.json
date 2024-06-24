@@ -547,6 +547,13 @@
     },
     {
       "type": "prom",
+      "description": "slide avatars routine",
+      "subroutine": true,
+      "symbol": "SLIDE_AVATARS",
+      "patchAsm": "slideAvatars.asm"
+    },
+    {
+      "type": "prom",
       "description": "main routine",
       "subroutine": true,
       "symbol": "CHAR_SELECT_MAIN_ROUTINE",
