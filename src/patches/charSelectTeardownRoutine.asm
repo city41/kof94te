@@ -1,10 +1,11 @@
-;; move the logo/countries back on screen where they used to be
+;; size the logo/countries back up to 16 so they display in order select
 ;; this enables order select to be just like in the original game,
 ;; while char select is clean
-move.w #129, D0
-move.w #32, D1
-move.w #496, D2 ; y = 0
-jsr $2MOVE_SPRITE
+bsr restoreLogo
+; move.w #129, D0
+; move.w #32, D1
+; move.w #496, D2 ; y = 0
+; jsr $2MOVE_SPRITE
 
 move.b #0, $IN_CHAR_SELECT_FLAG
 move.b #0, $MAIN_HACK_PHASE
@@ -100,3 +101,12 @@ movem.l $MOVEM_STORAGE, A4
 rts
 
 
+;;;;; SUBROUTINES
+
+;; restoreLogo
+;; returns the logo sprite's height back to 16
+;; so it shows up on order select
+restoreLogo:
+move.w #$8200 + 129, $3c0000
+move.w #$f810, $3c0002
+rts

@@ -1291,6 +1291,30 @@
       "subroutine": true,
       "symbol": "APPLY_CPU_CUSTOM_TEAM_OVERRIDES",
       "patchAsm": "checkForCpuCustomTeamOverrides.asm"
+    },
+    {
+      "type": "prom",
+      "description": "Deny moving the logo/globe onscreen during char select",
+      "address": "101de4",
+      "subroutine": true,
+      "symbol": "DENY_LOGO",
+      "patchAsm": [
+        "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
+        "bne doRegular",
+        "cmpi.w #$f810, D0",
+        "bne doRegular",
+
+        ";; ok the game wants to write the sprite onto the screen",
+        ";; lets intercept and set height to zero so it doesn't show",
+        "andi.w #$ffc0, D0",
+
+        "doRegular:",
+        ";; do the write as normal",
+        "move.w D0, (A2,D7.w)",
+        ";; restore what was clobbered",
+        "addq.w #2, D6",
+        "rts"
+      ]
     }
   ]
 }
