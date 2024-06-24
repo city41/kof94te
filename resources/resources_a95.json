@@ -229,13 +229,13 @@
       "name": "p1_blank_chosen_avatars",
       "imageFile": "./blank_chosen_avatars.png",
       "x": 32,
-      "y": 181
+      "y": 172
     },
     {
       "name": "p2_blank_chosen_avatars",
       "imageFile": "./blank_chosen_avatars.png",
       "x": 192,
-      "y": 181
+      "y": 172
     }
   ]
 }
