@@ -226,7 +226,7 @@ bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
 move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
-move.w #$ff, $SCALE_GRID_DELAY_COUNTDOWN
+move.w #$SCALE_GRID_DELAY_DURATION, $SCALE_GRID_DELAY_COUNTDOWN
 
 transitionPastPlayerSelect_done:
 rts
@@ -260,7 +260,7 @@ transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
 move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
-move.w #$ff, $SCALE_GRID_DELAY_COUNTDOWN
+move.w #$SCALE_GRID_DELAY_DURATION, $SCALE_GRID_DELAY_COUNTDOWN
 rts
 
 
