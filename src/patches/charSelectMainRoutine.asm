@@ -1,7 +1,9 @@
 cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-;; once we hit done, the game comes in here many times
-;; nothing we can do but wait for the game to move on
-beq done
+bne runMain
+bsr goToOrderSelect
+rts
+
+runMain:
 
 ;; move the logo and countries off screen, this combined
 ;; with changing the bg tilemap is what accomplishes the clean look
@@ -58,6 +60,8 @@ cmpi.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
 beq doScaleGridDelay
 cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
 beq doScaleGridDown
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DONE, $MAIN_HACK_PHASE
+beq doScaleGridDone
 bra done
 
 
@@ -120,6 +124,8 @@ bsr doScaleGridPrep
 
 bra done
 
+
+
 doScaleGridDown:
 
 jsr $2SCALE_GRID
@@ -132,11 +138,18 @@ skipSlideAvatars:
 subi.w #17, $GRID_SCALE_COUNTDOWN
 bne done
 
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, That way
-; it will do all the necessary things to successfully move to order select
-bsr goToTeamSelect
+move.b #$MAIN_PHASE_SCALE_GRID_DONE, $MAIN_HACK_PHASE
 bra done
+
+
+doScaleGridDone:
+; move.w #$GRID_IMAGE_SI, D6
+; move.w #1, D7
+; jsr $2TRUNCATE_SPRITES_ROUTINE
+move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
+bra done
+
+
 
 done:
 rts
@@ -394,18 +407,14 @@ showCpuCursorAndTeamIfContinued_done:
 rts
 
 
-;; goToTeamSelect
-;;
-;; does everything needed to give control back to the game
-;; this is only done at the very end of char select and is 
-;; a tiny hack to let the game set up order select for us
-goToTeamSelect:
-;; set the function pointer to team select
+;; goToOrderSelect
+goToOrderSelect:
+;; call the main team select function once so it can do all its prep
 jsr $37046
-; move.l #$37046, $108584
+;; set the function pointer to order select
 move.l #$370bc, $108584
-;; drain the timer, so it stays in team select as little as possible
-move.w #1, $108654
+;; drain the timer
+move.w #0, $108654
 
 rts
 

@@ -258,7 +258,6 @@ move.b #$MAIN_PHASE_PLAYER_SELECT, $MAIN_HACK_PHASE
 bra doneSettingPhase
 
 doneSettingPhase:
-move.b #0, $READY_TO_EXIT_CHAR_SELECT
 ;;;;;;;;;;; END DETERMINE THE PHASE FOR MAIN ;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;; LOAD CURSORS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

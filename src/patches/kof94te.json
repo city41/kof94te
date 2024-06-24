@@ -106,7 +106,8 @@
     "MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT": "5",
     "MAIN_PHASE_SCALE_GRID_DELAY": "6",
     "MAIN_PHASE_SCALE_GRID_DOWN": "7",
-    "MAIN_PHASE_DONE": "8",
+    "MAIN_PHASE_SCALE_GRID_DONE": "8",
+    "MAIN_PHASE_DONE": "9",
     "MAIN_HACK_PHASE": "10eb04",
 
     "STORE_ALL_REGISTERS": "10eb0c",
@@ -706,26 +707,6 @@
       "description": "clean up straggling word",
       "address": "13711c",
       "patchAsm": ["nop"]
-    },
-    {
-      "type": "prom",
-      "description": "prevent A in team select, let the game continue once cpu random select is done",
-      "address": "137466",
-      "subroutine": true,
-      "patchAsm": [
-        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
-        "cmpi.b #1, D5",
-        "beq setDone ; char select has finished, let the game know",
-        "bra setNotDone",
-        "setDone:",
-        "cmpi.b #0, D0 ; char select is done, force a non-zero result so game does move on",
-        "bra done",
-        "setNotDone:",
-        "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
-        "bra done",
-        "done:",
-        "rts"
-      ]
     },
     {
       "type": "prom",
