@@ -1,14 +1,11 @@
 ;; guardPalettes
 ;; while in character select, makes sure the game doesn't clobber our palettes
 
-;; we only need to guard the palettes in two situations
-;; - the end of char select, where we have handed control back to the game briefly
+;; we only need to guard the palettes in one situation
 ;; - a HERE COMES CHALLENGER happens during character select.
+;;
+;; caution: guarding the palettes when not needed almost always causes slowdown on the mister/real hardware
 
-cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-beq guard
-cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
-beq guard
 cmpi.b #1, $IN_HERE_COMES_CHALLENGER
 beq guard
 bra skip

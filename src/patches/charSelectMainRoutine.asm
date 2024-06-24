@@ -403,11 +403,11 @@ rts
 ;; goToOrderSelect
 goToOrderSelect:
 ;; call the main team select function once so it can do all its prep
+move.w #$101, $108654
 jsr $37046
-;; set the function pointer to order select
 move.l #$370bc, $108584
 ;; drain the timer
-move.w #0, $108654
+move.w #$0, $108654
 
 rts
 
