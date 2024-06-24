@@ -108,6 +108,7 @@
     "MAIN_PHASE_SCALE_GRID_DOWN": "7",
     "MAIN_PHASE_SCALE_GRID_DONE": "8",
     "MAIN_PHASE_DONE": "9",
+    "MAIN_PHASE_TEAM_SELECT_DONE": "a",
     "MAIN_HACK_PHASE": "10eb04",
 
     "STORE_ALL_REGISTERS": "10eb0c",
@@ -846,8 +847,13 @@
       "address": "106556",
       "subroutine": true,
       "patchAsm": [
+        "cmpi.b #$MAIN_PHASE_TEAM_SELECT_DONE, $MAIN_HACK_PHASE ; are we now in order select? don't let the very first sound play",
+        "; which is the brief team select choosing a cpu team",
+        "beq ignoreTeamSelectChooseCpuTeamSfx",
         "cmpi.b #1, $IN_CHAR_SELECT_FLAG",
         "bne play ; not in char select, let the sound play",
+        "cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE ; is this the awkward transition to order select phase? play nothing then",
+        "beq done",
         "cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE ; is this cpu select?",
         "beq play ; then play the sound",
         "cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE ; is this cpu subsequent select?",
@@ -865,6 +871,9 @@
         "move.b #0, $PLAY_HERE_COMES_CHALLENGER_CHIME ; turn off the flag, we have consumed it",
         "play:",
         "move.b D0, $320000",
+        "bra done",
+        "ignoreTeamSelectChooseCpuTeamSfx:",
+        "move.b #$MAIN_PHASE_UNKNOWN, $MAIN_HACK_PHASE",
         "done:",
         "rts"
       ]

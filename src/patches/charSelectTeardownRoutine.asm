@@ -8,7 +8,7 @@ bsr restoreLogo
 ; jsr $2MOVE_SPRITE
 
 move.b #0, $IN_CHAR_SELECT_FLAG
-move.b #0, $MAIN_HACK_PHASE
+move.b #$MAIN_PHASE_TEAM_SELECT_DONE, $MAIN_HACK_PHASE
 
 movem.l A4, $MOVEM_STORAGE
 
