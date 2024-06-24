@@ -399,20 +399,6 @@ jsr $2MOVE_CPU_CURSOR
 showCpuCursorAndTeamIfContinued_done:
 rts
 
-
-;; goToOrderSelect
-goToOrderSelect:
-;; call the main team select function once so it can do all its prep
-move.w #$101, $108654
-jsr $37046
-move.l #$370bc, $108584
-;; drain the timer
-move.w #$0, $108654
-
-rts
-
-
-
 ;; doScaleGridPrep
 ;;
 ;; preps for scaling the grid. Things like hide the chosen avatars and cursors
@@ -429,5 +415,20 @@ jsr $2TRUNCATE_SPRITES_ROUTINE
 
 ;; set up the grid y position
 move.w #$SCALE_GRID_Y_STARTING_POSITION, $SCALE_GRID_Y_POSITION
+
+rts
+
+
+;; goToOrderSelect
+;; sends the game to order select by having team select run for just one (maybe two or three)
+;; frames. This allows team select to prep and setup order select for us
+;; normally this means waiting for team select to finish its cpu team selection
+;; but there is a patch at the bottom of kof94te.json that drains that timer down to 1
+goToOrderSelect:
+;; set the function pointer to team select
+move.l #$37046, $108584
+;; drain the timer, so it stays in team select as little as possible
+move.w #0, $108654
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
 
 rts

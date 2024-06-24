@@ -1315,6 +1315,32 @@
         "addq.w #2, D6",
         "rts"
       ]
+    },
+    {
+      "type": "prom",
+      "description": "prevent A in team select, let the game continue once cpu random select is done",
+      "address": "137466",
+      "subroutine": true,
+      "patchAsm": [
+        "move.b $READY_TO_EXIT_CHAR_SELECT, D5",
+        "cmpi.b #1, D5",
+        "beq setDone ; char select has finished, let the game know",
+        "bra setNotDone",
+        "setDone:",
+        "cmpi.b #0, D0 ; char select is done, force a non-zero result so game does move on",
+        "bra done",
+        "setNotDone:",
+        "cmp.b D0, D0 ; char select isn't done, force a zero result so the game doesn't move on",
+        "bra done",
+        "done:",
+        "rts"
+      ]
+    },
+    {
+      "type": "prom",
+      "description": "force the cpu select timer to be 1 frame, to get to order select faster",
+      "address": "1370ae",
+      "patchAsm": ["move.w #1, $654(a5)"]
     }
   ]
 }
