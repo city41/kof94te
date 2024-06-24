@@ -66,11 +66,15 @@ function createAssemblyTileSCB1(
   };
 }
 
-function createAssemblyTileSBC3(column: SromCromTile[], y: number): number {
-  // for now, setting all ys to zero
+function createAssemblyTileSBC3(
+  column: SromCromTile[],
+  y: number,
+  sticky = false
+): number {
   // onscreen y is 496-y
   const yToWrite = 496 - y;
-  return (yToWrite << 7) | column.length;
+  const stickyBit = sticky ? 1 << 6 : 0;
+  return (yToWrite << 7) | stickyBit | column.length;
 }
 
 function createAssemblyTileSBC4(tx: number, startingX: number): number {
@@ -81,7 +85,8 @@ function createAsmColumn(
   tx: number,
   sromCromColumn: SromCromTile[],
   cromImage: SromCromCromImage,
-  startingPaletteIndex: number
+  startingPaletteIndex: number,
+  sticky = false
 ): AsmCromColumn {
   const scb1: AsmCromTileSCB1[] = [];
 
@@ -90,7 +95,11 @@ function createAsmColumn(
     scb1.push(createAssemblyTileSCB1(cromImage, tile, startingPaletteIndex));
   }
 
-  const scb3 = createAssemblyTileSBC3(sromCromColumn, cromImage.custom.y);
+  const scb3 = createAssemblyTileSBC3(
+    sromCromColumn,
+    cromImage.custom.y,
+    sticky
+  );
   const scb4 = createAssemblyTileSBC4(tx, cromImage.custom.x);
 
   return { scb1, scb3, scb4 };
@@ -125,7 +134,14 @@ function prepareForAssembly(
     width: cromImage.tiles[0].length,
     height: cromImage.tiles.length,
     columns: sromCromColumns.map((column, tx) =>
-      createAsmColumn(tx, column, cromImage, startingPaletteIndex)
+      // HACK ALERT: just making character_grid sticky
+      createAsmColumn(
+        tx,
+        column,
+        cromImage,
+        startingPaletteIndex,
+        cromImage.name === "character_grid" && tx > 0
+      )
     ),
   };
 }
