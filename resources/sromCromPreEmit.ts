@@ -1,5 +1,9 @@
 import { calcDestIndex } from "../src/cromSpans";
 
+// taken from the patch's symbols
+const GRID_IMAGE_SI = 0x153;
+const SCB1_TILE_WORDS_PER_SPRITE = 64;
+
 type SromCromTile = {
   /**
    * Where in CROM this tile lives
@@ -278,10 +282,6 @@ const characterToGridSpriteData: Array<{
     tileIndexOffset: 2,
   },
 ];
-
-// taken from the patch's symbols
-const GRID_IMAGE_SI = 0x147;
-const SCB1_TILE_WORDS_PER_SPRITE = 64;
 
 // take the grey crom image data and generate the data that will ultimately
 // create CHARACTER_TO_GREY_OUT_TABLE used in greyOutDefeatedCharacter.asm
