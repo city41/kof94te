@@ -54,6 +54,8 @@ cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
 cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doSubsequentSelect
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+beq doScaleGridDelay
 cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
 beq doScaleGridDown
 bra done
@@ -106,15 +108,39 @@ bsr transitionPastSubsequentSelect
 skipTransitionPastSubsequentSelect:
 bra done
 
+; delay a bit between character select and the grid scaling down
+doScaleGridDelay:
+subi.w #1, $SCALE_GRID_DELAY_COUNTDOWN
+bne done
+; countdown has hit zero, time to move to scale grid
+move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+move.w #$ff, $GRID_SCALE_COUNTDOWN
+bra done
+
 doScaleGridDown:
 cmpi.w #$ff, $GRID_SCALE_COUNTDOWN
-bne skipTruncateCpuCursor
+bne skipPrepForScale
 
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
 move.w #6, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
 
-skipTruncateCpuCursor:
+move.w #1, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #2, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #3, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #4, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #5, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #6, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+
+
+
+skipPrepForScale:
 
 jsr $2SCALE_GRID
 subi.w #17, $GRID_SCALE_COUNTDOWN
@@ -199,8 +225,8 @@ move.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
 bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
-move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
-move.w #$ff, $GRID_SCALE_COUNTDOWN
+move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+move.w #$ff, $SCALE_GRID_DELAY_COUNTDOWN
 
 transitionPastPlayerSelect_done:
 rts
@@ -233,8 +259,8 @@ rts
 transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
-move.w #$ff, $GRID_SCALE_COUNTDOWN
+move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+move.w #$ff, $SCALE_GRID_DELAY_COUNTDOWN
 rts
 
 
