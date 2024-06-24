@@ -111,6 +111,8 @@
     "GRID_SCALE_COUNTDOWN": "10eb32",
 
     "GRID_IMAGE_SI": "147",
+    "P1_CHOSEN_AVATARS_SI": "159",
+    "P2_CHOSEN_AVATARS_SI": "15f",
     "P2_CURSOR_LEFT_SI": "169",
     "P2_CURSOR_RIGHT_SI": "16a",
     "P2_CPU_CURSOR_CHAR1_LEFT_SI": "169",
@@ -218,6 +220,20 @@
       "subroutine": true,
       "symbol": "RUGAL_CG_CLEAR_DATA",
       "patchAsm": "rugal_character_grid_clear_data.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p1 blank chosen avatars image",
+      "subroutine": true,
+      "symbol": "P1_BLANK_CHOSEN_AVATARS",
+      "patchAsm": "p1_blank_chosen_avatars.asm"
+    },
+    {
+      "type": "prom",
+      "description": "p2 blank chosen avatars image",
+      "subroutine": true,
+      "symbol": "P2_BLANK_CHOSEN_AVATARS",
+      "patchAsm": "p2_blank_chosen_avatars.asm"
     },
     {
       "type": "prom",

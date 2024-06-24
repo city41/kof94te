@@ -1,0 +1,22 @@
+;;;;; start p2_blank_chosen_avatars static sprite data ;;;;;
+dc.w {{cromImages.p2_blank_chosen_avatars.width}} ; width in tiles
+dc.w {{cromImages.p2_blank_chosen_avatars.height}} ; height in tiles
+
+;; start sprite tiles
+{{#each cromImages.p2_blank_chosen_avatars.columns}}
+;;; column {{@index}}
+
+;; SCB1 word pairs
+{{#each scb1}}
+dc.w ${{hex evenWord}}
+dc.w ${{hex oddWord}}
+{{/each}}
+
+;; SCB3 vertical position|sticky|size
+dc.w ${{hex scb3}}
+
+;; SCB4 horizontal position
+dc.w ${{hex scb4}}
+
+{{/each}}
+;; end tiles

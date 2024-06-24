@@ -95,6 +95,14 @@
       {
         "template": "cpu_p2_cursor_custom_black.asm.hbr",
         "dest": "../src/patches/cpu_p2_cursor_custom_black.asm"
+      },
+      {
+        "template": "p1_blank_chosen_avatars.asm.hbr",
+        "dest": "../src/patches/p1_blank_chosen_avatars.asm"
+      },
+      {
+        "template": "p2_blank_chosen_avatars.asm.hbr",
+        "dest": "../src/patches/p2_blank_chosen_avatars.asm"
       }
     ]
   },
@@ -216,6 +224,18 @@
       "imageFile": "./cpu_p2_cursor_custom_black.png",
       "x": 0,
       "y": 272
+    },
+    {
+      "name": "p1_blank_chosen_avatars",
+      "imageFile": "./blank_chosen_avatars.png",
+      "x": 32,
+      "y": 181
+    },
+    {
+      "name": "p2_blank_chosen_avatars",
+      "imageFile": "./blank_chosen_avatars.png",
+      "x": 192,
+      "y": 181
     }
   ]
 }

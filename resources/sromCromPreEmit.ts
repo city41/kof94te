@@ -274,7 +274,7 @@ const characterToGridSpriteData: Array<{
 ];
 
 // taken from the patch's symbols
-const GRID_IMAGE_SI = 0x153;
+const GRID_IMAGE_SI = 0x147;
 const SCB1_TILE_WORDS_PER_SPRITE = 64;
 
 // take the grey crom image data and generate the data that will ultimately
@@ -310,7 +310,7 @@ function createRugalInjectData(rugalImage: AsmCromImage): number[] {
   const words: number[] = [];
 
   // grid first si is 0x153, Rugal's first column is 8 over, and 7 tiles down
-  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 7 * 2;
+  const firstColumnSCB1StartingAddress = (GRID_IMAGE_SI + 8) * 64 + 7 * 2;
 
   words.push(firstColumnSCB1StartingAddress);
   words.push(rugalImage.columns[0].scb1[0].evenWord);
@@ -323,7 +323,7 @@ function createRugalInjectData(rugalImage: AsmCromImage): number[] {
 
   // grid first si is 0x153, Rugal's second column is 9 over, and 7 tiles down
 
-  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 7 * 2;
+  const secondColumnSCB1StartingAddress = (GRID_IMAGE_SI + 9) * 64 + 7 * 2;
 
   words.push(secondColumnSCB1StartingAddress);
   words.push(rugalImage.columns[1].scb1[0].evenWord);
@@ -341,7 +341,7 @@ function createRugalClearData() {
   const words: number[] = [];
 
   // grid first si is 0x153, Rugal's first column is 8 over, and 6 tiles down
-  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 6 * 2;
+  const firstColumnSCB1StartingAddress = (GRID_IMAGE_SI + 8) * 64 + 6 * 2;
 
   words.push(firstColumnSCB1StartingAddress);
   words.push(0);
@@ -354,7 +354,7 @@ function createRugalClearData() {
 
   // grid first si is 0x153, Rugal's second column is 9 over, and 6 tiles down
 
-  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 6 * 2;
+  const secondColumnSCB1StartingAddress = (GRID_IMAGE_SI + 9) * 64 + 6 * 2;
 
   words.push(secondColumnSCB1StartingAddress);
   words.push(0);

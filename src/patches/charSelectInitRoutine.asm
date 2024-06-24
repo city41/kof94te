@@ -60,6 +60,16 @@ move.w #0, D5              ; offset into tile data
 lea $2CHARACTER_GRID_IMAGE, A6 ; load the image pointer
 jsr $2RENDER_STATIC_IMAGE
 
+; load the blank chosen avatars
+move.w #$P1_CHOSEN_AVATARS_SI, D6 ; set sprite index
+move.w #0, D5              ; offset into tile data
+lea $2P1_BLANK_CHOSEN_AVATARS, A6 ; load the image pointer
+jsr $2RENDER_STATIC_IMAGE
+move.w #$P2_CHOSEN_AVATARS_SI, D6 ; set sprite index
+move.w #0, D5              ; offset into tile data
+lea $2P2_BLANK_CHOSEN_AVATARS, A6 ; load the image pointer
+jsr $2RENDER_STATIC_IMAGE
+
 
 ;;;;;;;;;;;;;; INIT PLAYER 1 ;;;;;;;;;;;;;;;;;;;;
 cmpi.b #1, $BIOS_PLAYER_MOD1 ; is player 1 playing?
