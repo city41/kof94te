@@ -11,7 +11,7 @@
 move.w #$8200 + $GRID_IMAGE_SI, $3c0000 ; set up the proper vram address
 
 move.w $SCALE_GRID_Y_POSITION, D1 ; grab current y
-subi.w #10, D1      ; shift y down, 10 pixels
+subi.w #8, D1      ; shift y down, 8 pixels
 move.w D1, $SCALE_GRID_Y_POSITION ; store the new position for next time
 lsl.w #7, D1       ; shift y position up into place for scb3 word
 addi.w #6, D1 ; add on the height to form the full word

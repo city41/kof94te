@@ -128,8 +128,8 @@ jsr $2SLIDE_AVATARS
 ; jsr $2SLIDE_AVATARS
 ; skipSlideAvatars:
 
-subi.w #51, $GRID_SCALE_COUNTDOWN
-bne done
+subi.w #30, $GRID_SCALE_COUNTDOWN
+bpl done
 
 move.b #$MAIN_PHASE_SCALE_GRID_DONE, $MAIN_HACK_PHASE
 bra done
