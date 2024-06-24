@@ -1,5 +1,9 @@
 import { calcDestIndex } from "../src/cromSpans";
 
+// taken from the patch's symbols
+const GRID_IMAGE_SI = 0x153;
+const SCB1_TILE_WORDS_PER_SPRITE = 64;
+
 type SromCromTile = {
   /**
    * Where in CROM this tile lives
@@ -66,11 +70,15 @@ function createAssemblyTileSCB1(
   };
 }
 
-function createAssemblyTileSBC3(column: SromCromTile[], y: number): number {
-  // for now, setting all ys to zero
+function createAssemblyTileSBC3(
+  column: SromCromTile[],
+  y: number,
+  sticky = false
+): number {
   // onscreen y is 496-y
   const yToWrite = 496 - y;
-  return (yToWrite << 7) | column.length;
+  const stickyBit = sticky ? 1 << 6 : 0;
+  return (yToWrite << 7) | stickyBit | column.length;
 }
 
 function createAssemblyTileSBC4(tx: number, startingX: number): number {
@@ -81,7 +89,8 @@ function createAsmColumn(
   tx: number,
   sromCromColumn: SromCromTile[],
   cromImage: SromCromCromImage,
-  startingPaletteIndex: number
+  startingPaletteIndex: number,
+  sticky = false
 ): AsmCromColumn {
   const scb1: AsmCromTileSCB1[] = [];
 
@@ -90,7 +99,11 @@ function createAsmColumn(
     scb1.push(createAssemblyTileSCB1(cromImage, tile, startingPaletteIndex));
   }
 
-  const scb3 = createAssemblyTileSBC3(sromCromColumn, cromImage.custom.y);
+  const scb3 = createAssemblyTileSBC3(
+    sromCromColumn,
+    cromImage.custom.y,
+    sticky
+  );
   const scb4 = createAssemblyTileSBC4(tx, cromImage.custom.x);
 
   return { scb1, scb3, scb4 };
@@ -114,6 +127,12 @@ function convertTilesFromRowsToColumns(
   return columns;
 }
 
+const stickyImages = [
+  "character_grid",
+  "p1_blank_chosen_avatars",
+  "p2_blank_chosen_avatars",
+];
+
 function prepareForAssembly(
   cromImage: SromCromCromImage,
   startingPaletteIndex: number
@@ -125,7 +144,14 @@ function prepareForAssembly(
     width: cromImage.tiles[0].length,
     height: cromImage.tiles.length,
     columns: sromCromColumns.map((column, tx) =>
-      createAsmColumn(tx, column, cromImage, startingPaletteIndex)
+      // HACK ALERT: just making character_grid sticky
+      createAsmColumn(
+        tx,
+        column,
+        cromImage,
+        startingPaletteIndex,
+        stickyImages.includes(cromImage.name) && tx > 0
+      )
     ),
   };
 }
@@ -257,10 +283,6 @@ const characterToGridSpriteData: Array<{
   },
 ];
 
-// taken from the patch's symbols
-const GRID_IMAGE_SI = 0x153;
-const SCB1_TILE_WORDS_PER_SPRITE = 64;
-
 // take the grey crom image data and generate the data that will ultimately
 // create CHARACTER_TO_GREY_OUT_TABLE used in greyOutDefeatedCharacter.asm
 function createGreyCharacterGridEmit(greyCromImage: AsmCromImage) {
@@ -294,7 +316,7 @@ function createRugalInjectData(rugalImage: AsmCromImage): number[] {
   const words: number[] = [];
 
   // grid first si is 0x153, Rugal's first column is 8 over, and 7 tiles down
-  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 7 * 2;
+  const firstColumnSCB1StartingAddress = (GRID_IMAGE_SI + 8) * 64 + 7 * 2;
 
   words.push(firstColumnSCB1StartingAddress);
   words.push(rugalImage.columns[0].scb1[0].evenWord);
@@ -307,7 +329,7 @@ function createRugalInjectData(rugalImage: AsmCromImage): number[] {
 
   // grid first si is 0x153, Rugal's second column is 9 over, and 7 tiles down
 
-  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 7 * 2;
+  const secondColumnSCB1StartingAddress = (GRID_IMAGE_SI + 9) * 64 + 7 * 2;
 
   words.push(secondColumnSCB1StartingAddress);
   words.push(rugalImage.columns[1].scb1[0].evenWord);
@@ -325,7 +347,7 @@ function createRugalClearData() {
   const words: number[] = [];
 
   // grid first si is 0x153, Rugal's first column is 8 over, and 6 tiles down
-  const firstColumnSCB1StartingAddress = (0x153 + 8) * 64 + 6 * 2;
+  const firstColumnSCB1StartingAddress = (GRID_IMAGE_SI + 8) * 64 + 6 * 2;
 
   words.push(firstColumnSCB1StartingAddress);
   words.push(0);
@@ -338,7 +360,7 @@ function createRugalClearData() {
 
   // grid first si is 0x153, Rugal's second column is 9 over, and 6 tiles down
 
-  const secondColumnSCB1StartingAddress = (0x153 + 9) * 64 + 6 * 2;
+  const secondColumnSCB1StartingAddress = (GRID_IMAGE_SI + 9) * 64 + 6 * 2;
 
   words.push(secondColumnSCB1StartingAddress);
   words.push(0);

@@ -7,6 +7,8 @@
 
 cmpi.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
 beq guard
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+beq guard
 cmpi.b #1, $IN_HERE_COMES_CHALLENGER
 beq guard
 bra skip

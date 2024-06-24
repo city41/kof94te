@@ -68,7 +68,7 @@ rts
 ;;; SUBROUTINES ;;;;;
 
 ;; calcVramAddress
-;; given 1-6, determines where in vram to start placing the tiles using the grid si
+;; given 1-6, determines where in vram to start placing the tiles using the avatar si's
 ;;
 ;; parameters
 ;; D6.w - avatar index, 1 through 6
@@ -76,7 +76,7 @@ rts
 ;; D5.w - the vram address for the left upper corner tile of the avatar
 
 calcVramAddress:
-move.w #$GRID_IMAGE_SI, D5
+move.w #$P1_CHOSEN_AVATARS_SI, D5
 cmpi.w #1, D6
 beq calcVramAddress_doOneIndex
 cmpi.w #2, D6
@@ -90,31 +90,29 @@ beq calcVramAddress_doFiveIndex
 bra calcVramAddress_doSixIndex
 
 calcVramAddress_doOneIndex:
-addi.w #1, D5 ; move foward one column
-bra calcVramAddress_finishCalc
+bra calcVramAddress_finishCalc ; nothing extra to do, already at right spot
 
 calcVramAddress_doTwoIndex:
-addi.w #3, D5 ; move foward three columns
+addi.w #2, D5 ; move foward two columns
 bra calcVramAddress_finishCalc
 
 calcVramAddress_doThreeIndex:
-addi.w #5, D5 ; move foward five columns
+addi.w #4, D5 ; move foward four columns
 bra calcVramAddress_finishCalc
 
 calcVramAddress_doFourIndex:
-addi.w #15, D5 ; move foward 15 columns, clear to outside right avatar
+addi.w #10, D5 ; move foward 10 columns, clear to outside right avatar
 bra calcVramAddress_finishCalc
 
 calcVramAddress_doFiveIndex:
-addi.w #13, D5 ; move foward 13 columns, clear to center right avatar
+addi.w #8, D5 ; move foward 8 columns, clear to center right avatar
 bra calcVramAddress_finishCalc
 
 calcVramAddress_doSixIndex:
-addi.w #11, D5 ; move foward 11 columns, clear to inner right avatar
+addi.w #6, D5 ; move foward 6 columns, clear to inner right avatar
 
 calcVramAddress_finishCalc:
 lsl.w #6, D5 ; multiple the SI by 64, to get to first tile's vram address
-addi.w #18, D5 ; now go down 9 tiles, this is where the corner address is
 
 rts
 

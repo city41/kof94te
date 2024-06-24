@@ -31,7 +31,7 @@ bra done
 skipRugal:
 
 cmpi.b #0, $PLAY_MODE ; is this demo mode?
-bne prepCustomCpuCursorForSinglePlayerMode
+bne prepCpuCursorForSinglePlayerMode
 ;; this is demo mode, there are two cpu cursors
 ;; p1 cpu
 lea $P1_CUR_INPUT, A0
@@ -46,32 +46,32 @@ jsr $2MOVE_CPU_CURSOR
 move.b #$60, $320000 ; play movement sfx
 bra done
 
-prepCustomCpuCursorForSinglePlayerMode:
+prepCpuCursorForSinglePlayerMode:
 btst #0, $PLAY_MODE ; is player one playing?
-beq customCpu_loadPlayerDataSkipPlayer1
+beq loadPlayerDataSkipPlayer1
 ;; player 1 is human, load p2 for cpu
 lea $P2_CUR_INPUT, A0
-bra customCpu_doneLoadingPlayerData
+bra doneLoadingPlayerData
 
-customCpu_loadPlayerDataSkipPlayer1:
+loadPlayerDataSkipPlayer1:
 ;; player 2 is human, load p1 for cpu
 lea $P1_CUR_INPUT, A0
-customCpu_doneLoadingPlayerData:
+doneLoadingPlayerData:
 
 btst #6, $PLAY_MODE ; did the player just continue?
-bne customCpu_skipPickCustomCpuTeam ; then don't pick a new team
+bne skipPickCpuTeam ; then don't pick a new team
 bsr pickCpuTeam 
-customCpu_skipPickCustomCpuTeam:
+skipPickCpuTeam:
 
 btst #0, $PLAY_MODE
-beq customCpu_loadSiSkipPlayer1
+beq loadSiSkipPlayer1
 move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D0
-bra customCpu_doneLoadSi
+bra doneLoadSi
 
-customCpu_loadSiSkipPlayer1:
+loadSiSkipPlayer1:
 move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D0
 
-customCpu_doneLoadSi:
+doneLoadSi:
 jsr $2MOVE_CPU_CURSOR
 move.b #$60, $320000 ; play movement sfx
 

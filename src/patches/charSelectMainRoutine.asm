@@ -54,6 +54,10 @@ cmpi.b #$MAIN_PHASE_CPU_SELECT, $MAIN_HACK_PHASE
 beq doCpuSelect
 cmpi.b #$MAIN_PHASE_SUBSEQUENT_SINGLE_PLAYER_SELECT, $MAIN_HACK_PHASE
 beq doSubsequentSelect
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+beq doScaleGridDelay
+cmpi.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+beq doScaleGridDown
 bra done
 
 
@@ -102,6 +106,36 @@ cmpi.b #1, D6 ; if it is done, D6 will be 1
 bne skipTransitionPastSubsequentSelect
 bsr transitionPastSubsequentSelect
 skipTransitionPastSubsequentSelect:
+bra done
+
+; delay a bit between character select and the grid scaling down
+doScaleGridDelay:
+subi.w #1, $SCALE_GRID_DELAY_COUNTDOWN
+bne done
+; countdown has hit zero, time to move to scale grid
+move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
+move.w #$ff, $GRID_SCALE_COUNTDOWN
+
+bsr doScaleGridPrep
+
+bra done
+
+doScaleGridDown:
+
+jsr $2SCALE_GRID
+
+cmpi.w #190, $GRID_SCALE_COUNTDOWN
+bge skipSlideAvatars
+jsr $2SLIDE_AVATARS
+skipSlideAvatars:
+
+subi.w #17, $GRID_SCALE_COUNTDOWN
+bne done
+
+move.b #1, $READY_TO_EXIT_CHAR_SELECT
+; go back to OG team select, That way
+; it will do all the necessary things to successfully move to order select
+bsr goToTeamSelect
 bra done
 
 done:
@@ -171,11 +205,8 @@ move.b #$MAIN_PHASE_CPU_DELAY, $MAIN_HACK_PHASE
 bra transitionPastPlayerSelect_done
 
 transitionPastPlayerSelect_setCharSelectDone:
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, just for a few frames. That way
-; it will do all the necessary things to successfully move to order select
-bsr goToTeamSelect
+move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+move.w #$SCALE_GRID_DELAY_DURATION, $SCALE_GRID_DELAY_COUNTDOWN
 
 transitionPastPlayerSelect_done:
 rts
@@ -208,11 +239,8 @@ rts
 transitionPastCpuSelect:
 ; cpu is done, show their team in the chosen section
 bsr renderCpuChosenTeam
-move.b #$MAIN_PHASE_DONE, $MAIN_HACK_PHASE
-move.b #1, $READY_TO_EXIT_CHAR_SELECT
-; go back to OG team select, just for a few frames. That way
-; it will do all the necessary things to successfully move to order select
-bsr goToTeamSelect
+move.b #$MAIN_PHASE_SCALE_GRID_DELAY, $MAIN_HACK_PHASE
+move.w #$SCALE_GRID_DELAY_DURATION, $SCALE_GRID_DELAY_COUNTDOWN
 rts
 
 
@@ -373,8 +401,28 @@ rts
 ;; a tiny hack to let the game set up order select for us
 goToTeamSelect:
 ;; set the function pointer to team select
-move.l #$37046, $108584
+jsr $37046
+; move.l #$37046, $108584
+move.l #$370bc, $108584
 ;; drain the timer, so it stays in team select as little as possible
 move.w #1, $108654
+
+rts
+
+
+
+;; doScaleGridPrep
+;;
+;; preps for scaling the grid. Things like hide the chosen avatars and cursors
+doScaleGridPrep:
+
+;; hide all cursors
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
 
 rts
