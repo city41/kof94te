@@ -115,32 +115,12 @@ bne done
 ; countdown has hit zero, time to move to scale grid
 move.b #$MAIN_PHASE_SCALE_GRID_DOWN, $MAIN_HACK_PHASE
 move.w #$ff, $GRID_SCALE_COUNTDOWN
+
+bsr doScaleGridPrep
+
 bra done
 
 doScaleGridDown:
-cmpi.w #$ff, $GRID_SCALE_COUNTDOWN
-bne skipPrepForScale
-
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
-move.w #6, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
-
-move.w #1, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #2, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #3, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #4, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #5, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-move.w #6, D6
-jsr $2CLEAR_CHOSEN_AVATAR
-
-
-
-skipPrepForScale:
 
 jsr $2SCALE_GRID
 subi.w #17, $GRID_SCALE_COUNTDOWN
@@ -428,3 +408,33 @@ move.l #$370bc, $108584
 move.w #1, $108654
 
 rts
+
+
+
+;; doScaleGridPrep
+;;
+;; preps for scaling the grid. Things like hide the chosen avatars and cursors
+doScaleGridPrep:
+
+;; hide all cursors
+move.w #$P1_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+;; clear out chosen avatars
+move.w #1, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #2, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #3, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #4, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #5, D6
+jsr $2CLEAR_CHOSEN_AVATAR
+move.w #6, D6
+jsr $2CLEAR_CHOSEN_AVATAR
