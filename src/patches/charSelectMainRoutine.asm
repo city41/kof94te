@@ -107,6 +107,15 @@ skipTransitionPastSubsequentSelect:
 bra done
 
 doScaleGridDown:
+cmpi.w #$ff, $GRID_SCALE_COUNTDOWN
+bne skipTruncateCpuCursor
+
+move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
+move.w #6, D7
+jsr $2TRUNCATE_SPRITES_ROUTINE
+
+skipTruncateCpuCursor:
+
 jsr $2SCALE_GRID
 subi.w #17, $GRID_SCALE_COUNTDOWN
 bne done
@@ -115,9 +124,6 @@ move.w #$GRID_IMAGE_SI, D6
 move.w #18, D7
 jsr $2TRUNCATE_SPRITES_ROUTINE
 
-move.w #$P2_CPU_CURSOR_CHAR1_LEFT_SI, D6
-move.w #6, D7
-jsr $2TRUNCATE_SPRITES_ROUTINE
 
 
 move.b #1, $READY_TO_EXIT_CHAR_SELECT
