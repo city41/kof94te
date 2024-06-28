@@ -34,8 +34,8 @@ If you play through the single player mode with one of the original 8 teams, you
 
 ## Status
 
-The hack is complete and very playable in almost all Neo Geo environments (MAME, MiSTer, NeoSD, etc). There may be some remaining straggling [issues](https://github.com/city41/kof94te/issues) to fix.
+The hack is complete with no planned additions, 1.4.0 is the final version.
 
-You can build the rom and try it yourself here: https://neorh.mattgreer.dev
+You can build the rom and try it yourself here: https://neorh.mattgreer.dev/kof94
 
 A trailer video: https://www.youtube.com/watch?v=LBum6iwyDpk
