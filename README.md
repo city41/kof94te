@@ -26,7 +26,7 @@ This hack brings custom teams to KOF94:
 - Some minor versus mode quality of life improvements
   - Randomly chooses a background to fight on
   - Each player can choose a new team before each match
-- The CPU can choose custom teams too. More info here: https://neorh.mattgreer.dev/#cpu-custom-teams
+- The CPU can choose custom teams too. More info here: https://kof94te.mattgreer.dev/#cpu-custom-teams
 
 Since doing a new ending wasn't really feasible, the hack contains four reworked endings if you win the game with a custom team.
 
