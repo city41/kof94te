@@ -133,10 +133,10 @@ cmpi.b #$RANDOM_SELECT_TYPE_CHAR, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 beq slotMachine_turnOnChoiceSoundEffect
 cmpi.b #0, D3 ; this is team select, have we chosen the whole team?
 beq slotMachine_turnOnChoiceSoundEffect ; we have? do sfx
-move.b #$ff, D6 ; this is team select, but whole team has not been chosen, dont do the sound effect yet
+move.b #$ff, D5 ; this is team select, but whole team has not been chosen, dont do the sound effect yet
 bra slotMachine_doneChoiceSoundEffect
 slotMachine_turnOnChoiceSoundEffect:
-move.b #$0, D6 ; this is char select, or final team select, do sound effect
+move.b #$0, D5 ; this is char select, or final team select, do sound effect
 cmpi.b #$RANDOM_SELECT_TYPE_TEAM, $PX_RANDOM_SELECT_TYPE_OFFSET(A0)
 bne slotMachine_skipSetDelayedSoundEffect
 ;; this is team select, we want to play a single choice sound effect,
@@ -241,13 +241,13 @@ bne skipChooseRugal
 ;; they chose Rugal
 move.b #0, $PX_NUM_CHOSEN_CHARS_OFFSET(A0) ; first reset back to an unchosen team
 move.b #$18, D1
-move.b #$0, D6 ; do the sfx
+move.b #$0, D5 ; do the sfx
 bsr saveChar ; save the first Rugal
 move.b #$19, D1
-move.b #$ff, D6 ; skip the sfx
+move.b #$ff, D5 ; skip the sfx
 bsr saveChar ; save the second Rugal
 move.b #$19, D1
-move.b #$ff, D6 ; skip the sfx
+move.b #$ff, D5 ; skip the sfx
 bsr saveChar ; save the third Rugal
 
 bra skipChoosingChar
@@ -257,6 +257,7 @@ lea $2GRID_TO_CHARACTER_ID, A3
 adda.w D1, A3
 move.b (A3), D1 ; character Id from grid is now in D1
 
+move.b #$0, D5 ; do the sfx
 bsr saveChar
 
 skipChoosingChar:
