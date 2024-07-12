@@ -55,9 +55,14 @@ bra done
 fallingFighter:
 ;; the same conditions for falling fighter work for continue screen too
 continueScreenOrCutscene2:
+bsr checkIfJustLostToRugal ; a special case, losing to Rugal
+cmpi.b #1, D1              ; will set D1=1 if a human player just lost to Rugal
+beq playerIsContinuing
 cmpi.b #$ff, $DEFEATED_TEAMS
-beq winScreen ; if all teams are defeated, this is cutscene2, it's the same logic as winScreen
+beq winScreen ; if all teams are defeated, and they haven't lost to Rugal, then this is cutscene2, it's the same logic as winScreen
+
 ;; not the cutscene, must be continuing
+playerIsContinuing:
 cmpi.b #$80, $108238 ; did p1 lose?
 beq team1Character   ; yup, p1 lost, team1Character can handle it from here
 bra team2Character   ; p2 lost, team2Character can handle it from here
@@ -243,4 +248,50 @@ figureOutCharPalette_defaultChoice:
 move.b #0, D1
 
 figureOutCharPalette_done:
+rts
+
+
+
+;;;;;; SUBROUTINES ;;;;;;;;;;;;;;
+
+;; checkIfJustLostToRugal
+;; figures out if this is a single player game, and the human just lost to Rugal
+;; 
+;; returns
+;; D1=1 if the player just lost to Rugal
+;; D1=0 if the player did not just lose to Rugal
+checkIfJustLostToRugal:
+cmpi.b #3, $PLAY_MODE ; is this versus mode?
+; if this is versus mode, then for sure they did not lose to Rugal
+beq checkIfJustLostToRugal_didNotLose
+cmpi.b #$ff, $DEFEATED_TEAMS
+; if they haven't defeated all teams, then they haven't fought Rugal yet, so they can't have lost to him
+bne checkIfJustLostToRugal_didNotLose
+
+; ok all teams are defeated. See if p1 lost and p2 is Rugal
+btst #0, $PLAY_MODE ; is player one playing?
+beq checkIfJustLostToRugal_player2IsHuman
+
+; player 1 is human
+cmpi.b #$80, $108238 ; did p1 lose?
+bne checkIfJustLostToRugal_didNotLose   ; p1 didn't lose, so they did not lose to Rugal
+cmpi.b #8, $108431 ; ok, p1 lost, now is p2 Rugal?
+bne checkIfJustLostToRugal_didNotLose   ; p2 isnt Rugal, so they did not lose to Rugal
+bra checkIfJustLostToRugal_didLose ; by process of elimination, they must have just lost to Rugal
+
+checkIfJustLostToRugal_player2IsHuman:
+cmpi.b #$80, $108438 ; did p2 lose?
+bne checkIfJustLostToRugal_didNotLose   ; p2 didn't lose, so they did not lose to Rugal
+cmpi.b #8, $108231 ; ok, p2 lost, now is p1 Rugal?
+bne checkIfJustLostToRugal_didNotLose   ; p1 isnt Rugal, so they did not lose to Rugal
+bra checkIfJustLostToRugal_didLose ; by process of elimination, they must have just lost to Rugal
+
+checkIfJustLostToRugal_didNotLose:
+move.b #0, D1
+bra checkIfJustLostToRugal_done
+
+checkIfJustLostToRugal_didLose:
+move.b #1, D1
+
+checkIfJustLostToRugal_done:
 rts
