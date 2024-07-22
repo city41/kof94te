@@ -1,7 +1,5 @@
 # King of Fighters 94: Team Edit Edition
 
-Discord: https://discord.gg/tvm4fpkUNq
-
 A ROM hack for KOF94 that adds team edit.
 
 King of Fighters is a fighting game franchise where teams of three fight each other. The first entry, King of Fighters '94, does not allow you to pick your own team
