@@ -32,7 +32,7 @@ If you play through the single player mode with one of the original 8 teams, you
 
 ## Status
 
-The hack is complete with no planned additions, 1.4.0 is the final version.
+The hack is complete with no planned additions, 1.4.2 is the final version.
 
 You can build the rom and try it yourself here: https://neorh.mattgreer.dev/kof94
 
